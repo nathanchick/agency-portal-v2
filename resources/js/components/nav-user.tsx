@@ -1,6 +1,6 @@
 import {
     DropdownMenu,
-    DropdownMenuContent,
+    DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
@@ -49,6 +49,7 @@ export function NavUser() {
                         <UserMenuContent user={auth.user} />
                     </DropdownMenuContent>
                 </DropdownMenu>
+
             </SidebarMenuItem>
         </SidebarMenu>
     );

@@ -1,65 +1,245 @@
-import { NavFooter } from '@/components/nav-footer';
-import { NavMain } from '@/components/nav-main';
-import { NavUser } from '@/components/nav-user';
+"use client"
+
+import * as React from "react"
+import {
+    AudioWaveform,
+    BookOpen,
+    Bot, Clock,
+    Command,
+    Frame,
+    GalleryVerticalEnd, HeartPulseIcon, LockIcon,
+    Map,
+    PieChart,
+    Settings2,
+    SquareTerminal,
+} from "lucide-react"
+
+import { NavMain } from "@/components/nav-main"
+import { NavProjects } from "@/components/nav-projects"
+import { NavUser } from "@/components/nav-user"
+import { TeamSwitcher } from "@/components/team-switcher"
 import {
     Sidebar,
     SidebarContent,
     SidebarFooter,
     SidebarHeader,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-} from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
-import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
-import AppLogo from './app-logo';
+    SidebarRail,
+} from "@/components/ui/sidebar"
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
+// This is sample data.
+const data = {
+    user: {
+        name: "shadcn",
+        email: "m@example.com",
+        avatar: "/avatars/shadcn.jpg",
     },
-];
+    teams: [
+        {
+            name: "Deploy eCommerce",
+            logo: GalleryVerticalEnd,
+            plan: "Organisation",
+        },
+        {
+            name: "Allens of Kingsbury",
+            logo: AudioWaveform,
+            plan: "Customer",
+        },
+        {
+            name: "Case Luggage",
+            logo: Command,
+            plan: "Customer",
+        },
+    ],
+    navMain: [
+        {
+            title: "Dashboard",
+            url: "#",
+            icon: SquareTerminal,
+            isActive: true,
+        },
+        {
+            title: "Deployments",
+            url: "#",
+            icon: Bot,
+            items: [
+                {
+                    title: "Past",
+                    url: "#",
+                },
+                {
+                    title: "Planned",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Timesheets",
+            url: "#",
+            icon: Clock,
+            items: [
+                {
+                    title: "Technical Support",
+                    url: "#",
+                },
+                {
+                    title: "Marketing Support",
+                    url: "#",
+                },
+                {
+                    title: "Reports",
+                    url: "#",
+                }
+            ],
+        },
+        {
+            title: "Documents",
+            url: "#",
+            icon: BookOpen,
+            items: [
+                {
+                    title: "General",
+                    url: "#",
+                },
+                {
+                    title: "Team",
+                    url: "#",
+                },
+                {
+                    title: "Billing",
+                    url: "#",
+                },
+                {
+                    title: "Limits",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Tickets",
+            url: "#",
+            icon: BookOpen,
+            items: [
+                {
+                    title: "General",
+                    url: "#",
+                },
+                {
+                    title: "Team",
+                    url: "#",
+                },
+                {
+                    title: "Billing",
+                    url: "#",
+                },
+                {
+                    title: "Limits",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Site Health",
+            url: "#",
+            icon: HeartPulseIcon,
+            items: [
+                {
+                    title: "General",
+                    url: "#",
+                },
+                {
+                    title: "Team",
+                    url: "#",
+                },
+                {
+                    title: "Billing",
+                    url: "#",
+                },
+                {
+                    title: "Limits",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Security",
+            url: "#",
+            icon: LockIcon,
+            items: [
+                {
+                    title: "General",
+                    url: "#",
+                },
+                {
+                    title: "Team",
+                    url: "#",
+                },
+                {
+                    title: "Billing",
+                    url: "#",
+                },
+                {
+                    title: "Limits",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Billing/Subscriptions",
+            url: "#",
+            icon: BookOpen,
+            items: [
+                {
+                    title: "General",
+                    url: "#",
+                },
+                {
+                    title: "Team",
+                    url: "#",
+                },
+                {
+                    title: "Billing",
+                    url: "#",
+                },
+                {
+                    title: "Limits",
+                    url: "#",
+                },
+            ],
+        },
+    ],
+    projects: [
+        // {
+        //     name: "Design Engineering",
+        //     url: "#",
+        //     icon: Frame,
+        // },
+        // {
+        //     name: "Sales & Marketing",
+        //     url: "#",
+        //     icon: PieChart,
+        // },
+        // {
+        //     name: "Travel",
+        //     url: "#",
+        //     icon: Map,
+        // },
+    ],
+}
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
-];
-
-export function AppSidebar() {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
-        <Sidebar collapsible="icon" variant="inset">
+        <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
-                <SidebarMenu>
-                    <SidebarMenuItem>
-                        <SidebarMenuButton size="lg" asChild>
-                            <Link href={dashboard()} prefetch>
-                                <AppLogo />
-                            </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
-                </SidebarMenu>
+                <TeamSwitcher teams={data.teams} />
             </SidebarHeader>
-
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain items={data.navMain} />
+                <NavProjects projects={data.projects} />
             </SidebarContent>
-
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
-                <NavUser />
+                <NavUser user={data.user} />
             </SidebarFooter>
+            <SidebarRail />
         </Sidebar>
-    );
+    )
 }
