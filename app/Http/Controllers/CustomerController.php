@@ -58,7 +58,7 @@ class CustomerController extends Controller
         // Load users with their customer-specific role from pivot table
         $customer->load(['users' => function ($query) {
             $query->withPivot('role_id');
-        }]);
+        }, 'projects', 'websites']);
 
         // Map users to include role name from the pivot table
         $usersWithRoles = $customer->users->map(function ($user) {
@@ -94,6 +94,8 @@ class CustomerController extends Controller
                 'name' => $customer->name,
                 'status' => $customer->status,
                 'users' => $usersWithRoles,
+                'projects' => $customer->projects,
+                'websites' => $customer->websites,
             ],
             'availableUsers' => $availableUsers,
             'roles' => $roles,
@@ -289,5 +291,66 @@ class CustomerController extends Controller
         }
 
         return back()->with('success', $message);
+    }
+
+    public function storeProject(Request $request, Customer $customer)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'notes' => 'nullable|string',
+        ]);
+
+        $organisationId = $this->getCurrentOrganisationId();
+
+        \App\Models\Project::create([
+            'organisation_id' => $organisationId,
+            'customer_id' => $customer->id,
+            'name' => $validated['name'],
+            'notes' => $validated['notes'] ?? null,
+        ]);
+
+        return back()->with('success', 'Project created successfully');
+    }
+
+    public function destroyProject(Customer $customer, $projectId)
+    {
+        $project = \App\Models\Project::where('customer_id', $customer->id)
+            ->where('id', $projectId)
+            ->firstOrFail();
+
+        $project->delete();
+
+        return back()->with('success', 'Project deleted successfully');
+    }
+
+    public function storeWebsite(Request $request, Customer $customer)
+    {
+        $validated = $request->validate([
+            'type' => 'required|in:production,staging,development',
+            'url' => 'required|string|max:255',
+            'repo_url' => 'nullable|string|max:255',
+            'notes' => 'nullable|string',
+        ]);
+
+        \App\Models\Website::create([
+            'customer_id' => $customer->id,
+            'type' => $validated['type'],
+            'url' => $validated['url'],
+            'repo_url' => $validated['repo_url'] ?? null,
+            'notes' => $validated['notes'] ?? null,
+        ]);
+
+        return back()->with('success', 'Website created successfully');
+    }
+
+    public function destroyWebsite(Customer $customer, $websiteId)
+    {
+        $website = \App\Models\Website::where('customer_id', $customer->id)
+            ->where('id', $websiteId)
+            ->firstOrFail();
+
+        $website->delete();
+
+        return back()->with('success', 'Website deleted successfully');
     }
 }

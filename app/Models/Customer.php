@@ -27,6 +27,11 @@ class Customer extends Model
         return $this->hasMany(Project::class);
     }
 
+    public function websites(): HasMany
+    {
+        return $this->hasMany(Website::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)->withPivot('role_id');

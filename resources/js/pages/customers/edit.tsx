@@ -43,6 +43,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog'
 import { Trash2, Plus, UserPlus } from 'lucide-react'
+import { Textarea } from '@/components/ui/textarea'
 import { useState } from 'react'
 
 interface User {
@@ -52,11 +53,27 @@ interface User {
     role_name?: string
 }
 
+interface Project {
+    id: string
+    name: string
+    notes?: string
+}
+
+interface Website {
+    id: string
+    type: 'production' | 'staging' | 'development'
+    url: string
+    repo_url?: string
+    notes?: string
+}
+
 interface Customer {
     id: string
     name: string
     status: number
     users: User[]
+    projects: Project[]
+    websites: Website[]
 }
 
 interface Role {
@@ -74,6 +91,8 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
     const { auth } = usePage<{ auth: { userType: 'organisation' | 'customer' } }>().props
     const [selectedUserId, setSelectedUserId] = useState<string>('')
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
+    const [isCreateProjectDialogOpen, setIsCreateProjectDialogOpen] = useState(false)
+    const [isCreateWebsiteDialogOpen, setIsCreateWebsiteDialogOpen] = useState(false)
 
 
     const { data, setData, put, processing, errors } = useForm({
@@ -92,6 +111,32 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
         name: '',
         email: '',
         role: '',
+    })
+
+    const {
+        data: newProjectData,
+        setData: setNewProjectData,
+        post: createProject,
+        processing: creatingProject,
+        errors: newProjectErrors,
+        reset: resetNewProject,
+    } = useForm({
+        name: '',
+        notes: '',
+    })
+
+    const {
+        data: newWebsiteData,
+        setData: setNewWebsiteData,
+        post: createWebsite,
+        processing: creatingWebsite,
+        errors: newWebsiteErrors,
+        reset: resetNewWebsite,
+    } = useForm({
+        type: 'production' as 'production' | 'staging' | 'development',
+        url: '',
+        repo_url: '',
+        notes: '',
     })
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -137,6 +182,40 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                 preserveScroll: true,
             }
         )
+    }
+
+    const handleCreateProject = (e: React.FormEvent) => {
+        e.preventDefault()
+        createProject(route('customers.projects.store', customer.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                setIsCreateProjectDialogOpen(false)
+                resetNewProject()
+            },
+        })
+    }
+
+    const handleDeleteProject = (projectId: string) => {
+        router.delete(route('customers.projects.destroy', { customer: customer.id, project: projectId }), {
+            preserveScroll: true,
+        })
+    }
+
+    const handleCreateWebsite = (e: React.FormEvent) => {
+        e.preventDefault()
+        createWebsite(route('customers.websites.store', customer.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                setIsCreateWebsiteDialogOpen(false)
+                resetNewWebsite()
+            },
+        })
+    }
+
+    const handleDeleteWebsite = (websiteId: string) => {
+        router.delete(route('customers.websites.destroy', { customer: customer.id, website: websiteId }), {
+            preserveScroll: true,
+        })
     }
 
     return (
@@ -390,6 +469,265 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                     ) : (
                                         <p className="text-sm text-muted-foreground text-center py-4">
                                             No users assigned to this customer yet.
+                                        </p>
+                                    )}
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Projects</CardTitle>
+                                <CardDescription>
+                                    Manage projects for this customer
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-4">
+                                    <div className="flex justify-end">
+                                        <Dialog open={isCreateProjectDialogOpen} onOpenChange={setIsCreateProjectDialogOpen}>
+                                            <DialogTrigger asChild>
+                                                <Button type="button">
+                                                    <Plus className="h-4 w-4 mr-2" />
+                                                    Create Project
+                                                </Button>
+                                            </DialogTrigger>
+                                            <DialogContent>
+                                                <DialogHeader>
+                                                    <DialogTitle>Create Project</DialogTitle>
+                                                    <DialogDescription>
+                                                        Add a new project for this customer
+                                                    </DialogDescription>
+                                                </DialogHeader>
+                                                <form onSubmit={handleCreateProject} className="space-y-4">
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="project-name">Project Name</Label>
+                                                        <Input
+                                                            id="project-name"
+                                                            value={newProjectData.name}
+                                                            onChange={(e) => setNewProjectData('name', e.target.value)}
+                                                            placeholder="Enter project name"
+                                                            required
+                                                        />
+                                                        {newProjectErrors.name && (
+                                                            <p className="text-sm text-red-500">{newProjectErrors.name}</p>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="project-notes">Notes (Optional)</Label>
+                                                        <Input
+                                                            id="project-notes"
+                                                            value={newProjectData.notes}
+                                                            onChange={(e) => setNewProjectData('notes', e.target.value)}
+                                                            placeholder="Enter project notes"
+                                                        />
+                                                        {newProjectErrors.notes && (
+                                                            <p className="text-sm text-red-500">{newProjectErrors.notes}</p>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="flex gap-2 justify-end">
+                                                        <Button
+                                                            type="button"
+                                                            variant="outline"
+                                                            onClick={() => setIsCreateProjectDialogOpen(false)}
+                                                        >
+                                                            Cancel
+                                                        </Button>
+                                                        <Button type="submit" disabled={creatingProject}>
+                                                            {creatingProject ? 'Creating...' : 'Create Project'}
+                                                        </Button>
+                                                    </div>
+                                                </form>
+                                            </DialogContent>
+                                        </Dialog>
+                                    </div>
+
+                                    {customer.projects.length > 0 ? (
+                                        <Table>
+                                            <TableHeader>
+                                                <TableRow>
+                                                    <TableHead>Name</TableHead>
+                                                    <TableHead>Notes</TableHead>
+                                                    <TableHead className="w-[100px]">Actions</TableHead>
+                                                </TableRow>
+                                            </TableHeader>
+                                            <TableBody>
+                                                {customer.projects.map((project) => (
+                                                    <TableRow key={project.id}>
+                                                        <TableCell>{project.name}</TableCell>
+                                                        <TableCell>{project.notes || '-'}</TableCell>
+                                                        <TableCell>
+                                                            <Button
+                                                                type="button"
+                                                                variant="ghost"
+                                                                size="sm"
+                                                                onClick={() => handleDeleteProject(project.id)}
+                                                            >
+                                                                <Trash2 className="h-4 w-4 text-red-500" />
+                                                            </Button>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                ))}
+                                            </TableBody>
+                                        </Table>
+                                    ) : (
+                                        <p className="text-sm text-muted-foreground text-center py-4">
+                                            No projects for this customer yet.
+                                        </p>
+                                    )}
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Websites</CardTitle>
+                                <CardDescription>
+                                    Manage websites for this customer
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-4">
+                                    <div className="flex justify-end">
+                                        <Dialog open={isCreateWebsiteDialogOpen} onOpenChange={setIsCreateWebsiteDialogOpen}>
+                                            <DialogTrigger asChild>
+                                                <Button type="button">
+                                                    <Plus className="h-4 w-4 mr-2" />
+                                                    Create Website
+                                                </Button>
+                                            </DialogTrigger>
+                                            <DialogContent>
+                                                <DialogHeader>
+                                                    <DialogTitle>Create Website</DialogTitle>
+                                                    <DialogDescription>
+                                                        Add a new website for this customer
+                                                    </DialogDescription>
+                                                </DialogHeader>
+                                                <form onSubmit={handleCreateWebsite} className="space-y-4">
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="website-type">Type</Label>
+                                                        <Select
+                                                            value={newWebsiteData.type}
+                                                            onValueChange={(value) => setNewWebsiteData('type', value as 'production' | 'staging' | 'development')}
+                                                        >
+                                                            <SelectTrigger id="website-type">
+                                                                <SelectValue placeholder="Select type" />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                <SelectItem value="production">Production</SelectItem>
+                                                                <SelectItem value="staging">Staging</SelectItem>
+                                                                <SelectItem value="development">Development</SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                        {newWebsiteErrors.type && (
+                                                            <p className="text-sm text-red-500">{newWebsiteErrors.type}</p>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="website-url">URL</Label>
+                                                        <Input
+                                                            id="website-url"
+                                                            value={newWebsiteData.url}
+                                                            onChange={(e) => setNewWebsiteData('url', e.target.value)}
+                                                            placeholder="https://example.com"
+                                                            required
+                                                        />
+                                                        {newWebsiteErrors.url && (
+                                                            <p className="text-sm text-red-500">{newWebsiteErrors.url}</p>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="website-repo-url">Repository URL (Optional)</Label>
+                                                        <Input
+                                                            id="website-repo-url"
+                                                            value={newWebsiteData.repo_url}
+                                                            onChange={(e) => setNewWebsiteData('repo_url', e.target.value)}
+                                                            placeholder="https://github.com/username/repo"
+                                                        />
+                                                        {newWebsiteErrors.repo_url && (
+                                                            <p className="text-sm text-red-500">{newWebsiteErrors.repo_url}</p>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="website-notes">Notes (Optional)</Label>
+                                                        <Textarea
+                                                            id="website-notes"
+                                                            value={newWebsiteData.notes}
+                                                            onChange={(e) => setNewWebsiteData('notes', e.target.value)}
+                                                            placeholder="Enter website notes"
+                                                        />
+                                                        {newWebsiteErrors.notes && (
+                                                            <p className="text-sm text-red-500">{newWebsiteErrors.notes}</p>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="flex gap-2 justify-end">
+                                                        <Button
+                                                            type="button"
+                                                            variant="outline"
+                                                            onClick={() => setIsCreateWebsiteDialogOpen(false)}
+                                                        >
+                                                            Cancel
+                                                        </Button>
+                                                        <Button type="submit" disabled={creatingWebsite}>
+                                                            {creatingWebsite ? 'Creating...' : 'Create Website'}
+                                                        </Button>
+                                                    </div>
+                                                </form>
+                                            </DialogContent>
+                                        </Dialog>
+                                    </div>
+
+                                    {customer.websites.length > 0 ? (
+                                        <Table>
+                                            <TableHeader>
+                                                <TableRow>
+                                                    <TableHead>Type</TableHead>
+                                                    <TableHead>URL</TableHead>
+                                                    <TableHead>Repository</TableHead>
+                                                    <TableHead>Notes</TableHead>
+                                                    <TableHead className="w-[100px]">Actions</TableHead>
+                                                </TableRow>
+                                            </TableHeader>
+                                            <TableBody>
+                                                {customer.websites.map((website) => (
+                                                    <TableRow key={website.id}>
+                                                        <TableCell className="capitalize">{website.type}</TableCell>
+                                                        <TableCell>
+                                                            <a href={website.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                                                {website.url}
+                                                            </a>
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {website.repo_url ? (
+                                                                <a href={website.repo_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                                                    {website.repo_url}
+                                                                </a>
+                                                            ) : '-'}
+                                                        </TableCell>
+                                                        <TableCell>{website.notes || '-'}</TableCell>
+                                                        <TableCell>
+                                                            <Button
+                                                                type="button"
+                                                                variant="ghost"
+                                                                size="sm"
+                                                                onClick={() => handleDeleteWebsite(website.id)}
+                                                            >
+                                                                <Trash2 className="h-4 w-4 text-red-500" />
+                                                            </Button>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                ))}
+                                            </TableBody>
+                                        </Table>
+                                    ) : (
+                                        <p className="text-sm text-muted-foreground text-center py-4">
+                                            No websites for this customer yet.
                                         </p>
                                     )}
                                 </div>

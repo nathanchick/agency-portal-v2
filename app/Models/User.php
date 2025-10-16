@@ -14,7 +14,6 @@ use Coderflex\LaravelTicket\Contracts\CanUseTickets;
 
 class User extends Authenticatable implements CanUseTickets
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, TwoFactorAuthenticatable, HasUuids, HasRoles , HasTickets;
 
     /**
