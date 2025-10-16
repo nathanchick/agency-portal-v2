@@ -93,6 +93,14 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
     const [isCreateProjectDialogOpen, setIsCreateProjectDialogOpen] = useState(false)
     const [isCreateWebsiteDialogOpen, setIsCreateWebsiteDialogOpen] = useState(false)
+    const [deleteUserDialogOpen, setDeleteUserDialogOpen] = useState(false)
+    const [userToDelete, setUserToDelete] = useState<string | null>(null)
+    const [deleteProjectDialogOpen, setDeleteProjectDialogOpen] = useState(false)
+    const [projectToDelete, setProjectToDelete] = useState<string | null>(null)
+    const [deleteWebsiteDialogOpen, setDeleteWebsiteDialogOpen] = useState(false)
+    const [websiteToDelete, setWebsiteToDelete] = useState<string | null>(null)
+    const [deleteCustomerDialogOpen, setDeleteCustomerDialogOpen] = useState(false)
+    const [deleteConfirmText, setDeleteConfirmText] = useState('')
 
 
     const { data, setData, put, processing, errors } = useForm({
@@ -169,9 +177,20 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
     }
 
     const handleRemoveUser = (userId: string) => {
-        router.delete(route('customers.users.detach', { customer: customer.id, user: userId }), {
-            preserveScroll: true,
-        })
+        setUserToDelete(userId)
+        setDeleteUserDialogOpen(true)
+    }
+
+    const confirmRemoveUser = () => {
+        if (userToDelete) {
+            router.delete(route('customers.users.detach', { customer: customer.id, user: userToDelete }), {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setDeleteUserDialogOpen(false)
+                    setUserToDelete(null)
+                },
+            })
+        }
     }
 
     const handleRoleChange = (userId: string, roleName: string) => {
@@ -196,9 +215,20 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
     }
 
     const handleDeleteProject = (projectId: string) => {
-        router.delete(route('customers.projects.destroy', { customer: customer.id, project: projectId }), {
-            preserveScroll: true,
-        })
+        setProjectToDelete(projectId)
+        setDeleteProjectDialogOpen(true)
+    }
+
+    const confirmDeleteProject = () => {
+        if (projectToDelete) {
+            router.delete(route('customers.projects.destroy', { customer: customer.id, project: projectToDelete }), {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setDeleteProjectDialogOpen(false)
+                    setProjectToDelete(null)
+                },
+            })
+        }
     }
 
     const handleCreateWebsite = (e: React.FormEvent) => {
@@ -213,9 +243,31 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
     }
 
     const handleDeleteWebsite = (websiteId: string) => {
-        router.delete(route('customers.websites.destroy', { customer: customer.id, website: websiteId }), {
-            preserveScroll: true,
-        })
+        setWebsiteToDelete(websiteId)
+        setDeleteWebsiteDialogOpen(true)
+    }
+
+    const confirmDeleteWebsite = () => {
+        if (websiteToDelete) {
+            router.delete(route('customers.websites.destroy', { customer: customer.id, website: websiteToDelete }), {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setDeleteWebsiteDialogOpen(false)
+                    setWebsiteToDelete(null)
+                },
+            })
+        }
+    }
+
+    const handleDeleteCustomer = () => {
+        setDeleteConfirmText('')
+        setDeleteCustomerDialogOpen(true)
+    }
+
+    const confirmDeleteCustomer = () => {
+        if (deleteConfirmText === 'DELETE') {
+            router.delete(route('customers.destroy', customer.id))
+        }
     }
 
     return (
@@ -293,15 +345,20 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                         )}
                                     </div>
 
-                                    <div className="flex gap-2 pt-4">
-                                        <Button type="submit" disabled={processing}>
-                                            {processing ? 'Updating...' : 'Update Customer'}
-                                        </Button>
-                                        <Link href={route('customers.index')}>
-                                            <Button type="button" variant="outline">
-                                                Cancel
+                                    <div className="flex gap-2 pt-4 justify-between">
+                                        <div className="flex gap-2">
+                                            <Button type="submit" disabled={processing}>
+                                                {processing ? 'Updating...' : 'Update Customer'}
                                             </Button>
-                                        </Link>
+                                            <Link href={route('customers.index')}>
+                                                <Button type="button" variant="outline">
+                                                    Cancel
+                                                </Button>
+                                            </Link>
+                                        </div>
+                                        <Button type="button" variant="destructive" onClick={handleDeleteCustomer}>
+                                            Delete Customer
+                                        </Button>
                                     </div>
                                 </form>
                             </CardContent>
@@ -459,7 +516,7 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                                                 size="sm"
                                                                 onClick={() => handleRemoveUser(user.id)}
                                                             >
-                                                                <Trash2 className="h-4 w-4 text-red-500" />
+                                                                <Trash2 className="h-4 w-4 text-destructive" />
                                                             </Button>
                                                         </TableCell>
                                                     </TableRow>
@@ -474,6 +531,33 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                 </div>
                             </CardContent>
                         </Card>
+
+                        <Dialog open={deleteUserDialogOpen} onOpenChange={setDeleteUserDialogOpen}>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Remove User</DialogTitle>
+                                    <DialogDescription>
+                                        Are you sure you want to remove this user from the customer? This action cannot be undone.
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className="flex gap-2 justify-end">
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        onClick={() => setDeleteUserDialogOpen(false)}
+                                    >
+                                        Cancel
+                                    </Button>
+                                    <Button
+                                        type="button"
+                                        variant="destructive"
+                                        onClick={confirmRemoveUser}
+                                    >
+                                        Remove User
+                                    </Button>
+                                </div>
+                            </DialogContent>
+                        </Dialog>
 
                         <Card>
                             <CardHeader>
@@ -565,7 +649,7 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                                                 size="sm"
                                                                 onClick={() => handleDeleteProject(project.id)}
                                                             >
-                                                                <Trash2 className="h-4 w-4 text-red-500" />
+                                                                <Trash2 className="h-4 w-4 text-destructive" />
                                                             </Button>
                                                         </TableCell>
                                                     </TableRow>
@@ -580,6 +664,33 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                 </div>
                             </CardContent>
                         </Card>
+
+                        <Dialog open={deleteProjectDialogOpen} onOpenChange={setDeleteProjectDialogOpen}>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Delete Project</DialogTitle>
+                                    <DialogDescription>
+                                        Are you sure you want to delete this project? This action cannot be undone.
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className="flex gap-2 justify-end">
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        onClick={() => setDeleteProjectDialogOpen(false)}
+                                    >
+                                        Cancel
+                                    </Button>
+                                    <Button
+                                        type="button"
+                                        variant="destructive"
+                                        onClick={confirmDeleteProject}
+                                    >
+                                        Delete Project
+                                    </Button>
+                                </div>
+                            </DialogContent>
+                        </Dialog>
 
                         <Card>
                             <CardHeader>
@@ -718,7 +829,7 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                                                 size="sm"
                                                                 onClick={() => handleDeleteWebsite(website.id)}
                                                             >
-                                                                <Trash2 className="h-4 w-4 text-red-500" />
+                                                                <Trash2 className="h-4 w-4 text-destructive" />
                                                             </Button>
                                                         </TableCell>
                                                     </TableRow>
@@ -733,6 +844,77 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                 </div>
                             </CardContent>
                         </Card>
+
+                        <Dialog open={deleteWebsiteDialogOpen} onOpenChange={setDeleteWebsiteDialogOpen}>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Delete Website</DialogTitle>
+                                    <DialogDescription>
+                                        Are you sure you want to delete this website? This action cannot be undone.
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className="flex gap-2 justify-end">
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        onClick={() => setDeleteWebsiteDialogOpen(false)}
+                                    >
+                                        Cancel
+                                    </Button>
+                                    <Button
+                                        type="button"
+                                        variant="destructive"
+                                        onClick={confirmDeleteWebsite}
+                                    >
+                                        Delete Website
+                                    </Button>
+                                </div>
+                            </DialogContent>
+                        </Dialog>
+
+                        <Dialog open={deleteCustomerDialogOpen} onOpenChange={setDeleteCustomerDialogOpen}>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Delete Customer</DialogTitle>
+                                    <DialogDescription>
+                                        Are you sure you want to delete <strong>{customer.name}</strong>? This action cannot be undone and will delete all associated data including users, projects, and websites.
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className="space-y-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="delete-confirm">
+                                            Type <strong>DELETE</strong> to confirm
+                                        </Label>
+                                        <Input
+                                            id="delete-confirm"
+                                            value={deleteConfirmText}
+                                            onChange={(e) => setDeleteConfirmText(e.target.value)}
+                                            placeholder="DELETE"
+                                        />
+                                    </div>
+                                    <div className="flex gap-2 justify-end">
+                                        <Button
+                                            type="button"
+                                            variant="outline"
+                                            onClick={() => {
+                                                setDeleteCustomerDialogOpen(false)
+                                                setDeleteConfirmText('')
+                                            }}
+                                        >
+                                            Cancel
+                                        </Button>
+                                        <Button
+                                            type="button"
+                                            variant="destructive"
+                                            onClick={confirmDeleteCustomer}
+                                            disabled={deleteConfirmText !== 'DELETE'}
+                                        >
+                                            Delete Customer
+                                        </Button>
+                                    </div>
+                                </div>
+                            </DialogContent>
+                        </Dialog>
                     </div>
                 </div>
             </SidebarInset>

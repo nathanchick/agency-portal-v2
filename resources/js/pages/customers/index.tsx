@@ -24,7 +24,7 @@ import {
     TableRow,
 } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
-import { Pencil, Trash2, Plus } from 'lucide-react'
+import { Pencil, Plus } from 'lucide-react'
 
 interface Customer {
     id: string
@@ -40,12 +40,6 @@ interface Props {
 
 export default function Customers({ customers }: Props) {
     const { auth } = usePage<{ auth: { userType: 'organisation' | 'customer' } }>().props
-
-    const handleDelete = (id: string) => {
-        if (confirm('Are you sure you want to delete this customer?')) {
-            router.delete(`/customers/${id}`)
-        }
-    }
 
     return (
         <SidebarProvider>
@@ -117,20 +111,11 @@ export default function Customers({ customers }: Props) {
                                                 {new Date(customer.created_at).toLocaleDateString()}
                                             </TableCell>
                                             <TableCell className="text-right">
-                                                <div className="flex justify-end gap-2">
-                                                    <Link href={`/customers/${customer.id}/edit`}>
-                                                        <Button variant="outline" size="sm">
-                                                            <Pencil className="h-4 w-4" />
-                                                        </Button>
-                                                    </Link>
-                                                    <Button
-                                                        variant="outline"
-                                                        size="sm"
-                                                        onClick={() => handleDelete(customer.id)}
-                                                    >
-                                                        <Trash2 className="h-4 w-4" />
+                                                <Link href={`/customers/${customer.id}/edit`}>
+                                                    <Button variant="outline" size="sm">
+                                                        <Pencil className="h-4 w-4" />
                                                     </Button>
-                                                </div>
+                                                </Link>
                                             </TableCell>
                                         </TableRow>
                                     ))
