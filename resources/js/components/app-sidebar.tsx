@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import {
+    Activity,
     AudioWaveform,
     BookOpen,
     Bot, Clock,
@@ -9,14 +10,19 @@ import {
     Frame,
     GalleryVerticalEnd, HeartPulseIcon, LockIcon,
     Map,
-    PieChart,
+    PieChart, PoundSterling,
     Settings2,
-    SquareTerminal,
+    SquareTerminal, TicketCheckIcon,
+    Users,
+    Briefcase,
+    Flag,
+    FileText,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
+import { NavSecondary } from "@/components/nav-secondary"
 import { TeamSwitcher } from "@/components/team-switcher"
 import {
     Sidebar,
@@ -50,12 +56,60 @@ const data = {
             plan: "Customer",
         },
     ],
-    navMain: [
+    // Organisation user navigation
+    navMainOrganisation: [
         {
             title: "Dashboard",
-            url: "#",
+            url: route('dashboard'),
             icon: SquareTerminal,
-            isActive: true,
+        },
+        {
+            title: "Documents",
+            url: "#",
+            icon: FileText,
+            items: [
+                {
+                    title: "Completed",
+                    url: "#",
+                },
+                {
+                    title: "Pending",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Customers",
+            url: "/customers",
+            icon: Users,
+        },
+        {
+            title: "Projects",
+            url: "#",
+            icon: Briefcase,
+            items: [
+                {
+                    title: "Active",
+                    url: "#",
+                },
+                {
+                    title: "Archived",
+                    url: "#",
+                },
+            ],
+        },
+        {
+            title: "Banners",
+            url: "#",
+            icon: Flag,
+        },
+    ],
+    // Customer user navigation
+    navMainCustomer: [
+        {
+            title: "Dashboard",
+            url: route('dashboard'),
+            icon: SquareTerminal,
         },
         {
             title: "Deployments",
@@ -63,11 +117,11 @@ const data = {
             icon: Bot,
             items: [
                 {
-                    title: "Past",
+                    title: "History",
                     url: "#",
                 },
                 {
-                    title: "Planned",
+                    title: "Future Planned",
                     url: "#",
                 },
             ],
@@ -78,11 +132,7 @@ const data = {
             icon: Clock,
             items: [
                 {
-                    title: "Technical Support",
-                    url: "#",
-                },
-                {
-                    title: "Marketing Support",
+                    title: "Current Usuage",
                     url: "#",
                 },
                 {
@@ -97,42 +147,42 @@ const data = {
             icon: BookOpen,
             items: [
                 {
-                    title: "General",
+                    title: "User Acceptance",
                     url: "#",
                 },
                 {
-                    title: "Team",
+                    title: "Change Requests",
                     url: "#",
                 },
                 {
-                    title: "Billing",
+                    title: "Production Access",
                     url: "#",
                 },
                 {
-                    title: "Limits",
+                    title: "Terms & Contracts",
                     url: "#",
-                },
+                }
             ],
         },
         {
             title: "Tickets",
             url: "#",
-            icon: BookOpen,
+            icon: TicketCheckIcon,
             items: [
                 {
-                    title: "General",
+                    title: "My Tickets (Open)",
+                    url: route('my-tickets'),
+                },
+                {
+                    title: "All Tickets",
+                    url: route('all-tickets'),
+                },
+                {
+                    title: "Closed Tickets",
                     url: "#",
                 },
                 {
-                    title: "Team",
-                    url: "#",
-                },
-                {
-                    title: "Billing",
-                    url: "#",
-                },
-                {
-                    title: "Limits",
+                    title: "Reports",
                     url: "#",
                 },
             ],
@@ -143,19 +193,19 @@ const data = {
             icon: HeartPulseIcon,
             items: [
                 {
-                    title: "General",
+                    title: "Broken Links",
                     url: "#",
                 },
                 {
-                    title: "Team",
+                    title: "Cron Status",
                     url: "#",
                 },
                 {
-                    title: "Billing",
+                    title: "Uptime Report",
                     url: "#",
                 },
                 {
-                    title: "Limits",
+                    title: "Google Page Speed",
                     url: "#",
                 },
             ],
@@ -166,19 +216,19 @@ const data = {
             icon: LockIcon,
             items: [
                 {
-                    title: "General",
+                    title: "Security Scan",
                     url: "#",
                 },
                 {
-                    title: "Team",
+                    title: "CSP Monitoring",
                     url: "#",
                 },
                 {
-                    title: "Billing",
+                    title: "Vulnerability Report",
                     url: "#",
                 },
                 {
-                    title: "Limits",
+                    title: "SSL Status",
                     url: "#",
                 },
             ],
@@ -186,22 +236,14 @@ const data = {
         {
             title: "Billing/Subscriptions",
             url: "#",
-            icon: BookOpen,
+            icon: PoundSterling,
             items: [
                 {
-                    title: "General",
+                    title: "Invoices",
                     url: "#",
                 },
                 {
-                    title: "Team",
-                    url: "#",
-                },
-                {
-                    title: "Billing",
-                    url: "#",
-                },
-                {
-                    title: "Limits",
+                    title: "Active Billing",
                     url: "#",
                 },
             ],
@@ -224,17 +266,33 @@ const data = {
         //     icon: Map,
         // },
     ],
+    navSecondary: [
+        {
+            title: "Service Status",
+            url: "#",
+            icon: Activity,
+        },
+        {
+            title: "View our Knowledge Base",
+            url: "#",
+            icon: Map,
+        },
+    ]
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ userType = 'customer', ...props }: React.ComponentProps<typeof Sidebar> & { userType?: 'organisation' | 'customer' }) {
+    // Select navigation based on user type
+    const navItems = userType === 'organisation' ? data.navMainOrganisation : data.navMainCustomer
+
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
                 <TeamSwitcher teams={data.teams} />
             </SidebarHeader>
             <SidebarContent>
-                <NavMain items={data.navMain} />
+                <NavMain items={navItems} />
                 <NavProjects projects={data.projects} />
+                <NavSecondary items={data.navSecondary} className="mt-auto" />
             </SidebarContent>
             <SidebarFooter>
                 <NavUser user={data.user} />

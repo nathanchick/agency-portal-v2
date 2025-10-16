@@ -9,11 +9,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Coderflex\LaravelTicket\Concerns\HasTickets;
+use Coderflex\LaravelTicket\Contracts\CanUseTickets;
 
-class User extends Authenticatable
+class User extends Authenticatable implements CanUseTickets
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, TwoFactorAuthenticatable, HasUuids, HasRoles;
+    use HasFactory, Notifiable, TwoFactorAuthenticatable, HasUuids, HasRoles , HasTickets;
 
     /**
      * The attributes that are mass assignable.
@@ -49,5 +51,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function organisations()
+    {
+        return $this->belongsToMany(Organisation::class);
+    }
+
+    public function customers()
+    {
+        return $this->belongsToMany(Customer::class);
+    }
+
+    /**
+     * Get the team ID for Spatie Permission team support
+     */
+    public function getTeamIdAttribute()
+    {
+        // Return the current organisation ID from the tenant context
+        $currentOrganisation = Organisation::current();
+        return $currentOrganisation ? $currentOrganisation->id : null;
     }
 }
