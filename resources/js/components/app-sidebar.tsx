@@ -7,15 +7,11 @@ import {
     BookOpen,
     Bot, Clock,
     Command,
-    Frame,
     GalleryVerticalEnd, HeartPulseIcon, LockIcon,
     Map,
-    PieChart, PoundSterling,
-    Settings2,
+    PoundSterling,
     SquareTerminal, TicketCheckIcon,
     Users,
-    Briefcase,
-    Flag,
     FileText,
 } from "lucide-react"
 
@@ -31,6 +27,8 @@ import {
     SidebarHeader,
     SidebarRail,
 } from "@/components/ui/sidebar"
+
+import {route} from "ziggy-js";
 
 // This is sample data.
 const data = {
@@ -64,6 +62,11 @@ const data = {
             icon: SquareTerminal,
         },
         {
+            title: "Customers",
+            url: route('customers.index'),
+            icon: Users,
+        },
+        {
             title: "Documents",
             url: "#",
             icon: FileText,
@@ -77,31 +80,6 @@ const data = {
                     url: "#",
                 },
             ],
-        },
-        {
-            title: "Customers",
-            url: "/customers",
-            icon: Users,
-        },
-        {
-            title: "Projects",
-            url: "#",
-            icon: Briefcase,
-            items: [
-                {
-                    title: "Active",
-                    url: "#",
-                },
-                {
-                    title: "Archived",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Banners",
-            url: "#",
-            icon: Flag,
         },
     ],
     // Customer user navigation
@@ -171,11 +149,11 @@ const data = {
             items: [
                 {
                     title: "My Tickets (Open)",
-                    url: route('my-tickets'),
+                    url: route('tickets.view'),
                 },
                 {
                     title: "All Tickets",
-                    url: route('all-tickets'),
+                    url: route('tickets.view.all'),
                 },
                 {
                     title: "Closed Tickets",

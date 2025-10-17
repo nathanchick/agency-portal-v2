@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('customer_user', function (Blueprint $table) {
             $table->foreignUuid('customer_id')->constrained()->onDelete('cascade');
             $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('role_id')->nullable()->constrained('roles')->onDelete('set null');
 
             $table->primary(['customer_id', 'user_id']);
         });

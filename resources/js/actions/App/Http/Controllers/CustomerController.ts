@@ -318,7 +318,7 @@ show.form = showForm
 
 /**
 * @see \App\Http\Controllers\CustomerController::edit
-* @see app/Http/Controllers/CustomerController.php:54
+* @see app/Http/Controllers/CustomerController.php:65
 * @route '/customers/{customer}/edit'
 */
 export const edit = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -333,7 +333,7 @@ edit.definition = {
 
 /**
 * @see \App\Http\Controllers\CustomerController::edit
-* @see app/Http/Controllers/CustomerController.php:54
+* @see app/Http/Controllers/CustomerController.php:65
 * @route '/customers/{customer}/edit'
 */
 edit.url = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
@@ -366,7 +366,7 @@ edit.url = (args: { customer: string | number | { id: string | number } } | [cus
 
 /**
 * @see \App\Http\Controllers\CustomerController::edit
-* @see app/Http/Controllers/CustomerController.php:54
+* @see app/Http/Controllers/CustomerController.php:65
 * @route '/customers/{customer}/edit'
 */
 edit.get = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -376,7 +376,7 @@ edit.get = (args: { customer: string | number | { id: string | number } } | [cus
 
 /**
 * @see \App\Http\Controllers\CustomerController::edit
-* @see app/Http/Controllers/CustomerController.php:54
+* @see app/Http/Controllers/CustomerController.php:65
 * @route '/customers/{customer}/edit'
 */
 edit.head = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -386,7 +386,7 @@ edit.head = (args: { customer: string | number | { id: string | number } } | [cu
 
 /**
 * @see \App\Http\Controllers\CustomerController::edit
-* @see app/Http/Controllers/CustomerController.php:54
+* @see app/Http/Controllers/CustomerController.php:65
 * @route '/customers/{customer}/edit'
 */
 const editForm = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -396,7 +396,7 @@ const editForm = (args: { customer: string | number | { id: string | number } } 
 
 /**
 * @see \App\Http\Controllers\CustomerController::edit
-* @see app/Http/Controllers/CustomerController.php:54
+* @see app/Http/Controllers/CustomerController.php:65
 * @route '/customers/{customer}/edit'
 */
 editForm.get = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -406,7 +406,7 @@ editForm.get = (args: { customer: string | number | { id: string | number } } | 
 
 /**
 * @see \App\Http\Controllers\CustomerController::edit
-* @see app/Http/Controllers/CustomerController.php:54
+* @see app/Http/Controllers/CustomerController.php:65
 * @route '/customers/{customer}/edit'
 */
 editForm.head = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -423,7 +423,7 @@ edit.form = editForm
 
 /**
 * @see \App\Http\Controllers\CustomerController::update
-* @see app/Http/Controllers/CustomerController.php:105
+* @see app/Http/Controllers/CustomerController.php:116
 * @route '/customers/{customer}'
 */
 export const update = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -438,7 +438,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\CustomerController::update
-* @see app/Http/Controllers/CustomerController.php:105
+* @see app/Http/Controllers/CustomerController.php:116
 * @route '/customers/{customer}'
 */
 update.url = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
@@ -471,7 +471,7 @@ update.url = (args: { customer: string | number | { id: string | number } } | [c
 
 /**
 * @see \App\Http\Controllers\CustomerController::update
-* @see app/Http/Controllers/CustomerController.php:105
+* @see app/Http/Controllers/CustomerController.php:116
 * @route '/customers/{customer}'
 */
 update.put = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -481,7 +481,7 @@ update.put = (args: { customer: string | number | { id: string | number } } | [c
 
 /**
 * @see \App\Http\Controllers\CustomerController::update
-* @see app/Http/Controllers/CustomerController.php:105
+* @see app/Http/Controllers/CustomerController.php:116
 * @route '/customers/{customer}'
 */
 update.patch = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -491,7 +491,7 @@ update.patch = (args: { customer: string | number | { id: string | number } } | 
 
 /**
 * @see \App\Http\Controllers\CustomerController::update
-* @see app/Http/Controllers/CustomerController.php:105
+* @see app/Http/Controllers/CustomerController.php:116
 * @route '/customers/{customer}'
 */
 const updateForm = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -506,7 +506,7 @@ const updateForm = (args: { customer: string | number | { id: string | number } 
 
 /**
 * @see \App\Http\Controllers\CustomerController::update
-* @see app/Http/Controllers/CustomerController.php:105
+* @see app/Http/Controllers/CustomerController.php:116
 * @route '/customers/{customer}'
 */
 updateForm.put = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -521,7 +521,7 @@ updateForm.put = (args: { customer: string | number | { id: string | number } } 
 
 /**
 * @see \App\Http\Controllers\CustomerController::update
-* @see app/Http/Controllers/CustomerController.php:105
+* @see app/Http/Controllers/CustomerController.php:116
 * @route '/customers/{customer}'
 */
 updateForm.patch = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -538,7 +538,7 @@ update.form = updateForm
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroy
-* @see app/Http/Controllers/CustomerController.php:117
+* @see app/Http/Controllers/CustomerController.php:128
 * @route '/customers/{customer}'
 */
 export const destroy = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -553,7 +553,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroy
-* @see app/Http/Controllers/CustomerController.php:117
+* @see app/Http/Controllers/CustomerController.php:128
 * @route '/customers/{customer}'
 */
 destroy.url = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
@@ -586,7 +586,7 @@ destroy.url = (args: { customer: string | number | { id: string | number } } | [
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroy
-* @see app/Http/Controllers/CustomerController.php:117
+* @see app/Http/Controllers/CustomerController.php:128
 * @route '/customers/{customer}'
 */
 destroy.delete = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -596,7 +596,7 @@ destroy.delete = (args: { customer: string | number | { id: string | number } } 
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroy
-* @see app/Http/Controllers/CustomerController.php:117
+* @see app/Http/Controllers/CustomerController.php:128
 * @route '/customers/{customer}'
 */
 const destroyForm = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -611,7 +611,7 @@ const destroyForm = (args: { customer: string | number | { id: string | number }
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroy
-* @see app/Http/Controllers/CustomerController.php:117
+* @see app/Http/Controllers/CustomerController.php:128
 * @route '/customers/{customer}'
 */
 destroyForm.delete = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -628,7 +628,7 @@ destroy.form = destroyForm
 
 /**
 * @see \App\Http\Controllers\CustomerController::createUser
-* @see app/Http/Controllers/CustomerController.php:202
+* @see app/Http/Controllers/CustomerController.php:213
 * @route '/customers/{customer}/users/create'
 */
 export const createUser = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -643,7 +643,7 @@ createUser.definition = {
 
 /**
 * @see \App\Http\Controllers\CustomerController::createUser
-* @see app/Http/Controllers/CustomerController.php:202
+* @see app/Http/Controllers/CustomerController.php:213
 * @route '/customers/{customer}/users/create'
 */
 createUser.url = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
@@ -676,7 +676,7 @@ createUser.url = (args: { customer: string | number | { id: string | number } } 
 
 /**
 * @see \App\Http\Controllers\CustomerController::createUser
-* @see app/Http/Controllers/CustomerController.php:202
+* @see app/Http/Controllers/CustomerController.php:213
 * @route '/customers/{customer}/users/create'
 */
 createUser.post = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -686,7 +686,7 @@ createUser.post = (args: { customer: string | number | { id: string | number } }
 
 /**
 * @see \App\Http\Controllers\CustomerController::createUser
-* @see app/Http/Controllers/CustomerController.php:202
+* @see app/Http/Controllers/CustomerController.php:213
 * @route '/customers/{customer}/users/create'
 */
 const createUserForm = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -696,7 +696,7 @@ const createUserForm = (args: { customer: string | number | { id: string | numbe
 
 /**
 * @see \App\Http\Controllers\CustomerController::createUser
-* @see app/Http/Controllers/CustomerController.php:202
+* @see app/Http/Controllers/CustomerController.php:213
 * @route '/customers/{customer}/users/create'
 */
 createUserForm.post = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -708,7 +708,7 @@ createUser.form = createUserForm
 
 /**
 * @see \App\Http\Controllers\CustomerController::attachUser
-* @see app/Http/Controllers/CustomerController.php:124
+* @see app/Http/Controllers/CustomerController.php:135
 * @route '/customers/{customer}/users'
 */
 export const attachUser = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -723,7 +723,7 @@ attachUser.definition = {
 
 /**
 * @see \App\Http\Controllers\CustomerController::attachUser
-* @see app/Http/Controllers/CustomerController.php:124
+* @see app/Http/Controllers/CustomerController.php:135
 * @route '/customers/{customer}/users'
 */
 attachUser.url = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
@@ -756,7 +756,7 @@ attachUser.url = (args: { customer: string | number | { id: string | number } } 
 
 /**
 * @see \App\Http\Controllers\CustomerController::attachUser
-* @see app/Http/Controllers/CustomerController.php:124
+* @see app/Http/Controllers/CustomerController.php:135
 * @route '/customers/{customer}/users'
 */
 attachUser.post = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -766,7 +766,7 @@ attachUser.post = (args: { customer: string | number | { id: string | number } }
 
 /**
 * @see \App\Http\Controllers\CustomerController::attachUser
-* @see app/Http/Controllers/CustomerController.php:124
+* @see app/Http/Controllers/CustomerController.php:135
 * @route '/customers/{customer}/users'
 */
 const attachUserForm = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -776,7 +776,7 @@ const attachUserForm = (args: { customer: string | number | { id: string | numbe
 
 /**
 * @see \App\Http\Controllers\CustomerController::attachUser
-* @see app/Http/Controllers/CustomerController.php:124
+* @see app/Http/Controllers/CustomerController.php:135
 * @route '/customers/{customer}/users'
 */
 attachUserForm.post = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -788,7 +788,7 @@ attachUser.form = attachUserForm
 
 /**
 * @see \App\Http\Controllers\CustomerController::updateUserRole
-* @see app/Http/Controllers/CustomerController.php:172
+* @see app/Http/Controllers/CustomerController.php:183
 * @route '/customers/{customer}/users/{user}/role'
 */
 export const updateUserRole = (args: { customer: string | number | { id: string | number }, user: string | number } | [customer: string | number | { id: string | number }, user: string | number ], options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -803,7 +803,7 @@ updateUserRole.definition = {
 
 /**
 * @see \App\Http\Controllers\CustomerController::updateUserRole
-* @see app/Http/Controllers/CustomerController.php:172
+* @see app/Http/Controllers/CustomerController.php:183
 * @route '/customers/{customer}/users/{user}/role'
 */
 updateUserRole.url = (args: { customer: string | number | { id: string | number }, user: string | number } | [customer: string | number | { id: string | number }, user: string | number ], options?: RouteQueryOptions) => {
@@ -831,7 +831,7 @@ updateUserRole.url = (args: { customer: string | number | { id: string | number 
 
 /**
 * @see \App\Http\Controllers\CustomerController::updateUserRole
-* @see app/Http/Controllers/CustomerController.php:172
+* @see app/Http/Controllers/CustomerController.php:183
 * @route '/customers/{customer}/users/{user}/role'
 */
 updateUserRole.put = (args: { customer: string | number | { id: string | number }, user: string | number } | [customer: string | number | { id: string | number }, user: string | number ], options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -841,7 +841,7 @@ updateUserRole.put = (args: { customer: string | number | { id: string | number 
 
 /**
 * @see \App\Http\Controllers\CustomerController::updateUserRole
-* @see app/Http/Controllers/CustomerController.php:172
+* @see app/Http/Controllers/CustomerController.php:183
 * @route '/customers/{customer}/users/{user}/role'
 */
 const updateUserRoleForm = (args: { customer: string | number | { id: string | number }, user: string | number } | [customer: string | number | { id: string | number }, user: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -856,7 +856,7 @@ const updateUserRoleForm = (args: { customer: string | number | { id: string | n
 
 /**
 * @see \App\Http\Controllers\CustomerController::updateUserRole
-* @see app/Http/Controllers/CustomerController.php:172
+* @see app/Http/Controllers/CustomerController.php:183
 * @route '/customers/{customer}/users/{user}/role'
 */
 updateUserRoleForm.put = (args: { customer: string | number | { id: string | number }, user: string | number } | [customer: string | number | { id: string | number }, user: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -873,7 +873,7 @@ updateUserRole.form = updateUserRoleForm
 
 /**
 * @see \App\Http\Controllers\CustomerController::detachUser
-* @see app/Http/Controllers/CustomerController.php:165
+* @see app/Http/Controllers/CustomerController.php:176
 * @route '/customers/{customer}/users/{user}'
 */
 export const detachUser = (args: { customer: string | number | { id: string | number }, user: string | number } | [customer: string | number | { id: string | number }, user: string | number ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -888,7 +888,7 @@ detachUser.definition = {
 
 /**
 * @see \App\Http\Controllers\CustomerController::detachUser
-* @see app/Http/Controllers/CustomerController.php:165
+* @see app/Http/Controllers/CustomerController.php:176
 * @route '/customers/{customer}/users/{user}'
 */
 detachUser.url = (args: { customer: string | number | { id: string | number }, user: string | number } | [customer: string | number | { id: string | number }, user: string | number ], options?: RouteQueryOptions) => {
@@ -916,7 +916,7 @@ detachUser.url = (args: { customer: string | number | { id: string | number }, u
 
 /**
 * @see \App\Http\Controllers\CustomerController::detachUser
-* @see app/Http/Controllers/CustomerController.php:165
+* @see app/Http/Controllers/CustomerController.php:176
 * @route '/customers/{customer}/users/{user}'
 */
 detachUser.delete = (args: { customer: string | number | { id: string | number }, user: string | number } | [customer: string | number | { id: string | number }, user: string | number ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -926,7 +926,7 @@ detachUser.delete = (args: { customer: string | number | { id: string | number }
 
 /**
 * @see \App\Http\Controllers\CustomerController::detachUser
-* @see app/Http/Controllers/CustomerController.php:165
+* @see app/Http/Controllers/CustomerController.php:176
 * @route '/customers/{customer}/users/{user}'
 */
 const detachUserForm = (args: { customer: string | number | { id: string | number }, user: string | number } | [customer: string | number | { id: string | number }, user: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -941,7 +941,7 @@ const detachUserForm = (args: { customer: string | number | { id: string | numbe
 
 /**
 * @see \App\Http\Controllers\CustomerController::detachUser
-* @see app/Http/Controllers/CustomerController.php:165
+* @see app/Http/Controllers/CustomerController.php:176
 * @route '/customers/{customer}/users/{user}'
 */
 detachUserForm.delete = (args: { customer: string | number | { id: string | number }, user: string | number } | [customer: string | number | { id: string | number }, user: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -958,7 +958,7 @@ detachUser.form = detachUserForm
 
 /**
 * @see \App\Http\Controllers\CustomerController::storeProject
-* @see app/Http/Controllers/CustomerController.php:296
+* @see app/Http/Controllers/CustomerController.php:307
 * @route '/customers/{customer}/projects'
 */
 export const storeProject = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -973,7 +973,7 @@ storeProject.definition = {
 
 /**
 * @see \App\Http\Controllers\CustomerController::storeProject
-* @see app/Http/Controllers/CustomerController.php:296
+* @see app/Http/Controllers/CustomerController.php:307
 * @route '/customers/{customer}/projects'
 */
 storeProject.url = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
@@ -1006,7 +1006,7 @@ storeProject.url = (args: { customer: string | number | { id: string | number } 
 
 /**
 * @see \App\Http\Controllers\CustomerController::storeProject
-* @see app/Http/Controllers/CustomerController.php:296
+* @see app/Http/Controllers/CustomerController.php:307
 * @route '/customers/{customer}/projects'
 */
 storeProject.post = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -1016,7 +1016,7 @@ storeProject.post = (args: { customer: string | number | { id: string | number }
 
 /**
 * @see \App\Http\Controllers\CustomerController::storeProject
-* @see app/Http/Controllers/CustomerController.php:296
+* @see app/Http/Controllers/CustomerController.php:307
 * @route '/customers/{customer}/projects'
 */
 const storeProjectForm = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1026,7 +1026,7 @@ const storeProjectForm = (args: { customer: string | number | { id: string | num
 
 /**
 * @see \App\Http\Controllers\CustomerController::storeProject
-* @see app/Http/Controllers/CustomerController.php:296
+* @see app/Http/Controllers/CustomerController.php:307
 * @route '/customers/{customer}/projects'
 */
 storeProjectForm.post = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1037,8 +1037,93 @@ storeProjectForm.post = (args: { customer: string | number | { id: string | numb
 storeProject.form = storeProjectForm
 
 /**
+* @see \App\Http\Controllers\CustomerController::updateProject
+* @see app/Http/Controllers/CustomerController.php:326
+* @route '/customers/{customer}/projects/{project}'
+*/
+export const updateProject = (args: { customer: string | number | { id: string | number }, project: string | number } | [customer: string | number | { id: string | number }, project: string | number ], options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: updateProject.url(args, options),
+    method: 'put',
+})
+
+updateProject.definition = {
+    methods: ["put"],
+    url: '/customers/{customer}/projects/{project}',
+} satisfies RouteDefinition<["put"]>
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateProject
+* @see app/Http/Controllers/CustomerController.php:326
+* @route '/customers/{customer}/projects/{project}'
+*/
+updateProject.url = (args: { customer: string | number | { id: string | number }, project: string | number } | [customer: string | number | { id: string | number }, project: string | number ], options?: RouteQueryOptions) => {
+    if (Array.isArray(args)) {
+        args = {
+            customer: args[0],
+            project: args[1],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+        customer: typeof args.customer === 'object'
+        ? args.customer.id
+        : args.customer,
+        project: args.project,
+    }
+
+    return updateProject.definition.url
+            .replace('{customer}', parsedArgs.customer.toString())
+            .replace('{project}', parsedArgs.project.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateProject
+* @see app/Http/Controllers/CustomerController.php:326
+* @route '/customers/{customer}/projects/{project}'
+*/
+updateProject.put = (args: { customer: string | number | { id: string | number }, project: string | number } | [customer: string | number | { id: string | number }, project: string | number ], options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: updateProject.url(args, options),
+    method: 'put',
+})
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateProject
+* @see app/Http/Controllers/CustomerController.php:326
+* @route '/customers/{customer}/projects/{project}'
+*/
+const updateProjectForm = (args: { customer: string | number | { id: string | number }, project: string | number } | [customer: string | number | { id: string | number }, project: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateProject.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateProject
+* @see app/Http/Controllers/CustomerController.php:326
+* @route '/customers/{customer}/projects/{project}'
+*/
+updateProjectForm.put = (args: { customer: string | number | { id: string | number }, project: string | number } | [customer: string | number | { id: string | number }, project: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateProject.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+updateProject.form = updateProjectForm
+
+/**
 * @see \App\Http\Controllers\CustomerController::destroyProject
-* @see app/Http/Controllers/CustomerController.php:315
+* @see app/Http/Controllers/CustomerController.php:342
 * @route '/customers/{customer}/projects/{project}'
 */
 export const destroyProject = (args: { customer: string | number | { id: string | number }, project: string | number } | [customer: string | number | { id: string | number }, project: string | number ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -1053,7 +1138,7 @@ destroyProject.definition = {
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroyProject
-* @see app/Http/Controllers/CustomerController.php:315
+* @see app/Http/Controllers/CustomerController.php:342
 * @route '/customers/{customer}/projects/{project}'
 */
 destroyProject.url = (args: { customer: string | number | { id: string | number }, project: string | number } | [customer: string | number | { id: string | number }, project: string | number ], options?: RouteQueryOptions) => {
@@ -1081,7 +1166,7 @@ destroyProject.url = (args: { customer: string | number | { id: string | number 
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroyProject
-* @see app/Http/Controllers/CustomerController.php:315
+* @see app/Http/Controllers/CustomerController.php:342
 * @route '/customers/{customer}/projects/{project}'
 */
 destroyProject.delete = (args: { customer: string | number | { id: string | number }, project: string | number } | [customer: string | number | { id: string | number }, project: string | number ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -1091,7 +1176,7 @@ destroyProject.delete = (args: { customer: string | number | { id: string | numb
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroyProject
-* @see app/Http/Controllers/CustomerController.php:315
+* @see app/Http/Controllers/CustomerController.php:342
 * @route '/customers/{customer}/projects/{project}'
 */
 const destroyProjectForm = (args: { customer: string | number | { id: string | number }, project: string | number } | [customer: string | number | { id: string | number }, project: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1106,7 +1191,7 @@ const destroyProjectForm = (args: { customer: string | number | { id: string | n
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroyProject
-* @see app/Http/Controllers/CustomerController.php:315
+* @see app/Http/Controllers/CustomerController.php:342
 * @route '/customers/{customer}/projects/{project}'
 */
 destroyProjectForm.delete = (args: { customer: string | number | { id: string | number }, project: string | number } | [customer: string | number | { id: string | number }, project: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1123,7 +1208,7 @@ destroyProject.form = destroyProjectForm
 
 /**
 * @see \App\Http\Controllers\CustomerController::storeWebsite
-* @see app/Http/Controllers/CustomerController.php:326
+* @see app/Http/Controllers/CustomerController.php:357
 * @route '/customers/{customer}/websites'
 */
 export const storeWebsite = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -1138,7 +1223,7 @@ storeWebsite.definition = {
 
 /**
 * @see \App\Http\Controllers\CustomerController::storeWebsite
-* @see app/Http/Controllers/CustomerController.php:326
+* @see app/Http/Controllers/CustomerController.php:357
 * @route '/customers/{customer}/websites'
 */
 storeWebsite.url = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
@@ -1171,7 +1256,7 @@ storeWebsite.url = (args: { customer: string | number | { id: string | number } 
 
 /**
 * @see \App\Http\Controllers\CustomerController::storeWebsite
-* @see app/Http/Controllers/CustomerController.php:326
+* @see app/Http/Controllers/CustomerController.php:357
 * @route '/customers/{customer}/websites'
 */
 storeWebsite.post = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -1181,7 +1266,7 @@ storeWebsite.post = (args: { customer: string | number | { id: string | number }
 
 /**
 * @see \App\Http\Controllers\CustomerController::storeWebsite
-* @see app/Http/Controllers/CustomerController.php:326
+* @see app/Http/Controllers/CustomerController.php:357
 * @route '/customers/{customer}/websites'
 */
 const storeWebsiteForm = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1191,7 +1276,7 @@ const storeWebsiteForm = (args: { customer: string | number | { id: string | num
 
 /**
 * @see \App\Http\Controllers\CustomerController::storeWebsite
-* @see app/Http/Controllers/CustomerController.php:326
+* @see app/Http/Controllers/CustomerController.php:357
 * @route '/customers/{customer}/websites'
 */
 storeWebsiteForm.post = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1202,8 +1287,178 @@ storeWebsiteForm.post = (args: { customer: string | number | { id: string | numb
 storeWebsite.form = storeWebsiteForm
 
 /**
+* @see \App\Http\Controllers\CustomerController::updateWebsite
+* @see app/Http/Controllers/CustomerController.php:377
+* @route '/customers/{customer}/websites/{website}'
+*/
+export const updateWebsite = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: updateWebsite.url(args, options),
+    method: 'put',
+})
+
+updateWebsite.definition = {
+    methods: ["put"],
+    url: '/customers/{customer}/websites/{website}',
+} satisfies RouteDefinition<["put"]>
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateWebsite
+* @see app/Http/Controllers/CustomerController.php:377
+* @route '/customers/{customer}/websites/{website}'
+*/
+updateWebsite.url = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions) => {
+    if (Array.isArray(args)) {
+        args = {
+            customer: args[0],
+            website: args[1],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+        customer: typeof args.customer === 'object'
+        ? args.customer.id
+        : args.customer,
+        website: args.website,
+    }
+
+    return updateWebsite.definition.url
+            .replace('{customer}', parsedArgs.customer.toString())
+            .replace('{website}', parsedArgs.website.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateWebsite
+* @see app/Http/Controllers/CustomerController.php:377
+* @route '/customers/{customer}/websites/{website}'
+*/
+updateWebsite.put = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: updateWebsite.url(args, options),
+    method: 'put',
+})
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateWebsite
+* @see app/Http/Controllers/CustomerController.php:377
+* @route '/customers/{customer}/websites/{website}'
+*/
+const updateWebsiteForm = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateWebsite.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateWebsite
+* @see app/Http/Controllers/CustomerController.php:377
+* @route '/customers/{customer}/websites/{website}'
+*/
+updateWebsiteForm.put = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateWebsite.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+updateWebsite.form = updateWebsiteForm
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateWebsiteProject
+* @see app/Http/Controllers/CustomerController.php:406
+* @route '/customers/{customer}/websites/{website}/project'
+*/
+export const updateWebsiteProject = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: updateWebsiteProject.url(args, options),
+    method: 'put',
+})
+
+updateWebsiteProject.definition = {
+    methods: ["put"],
+    url: '/customers/{customer}/websites/{website}/project',
+} satisfies RouteDefinition<["put"]>
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateWebsiteProject
+* @see app/Http/Controllers/CustomerController.php:406
+* @route '/customers/{customer}/websites/{website}/project'
+*/
+updateWebsiteProject.url = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions) => {
+    if (Array.isArray(args)) {
+        args = {
+            customer: args[0],
+            website: args[1],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+        customer: typeof args.customer === 'object'
+        ? args.customer.id
+        : args.customer,
+        website: args.website,
+    }
+
+    return updateWebsiteProject.definition.url
+            .replace('{customer}', parsedArgs.customer.toString())
+            .replace('{website}', parsedArgs.website.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateWebsiteProject
+* @see app/Http/Controllers/CustomerController.php:406
+* @route '/customers/{customer}/websites/{website}/project'
+*/
+updateWebsiteProject.put = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: updateWebsiteProject.url(args, options),
+    method: 'put',
+})
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateWebsiteProject
+* @see app/Http/Controllers/CustomerController.php:406
+* @route '/customers/{customer}/websites/{website}/project'
+*/
+const updateWebsiteProjectForm = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateWebsiteProject.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\CustomerController::updateWebsiteProject
+* @see app/Http/Controllers/CustomerController.php:406
+* @route '/customers/{customer}/websites/{website}/project'
+*/
+updateWebsiteProjectForm.put = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateWebsiteProject.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+updateWebsiteProject.form = updateWebsiteProjectForm
+
+/**
 * @see \App\Http\Controllers\CustomerController::destroyWebsite
-* @see app/Http/Controllers/CustomerController.php:346
+* @see app/Http/Controllers/CustomerController.php:395
 * @route '/customers/{customer}/websites/{website}'
 */
 export const destroyWebsite = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -1218,7 +1473,7 @@ destroyWebsite.definition = {
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroyWebsite
-* @see app/Http/Controllers/CustomerController.php:346
+* @see app/Http/Controllers/CustomerController.php:395
 * @route '/customers/{customer}/websites/{website}'
 */
 destroyWebsite.url = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions) => {
@@ -1246,7 +1501,7 @@ destroyWebsite.url = (args: { customer: string | number | { id: string | number 
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroyWebsite
-* @see app/Http/Controllers/CustomerController.php:346
+* @see app/Http/Controllers/CustomerController.php:395
 * @route '/customers/{customer}/websites/{website}'
 */
 destroyWebsite.delete = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -1256,7 +1511,7 @@ destroyWebsite.delete = (args: { customer: string | number | { id: string | numb
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroyWebsite
-* @see app/Http/Controllers/CustomerController.php:346
+* @see app/Http/Controllers/CustomerController.php:395
 * @route '/customers/{customer}/websites/{website}'
 */
 const destroyWebsiteForm = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1271,7 +1526,7 @@ const destroyWebsiteForm = (args: { customer: string | number | { id: string | n
 
 /**
 * @see \App\Http\Controllers\CustomerController::destroyWebsite
-* @see app/Http/Controllers/CustomerController.php:346
+* @see app/Http/Controllers/CustomerController.php:395
 * @route '/customers/{customer}/websites/{website}'
 */
 destroyWebsiteForm.delete = (args: { customer: string | number | { id: string | number }, website: string | number } | [customer: string | number | { id: string | number }, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1286,6 +1541,6 @@ destroyWebsiteForm.delete = (args: { customer: string | number | { id: string | 
 
 destroyWebsite.form = destroyWebsiteForm
 
-const CustomerController = { index, create, store, show, edit, update, destroy, createUser, attachUser, updateUserRole, detachUser, storeProject, destroyProject, storeWebsite, destroyWebsite }
+const CustomerController = { index, create, store, show, edit, update, destroy, createUser, attachUser, updateUserRole, detachUser, storeProject, updateProject, destroyProject, storeWebsite, updateWebsite, updateWebsiteProject, destroyWebsite }
 
 export default CustomerController

@@ -95,7 +95,7 @@ export default function CreateTicket({ categories, labels }: Props) {
                                 </BreadcrumbItem>
                                 <BreadcrumbSeparator className="hidden md:block" />
                                 <BreadcrumbItem>
-                                    <BreadcrumbLink href="/my-tickets">
+                                    <BreadcrumbLink href={route('tickets.view')}>
                                         My Tickets
                                     </BreadcrumbLink>
                                 </BreadcrumbItem>
@@ -209,7 +209,7 @@ export default function CreateTicket({ categories, labels }: Props) {
                                         {processing ? 'Creating...' : 'Create Ticket'}
                                     </Button>
                                     <Button type="button" variant="outline" asChild>
-                                        <a href="/my-tickets">Cancel</a>
+                                        <a href={route('tickets.view')}>Cancel</a>
                                     </Button>
                                 </div>
                             </form>

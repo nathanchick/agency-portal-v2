@@ -73,6 +73,6 @@ class TicketController extends Controller
             $ticket->labels()->attach($validated['label_ids']);
         }
 
-        return redirect()->route('my-tickets')->with('success', 'Ticket created successfully!');
+        return redirect()->route('tickets.view')->with('success', 'Ticket created successfully!');
     }
 }

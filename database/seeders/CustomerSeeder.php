@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Customer;
 use App\Models\Organisation;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
 
 class CustomerSeeder extends Seeder
@@ -21,7 +22,7 @@ class CustomerSeeder extends Seeder
             return;
         }
 
-        Customer::firstOrCreate(
+        $customer = Customer::firstOrCreate(
             [
                 'name' => 'Demo Customer',
                 'organisation_id' => $organisation->id,
@@ -33,6 +34,21 @@ class CustomerSeeder extends Seeder
             ]
         );
 
-        $this->command->info('Customer "Demo Customer" created successfully!');
+        // Create default project if it doesn't exist
+        Project::firstOrCreate(
+            [
+                'customer_id' => $customer->id,
+                'is_default' => true,
+            ],
+            [
+                'organisation_id' => $organisation->id,
+                'customer_id' => $customer->id,
+                'name' => 'Default',
+                'notes' => 'Default project - cannot be deleted',
+                'is_default' => true,
+            ]
+        );
+
+        $this->command->info('Customer "Demo Customer" and default project created successfully!');
     }
 }

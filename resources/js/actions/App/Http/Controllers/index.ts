@@ -1,12 +1,12 @@
 import Auth from './Auth'
-import TicketController from './TicketController'
 import CustomerController from './CustomerController'
+import TicketController from './TicketController'
 import Settings from './Settings'
 
 const Controllers = {
     Auth: Object.assign(Auth, Auth),
-    TicketController: Object.assign(TicketController, TicketController),
     CustomerController: Object.assign(CustomerController, CustomerController),
+    TicketController: Object.assign(TicketController, TicketController),
     Settings: Object.assign(Settings, Settings),
 }
 

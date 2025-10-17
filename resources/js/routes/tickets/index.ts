@@ -1,4 +1,86 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
+import view381131 from './view'
+/**
+* @see \App\Http\Controllers\TicketController::view
+* @see app/Http/Controllers/TicketController.php:13
+* @route '/tickets'
+*/
+export const view = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: view.url(options),
+    method: 'get',
+})
+
+view.definition = {
+    methods: ["get","head"],
+    url: '/tickets',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\TicketController::view
+* @see app/Http/Controllers/TicketController.php:13
+* @route '/tickets'
+*/
+view.url = (options?: RouteQueryOptions) => {
+    return view.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\TicketController::view
+* @see app/Http/Controllers/TicketController.php:13
+* @route '/tickets'
+*/
+view.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: view.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\TicketController::view
+* @see app/Http/Controllers/TicketController.php:13
+* @route '/tickets'
+*/
+view.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: view.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\TicketController::view
+* @see app/Http/Controllers/TicketController.php:13
+* @route '/tickets'
+*/
+const viewForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: view.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\TicketController::view
+* @see app/Http/Controllers/TicketController.php:13
+* @route '/tickets'
+*/
+viewForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: view.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\TicketController::view
+* @see app/Http/Controllers/TicketController.php:13
+* @route '/tickets'
+*/
+viewForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: view.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+view.form = viewForm
+
 /**
 * @see \App\Http\Controllers\TicketController::create
 * @see app/Http/Controllers/TicketController.php:38
@@ -137,6 +219,7 @@ storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => (
 store.form = storeForm
 
 const tickets = {
+    view: Object.assign(view, view381131),
     create: Object.assign(create, create),
     store: Object.assign(store, store),
 }

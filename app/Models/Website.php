@@ -12,14 +12,19 @@ class Website extends Model
 
     protected $fillable = [
         'customer_id',
+        'project_id',
         'type',
         'url',
-        'repo_url',
         'notes',
     ];
 
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
     }
 }

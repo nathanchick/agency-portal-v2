@@ -43,9 +43,20 @@ class CustomerController extends Controller
             'status' => 'required|integer|in:0,1',
         ]);
 
+        $organisationId = $this->getCurrentOrganisationId();
+
         $customer = Customer::create([
             ...$validated,
-            'organisation_id' => $this->getCurrentOrganisationId(),
+            'organisation_id' => $organisationId,
+        ]);
+
+        // Create default project for the customer
+        \App\Models\Project::create([
+            'organisation_id' => $organisationId,
+            'customer_id' => $customer->id,
+            'name' => 'Default',
+            'notes' => 'Default project - cannot be deleted',
+            'is_default' => true,
         ]);
 
         return redirect()->route('customers.edit', $customer)->with('success', 'Customer created successfully');
@@ -58,7 +69,7 @@ class CustomerController extends Controller
         // Load users with their customer-specific role from pivot table
         $customer->load(['users' => function ($query) {
             $query->withPivot('role_id');
-        }, 'projects', 'websites']);
+        }, 'projects', 'websites.project']);
 
         // Map users to include role name from the pivot table
         $usersWithRoles = $customer->users->map(function ($user) {
@@ -312,11 +323,31 @@ class CustomerController extends Controller
         return back()->with('success', 'Project created successfully');
     }
 
+    public function updateProject(Request $request, Customer $customer, $projectId)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'notes' => 'nullable|string',
+        ]);
+
+        $project = \App\Models\Project::where('customer_id', $customer->id)
+            ->where('id', $projectId)
+            ->firstOrFail();
+
+        $project->update($validated);
+
+        return back()->with('success', 'Project updated successfully');
+    }
+
     public function destroyProject(Customer $customer, $projectId)
     {
         $project = \App\Models\Project::where('customer_id', $customer->id)
             ->where('id', $projectId)
             ->firstOrFail();
+
+        if ($project->is_default) {
+            return back()->with('error', 'Cannot delete the default project');
+        }
 
         $project->delete();
 
@@ -326,21 +357,39 @@ class CustomerController extends Controller
     public function storeWebsite(Request $request, Customer $customer)
     {
         $validated = $request->validate([
+            'project_id' => 'required|exists:projects,id',
             'type' => 'required|in:production,staging,development',
             'url' => 'required|string|max:255',
-            'repo_url' => 'nullable|string|max:255',
             'notes' => 'nullable|string',
         ]);
 
         \App\Models\Website::create([
             'customer_id' => $customer->id,
+            'project_id' => $validated['project_id'],
             'type' => $validated['type'],
             'url' => $validated['url'],
-            'repo_url' => $validated['repo_url'] ?? null,
             'notes' => $validated['notes'] ?? null,
         ]);
 
         return back()->with('success', 'Website created successfully');
+    }
+
+    public function updateWebsite(Request $request, Customer $customer, $websiteId)
+    {
+        $validated = $request->validate([
+            'project_id' => 'required|exists:projects,id',
+            'type' => 'required|in:production,staging,development',
+            'url' => 'required|string|max:255',
+            'notes' => 'nullable|string',
+        ]);
+
+        $website = \App\Models\Website::where('customer_id', $customer->id)
+            ->where('id', $websiteId)
+            ->firstOrFail();
+
+        $website->update($validated);
+
+        return back()->with('success', 'Website updated successfully');
     }
 
     public function destroyWebsite(Customer $customer, $websiteId)
@@ -352,5 +401,22 @@ class CustomerController extends Controller
         $website->delete();
 
         return back()->with('success', 'Website deleted successfully');
+    }
+
+    public function updateWebsiteProject(Request $request, Customer $customer, $websiteId)
+    {
+        $validated = $request->validate([
+            'project_id' => 'required|exists:projects,id',
+        ]);
+
+        $website = \App\Models\Website::where('customer_id', $customer->id)
+            ->where('id', $websiteId)
+            ->firstOrFail();
+
+        $website->update([
+            'project_id' => $validated['project_id'],
+        ]);
+
+        return back()->with('success', 'Website project updated successfully');
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignUuid('customer_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->text('notes')->nullable();
+            $table->boolean('is_default')->default(false);
             $table->timestamps();
         });
     }

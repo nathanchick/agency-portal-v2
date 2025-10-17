@@ -16,6 +16,11 @@ class Project extends Model
         'customer_id',
         'name',
         'notes',
+        'is_default',
+    ];
+
+    protected $casts = [
+        'is_default' => 'boolean',
     ];
 
     public function customer(): BelongsTo

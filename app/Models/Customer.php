@@ -32,6 +32,11 @@ class Customer extends Model
         return $this->hasMany(Website::class);
     }
 
+    public function documentRequests(): HasMany
+    {
+        return $this->hasMany(DocumentRequest::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)->withPivot('role_id');

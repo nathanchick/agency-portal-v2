@@ -42,7 +42,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog'
-import { Trash2, Plus, UserPlus } from 'lucide-react'
+import { Trash2, Plus, UserPlus, Pencil } from 'lucide-react'
 import { Textarea } from '@/components/ui/textarea'
 import { useState } from 'react'
 
@@ -57,14 +57,16 @@ interface Project {
     id: string
     name: string
     notes?: string
+    is_default?: boolean
 }
 
 interface Website {
     id: string
     type: 'production' | 'staging' | 'development'
     url: string
-    repo_url?: string
     notes?: string
+    project?: Project
+    project_id?: string
 }
 
 interface Customer {
@@ -93,6 +95,10 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
     const [isCreateProjectDialogOpen, setIsCreateProjectDialogOpen] = useState(false)
     const [isCreateWebsiteDialogOpen, setIsCreateWebsiteDialogOpen] = useState(false)
+    const [isEditProjectDialogOpen, setIsEditProjectDialogOpen] = useState(false)
+    const [isEditWebsiteDialogOpen, setIsEditWebsiteDialogOpen] = useState(false)
+    const [editingProject, setEditingProject] = useState<Project | null>(null)
+    const [editingWebsite, setEditingWebsite] = useState<Website | null>(null)
     const [deleteUserDialogOpen, setDeleteUserDialogOpen] = useState(false)
     const [userToDelete, setUserToDelete] = useState<string | null>(null)
     const [deleteProjectDialogOpen, setDeleteProjectDialogOpen] = useState(false)
@@ -134,6 +140,18 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
     })
 
     const {
+        data: editProjectData,
+        setData: setEditProjectData,
+        put: updateProject,
+        processing: updatingProject,
+        errors: editProjectErrors,
+        reset: resetEditProject,
+    } = useForm({
+        name: '',
+        notes: '',
+    })
+
+    const {
         data: newWebsiteData,
         setData: setNewWebsiteData,
         post: createWebsite,
@@ -141,9 +159,23 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
         errors: newWebsiteErrors,
         reset: resetNewWebsite,
     } = useForm({
+        project_id: '',
         type: 'production' as 'production' | 'staging' | 'development',
         url: '',
-        repo_url: '',
+        notes: '',
+    })
+
+    const {
+        data: editWebsiteData,
+        setData: setEditWebsiteData,
+        put: updateWebsite,
+        processing: updatingWebsite,
+        errors: editWebsiteErrors,
+        reset: resetEditWebsite,
+    } = useForm({
+        project_id: '',
+        type: 'production' as 'production' | 'staging' | 'development',
+        url: '',
         notes: '',
     })
 
@@ -214,6 +246,29 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
         })
     }
 
+    const handleEditProject = (project: Project) => {
+        setEditingProject(project)
+        setEditProjectData({
+            name: project.name,
+            notes: project.notes || '',
+        })
+        setIsEditProjectDialogOpen(true)
+    }
+
+    const handleUpdateProject = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (editingProject) {
+            updateProject(route('customers.projects.update', { customer: customer.id, project: editingProject.id }), {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setIsEditProjectDialogOpen(false)
+                    setEditingProject(null)
+                    resetEditProject()
+                },
+            })
+        }
+    }
+
     const handleDeleteProject = (projectId: string) => {
         setProjectToDelete(projectId)
         setDeleteProjectDialogOpen(true)
@@ -242,6 +297,31 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
         })
     }
 
+    const handleEditWebsite = (website: Website) => {
+        setEditingWebsite(website)
+        setEditWebsiteData({
+            project_id: website.project_id || '',
+            type: website.type,
+            url: website.url,
+            notes: website.notes || '',
+        })
+        setIsEditWebsiteDialogOpen(true)
+    }
+
+    const handleUpdateWebsite = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (editingWebsite) {
+            updateWebsite(route('customers.websites.update', { customer: customer.id, website: editingWebsite.id }), {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setIsEditWebsiteDialogOpen(false)
+                    setEditingWebsite(null)
+                    resetEditWebsite()
+                },
+            })
+        }
+    }
+
     const handleDeleteWebsite = (websiteId: string) => {
         setWebsiteToDelete(websiteId)
         setDeleteWebsiteDialogOpen(true)
@@ -257,6 +337,16 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                 },
             })
         }
+    }
+
+    const handleWebsiteProjectChange = (websiteId: string, projectId: string) => {
+        router.put(
+            route('customers.websites.update-project', { customer: customer.id, website: websiteId }),
+            { project_id: projectId },
+            {
+                preserveScroll: true,
+            }
+        )
     }
 
     const handleDeleteCustomer = () => {
@@ -643,14 +733,26 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                                         <TableCell>{project.name}</TableCell>
                                                         <TableCell>{project.notes || '-'}</TableCell>
                                                         <TableCell>
-                                                            <Button
-                                                                type="button"
-                                                                variant="ghost"
-                                                                size="sm"
-                                                                onClick={() => handleDeleteProject(project.id)}
-                                                            >
-                                                                <Trash2 className="h-4 w-4 text-destructive" />
-                                                            </Button>
+                                                            <div className="flex gap-2">
+                                                                <Button
+                                                                    type="button"
+                                                                    variant="ghost"
+                                                                    size="sm"
+                                                                    onClick={() => handleEditProject(project)}
+                                                                >
+                                                                    <Pencil className="h-4 w-4" />
+                                                                </Button>
+                                                                {!project.is_default && (
+                                                                    <Button
+                                                                        type="button"
+                                                                        variant="ghost"
+                                                                        size="sm"
+                                                                        onClick={() => handleDeleteProject(project.id)}
+                                                                    >
+                                                                        <Trash2 className="h-4 w-4 text-destructive" />
+                                                                    </Button>
+                                                                )}
+                                                            </div>
                                                         </TableCell>
                                                     </TableRow>
                                                 ))}
@@ -692,6 +794,58 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                             </DialogContent>
                         </Dialog>
 
+                        <Dialog open={isEditProjectDialogOpen} onOpenChange={setIsEditProjectDialogOpen}>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Edit Project</DialogTitle>
+                                    <DialogDescription>
+                                        Update project information
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <form onSubmit={handleUpdateProject} className="space-y-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="edit-project-name">Project Name</Label>
+                                        <Input
+                                            id="edit-project-name"
+                                            value={editProjectData.name}
+                                            onChange={(e) => setEditProjectData('name', e.target.value)}
+                                            placeholder="Enter project name"
+                                            required
+                                        />
+                                        {editProjectErrors.name && (
+                                            <p className="text-sm text-red-500">{editProjectErrors.name}</p>
+                                        )}
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="edit-project-notes">Notes (Optional)</Label>
+                                        <Input
+                                            id="edit-project-notes"
+                                            value={editProjectData.notes}
+                                            onChange={(e) => setEditProjectData('notes', e.target.value)}
+                                            placeholder="Enter project notes"
+                                        />
+                                        {editProjectErrors.notes && (
+                                            <p className="text-sm text-red-500">{editProjectErrors.notes}</p>
+                                        )}
+                                    </div>
+
+                                    <div className="flex gap-2 justify-end">
+                                        <Button
+                                            type="button"
+                                            variant="outline"
+                                            onClick={() => setIsEditProjectDialogOpen(false)}
+                                        >
+                                            Cancel
+                                        </Button>
+                                        <Button type="submit" disabled={updatingProject}>
+                                            {updatingProject ? 'Updating...' : 'Update Project'}
+                                        </Button>
+                                    </div>
+                                </form>
+                            </DialogContent>
+                        </Dialog>
+
                         <Card>
                             <CardHeader>
                                 <CardTitle>Websites</CardTitle>
@@ -717,6 +871,28 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                                     </DialogDescription>
                                                 </DialogHeader>
                                                 <form onSubmit={handleCreateWebsite} className="space-y-4">
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="website-project">Project</Label>
+                                                        <Select
+                                                            value={newWebsiteData.project_id}
+                                                            onValueChange={(value) => setNewWebsiteData('project_id', value)}
+                                                        >
+                                                            <SelectTrigger id="website-project">
+                                                                <SelectValue placeholder="Select project" />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                {customer.projects.map((project) => (
+                                                                    <SelectItem key={project.id} value={project.id}>
+                                                                        {project.name}
+                                                                    </SelectItem>
+                                                                ))}
+                                                            </SelectContent>
+                                                        </Select>
+                                                        {newWebsiteErrors.project_id && (
+                                                            <p className="text-sm text-red-500">{newWebsiteErrors.project_id}</p>
+                                                        )}
+                                                    </div>
+
                                                     <div className="space-y-2">
                                                         <Label htmlFor="website-type">Type</Label>
                                                         <Select
@@ -748,19 +924,6 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                                         />
                                                         {newWebsiteErrors.url && (
                                                             <p className="text-sm text-red-500">{newWebsiteErrors.url}</p>
-                                                        )}
-                                                    </div>
-
-                                                    <div className="space-y-2">
-                                                        <Label htmlFor="website-repo-url">Repository URL (Optional)</Label>
-                                                        <Input
-                                                            id="website-repo-url"
-                                                            value={newWebsiteData.repo_url}
-                                                            onChange={(e) => setNewWebsiteData('repo_url', e.target.value)}
-                                                            placeholder="https://github.com/username/repo"
-                                                        />
-                                                        {newWebsiteErrors.repo_url && (
-                                                            <p className="text-sm text-red-500">{newWebsiteErrors.repo_url}</p>
                                                         )}
                                                     </div>
 
@@ -798,9 +961,9 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                         <Table>
                                             <TableHeader>
                                                 <TableRow>
+                                                    <TableHead>Assigned To</TableHead>
                                                     <TableHead>Type</TableHead>
                                                     <TableHead>URL</TableHead>
-                                                    <TableHead>Repository</TableHead>
                                                     <TableHead>Notes</TableHead>
                                                     <TableHead className="w-[100px]">Actions</TableHead>
                                                 </TableRow>
@@ -808,29 +971,49 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                             <TableBody>
                                                 {customer.websites.map((website) => (
                                                     <TableRow key={website.id}>
+                                                        <TableCell>
+                                                            <Select
+                                                                value={website.project_id ?? ''}
+                                                                onValueChange={(value) => handleWebsiteProjectChange(website.id, value)}
+                                                            >
+                                                                <SelectTrigger className="w-[180px]">
+                                                                    <SelectValue placeholder="Select project" />
+                                                                </SelectTrigger>
+                                                                <SelectContent>
+                                                                    {customer.projects.map((project) => (
+                                                                        <SelectItem key={project.id} value={project.id}>
+                                                                            {project.name}
+                                                                        </SelectItem>
+                                                                    ))}
+                                                                </SelectContent>
+                                                            </Select>
+                                                        </TableCell>
                                                         <TableCell className="capitalize">{website.type}</TableCell>
                                                         <TableCell>
                                                             <a href={website.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                                                                 {website.url}
                                                             </a>
                                                         </TableCell>
-                                                        <TableCell>
-                                                            {website.repo_url ? (
-                                                                <a href={website.repo_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                                                                    {website.repo_url}
-                                                                </a>
-                                                            ) : '-'}
-                                                        </TableCell>
                                                         <TableCell>{website.notes || '-'}</TableCell>
                                                         <TableCell>
-                                                            <Button
-                                                                type="button"
-                                                                variant="ghost"
-                                                                size="sm"
-                                                                onClick={() => handleDeleteWebsite(website.id)}
-                                                            >
-                                                                <Trash2 className="h-4 w-4 text-destructive" />
-                                                            </Button>
+                                                            <div className="flex gap-2">
+                                                                <Button
+                                                                    type="button"
+                                                                    variant="ghost"
+                                                                    size="sm"
+                                                                    onClick={() => handleEditWebsite(website)}
+                                                                >
+                                                                    <Pencil className="h-4 w-4" />
+                                                                </Button>
+                                                                <Button
+                                                                    type="button"
+                                                                    variant="ghost"
+                                                                    size="sm"
+                                                                    onClick={() => handleDeleteWebsite(website.id)}
+                                                                >
+                                                                    <Trash2 className="h-4 w-4 text-destructive" />
+                                                                </Button>
+                                                            </div>
                                                         </TableCell>
                                                     </TableRow>
                                                 ))}
@@ -869,6 +1052,100 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                         Delete Website
                                     </Button>
                                 </div>
+                            </DialogContent>
+                        </Dialog>
+
+                        <Dialog open={isEditWebsiteDialogOpen} onOpenChange={setIsEditWebsiteDialogOpen}>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Edit Website</DialogTitle>
+                                    <DialogDescription>
+                                        Update website information
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <form onSubmit={handleUpdateWebsite} className="space-y-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="edit-website-project">Project</Label>
+                                        <Select
+                                            value={editWebsiteData.project_id}
+                                            onValueChange={(value) => setEditWebsiteData('project_id', value)}
+                                        >
+                                            <SelectTrigger id="edit-website-project">
+                                                <SelectValue placeholder="Select project" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {customer.projects.map((project) => (
+                                                    <SelectItem key={project.id} value={project.id}>
+                                                        {project.name}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        {editWebsiteErrors.project_id && (
+                                            <p className="text-sm text-red-500">{editWebsiteErrors.project_id}</p>
+                                        )}
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="edit-website-type">Type</Label>
+                                        <Select
+                                            value={editWebsiteData.type}
+                                            onValueChange={(value) => setEditWebsiteData('type', value as 'production' | 'staging' | 'development')}
+                                        >
+                                            <SelectTrigger id="edit-website-type">
+                                                <SelectValue placeholder="Select type" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="production">Production</SelectItem>
+                                                <SelectItem value="staging">Staging</SelectItem>
+                                                <SelectItem value="development">Development</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                        {editWebsiteErrors.type && (
+                                            <p className="text-sm text-red-500">{editWebsiteErrors.type}</p>
+                                        )}
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="edit-website-url">URL</Label>
+                                        <Input
+                                            id="edit-website-url"
+                                            value={editWebsiteData.url}
+                                            onChange={(e) => setEditWebsiteData('url', e.target.value)}
+                                            placeholder="https://example.com"
+                                            required
+                                        />
+                                        {editWebsiteErrors.url && (
+                                            <p className="text-sm text-red-500">{editWebsiteErrors.url}</p>
+                                        )}
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label htmlFor="edit-website-notes">Notes (Optional)</Label>
+                                        <Textarea
+                                            id="edit-website-notes"
+                                            value={editWebsiteData.notes}
+                                            onChange={(e) => setEditWebsiteData('notes', e.target.value)}
+                                            placeholder="Enter website notes"
+                                        />
+                                        {editWebsiteErrors.notes && (
+                                            <p className="text-sm text-red-500">{editWebsiteErrors.notes}</p>
+                                        )}
+                                    </div>
+
+                                    <div className="flex gap-2 justify-end">
+                                        <Button
+                                            type="button"
+                                            variant="outline"
+                                            onClick={() => setIsEditWebsiteDialogOpen(false)}
+                                        >
+                                            Cancel
+                                        </Button>
+                                        <Button type="submit" disabled={updatingWebsite}>
+                                            {updatingWebsite ? 'Updating...' : 'Update Website'}
+                                        </Button>
+                                    </div>
+                                </form>
                             </DialogContent>
                         </Dialog>
 

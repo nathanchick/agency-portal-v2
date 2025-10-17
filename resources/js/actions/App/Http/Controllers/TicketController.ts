@@ -2,7 +2,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 /**
 * @see \App\Http\Controllers\TicketController::myTickets
 * @see app/Http/Controllers/TicketController.php:13
-* @route '/my-tickets'
+* @route '/tickets'
 */
 export const myTickets = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: myTickets.url(options),
@@ -11,13 +11,13 @@ export const myTickets = (options?: RouteQueryOptions): RouteDefinition<'get'> =
 
 myTickets.definition = {
     methods: ["get","head"],
-    url: '/my-tickets',
+    url: '/tickets',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
 * @see \App\Http\Controllers\TicketController::myTickets
 * @see app/Http/Controllers/TicketController.php:13
-* @route '/my-tickets'
+* @route '/tickets'
 */
 myTickets.url = (options?: RouteQueryOptions) => {
     return myTickets.definition.url + queryParams(options)
@@ -26,7 +26,7 @@ myTickets.url = (options?: RouteQueryOptions) => {
 /**
 * @see \App\Http\Controllers\TicketController::myTickets
 * @see app/Http/Controllers/TicketController.php:13
-* @route '/my-tickets'
+* @route '/tickets'
 */
 myTickets.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: myTickets.url(options),
@@ -36,7 +36,7 @@ myTickets.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 /**
 * @see \App\Http\Controllers\TicketController::myTickets
 * @see app/Http/Controllers/TicketController.php:13
-* @route '/my-tickets'
+* @route '/tickets'
 */
 myTickets.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: myTickets.url(options),
@@ -46,7 +46,7 @@ myTickets.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 /**
 * @see \App\Http\Controllers\TicketController::myTickets
 * @see app/Http/Controllers/TicketController.php:13
-* @route '/my-tickets'
+* @route '/tickets'
 */
 const myTicketsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: myTickets.url(options),
@@ -56,7 +56,7 @@ const myTicketsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> 
 /**
 * @see \App\Http\Controllers\TicketController::myTickets
 * @see app/Http/Controllers/TicketController.php:13
-* @route '/my-tickets'
+* @route '/tickets'
 */
 myTicketsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: myTickets.url(options),
@@ -66,7 +66,7 @@ myTicketsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 /**
 * @see \App\Http\Controllers\TicketController::myTickets
 * @see app/Http/Controllers/TicketController.php:13
-* @route '/my-tickets'
+* @route '/tickets'
 */
 myTicketsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: myTickets.url({
@@ -83,7 +83,7 @@ myTickets.form = myTicketsForm
 /**
 * @see \App\Http\Controllers\TicketController::allTickets
 * @see app/Http/Controllers/TicketController.php:26
-* @route '/all-tickets'
+* @route '/tickets/view/all'
 */
 export const allTickets = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: allTickets.url(options),
@@ -92,13 +92,13 @@ export const allTickets = (options?: RouteQueryOptions): RouteDefinition<'get'> 
 
 allTickets.definition = {
     methods: ["get","head"],
-    url: '/all-tickets',
+    url: '/tickets/view/all',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
 * @see \App\Http\Controllers\TicketController::allTickets
 * @see app/Http/Controllers/TicketController.php:26
-* @route '/all-tickets'
+* @route '/tickets/view/all'
 */
 allTickets.url = (options?: RouteQueryOptions) => {
     return allTickets.definition.url + queryParams(options)
@@ -107,7 +107,7 @@ allTickets.url = (options?: RouteQueryOptions) => {
 /**
 * @see \App\Http\Controllers\TicketController::allTickets
 * @see app/Http/Controllers/TicketController.php:26
-* @route '/all-tickets'
+* @route '/tickets/view/all'
 */
 allTickets.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: allTickets.url(options),
@@ -117,7 +117,7 @@ allTickets.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 /**
 * @see \App\Http\Controllers\TicketController::allTickets
 * @see app/Http/Controllers/TicketController.php:26
-* @route '/all-tickets'
+* @route '/tickets/view/all'
 */
 allTickets.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: allTickets.url(options),
@@ -127,7 +127,7 @@ allTickets.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 /**
 * @see \App\Http\Controllers\TicketController::allTickets
 * @see app/Http/Controllers/TicketController.php:26
-* @route '/all-tickets'
+* @route '/tickets/view/all'
 */
 const allTicketsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: allTickets.url(options),
@@ -137,7 +137,7 @@ const allTicketsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'>
 /**
 * @see \App\Http\Controllers\TicketController::allTickets
 * @see app/Http/Controllers/TicketController.php:26
-* @route '/all-tickets'
+* @route '/tickets/view/all'
 */
 allTicketsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: allTickets.url(options),
@@ -147,7 +147,7 @@ allTicketsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =
 /**
 * @see \App\Http\Controllers\TicketController::allTickets
 * @see app/Http/Controllers/TicketController.php:26
-* @route '/all-tickets'
+* @route '/tickets/view/all'
 */
 allTicketsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: allTickets.url({

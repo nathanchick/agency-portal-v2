@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('websites', function (Blueprint $table) {
+        Schema::create('documents', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('customer_id')->constrained('customers')->onDelete('cascade');
-            $table->enum('type', ['production', 'staging', 'development']);
-            $table->string('url');
-            $table->text('notes')->nullable();
+            $table->foreignUuid('organisation_id')->constrained('organisations')->onDelete('cascade');
+            $table->string('name');
+            $table->enum('format', ['form', 'pdf']);
+            $table->string('filename')->nullable();
+            $table->longText('content')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('websites');
+        Schema::dropIfExists('documents');
     }
 };

@@ -35,4 +35,14 @@ class Organisation extends Model implements IsTenant
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
+    public function documentRequests()
+    {
+        return $this->hasMany(DocumentRequest::class);
+    }
 }
