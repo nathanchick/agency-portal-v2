@@ -80,6 +80,43 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        // Assign organisation user to Example Ltd organisation
+        $organisation = \App\Models\Organisation::where('billing_email', 'dummy@example.co.uk')->first();
+
+        if ($organisation && $orgUser) {
+            // Attach user to organisation if not already attached
+            if (!$orgUser->organisations()->where('organisation_id', $organisation->id)->exists()) {
+                $orgUser->organisations()->attach($organisation->id);
+                $this->command->info("User {$orgUser->email} assigned to organisation {$organisation->name}");
+            }
+
+            // Assign Admin role to user in organisation context
+            $role = \App\Models\Role::where('name', 'Admin')
+                ->where('guard_name', 'web')
+                ->where('team_id', $organisation->id)
+                ->first();
+
+            if ($role) {
+                // Check if role assignment already exists
+                $hasRole = DB::table('model_has_roles')
+                    ->where('role_id', $role->id)
+                    ->where('model_type', 'App\Models\User')
+                    ->where('model_id', $orgUser->id)
+                    ->where('team_id', $organisation->id)
+                    ->exists();
+
+                if (!$hasRole) {
+                    DB::table('model_has_roles')->insert([
+                        'role_id' => $role->id,
+                        'model_type' => 'App\Models\User',
+                        'model_id' => $orgUser->id,
+                        'team_id' => $organisation->id,
+                    ]);
+                    $this->command->info("Admin role assigned to {$orgUser->email} in {$organisation->name}");
+                }
+            }
+        }
+
         // Assign customer user to Demo Customer
         $customer = \App\Models\Customer::where('name', 'Demo Customer')->first();
 

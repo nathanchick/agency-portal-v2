@@ -16,10 +16,12 @@ class Customer extends Model
         'organisation_id',
         'name',
         'status',
+        'allow_all_users',
     ];
 
     protected $casts = [
         'status' => 'integer',
+        'allow_all_users' => 'boolean',
     ];
 
     public function projects(): HasMany

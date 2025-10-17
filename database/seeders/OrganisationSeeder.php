@@ -27,5 +27,21 @@ class OrganisationSeeder extends Seeder
         );
 
         $this->command->info('Organisation "Deploy eCommerce Ltd" created successfully!');
+
+        Organisation::firstOrCreate(
+            ['billing_email' => 'dummy@example.co.uk'],
+            [
+                'name' => 'Example Ltd',
+                'billing_email' => 'dummy@example.co.uk',
+                'billing_address1' => 'Unit G2, Bellringer Road',
+                'billing_city' => 'Stoke-on-Trent',
+                'billing_state' => 'Staffordshire',
+                'billing_zip' => 'ST4 8GB',
+                'billing_country' => 'United Kingdom',
+                'status' => 1,
+            ]
+        );
+
+        $this->command->info('Organisation "Example Ltd" created successfully!');
     }
 }

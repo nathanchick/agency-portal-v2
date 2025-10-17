@@ -33,11 +33,25 @@ class DomainTenantFinder extends TenantFinder
         $user = $request->user();
 
         if (!$user) {
+            if (config('app.debug')) {
+                \Log::debug('DomainTenantFinder - No authenticated user');
+            }
             return null;
         }
 
         // Get the first organisation the user belongs to
         // You might want to store the current_organisation_id on the user
-        return $user->organisations()->first();
+        $organisation = $user->organisations()->first();
+
+        if (config('app.debug')) {
+            \Log::debug('DomainTenantFinder - Found organisation', [
+                'user_id' => $user->id,
+                'user_email' => $user->email,
+                'organisation_id' => $organisation?->id,
+                'organisation_name' => $organisation?->name,
+            ]);
+        }
+
+        return $organisation;
     }
 }

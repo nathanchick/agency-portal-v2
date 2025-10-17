@@ -9,24 +9,24 @@ use Illuminate\Support\Facades\Route;
  * These routes are for organisation users managing customers, projects, and websites
  */
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    // Customer Management
-    Route::resource('customers', CustomerController::class);
+Route::middleware(['auth', 'verified', 'organisation'])->group(function () {
+    // Customer Management - Only Admin and Manager can access
+    Route::resource('customers', CustomerController::class)->middleware('role:Admin|Manager');
 
-    // Customer Users
-    Route::post('customers/{customer}/users/create', [CustomerController::class, 'createUser'])->name('customers.users.create');
-    Route::post('customers/{customer}/users', [CustomerController::class, 'attachUser'])->name('customers.users.attach');
-    Route::put('customers/{customer}/users/{user}/role', [CustomerController::class, 'updateUserRole'])->name('customers.users.update-role');
-    Route::delete('customers/{customer}/users/{user}', [CustomerController::class, 'detachUser'])->name('customers.users.detach');
+    // Customer Users - Only Admin and Manager can manage users
+    Route::post('customers/{customer}/users/create', [CustomerController::class, 'createUser'])->name('customers.users.create')->middleware('role:Admin|Manager');
+    Route::post('customers/{customer}/users', [CustomerController::class, 'attachUser'])->name('customers.users.attach')->middleware('role:Admin|Manager');
+    Route::put('customers/{customer}/users/{user}/role', [CustomerController::class, 'updateUserRole'])->name('customers.users.update-role')->middleware('role:Admin|Manager');
+    Route::delete('customers/{customer}/users/{user}', [CustomerController::class, 'detachUser'])->name('customers.users.detach')->middleware('role:Admin|Manager');
 
-    // Projects
-    Route::post('customers/{customer}/projects', [CustomerController::class, 'storeProject'])->name('customers.projects.store');
-    Route::put('customers/{customer}/projects/{project}', [CustomerController::class, 'updateProject'])->name('customers.projects.update');
-    Route::delete('customers/{customer}/projects/{project}', [CustomerController::class, 'destroyProject'])->name('customers.projects.destroy');
+    // Projects - All organisation users can manage
+    Route::post('customers/{customer}/projects', [CustomerController::class, 'storeProject'])->name('customers.projects.store')->middleware('role:Admin|Manager|User');
+    Route::put('customers/{customer}/projects/{project}', [CustomerController::class, 'updateProject'])->name('customers.projects.update')->middleware('role:Admin|Manager|User');
+    Route::delete('customers/{customer}/projects/{project}', [CustomerController::class, 'destroyProject'])->name('customers.projects.destroy')->middleware('role:Admin|Manager');
 
-    // Websites
-    Route::post('customers/{customer}/websites', [CustomerController::class, 'storeWebsite'])->name('customers.websites.store');
-    Route::put('customers/{customer}/websites/{website}', [CustomerController::class, 'updateWebsite'])->name('customers.websites.update');
-    Route::put('customers/{customer}/websites/{website}/project', [CustomerController::class, 'updateWebsiteProject'])->name('customers.websites.update-project');
-    Route::delete('customers/{customer}/websites/{website}', [CustomerController::class, 'destroyWebsite'])->name('customers.websites.destroy');
+    // Websites - All organisation users can manage
+    Route::post('customers/{customer}/websites', [CustomerController::class, 'storeWebsite'])->name('customers.websites.store')->middleware('role:Admin|Manager|User');
+    Route::put('customers/{customer}/websites/{website}', [CustomerController::class, 'updateWebsite'])->name('customers.websites.update')->middleware('role:Admin|Manager|User');
+    Route::put('customers/{customer}/websites/{website}/project', [CustomerController::class, 'updateWebsiteProject'])->name('customers.websites.update-project')->middleware('role:Admin|Manager|User');
+    Route::delete('customers/{customer}/websites/{website}', [CustomerController::class, 'destroyWebsite'])->name('customers.websites.destroy')->middleware('role:Admin|Manager');
 });

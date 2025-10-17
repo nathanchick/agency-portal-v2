@@ -2,29 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\HasCurrentOrganisation;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CustomerController extends Controller
 {
-    /**
-     * Get the current organisation ID for the authenticated user
-     */
-    private function getCurrentOrganisationId()
-    {
-        $organisation = auth()->user()->organisations()->first();
-
-        if (!$organisation) {
-            abort(403, 'You must belong to an organisation to perform this action.');
-        }
-
-        return $organisation->id;
-    }
+    use HasCurrentOrganisation;
 
     public function index()
     {
-        $customers = Customer::with('users')->latest()->get();
+        $organisationId = $this->getCurrentOrganisationId();
+        $user = auth()->user();
+
+        // Check if user is an organisation user
+        $isOrganisationUser = \Illuminate\Support\Facades\DB::table('model_has_roles')
+            ->where('model_id', $user->id)
+            ->where('model_type', \App\Models\User::class)
+            ->where('team_id', $organisationId)
+            ->exists();
+
+        if ($isOrganisationUser) {
+            // Organisation users see all customers for this organisation
+            $customers = Customer::with('users')
+                ->where('organisation_id', $organisationId)
+                ->latest()
+                ->get();
+        } else {
+            // Customer users only see customers they're assigned to
+            $customers = $user->customers()
+                ->with('users')
+                ->where('customers.organisation_id', $organisationId)
+                ->latest()
+                ->get();
+        }
 
         return Inertia::render('customers/index', [
             'customers' => $customers,
@@ -66,6 +78,11 @@ class CustomerController extends Controller
     {
         $organisationId = $this->getCurrentOrganisationId();
 
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         // Load users with their customer-specific role from pivot table
         $customer->load(['users' => function ($query) {
             $query->withPivot('role_id');
@@ -94,7 +111,20 @@ class CustomerController extends Controller
             $query->where('organisations.id', $organisationId);
         })->whereDoesntHave('customers', function ($query) use ($customer) {
             $query->where('customers.id', $customer->id);
-        })->get(['id', 'name', 'email']);
+        })->get(['id', 'name', 'email'])->map(function ($user) use ($organisationId) {
+            // Check if user has an organisation role
+            $hasOrganisationRole = \Illuminate\Support\Facades\DB::table('model_has_roles')
+                ->where('model_id', $user->id)
+                ->where('model_type', \App\Models\User::class)
+                ->where('team_id', $organisationId)
+                ->exists();
+
+            return [
+                'id' => $user->id,
+                'name' => $hasOrganisationRole ? $user->name . ' (Organisation)' : $user->name,
+                'email' => $user->email,
+            ];
+        });
 
         // Get roles for this organisation
         $roles = \App\Models\Role::where('team_id', $organisationId)->get(['id', 'name']);
@@ -104,6 +134,7 @@ class CustomerController extends Controller
                 'id' => $customer->id,
                 'name' => $customer->name,
                 'status' => $customer->status,
+                'allow_all_users' => $customer->allow_all_users,
                 'users' => $usersWithRoles,
                 'projects' => $customer->projects,
                 'websites' => $customer->websites,
@@ -115,9 +146,17 @@ class CustomerController extends Controller
 
     public function update(Request $request, Customer $customer)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'status' => 'required|integer|in:0,1',
+            'allow_all_users' => 'required|boolean',
         ]);
 
         $customer->update($validated);
@@ -127,6 +166,13 @@ class CustomerController extends Controller
 
     public function destroy(Customer $customer)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $customer->delete();
 
         return redirect()->route('customers.index')->with('success', 'Customer deleted successfully');
@@ -134,12 +180,17 @@ class CustomerController extends Controller
 
     public function attachUser(Request $request, Customer $customer)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $validated = $request->validate([
             'user_id' => 'required|exists:users,id',
             'role_id' => 'nullable|exists:roles,id',
         ]);
-
-        $organisationId = $this->getCurrentOrganisationId();
 
         // Check if user is already attached
         if ($customer->users()->where('user_id', $validated['user_id'])->exists()) {
@@ -175,6 +226,13 @@ class CustomerController extends Controller
 
     public function detachUser(Customer $customer, $userId)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $customer->users()->detach($userId);
 
         return back()->with('success', 'User removed successfully');
@@ -182,11 +240,16 @@ class CustomerController extends Controller
 
     public function updateUserRole(Request $request, Customer $customer, $userId)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $validated = $request->validate([
             'role' => 'required|exists:roles,name',
         ]);
-
-        $organisationId = $this->getCurrentOrganisationId();
 
         // Verify user is assigned to this customer
         if (!$customer->users()->where('users.id', $userId)->exists()) {
@@ -212,6 +275,13 @@ class CustomerController extends Controller
 
     public function createUser(Request $request, Customer $customer)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
@@ -219,7 +289,6 @@ class CustomerController extends Controller
         ]);
 
         // Get the organisation from the authenticated user
-        $organisationId = $this->getCurrentOrganisationId();
         $organisation = \App\Models\Organisation::findOrFail($organisationId);
 
         // Find the role - try provided role, then 'User', then first available role
@@ -306,12 +375,17 @@ class CustomerController extends Controller
 
     public function storeProject(Request $request, Customer $customer)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'notes' => 'nullable|string',
         ]);
-
-        $organisationId = $this->getCurrentOrganisationId();
 
         \App\Models\Project::create([
             'organisation_id' => $organisationId,
@@ -325,6 +399,13 @@ class CustomerController extends Controller
 
     public function updateProject(Request $request, Customer $customer, $projectId)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'notes' => 'nullable|string',
@@ -341,6 +422,13 @@ class CustomerController extends Controller
 
     public function destroyProject(Customer $customer, $projectId)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $project = \App\Models\Project::where('customer_id', $customer->id)
             ->where('id', $projectId)
             ->firstOrFail();
@@ -356,6 +444,13 @@ class CustomerController extends Controller
 
     public function storeWebsite(Request $request, Customer $customer)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $validated = $request->validate([
             'project_id' => 'required|exists:projects,id',
             'type' => 'required|in:production,staging,development',
@@ -376,6 +471,13 @@ class CustomerController extends Controller
 
     public function updateWebsite(Request $request, Customer $customer, $websiteId)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $validated = $request->validate([
             'project_id' => 'required|exists:projects,id',
             'type' => 'required|in:production,staging,development',
@@ -394,6 +496,13 @@ class CustomerController extends Controller
 
     public function destroyWebsite(Customer $customer, $websiteId)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $website = \App\Models\Website::where('customer_id', $customer->id)
             ->where('id', $websiteId)
             ->firstOrFail();
@@ -405,6 +514,13 @@ class CustomerController extends Controller
 
     public function updateWebsiteProject(Request $request, Customer $customer, $websiteId)
     {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
         $validated = $request->validate([
             'project_id' => 'required|exists:projects,id',
         ]);

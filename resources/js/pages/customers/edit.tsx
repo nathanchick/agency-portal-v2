@@ -44,6 +44,7 @@ import {
 } from '@/components/ui/dialog'
 import { Trash2, Plus, UserPlus, Pencil } from 'lucide-react'
 import { Textarea } from '@/components/ui/textarea'
+import { Switch } from '@/components/ui/switch'
 import { useState } from 'react'
 
 interface User {
@@ -73,6 +74,7 @@ interface Customer {
     id: string
     name: string
     status: number
+    allow_all_users: boolean
     users: User[]
     projects: Project[]
     websites: Website[]
@@ -90,7 +92,6 @@ interface Props {
 }
 
 export default function EditCustomer({ customer, availableUsers, roles }: Props) {
-    const { auth } = usePage<{ auth: { userType: 'organisation' | 'customer' } }>().props
     const [selectedUserId, setSelectedUserId] = useState<string>('')
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
     const [isCreateProjectDialogOpen, setIsCreateProjectDialogOpen] = useState(false)
@@ -112,6 +113,7 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
     const { data, setData, put, processing, errors } = useForm({
         name: customer.name,
         status: customer.status.toString(),
+        allow_all_users: customer.allow_all_users,
     })
 
     const {
@@ -362,7 +364,7 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
 
     return (
         <SidebarProvider>
-            <AppSidebar userType={auth.userType} />
+            <AppSidebar />
             <SidebarInset>
                 <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
                     <div className="flex items-center gap-2 px-4">
@@ -432,6 +434,27 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                         </Select>
                                         {errors.status && (
                                             <p className="text-sm text-red-500">{errors.status}</p>
+                                        )}
+                                    </div>
+
+                                    <div className="space-y-4 mt-8">
+                                        <div className="flex items-center space-x-2">
+                                            <Switch
+                                                id="allow_all_users"
+                                                checked={data.allow_all_users}
+                                                onCheckedChange={(checked) => setData('allow_all_users', checked)}
+                                            />
+                                            <Label htmlFor="allow_all_users" className="cursor-pointer">
+                                                Allow all Organisation users
+                                            </Label>
+                                        </div>
+                                        <p className="text-sm text-muted-foreground">
+                                            {data.allow_all_users
+                                                ? 'All Organisation users are able to view this customer and all related data'
+                                                : 'Only assigned Organisation users are able to view this customer and related data'}
+                                        </p>
+                                        {errors.allow_all_users && (
+                                            <p className="text-sm text-red-500">{errors.allow_all_users}</p>
                                         )}
                                     </div>
 

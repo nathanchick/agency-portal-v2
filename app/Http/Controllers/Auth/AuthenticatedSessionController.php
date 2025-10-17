@@ -43,6 +43,10 @@ class AuthenticatedSessionController extends Controller
 
         Auth::login($user, $request->boolean('remember'));
 
+        // Update last login timestamp
+        $user->last_login_at = now();
+        $user->save();
+
         $request->session()->regenerate();
 
         return redirect()->intended(route('dashboard', absolute: false));

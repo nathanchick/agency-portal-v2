@@ -28,8 +28,6 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function CreateCustomer() {
-    const { auth } = usePage<{ auth: { userType: 'organisation' | 'customer' } }>().props
-
     const { data, setData, post, processing, errors } = useForm({
         name: '',
         status: '1',
@@ -42,7 +40,7 @@ export default function CreateCustomer() {
 
     return (
         <SidebarProvider>
-            <AppSidebar userType={auth.userType} />
+            <AppSidebar />
             <SidebarInset>
                 <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
                     <div className="flex items-center gap-2 px-4">
