@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Customer;
-use App\Models\Organisation;
-use App\Models\Project;
+use Modules\Customer\Models\Customer;
+use Modules\Organisation\Models\Organisation;
+use Modules\Project\Models\Project;
 use Illuminate\Database\Seeder;
 
 class CustomerSeeder extends Seeder

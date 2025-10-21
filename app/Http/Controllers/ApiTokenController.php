@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ApiToken;
+use Modules\Organisation\Models\ApiToken;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 

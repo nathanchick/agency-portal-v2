@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Organisation;
+use Modules\Organisation\Models\Organisation;
 use Illuminate\Broadcasting\BroadcastEvent;
 use Illuminate\Events\CallQueuedListener;
 use Illuminate\Mail\SendQueuedMailable;

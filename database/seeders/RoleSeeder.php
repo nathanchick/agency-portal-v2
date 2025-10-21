@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Customer;
-use App\Models\Organisation;
+use Modules\Customer\Models\Customer;
+use Modules\Organisation\Models\Organisation;
 use Illuminate\Database\Seeder;
 use Modules\Organisation\Models\Role;
 

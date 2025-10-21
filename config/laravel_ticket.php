@@ -77,9 +77,9 @@ return [
      * Models for Eloquent relationships
      */
     'models' => [
-        'ticket' => \App\Models\Ticket::class,
-        'message' => \App\Models\Message::class,
-        'category' => \App\Models\Category::class,
-        'label' => \App\Models\Label::class,
+        'ticket' => \Modules\Ticket\Models\Ticket::class,
+        'message' => \Modules\Ticket\Models\Message::class,
+        'category' => \Modules\Ticket\Models\Category::class,
+        'label' => \Modules\Ticket\Models\Label::class,
     ],
 ];

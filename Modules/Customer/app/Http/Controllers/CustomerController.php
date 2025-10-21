@@ -368,7 +368,7 @@ class CustomerController extends Controller
             $isNewUser = true;
 
             // Send invitation email with password setup link
-            $user->notify(new \App\Notifications\NewUserInvitation($organisation->name, $customer->name));
+            $user->notify(new \Modules\Organisation\Notifications\NewUserInvitation($organisation->name, $customer->name));
 
             $message = 'New user created and invited successfully';
         }
@@ -461,7 +461,7 @@ class CustomerController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        \App\Models\Website::create([
+        \Modules\Customer\Models\Website::create([
             'customer_id' => $customer->id,
             'project_id' => $validated['project_id'],
             'type' => $validated['type'],
@@ -488,7 +488,7 @@ class CustomerController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        $website = \App\Models\Website::where('customer_id', $customer->id)
+        $website = \Modules\Customer\Models\Website::where('customer_id', $customer->id)
             ->where('id', $websiteId)
             ->firstOrFail();
 
@@ -506,7 +506,7 @@ class CustomerController extends Controller
             abort(403, 'You do not have access to this customer.');
         }
 
-        $website = \App\Models\Website::where('customer_id', $customer->id)
+        $website = \Modules\Customer\Models\Website::where('customer_id', $customer->id)
             ->where('id', $websiteId)
             ->firstOrFail();
 
@@ -528,7 +528,7 @@ class CustomerController extends Controller
             'project_id' => 'required|exists:projects,id',
         ]);
 
-        $website = \App\Models\Website::where('customer_id', $customer->id)
+        $website = \Modules\Customer\Models\Website::where('customer_id', $customer->id)
             ->where('id', $websiteId)
             ->firstOrFail();
 

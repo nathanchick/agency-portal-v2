@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Assign organisation user to Deploy eCommerce organisation
-        $organisation = \App\Models\Organisation::where('billing_email', 'sarah.woolley@deploy.co.uk')->first();
+        $organisation = \Modules\Organisation\Models\Organisation::where('billing_email', 'sarah.woolley@deploy.co.uk')->first();
 
         if ($organisation && $orgUser) {
             // Attach user to organisation if not already attached
@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
         }
 
         // Assign organisation user to Example Ltd organisation
-        $organisation = \App\Models\Organisation::where('billing_email', 'dummy@example.co.uk')->first();
+        $organisation = \Modules\Organisation\Models\Organisation::where('billing_email', 'dummy@example.co.uk')->first();
 
         if ($organisation && $orgUser) {
             // Attach user to organisation if not already attached
@@ -117,7 +117,7 @@ class DatabaseSeeder extends Seeder
         }
 
         // Assign customer user to Demo Customer
-        $customer = \App\Models\Customer::where('name', 'Demo Customer')->first();
+        $customer = \Modules\Customer\Models\Customer::where('name', 'Demo Customer')->first();
 
         if ($customer && $customerUser) {
             // Attach user to customer if not already attached
