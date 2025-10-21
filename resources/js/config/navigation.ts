@@ -1,10 +1,8 @@
 import {
     Activity,
-    AudioWaveform,
     BookOpen,
     Bot,
     Clock,
-    Command,
     GalleryVerticalEnd,
     HeartPulseIcon,
     LockIcon,
@@ -55,19 +53,24 @@ export const navigation: NavigationConfig = {
         },
         {
             title: "Documents",
-            url: "#",
+            url: route('documents.pending'),
             icon: FileText,
             roles: ['Admin', 'Manager', 'User'],
             items: [
                 {
-                    title: "Completed",
-                    url: "#",
+                    title: "Pending",
+                    url: route('documents.pending'),
                     roles: ['Admin', 'Manager', 'User'],
                 },
                 {
-                    title: "Pending",
-                    url: "#",
-                    roles: ['Admin', 'Manager'],
+                    title: "Completed",
+                    url: route('documents.completed'),
+                    roles: ['Admin', 'Manager', 'User'],
+                },
+                {
+                    title: "Document Types",
+                    url: route('document-types.index'),
+                    roles: ['Admin'],
                 },
             ],
         },
@@ -117,29 +120,29 @@ export const navigation: NavigationConfig = {
         },
         {
             title: "Documents",
-            url: "#",
+            url: route('customer.documents.my-pending'),
             icon: BookOpen,
             roles: ['Admin', 'Manager', 'User'],
             items: [
                 {
-                    title: "User Acceptance",
-                    url: "#",
+                    title: "My Pending Docs",
+                    url: route('customer.documents.my-pending'),
                     roles: ['Admin', 'Manager', 'User'],
                 },
                 {
-                    title: "Change Requests",
-                    url: "#",
-                    roles: ['Admin', 'Manager'],
-                },
-                {
-                    title: "Production Access",
-                    url: "#",
-                    roles: ['Admin', 'Manager'],
-                },
-                {
-                    title: "Terms & Contracts",
-                    url: "#",
+                    title: "My Completed Docs",
+                    url: route('customer.documents.my-completed'),
                     roles: ['Admin', 'Manager', 'User'],
+                },
+                {
+                    title: "All Pending Docs",
+                    url: route('customer.documents.all-pending'),
+                    roles: ['Admin', 'Manager'],
+                },
+                {
+                    title: "All Completed Docs",
+                    url: route('customer.documents.all-completed'),
+                    roles: ['Admin', 'Manager'],
                 },
             ],
         },

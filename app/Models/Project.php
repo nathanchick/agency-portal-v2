@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Models\Concerns\BelongsToTenant;
+use App\Traits\DispatchesWebhooks;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Project extends Model
 {
-    use HasUuids, BelongsToTenant;
+    use HasUuids, BelongsToTenant, DispatchesWebhooks;
 
     protected $fillable = [
         'organisation_id',

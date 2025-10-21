@@ -131,6 +131,6 @@ return [
      * Jobs not tenant aware even if these don't implement the NotTenantAware interface.
      */
     'not_tenant_aware_jobs' => [
-        // ...
+        \Spatie\WebhookServer\CallWebhookJob::class,
     ],
 ];

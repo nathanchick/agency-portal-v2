@@ -11,13 +11,17 @@
     "require": {
         "php": "^8.2",
         "coderflex/laravel-ticket": "^2.1",
+        "dedoc/scramble": "^0.12.36",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/fortify": "^1.30",
         "laravel/framework": "^12.0",
+        "laravel/horizon": "^5.36",
+        "laravel/sanctum": "^4.2",
         "laravel/tinker": "^2.10",
         "laravel/wayfinder": "^0.1.9",
         "spatie/laravel-multitenancy": "^4.0",
         "spatie/laravel-permission": "^6.21",
+        "spatie/laravel-webhook-server": "^3.8",
         "tightenco/ziggy": "^2.6"
     },
     "require-dev": {

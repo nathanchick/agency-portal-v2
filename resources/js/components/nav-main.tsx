@@ -35,17 +35,26 @@ export function NavMain({
     }[]
 }) {
     const { url } = usePage()
+
+    // Helper function to check if URLs match (ignoring query strings and domain)
+    const urlsMatch = (navUrl: string, currentUrl: string) => {
+        // Extract just the path from the navigation URL (remove domain)
+        const navPath = navUrl.split('?')[0].replace(/^https?:\/\/[^\/]+/, '')
+        const currentPath = currentUrl.split('?')[0]
+        return navPath === currentPath
+    }
+
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Platform</SidebarGroupLabel>
             <SidebarMenu>
                 {items.map((item) => {
-                    const isItemActive = item.url === url || item.items?.some(sub => sub.url === url)
+                    const isItemActive = urlsMatch(item.url, url) || item.items?.some(sub => urlsMatch(sub.url, url))
 
                     if (item.items === undefined) {
                         return (
                             <SidebarMenuItem key={item.title}>
-                                <SidebarMenuButton asChild tooltip={item.title} isActive={item.url === url}>
+                                <SidebarMenuButton asChild tooltip={item.title} isActive={urlsMatch(item.url, url)}>
                                     <a href={item.url}>
                                         {item.icon && <item.icon />}
                                         <span>{item.title}</span>
@@ -74,7 +83,7 @@ export function NavMain({
                                     <SidebarMenuSub>
                                         {item.items?.map((subItem) => (
                                             <SidebarMenuSubItem key={subItem.title}>
-                                                <SidebarMenuSubButton asChild isActive={subItem.url === url}>
+                                                <SidebarMenuSubButton asChild isActive={urlsMatch(subItem.url, url)}>
                                                     <a href={subItem.url}>
                                                         <span>{subItem.title}</span>
                                                     </a>

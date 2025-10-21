@@ -1,5 +1,5 @@
 import { usePage } from '@inertiajs/react'
-import { navigation, NavigationItem, NavigationSubItem, UserType, RoleType } from '@/config/navigation'
+import { navigation, NavigationItem, UserType, RoleType } from '@/config/navigation'
 
 interface AuthProps {
     userType: UserType

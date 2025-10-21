@@ -2,33 +2,35 @@
 
 namespace App\Models;
 
+use App\Traits\DispatchesWebhooks;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DocumentRequest extends Model
 {
-    use HasUuids;
+    use HasUuids, DispatchesWebhooks;
 
     protected $fillable = [
         'organisation_id',
         'customer_id',
+        'user_id',
+        'cc_email',
+        'cc_name',
         'document_id',
         'content',
+        'notes',
+        'uploaded_file',
+        'requires_approval',
+        'scheduled_send_at',
         'status',
-        'signed_at',
-        'signed_by',
-        'signed_user_name',
-        'signed_user_email',
-        'signed_ip_address',
-        'signed_user_agent',
-        'signed_metadata',
     ];
 
     protected $casts = [
         'status' => 'string',
-        'signed_at' => 'datetime',
-        'signed_metadata' => 'array',
+        'requires_approval' => 'boolean',
+        'scheduled_send_at' => 'datetime',
     ];
 
     public function organisation(): BelongsTo
@@ -46,8 +48,13 @@ class DocumentRequest extends Model
         return $this->belongsTo(Document::class);
     }
 
-    public function signedByUser(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'signed_by');
+        return $this->belongsTo(User::class);
+    }
+
+    public function history(): HasMany
+    {
+        return $this->hasMany(DocumentHistory::class);
     }
 }
