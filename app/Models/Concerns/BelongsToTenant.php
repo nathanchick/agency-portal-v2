@@ -2,7 +2,7 @@
 
 namespace App\Models\Concerns;
 
-use App\Models\Organisation;
+use Modules\Organisation\Models\Organisation;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

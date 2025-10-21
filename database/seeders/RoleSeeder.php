@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Organisation;
 use App\Models\Customer;
-use App\Models\Role;
+use Modules\Organisation\Models\Role;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder

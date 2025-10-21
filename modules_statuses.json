@@ -1,0 +1,7 @@
+{
+    "Customer": true,
+    "Document": true,
+    "Ticket": true,
+    "Webhook": true,
+    "Organisation": true
+}

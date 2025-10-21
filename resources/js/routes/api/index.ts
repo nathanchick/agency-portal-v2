@@ -1,15 +1,11 @@
-import customers from './customers'
-import documentRequests from './document-requests'
-import projects from './projects'
-import websites from './websites'
-import tickets from './tickets'
+import api from './api'
+import organisation from './organisation'
+import webhook from './webhook'
 
 const api = {
-    customers: Object.assign(customers, customers),
-    documentRequests: Object.assign(documentRequests, documentRequests),
-    projects: Object.assign(projects, projects),
-    websites: Object.assign(websites, websites),
-    tickets: Object.assign(tickets, tickets),
+    api: Object.assign(api, api),
+    organisation: Object.assign(organisation, organisation),
+    webhook: Object.assign(webhook, webhook),
 }
 
 export default api

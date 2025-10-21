@@ -1,8 +1,8 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 import view381131 from './view'
 /**
-* @see \App\Http\Controllers\TicketController::view
-* @see app/Http/Controllers/TicketController.php:13
+* @see \Modules\Ticket\Http\Controllers\TicketController::view
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:14
 * @route '/tickets'
 */
 export const view = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,8 +16,8 @@ view.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\TicketController::view
-* @see app/Http/Controllers/TicketController.php:13
+* @see \Modules\Ticket\Http\Controllers\TicketController::view
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:14
 * @route '/tickets'
 */
 view.url = (options?: RouteQueryOptions) => {
@@ -25,8 +25,8 @@ view.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\TicketController::view
-* @see app/Http/Controllers/TicketController.php:13
+* @see \Modules\Ticket\Http\Controllers\TicketController::view
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:14
 * @route '/tickets'
 */
 view.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,8 +35,8 @@ view.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\TicketController::view
-* @see app/Http/Controllers/TicketController.php:13
+* @see \Modules\Ticket\Http\Controllers\TicketController::view
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:14
 * @route '/tickets'
 */
 view.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,8 +45,8 @@ view.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\TicketController::view
-* @see app/Http/Controllers/TicketController.php:13
+* @see \Modules\Ticket\Http\Controllers\TicketController::view
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:14
 * @route '/tickets'
 */
 const viewForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -55,8 +55,8 @@ const viewForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\TicketController::view
-* @see app/Http/Controllers/TicketController.php:13
+* @see \Modules\Ticket\Http\Controllers\TicketController::view
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:14
 * @route '/tickets'
 */
 viewForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -65,8 +65,8 @@ viewForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\TicketController::view
-* @see app/Http/Controllers/TicketController.php:13
+* @see \Modules\Ticket\Http\Controllers\TicketController::view
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:14
 * @route '/tickets'
 */
 viewForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -82,8 +82,8 @@ viewForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 view.form = viewForm
 
 /**
-* @see \App\Http\Controllers\TicketController::create
-* @see app/Http/Controllers/TicketController.php:38
+* @see \Modules\Ticket\Http\Controllers\TicketController::create
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:39
 * @route '/tickets/create'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -97,8 +97,8 @@ create.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\TicketController::create
-* @see app/Http/Controllers/TicketController.php:38
+* @see \Modules\Ticket\Http\Controllers\TicketController::create
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:39
 * @route '/tickets/create'
 */
 create.url = (options?: RouteQueryOptions) => {
@@ -106,8 +106,8 @@ create.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\TicketController::create
-* @see app/Http/Controllers/TicketController.php:38
+* @see \Modules\Ticket\Http\Controllers\TicketController::create
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:39
 * @route '/tickets/create'
 */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -116,8 +116,8 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\TicketController::create
-* @see app/Http/Controllers/TicketController.php:38
+* @see \Modules\Ticket\Http\Controllers\TicketController::create
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:39
 * @route '/tickets/create'
 */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -126,8 +126,8 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\TicketController::create
-* @see app/Http/Controllers/TicketController.php:38
+* @see \Modules\Ticket\Http\Controllers\TicketController::create
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:39
 * @route '/tickets/create'
 */
 const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -136,8 +136,8 @@ const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 })
 
 /**
-* @see \App\Http\Controllers\TicketController::create
-* @see app/Http/Controllers/TicketController.php:38
+* @see \Modules\Ticket\Http\Controllers\TicketController::create
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:39
 * @route '/tickets/create'
 */
 createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -146,8 +146,8 @@ createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\TicketController::create
-* @see app/Http/Controllers/TicketController.php:38
+* @see \Modules\Ticket\Http\Controllers\TicketController::create
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:39
 * @route '/tickets/create'
 */
 createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -163,8 +163,8 @@ createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 create.form = createForm
 
 /**
-* @see \App\Http\Controllers\TicketController::store
-* @see app/Http/Controllers/TicketController.php:49
+* @see \Modules\Ticket\Http\Controllers\TicketController::store
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:50
 * @route '/tickets'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -178,8 +178,8 @@ store.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\TicketController::store
-* @see app/Http/Controllers/TicketController.php:49
+* @see \Modules\Ticket\Http\Controllers\TicketController::store
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:50
 * @route '/tickets'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -187,8 +187,8 @@ store.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\TicketController::store
-* @see app/Http/Controllers/TicketController.php:49
+* @see \Modules\Ticket\Http\Controllers\TicketController::store
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:50
 * @route '/tickets'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -197,8 +197,8 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\TicketController::store
-* @see app/Http/Controllers/TicketController.php:49
+* @see \Modules\Ticket\Http\Controllers\TicketController::store
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:50
 * @route '/tickets'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -207,8 +207,8 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 })
 
 /**
-* @see \App\Http\Controllers\TicketController::store
-* @see app/Http/Controllers/TicketController.php:49
+* @see \Modules\Ticket\Http\Controllers\TicketController::store
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:50
 * @route '/tickets'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

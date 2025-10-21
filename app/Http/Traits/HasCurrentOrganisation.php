@@ -2,7 +2,7 @@
 
 namespace App\Http\Traits;
 
-use App\Models\Organisation;
+use Modules\Organisation\Models\Organisation;
 
 trait HasCurrentOrganisation
 {

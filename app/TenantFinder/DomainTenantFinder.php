@@ -2,7 +2,7 @@
 
 namespace App\TenantFinder;
 
-use App\Models\Organisation;
+use Modules\Organisation\Models\Organisation;
 use Illuminate\Http\Request;
 use Spatie\Multitenancy\TenantFinder\TenantFinder;
 

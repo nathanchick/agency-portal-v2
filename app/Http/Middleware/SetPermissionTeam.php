@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use Modules\Organisation\Models\Organisation;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\Organisation;
 
 class SetPermissionTeam
 {

@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
-* @see \App\Http\Controllers\WebhookController::index
-* @see app/Http/Controllers/WebhookController.php:21
+* @see \Modules\Webhook\Http\Controllers\WebhookController::index
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:22
 * @route '/webhooks'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -15,8 +15,8 @@ index.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\WebhookController::index
-* @see app/Http/Controllers/WebhookController.php:21
+* @see \Modules\Webhook\Http\Controllers\WebhookController::index
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:22
 * @route '/webhooks'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -24,8 +24,8 @@ index.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\WebhookController::index
-* @see app/Http/Controllers/WebhookController.php:21
+* @see \Modules\Webhook\Http\Controllers\WebhookController::index
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:22
 * @route '/webhooks'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,8 +34,8 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::index
-* @see app/Http/Controllers/WebhookController.php:21
+* @see \Modules\Webhook\Http\Controllers\WebhookController::index
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:22
 * @route '/webhooks'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,8 +44,8 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::index
-* @see app/Http/Controllers/WebhookController.php:21
+* @see \Modules\Webhook\Http\Controllers\WebhookController::index
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:22
 * @route '/webhooks'
 */
 const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -54,8 +54,8 @@ const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::index
-* @see app/Http/Controllers/WebhookController.php:21
+* @see \Modules\Webhook\Http\Controllers\WebhookController::index
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:22
 * @route '/webhooks'
 */
 indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -64,8 +64,8 @@ indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::index
-* @see app/Http/Controllers/WebhookController.php:21
+* @see \Modules\Webhook\Http\Controllers\WebhookController::index
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:22
 * @route '/webhooks'
 */
 indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -81,8 +81,8 @@ indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 index.form = indexForm
 
 /**
-* @see \App\Http\Controllers\WebhookController::jobs
-* @see app/Http/Controllers/WebhookController.php:56
+* @see \Modules\Webhook\Http\Controllers\WebhookController::jobs
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:57
 * @route '/webhooks/jobs'
 */
 export const jobs = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -96,8 +96,8 @@ jobs.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\WebhookController::jobs
-* @see app/Http/Controllers/WebhookController.php:56
+* @see \Modules\Webhook\Http\Controllers\WebhookController::jobs
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:57
 * @route '/webhooks/jobs'
 */
 jobs.url = (options?: RouteQueryOptions) => {
@@ -105,8 +105,8 @@ jobs.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\WebhookController::jobs
-* @see app/Http/Controllers/WebhookController.php:56
+* @see \Modules\Webhook\Http\Controllers\WebhookController::jobs
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:57
 * @route '/webhooks/jobs'
 */
 jobs.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -115,8 +115,8 @@ jobs.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::jobs
-* @see app/Http/Controllers/WebhookController.php:56
+* @see \Modules\Webhook\Http\Controllers\WebhookController::jobs
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:57
 * @route '/webhooks/jobs'
 */
 jobs.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -125,8 +125,8 @@ jobs.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::jobs
-* @see app/Http/Controllers/WebhookController.php:56
+* @see \Modules\Webhook\Http\Controllers\WebhookController::jobs
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:57
 * @route '/webhooks/jobs'
 */
 const jobsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -135,8 +135,8 @@ const jobsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::jobs
-* @see app/Http/Controllers/WebhookController.php:56
+* @see \Modules\Webhook\Http\Controllers\WebhookController::jobs
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:57
 * @route '/webhooks/jobs'
 */
 jobsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -145,8 +145,8 @@ jobsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::jobs
-* @see app/Http/Controllers/WebhookController.php:56
+* @see \Modules\Webhook\Http\Controllers\WebhookController::jobs
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:57
 * @route '/webhooks/jobs'
 */
 jobsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -162,8 +162,8 @@ jobsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 jobs.form = jobsForm
 
 /**
-* @see \App\Http\Controllers\WebhookController::create
-* @see app/Http/Controllers/WebhookController.php:127
+* @see \Modules\Webhook\Http\Controllers\WebhookController::create
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:128
 * @route '/webhooks/create'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -177,8 +177,8 @@ create.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\WebhookController::create
-* @see app/Http/Controllers/WebhookController.php:127
+* @see \Modules\Webhook\Http\Controllers\WebhookController::create
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:128
 * @route '/webhooks/create'
 */
 create.url = (options?: RouteQueryOptions) => {
@@ -186,8 +186,8 @@ create.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\WebhookController::create
-* @see app/Http/Controllers/WebhookController.php:127
+* @see \Modules\Webhook\Http\Controllers\WebhookController::create
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:128
 * @route '/webhooks/create'
 */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -196,8 +196,8 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::create
-* @see app/Http/Controllers/WebhookController.php:127
+* @see \Modules\Webhook\Http\Controllers\WebhookController::create
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:128
 * @route '/webhooks/create'
 */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -206,8 +206,8 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::create
-* @see app/Http/Controllers/WebhookController.php:127
+* @see \Modules\Webhook\Http\Controllers\WebhookController::create
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:128
 * @route '/webhooks/create'
 */
 const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -216,8 +216,8 @@ const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::create
-* @see app/Http/Controllers/WebhookController.php:127
+* @see \Modules\Webhook\Http\Controllers\WebhookController::create
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:128
 * @route '/webhooks/create'
 */
 createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -226,8 +226,8 @@ createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::create
-* @see app/Http/Controllers/WebhookController.php:127
+* @see \Modules\Webhook\Http\Controllers\WebhookController::create
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:128
 * @route '/webhooks/create'
 */
 createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -243,8 +243,8 @@ createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 create.form = createForm
 
 /**
-* @see \App\Http\Controllers\WebhookController::store
-* @see app/Http/Controllers/WebhookController.php:138
+* @see \Modules\Webhook\Http\Controllers\WebhookController::store
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:139
 * @route '/webhooks'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -258,8 +258,8 @@ store.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\WebhookController::store
-* @see app/Http/Controllers/WebhookController.php:138
+* @see \Modules\Webhook\Http\Controllers\WebhookController::store
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:139
 * @route '/webhooks'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -267,8 +267,8 @@ store.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\WebhookController::store
-* @see app/Http/Controllers/WebhookController.php:138
+* @see \Modules\Webhook\Http\Controllers\WebhookController::store
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:139
 * @route '/webhooks'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -277,8 +277,8 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::store
-* @see app/Http/Controllers/WebhookController.php:138
+* @see \Modules\Webhook\Http\Controllers\WebhookController::store
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:139
 * @route '/webhooks'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -287,8 +287,8 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::store
-* @see app/Http/Controllers/WebhookController.php:138
+* @see \Modules\Webhook\Http\Controllers\WebhookController::store
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:139
 * @route '/webhooks'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -299,8 +299,8 @@ storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => (
 store.form = storeForm
 
 /**
-* @see \App\Http\Controllers\WebhookController::edit
-* @see app/Http/Controllers/WebhookController.php:172
+* @see \Modules\Webhook\Http\Controllers\WebhookController::edit
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:173
 * @route '/webhooks/{webhook}/edit'
 */
 export const edit = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -314,8 +314,8 @@ edit.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\WebhookController::edit
-* @see app/Http/Controllers/WebhookController.php:172
+* @see \Modules\Webhook\Http\Controllers\WebhookController::edit
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:173
 * @route '/webhooks/{webhook}/edit'
 */
 edit.url = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -347,8 +347,8 @@ edit.url = (args: { webhook: string | { id: string } } | [webhook: string | { id
 }
 
 /**
-* @see \App\Http\Controllers\WebhookController::edit
-* @see app/Http/Controllers/WebhookController.php:172
+* @see \Modules\Webhook\Http\Controllers\WebhookController::edit
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:173
 * @route '/webhooks/{webhook}/edit'
 */
 edit.get = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -357,8 +357,8 @@ edit.get = (args: { webhook: string | { id: string } } | [webhook: string | { id
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::edit
-* @see app/Http/Controllers/WebhookController.php:172
+* @see \Modules\Webhook\Http\Controllers\WebhookController::edit
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:173
 * @route '/webhooks/{webhook}/edit'
 */
 edit.head = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -367,8 +367,8 @@ edit.head = (args: { webhook: string | { id: string } } | [webhook: string | { i
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::edit
-* @see app/Http/Controllers/WebhookController.php:172
+* @see \Modules\Webhook\Http\Controllers\WebhookController::edit
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:173
 * @route '/webhooks/{webhook}/edit'
 */
 const editForm = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -377,8 +377,8 @@ const editForm = (args: { webhook: string | { id: string } } | [webhook: string 
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::edit
-* @see app/Http/Controllers/WebhookController.php:172
+* @see \Modules\Webhook\Http\Controllers\WebhookController::edit
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:173
 * @route '/webhooks/{webhook}/edit'
 */
 editForm.get = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -387,8 +387,8 @@ editForm.get = (args: { webhook: string | { id: string } } | [webhook: string | 
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::edit
-* @see app/Http/Controllers/WebhookController.php:172
+* @see \Modules\Webhook\Http\Controllers\WebhookController::edit
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:173
 * @route '/webhooks/{webhook}/edit'
 */
 editForm.head = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -404,8 +404,8 @@ editForm.head = (args: { webhook: string | { id: string } } | [webhook: string |
 edit.form = editForm
 
 /**
-* @see \App\Http\Controllers\WebhookController::update
-* @see app/Http/Controllers/WebhookController.php:191
+* @see \Modules\Webhook\Http\Controllers\WebhookController::update
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:192
 * @route '/webhooks/{webhook}'
 */
 export const update = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -419,8 +419,8 @@ update.definition = {
 } satisfies RouteDefinition<["put"]>
 
 /**
-* @see \App\Http\Controllers\WebhookController::update
-* @see app/Http/Controllers/WebhookController.php:191
+* @see \Modules\Webhook\Http\Controllers\WebhookController::update
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:192
 * @route '/webhooks/{webhook}'
 */
 update.url = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -452,8 +452,8 @@ update.url = (args: { webhook: string | { id: string } } | [webhook: string | { 
 }
 
 /**
-* @see \App\Http\Controllers\WebhookController::update
-* @see app/Http/Controllers/WebhookController.php:191
+* @see \Modules\Webhook\Http\Controllers\WebhookController::update
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:192
 * @route '/webhooks/{webhook}'
 */
 update.put = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -462,8 +462,8 @@ update.put = (args: { webhook: string | { id: string } } | [webhook: string | { 
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::update
-* @see app/Http/Controllers/WebhookController.php:191
+* @see \Modules\Webhook\Http\Controllers\WebhookController::update
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:192
 * @route '/webhooks/{webhook}'
 */
 const updateForm = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -477,8 +477,8 @@ const updateForm = (args: { webhook: string | { id: string } } | [webhook: strin
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::update
-* @see app/Http/Controllers/WebhookController.php:191
+* @see \Modules\Webhook\Http\Controllers\WebhookController::update
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:192
 * @route '/webhooks/{webhook}'
 */
 updateForm.put = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -494,8 +494,8 @@ updateForm.put = (args: { webhook: string | { id: string } } | [webhook: string 
 update.form = updateForm
 
 /**
-* @see \App\Http\Controllers\WebhookController::destroy
-* @see app/Http/Controllers/WebhookController.php:219
+* @see \Modules\Webhook\Http\Controllers\WebhookController::destroy
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:220
 * @route '/webhooks/{webhook}'
 */
 export const destroy = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -509,8 +509,8 @@ destroy.definition = {
 } satisfies RouteDefinition<["delete"]>
 
 /**
-* @see \App\Http\Controllers\WebhookController::destroy
-* @see app/Http/Controllers/WebhookController.php:219
+* @see \Modules\Webhook\Http\Controllers\WebhookController::destroy
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:220
 * @route '/webhooks/{webhook}'
 */
 destroy.url = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -542,8 +542,8 @@ destroy.url = (args: { webhook: string | { id: string } } | [webhook: string | {
 }
 
 /**
-* @see \App\Http\Controllers\WebhookController::destroy
-* @see app/Http/Controllers/WebhookController.php:219
+* @see \Modules\Webhook\Http\Controllers\WebhookController::destroy
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:220
 * @route '/webhooks/{webhook}'
 */
 destroy.delete = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -552,8 +552,8 @@ destroy.delete = (args: { webhook: string | { id: string } } | [webhook: string 
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::destroy
-* @see app/Http/Controllers/WebhookController.php:219
+* @see \Modules\Webhook\Http\Controllers\WebhookController::destroy
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:220
 * @route '/webhooks/{webhook}'
 */
 const destroyForm = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -567,8 +567,8 @@ const destroyForm = (args: { webhook: string | { id: string } } | [webhook: stri
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::destroy
-* @see app/Http/Controllers/WebhookController.php:219
+* @see \Modules\Webhook\Http\Controllers\WebhookController::destroy
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:220
 * @route '/webhooks/{webhook}'
 */
 destroyForm.delete = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -584,8 +584,8 @@ destroyForm.delete = (args: { webhook: string | { id: string } } | [webhook: str
 destroy.form = destroyForm
 
 /**
-* @see \App\Http\Controllers\WebhookController::toggle
-* @see app/Http/Controllers/WebhookController.php:236
+* @see \Modules\Webhook\Http\Controllers\WebhookController::toggle
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:237
 * @route '/webhooks/{webhook}/toggle'
 */
 export const toggle = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -599,8 +599,8 @@ toggle.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\WebhookController::toggle
-* @see app/Http/Controllers/WebhookController.php:236
+* @see \Modules\Webhook\Http\Controllers\WebhookController::toggle
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:237
 * @route '/webhooks/{webhook}/toggle'
 */
 toggle.url = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -632,8 +632,8 @@ toggle.url = (args: { webhook: string | { id: string } } | [webhook: string | { 
 }
 
 /**
-* @see \App\Http\Controllers\WebhookController::toggle
-* @see app/Http/Controllers/WebhookController.php:236
+* @see \Modules\Webhook\Http\Controllers\WebhookController::toggle
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:237
 * @route '/webhooks/{webhook}/toggle'
 */
 toggle.post = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -642,8 +642,8 @@ toggle.post = (args: { webhook: string | { id: string } } | [webhook: string | {
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::toggle
-* @see app/Http/Controllers/WebhookController.php:236
+* @see \Modules\Webhook\Http\Controllers\WebhookController::toggle
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:237
 * @route '/webhooks/{webhook}/toggle'
 */
 const toggleForm = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -652,8 +652,8 @@ const toggleForm = (args: { webhook: string | { id: string } } | [webhook: strin
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::toggle
-* @see app/Http/Controllers/WebhookController.php:236
+* @see \Modules\Webhook\Http\Controllers\WebhookController::toggle
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:237
 * @route '/webhooks/{webhook}/toggle'
 */
 toggleForm.post = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -664,8 +664,8 @@ toggleForm.post = (args: { webhook: string | { id: string } } | [webhook: string
 toggle.form = toggleForm
 
 /**
-* @see \App\Http\Controllers\WebhookController::regenerateSecret
-* @see app/Http/Controllers/WebhookController.php:253
+* @see \Modules\Webhook\Http\Controllers\WebhookController::regenerateSecret
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:254
 * @route '/webhooks/{webhook}/regenerate-secret'
 */
 export const regenerateSecret = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -679,8 +679,8 @@ regenerateSecret.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\WebhookController::regenerateSecret
-* @see app/Http/Controllers/WebhookController.php:253
+* @see \Modules\Webhook\Http\Controllers\WebhookController::regenerateSecret
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:254
 * @route '/webhooks/{webhook}/regenerate-secret'
 */
 regenerateSecret.url = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -712,8 +712,8 @@ regenerateSecret.url = (args: { webhook: string | { id: string } } | [webhook: s
 }
 
 /**
-* @see \App\Http\Controllers\WebhookController::regenerateSecret
-* @see app/Http/Controllers/WebhookController.php:253
+* @see \Modules\Webhook\Http\Controllers\WebhookController::regenerateSecret
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:254
 * @route '/webhooks/{webhook}/regenerate-secret'
 */
 regenerateSecret.post = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -722,8 +722,8 @@ regenerateSecret.post = (args: { webhook: string | { id: string } } | [webhook: 
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::regenerateSecret
-* @see app/Http/Controllers/WebhookController.php:253
+* @see \Modules\Webhook\Http\Controllers\WebhookController::regenerateSecret
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:254
 * @route '/webhooks/{webhook}/regenerate-secret'
 */
 const regenerateSecretForm = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -732,8 +732,8 @@ const regenerateSecretForm = (args: { webhook: string | { id: string } } | [webh
 })
 
 /**
-* @see \App\Http\Controllers\WebhookController::regenerateSecret
-* @see app/Http/Controllers/WebhookController.php:253
+* @see \Modules\Webhook\Http\Controllers\WebhookController::regenerateSecret
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:254
 * @route '/webhooks/{webhook}/regenerate-secret'
 */
 regenerateSecretForm.post = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Jobs\DispatchWebhook;
-use App\Models\Webhook;
+use Modules\Webhook\Models\Webhook;
 use Illuminate\Database\Eloquent\Model;
 
 class WebhookObserver

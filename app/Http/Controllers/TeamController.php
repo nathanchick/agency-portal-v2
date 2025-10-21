@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\HasCurrentOrganisation;
 use App\Models\Customer;
-use App\Models\Organisation;
-use App\Models\Role;
+use Modules\Organisation\Models\Organisation;
+use Modules\Organisation\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

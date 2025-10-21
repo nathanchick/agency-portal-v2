@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Organisation;
-use App\Models\Role;
+use Modules\Organisation\Models\Organisation;
+use Modules\Organisation\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;

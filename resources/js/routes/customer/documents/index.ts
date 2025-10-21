@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myPending
-* @see app/Http/Controllers/CustomerDocumentController.php:17
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:19
 * @route '/customer/documents/my-pending'
 */
 export const myPending = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -15,8 +15,8 @@ myPending.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myPending
-* @see app/Http/Controllers/CustomerDocumentController.php:17
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:19
 * @route '/customer/documents/my-pending'
 */
 myPending.url = (options?: RouteQueryOptions) => {
@@ -24,8 +24,8 @@ myPending.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myPending
-* @see app/Http/Controllers/CustomerDocumentController.php:17
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:19
 * @route '/customer/documents/my-pending'
 */
 myPending.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,8 +34,8 @@ myPending.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myPending
-* @see app/Http/Controllers/CustomerDocumentController.php:17
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:19
 * @route '/customer/documents/my-pending'
 */
 myPending.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,8 +44,8 @@ myPending.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myPending
-* @see app/Http/Controllers/CustomerDocumentController.php:17
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:19
 * @route '/customer/documents/my-pending'
 */
 const myPendingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -54,8 +54,8 @@ const myPendingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> 
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myPending
-* @see app/Http/Controllers/CustomerDocumentController.php:17
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:19
 * @route '/customer/documents/my-pending'
 */
 myPendingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -64,8 +64,8 @@ myPendingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myPending
-* @see app/Http/Controllers/CustomerDocumentController.php:17
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:19
 * @route '/customer/documents/my-pending'
 */
 myPendingForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -81,8 +81,8 @@ myPendingForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =
 myPending.form = myPendingForm
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:35
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:37
 * @route '/customer/documents/my-completed'
 */
 export const myCompleted = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -96,8 +96,8 @@ myCompleted.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:35
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:37
 * @route '/customer/documents/my-completed'
 */
 myCompleted.url = (options?: RouteQueryOptions) => {
@@ -105,8 +105,8 @@ myCompleted.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:35
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:37
 * @route '/customer/documents/my-completed'
 */
 myCompleted.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -115,8 +115,8 @@ myCompleted.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:35
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:37
 * @route '/customer/documents/my-completed'
 */
 myCompleted.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -125,8 +125,8 @@ myCompleted.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:35
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:37
 * @route '/customer/documents/my-completed'
 */
 const myCompletedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -135,8 +135,8 @@ const myCompletedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:35
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:37
 * @route '/customer/documents/my-completed'
 */
 myCompletedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -145,8 +145,8 @@ myCompletedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> 
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::myCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:35
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:37
 * @route '/customer/documents/my-completed'
 */
 myCompletedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -162,8 +162,8 @@ myCompletedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'>
 myCompleted.form = myCompletedForm
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allPending
-* @see app/Http/Controllers/CustomerDocumentController.php:53
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:55
 * @route '/customer/documents/all-pending'
 */
 export const allPending = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -177,8 +177,8 @@ allPending.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allPending
-* @see app/Http/Controllers/CustomerDocumentController.php:53
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:55
 * @route '/customer/documents/all-pending'
 */
 allPending.url = (options?: RouteQueryOptions) => {
@@ -186,8 +186,8 @@ allPending.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allPending
-* @see app/Http/Controllers/CustomerDocumentController.php:53
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:55
 * @route '/customer/documents/all-pending'
 */
 allPending.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -196,8 +196,8 @@ allPending.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allPending
-* @see app/Http/Controllers/CustomerDocumentController.php:53
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:55
 * @route '/customer/documents/all-pending'
 */
 allPending.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -206,8 +206,8 @@ allPending.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allPending
-* @see app/Http/Controllers/CustomerDocumentController.php:53
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:55
 * @route '/customer/documents/all-pending'
 */
 const allPendingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -216,8 +216,8 @@ const allPendingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'>
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allPending
-* @see app/Http/Controllers/CustomerDocumentController.php:53
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:55
 * @route '/customer/documents/all-pending'
 */
 allPendingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -226,8 +226,8 @@ allPendingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allPending
-* @see app/Http/Controllers/CustomerDocumentController.php:53
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:55
 * @route '/customer/documents/all-pending'
 */
 allPendingForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -243,8 +243,8 @@ allPendingForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> 
 allPending.form = allPendingForm
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:74
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:76
 * @route '/customer/documents/all-completed'
 */
 export const allCompleted = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -258,8 +258,8 @@ allCompleted.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:74
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:76
 * @route '/customer/documents/all-completed'
 */
 allCompleted.url = (options?: RouteQueryOptions) => {
@@ -267,8 +267,8 @@ allCompleted.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:74
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:76
 * @route '/customer/documents/all-completed'
 */
 allCompleted.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -277,8 +277,8 @@ allCompleted.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:74
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:76
 * @route '/customer/documents/all-completed'
 */
 allCompleted.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -287,8 +287,8 @@ allCompleted.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:74
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:76
 * @route '/customer/documents/all-completed'
 */
 const allCompletedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -297,8 +297,8 @@ const allCompletedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:74
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:76
 * @route '/customer/documents/all-completed'
 */
 allCompletedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -307,8 +307,8 @@ allCompletedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'>
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::allCompleted
-* @see app/Http/Controllers/CustomerDocumentController.php:74
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:76
 * @route '/customer/documents/all-completed'
 */
 allCompletedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -324,8 +324,8 @@ allCompletedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'
 allCompleted.form = allCompletedForm
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::viewSign
-* @see app/Http/Controllers/CustomerDocumentController.php:95
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::viewSign
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:97
 * @route '/customer/documents/{id}/view-sign'
 */
 export const viewSign = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -339,8 +339,8 @@ viewSign.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::viewSign
-* @see app/Http/Controllers/CustomerDocumentController.php:95
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::viewSign
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:97
 * @route '/customer/documents/{id}/view-sign'
 */
 viewSign.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -366,8 +366,8 @@ viewSign.url = (args: { id: string | number } | [id: string | number ] | string 
 }
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::viewSign
-* @see app/Http/Controllers/CustomerDocumentController.php:95
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::viewSign
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:97
 * @route '/customer/documents/{id}/view-sign'
 */
 viewSign.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -376,8 +376,8 @@ viewSign.get = (args: { id: string | number } | [id: string | number ] | string 
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::viewSign
-* @see app/Http/Controllers/CustomerDocumentController.php:95
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::viewSign
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:97
 * @route '/customer/documents/{id}/view-sign'
 */
 viewSign.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -386,8 +386,8 @@ viewSign.head = (args: { id: string | number } | [id: string | number ] | string
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::viewSign
-* @see app/Http/Controllers/CustomerDocumentController.php:95
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::viewSign
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:97
 * @route '/customer/documents/{id}/view-sign'
 */
 const viewSignForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -396,8 +396,8 @@ const viewSignForm = (args: { id: string | number } | [id: string | number ] | s
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::viewSign
-* @see app/Http/Controllers/CustomerDocumentController.php:95
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::viewSign
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:97
 * @route '/customer/documents/{id}/view-sign'
 */
 viewSignForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -406,8 +406,8 @@ viewSignForm.get = (args: { id: string | number } | [id: string | number ] | str
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::viewSign
-* @see app/Http/Controllers/CustomerDocumentController.php:95
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::viewSign
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:97
 * @route '/customer/documents/{id}/view-sign'
 */
 viewSignForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -423,8 +423,8 @@ viewSignForm.head = (args: { id: string | number } | [id: string | number ] | st
 viewSign.form = viewSignForm
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::approve
-* @see app/Http/Controllers/CustomerDocumentController.php:195
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::approve
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:197
 * @route '/customer/documents/{id}/approve'
 */
 export const approve = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -438,8 +438,8 @@ approve.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::approve
-* @see app/Http/Controllers/CustomerDocumentController.php:195
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::approve
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:197
 * @route '/customer/documents/{id}/approve'
 */
 approve.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -465,8 +465,8 @@ approve.url = (args: { id: string | number } | [id: string | number ] | string |
 }
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::approve
-* @see app/Http/Controllers/CustomerDocumentController.php:195
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::approve
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:197
 * @route '/customer/documents/{id}/approve'
 */
 approve.post = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -475,8 +475,8 @@ approve.post = (args: { id: string | number } | [id: string | number ] | string 
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::approve
-* @see app/Http/Controllers/CustomerDocumentController.php:195
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::approve
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:197
 * @route '/customer/documents/{id}/approve'
 */
 const approveForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -485,8 +485,8 @@ const approveForm = (args: { id: string | number } | [id: string | number ] | st
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::approve
-* @see app/Http/Controllers/CustomerDocumentController.php:195
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::approve
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:197
 * @route '/customer/documents/{id}/approve'
 */
 approveForm.post = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -497,8 +497,8 @@ approveForm.post = (args: { id: string | number } | [id: string | number ] | str
 approve.form = approveForm
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::decline
-* @see app/Http/Controllers/CustomerDocumentController.php:262
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::decline
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:264
 * @route '/customer/documents/{id}/decline'
 */
 export const decline = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -512,8 +512,8 @@ decline.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::decline
-* @see app/Http/Controllers/CustomerDocumentController.php:262
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::decline
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:264
 * @route '/customer/documents/{id}/decline'
 */
 decline.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -539,8 +539,8 @@ decline.url = (args: { id: string | number } | [id: string | number ] | string |
 }
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::decline
-* @see app/Http/Controllers/CustomerDocumentController.php:262
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::decline
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:264
 * @route '/customer/documents/{id}/decline'
 */
 decline.post = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -549,8 +549,8 @@ decline.post = (args: { id: string | number } | [id: string | number ] | string 
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::decline
-* @see app/Http/Controllers/CustomerDocumentController.php:262
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::decline
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:264
 * @route '/customer/documents/{id}/decline'
 */
 const declineForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -559,8 +559,8 @@ const declineForm = (args: { id: string | number } | [id: string | number ] | st
 })
 
 /**
-* @see \App\Http\Controllers\CustomerDocumentController::decline
-* @see app/Http/Controllers/CustomerDocumentController.php:262
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::decline
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:264
 * @route '/customer/documents/{id}/decline'
 */
 declineForm.post = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

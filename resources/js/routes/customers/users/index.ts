@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
-* @see \App\Http\Controllers\CustomerController::create
-* @see app/Http/Controllers/CustomerController.php:276
+* @see \Modules\Customer\Http\Controllers\CustomerController::create
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:279
 * @route '/customers/{customer}/users/create'
 */
 export const create = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -15,8 +15,8 @@ create.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\CustomerController::create
-* @see app/Http/Controllers/CustomerController.php:276
+* @see \Modules\Customer\Http\Controllers\CustomerController::create
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:279
 * @route '/customers/{customer}/users/create'
 */
 create.url = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -48,8 +48,8 @@ create.url = (args: { customer: string | { id: string } } | [customer: string | 
 }
 
 /**
-* @see \App\Http\Controllers\CustomerController::create
-* @see app/Http/Controllers/CustomerController.php:276
+* @see \Modules\Customer\Http\Controllers\CustomerController::create
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:279
 * @route '/customers/{customer}/users/create'
 */
 create.post = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -58,8 +58,8 @@ create.post = (args: { customer: string | { id: string } } | [customer: string |
 })
 
 /**
-* @see \App\Http\Controllers\CustomerController::create
-* @see app/Http/Controllers/CustomerController.php:276
+* @see \Modules\Customer\Http\Controllers\CustomerController::create
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:279
 * @route '/customers/{customer}/users/create'
 */
 const createForm = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -68,8 +68,8 @@ const createForm = (args: { customer: string | { id: string } } | [customer: str
 })
 
 /**
-* @see \App\Http\Controllers\CustomerController::create
-* @see app/Http/Controllers/CustomerController.php:276
+* @see \Modules\Customer\Http\Controllers\CustomerController::create
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:279
 * @route '/customers/{customer}/users/create'
 */
 createForm.post = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -80,8 +80,8 @@ createForm.post = (args: { customer: string | { id: string } } | [customer: stri
 create.form = createForm
 
 /**
-* @see \App\Http\Controllers\CustomerController::attach
-* @see app/Http/Controllers/CustomerController.php:181
+* @see \Modules\Customer\Http\Controllers\CustomerController::attach
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:184
 * @route '/customers/{customer}/users'
 */
 export const attach = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -95,8 +95,8 @@ attach.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\CustomerController::attach
-* @see app/Http/Controllers/CustomerController.php:181
+* @see \Modules\Customer\Http\Controllers\CustomerController::attach
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:184
 * @route '/customers/{customer}/users'
 */
 attach.url = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -128,8 +128,8 @@ attach.url = (args: { customer: string | { id: string } } | [customer: string | 
 }
 
 /**
-* @see \App\Http\Controllers\CustomerController::attach
-* @see app/Http/Controllers/CustomerController.php:181
+* @see \Modules\Customer\Http\Controllers\CustomerController::attach
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:184
 * @route '/customers/{customer}/users'
 */
 attach.post = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -138,8 +138,8 @@ attach.post = (args: { customer: string | { id: string } } | [customer: string |
 })
 
 /**
-* @see \App\Http\Controllers\CustomerController::attach
-* @see app/Http/Controllers/CustomerController.php:181
+* @see \Modules\Customer\Http\Controllers\CustomerController::attach
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:184
 * @route '/customers/{customer}/users'
 */
 const attachForm = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -148,8 +148,8 @@ const attachForm = (args: { customer: string | { id: string } } | [customer: str
 })
 
 /**
-* @see \App\Http\Controllers\CustomerController::attach
-* @see app/Http/Controllers/CustomerController.php:181
+* @see \Modules\Customer\Http\Controllers\CustomerController::attach
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:184
 * @route '/customers/{customer}/users'
 */
 attachForm.post = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -160,8 +160,8 @@ attachForm.post = (args: { customer: string | { id: string } } | [customer: stri
 attach.form = attachForm
 
 /**
-* @see \App\Http\Controllers\CustomerController::updateRole
-* @see app/Http/Controllers/CustomerController.php:241
+* @see \Modules\Customer\Http\Controllers\CustomerController::updateRole
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:244
 * @route '/customers/{customer}/users/{user}/role'
 */
 export const updateRole = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -175,8 +175,8 @@ updateRole.definition = {
 } satisfies RouteDefinition<["put"]>
 
 /**
-* @see \App\Http\Controllers\CustomerController::updateRole
-* @see app/Http/Controllers/CustomerController.php:241
+* @see \Modules\Customer\Http\Controllers\CustomerController::updateRole
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:244
 * @route '/customers/{customer}/users/{user}/role'
 */
 updateRole.url = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions) => {
@@ -203,8 +203,8 @@ updateRole.url = (args: { customer: string | { id: string }, user: string | numb
 }
 
 /**
-* @see \App\Http\Controllers\CustomerController::updateRole
-* @see app/Http/Controllers/CustomerController.php:241
+* @see \Modules\Customer\Http\Controllers\CustomerController::updateRole
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:244
 * @route '/customers/{customer}/users/{user}/role'
 */
 updateRole.put = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -213,8 +213,8 @@ updateRole.put = (args: { customer: string | { id: string }, user: string | numb
 })
 
 /**
-* @see \App\Http\Controllers\CustomerController::updateRole
-* @see app/Http/Controllers/CustomerController.php:241
+* @see \Modules\Customer\Http\Controllers\CustomerController::updateRole
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:244
 * @route '/customers/{customer}/users/{user}/role'
 */
 const updateRoleForm = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -228,8 +228,8 @@ const updateRoleForm = (args: { customer: string | { id: string }, user: string 
 })
 
 /**
-* @see \App\Http\Controllers\CustomerController::updateRole
-* @see app/Http/Controllers/CustomerController.php:241
+* @see \Modules\Customer\Http\Controllers\CustomerController::updateRole
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:244
 * @route '/customers/{customer}/users/{user}/role'
 */
 updateRoleForm.put = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -245,8 +245,8 @@ updateRoleForm.put = (args: { customer: string | { id: string }, user: string | 
 updateRole.form = updateRoleForm
 
 /**
-* @see \App\Http\Controllers\CustomerController::detach
-* @see app/Http/Controllers/CustomerController.php:227
+* @see \Modules\Customer\Http\Controllers\CustomerController::detach
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:230
 * @route '/customers/{customer}/users/{user}'
 */
 export const detach = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -260,8 +260,8 @@ detach.definition = {
 } satisfies RouteDefinition<["delete"]>
 
 /**
-* @see \App\Http\Controllers\CustomerController::detach
-* @see app/Http/Controllers/CustomerController.php:227
+* @see \Modules\Customer\Http\Controllers\CustomerController::detach
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:230
 * @route '/customers/{customer}/users/{user}'
 */
 detach.url = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions) => {
@@ -288,8 +288,8 @@ detach.url = (args: { customer: string | { id: string }, user: string | number }
 }
 
 /**
-* @see \App\Http\Controllers\CustomerController::detach
-* @see app/Http/Controllers/CustomerController.php:227
+* @see \Modules\Customer\Http\Controllers\CustomerController::detach
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:230
 * @route '/customers/{customer}/users/{user}'
 */
 detach.delete = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -298,8 +298,8 @@ detach.delete = (args: { customer: string | { id: string }, user: string | numbe
 })
 
 /**
-* @see \App\Http\Controllers\CustomerController::detach
-* @see app/Http/Controllers/CustomerController.php:227
+* @see \Modules\Customer\Http\Controllers\CustomerController::detach
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:230
 * @route '/customers/{customer}/users/{user}'
 */
 const detachForm = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -313,8 +313,8 @@ const detachForm = (args: { customer: string | { id: string }, user: string | nu
 })
 
 /**
-* @see \App\Http\Controllers\CustomerController::detach
-* @see app/Http/Controllers/CustomerController.php:227
+* @see \Modules\Customer\Http\Controllers\CustomerController::detach
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:230
 * @route '/customers/{customer}/users/{user}'
 */
 detachForm.delete = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

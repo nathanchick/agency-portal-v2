@@ -19,9 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 
-    // Organisation Switcher
-    Route::post('/organisation/switch', [\App\Http\Controllers\OrganisationController::class, 'switch'])
-        ->name('organisation.switch');
+    // Organisation Switcher - moved to Modules/Organisation/routes/web.php
 
     // Team Management - Admin only
     Route::resource('team', \App\Http\Controllers\TeamController::class)

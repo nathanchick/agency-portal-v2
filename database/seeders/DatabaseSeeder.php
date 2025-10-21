@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
             }
 
             // Assign Admin role to user in organisation context
-            $role = \App\Models\Role::where('name', 'Admin')
+            $role = \Modules\Organisation\Models\Role::where('name', 'Admin')
                 ->where('guard_name', 'web')
                 ->where('team_id', $organisation->id)
                 ->first();
@@ -91,7 +91,7 @@ class DatabaseSeeder extends Seeder
             }
 
             // Assign Admin role to user in organisation context
-            $role = \App\Models\Role::where('name', 'Admin')
+            $role = \Modules\Organisation\Models\Role::where('name', 'Admin')
                 ->where('guard_name', 'web')
                 ->where('team_id', $organisation->id)
                 ->first();
@@ -128,7 +128,7 @@ class DatabaseSeeder extends Seeder
             }
 
             // Assign Admin role to customer user in customer context
-            $customerRole = \App\Models\Role::where('name', 'Admin')
+            $customerRole = \Modules\Organisation\Models\Role::where('name', 'Admin')
                 ->where('guard_name', 'web')
                 ->where('team_id', $customer->id)
                 ->first();
