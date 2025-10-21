@@ -2,9 +2,9 @@
 
 namespace App\Models\Concerns;
 
-use Modules\Organisation\Models\Organisation;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Organisation\Models\Organisation;
 
 trait BelongsToTenant
 {
@@ -13,7 +13,7 @@ trait BelongsToTenant
         // Automatically scope all queries to current tenant
         static::addGlobalScope('tenant', function (Builder $builder) {
             if ($tenant = Organisation::current()) {
-                $builder->where($builder->getQuery()->from . '.organisation_id', $tenant->id);
+                $builder->where($builder->getQuery()->from.'.organisation_id', $tenant->id);
             }
         });
 

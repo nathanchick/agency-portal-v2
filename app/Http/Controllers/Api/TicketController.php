@@ -29,7 +29,7 @@ class TicketController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('read:tickets')) {
+        if (! $apiToken->can('read:tickets')) {
             return response()->json([
                 'message' => 'This token does not have permission to read tickets.',
             ], 403);
@@ -51,7 +51,7 @@ class TicketController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('write:tickets')) {
+        if (! $apiToken->can('write:tickets')) {
             return response()->json([
                 'message' => 'This token does not have permission to create tickets.',
             ], 403);
@@ -85,7 +85,7 @@ class TicketController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('read:tickets')) {
+        if (! $apiToken->can('read:tickets')) {
             return response()->json([
                 'message' => 'This token does not have permission to read tickets.',
             ], 403);
@@ -107,7 +107,7 @@ class TicketController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('write:tickets')) {
+        if (! $apiToken->can('write:tickets')) {
             return response()->json([
                 'message' => 'This token does not have permission to update tickets.',
             ], 403);
@@ -141,7 +141,7 @@ class TicketController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('delete:tickets')) {
+        if (! $apiToken->can('delete:tickets')) {
             return response()->json([
                 'message' => 'This token does not have permission to delete tickets.',
             ], 403);

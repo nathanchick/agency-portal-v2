@@ -2,8 +2,8 @@
 
 namespace App\TenantFinder;
 
-use Modules\Organisation\Models\Organisation;
 use Illuminate\Http\Request;
+use Modules\Organisation\Models\Organisation;
 use Spatie\Multitenancy\TenantFinder\TenantFinder;
 
 class DomainTenantFinder extends TenantFinder
@@ -32,10 +32,11 @@ class DomainTenantFinder extends TenantFinder
     {
         $user = $request->user();
 
-        if (!$user) {
+        if (! $user) {
             if (config('app.debug')) {
                 \Log::debug('DomainTenantFinder - No authenticated user');
             }
+
             return null;
         }
 

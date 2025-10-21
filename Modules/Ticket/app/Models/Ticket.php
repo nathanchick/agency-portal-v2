@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Ticket extends BaseTicket
 {
-    use HasUuids, BelongsToTenant;
+    use BelongsToTenant;
+    use HasUuids;
 
     protected $fillable = [
         'uuid',

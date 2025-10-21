@@ -2,20 +2,19 @@
 
 namespace Modules\Document\Models;
 
-use App\Traits\DispatchesWebhooks;
 use App\Models\User;
-use Modules\Customer\Models\Customer;
-use Modules\Organisation\Models\Organisation;
-use Modules\Document\Models\Document;
-use Modules\Document\Models\DocumentHistory;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\DispatchesWebhooks;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Customer\Models\Customer;
+use Modules\Organisation\Models\Organisation;
 
 class DocumentRequest extends Model
 {
-    use HasUuids, DispatchesWebhooks;
+    use DispatchesWebhooks;
+    use HasUuids;
 
     protected $fillable = [
         'organisation_id',

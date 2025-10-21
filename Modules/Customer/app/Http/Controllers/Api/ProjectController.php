@@ -3,9 +3,9 @@
 namespace Modules\Customer\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Modules\Customer\Models\Project;
-use Modules\Customer\Models\Customer;
 use Illuminate\Http\Request;
+use Modules\Customer\Models\Customer;
+use Modules\Customer\Models\Project;
 
 class ProjectController extends Controller
 {
@@ -30,7 +30,7 @@ class ProjectController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('read:projects')) {
+        if (! $apiToken->can('read:projects')) {
             return response()->json([
                 'message' => 'This token does not have permission to read projects.',
             ], 403);
@@ -52,7 +52,7 @@ class ProjectController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('write:projects')) {
+        if (! $apiToken->can('write:projects')) {
             return response()->json([
                 'message' => 'This token does not have permission to create projects.',
             ], 403);
@@ -70,7 +70,7 @@ class ProjectController extends Controller
             ->where('organisation_id', $organisation)
             ->first();
 
-        if (!$customer) {
+        if (! $customer) {
             return response()->json([
                 'message' => 'The customer does not belong to this organisation.',
             ], 403);
@@ -93,7 +93,7 @@ class ProjectController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('read:projects')) {
+        if (! $apiToken->can('read:projects')) {
             return response()->json([
                 'message' => 'This token does not have permission to read projects.',
             ], 403);
@@ -115,7 +115,7 @@ class ProjectController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('write:projects')) {
+        if (! $apiToken->can('write:projects')) {
             return response()->json([
                 'message' => 'This token does not have permission to update projects.',
             ], 403);
@@ -137,7 +137,7 @@ class ProjectController extends Controller
                 ->where('organisation_id', $organisation)
                 ->first();
 
-            if (!$customer) {
+            if (! $customer) {
                 return response()->json([
                     'message' => 'The customer does not belong to this organisation.',
                 ], 403);
@@ -158,7 +158,7 @@ class ProjectController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('delete:projects')) {
+        if (! $apiToken->can('delete:projects')) {
             return response()->json([
                 'message' => 'This token does not have permission to delete projects.',
             ], 403);

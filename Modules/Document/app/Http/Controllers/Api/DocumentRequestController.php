@@ -3,8 +3,8 @@
 namespace Modules\Document\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Modules\Document\Models\DocumentRequest;
 use Illuminate\Http\Request;
+use Modules\Document\Models\DocumentRequest;
 
 class DocumentRequestController extends Controller
 {
@@ -29,7 +29,7 @@ class DocumentRequestController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('read:document-requests')) {
+        if (! $apiToken->can('read:document-requests')) {
             return response()->json([
                 'message' => 'This token does not have permission to read document requests.',
             ], 403);
@@ -51,7 +51,7 @@ class DocumentRequestController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('write:document-requests')) {
+        if (! $apiToken->can('write:document-requests')) {
             return response()->json([
                 'message' => 'This token does not have permission to create document requests.',
             ], 403);
@@ -88,7 +88,7 @@ class DocumentRequestController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('read:document-requests')) {
+        if (! $apiToken->can('read:document-requests')) {
             return response()->json([
                 'message' => 'This token does not have permission to read document requests.',
             ], 403);
@@ -110,7 +110,7 @@ class DocumentRequestController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('write:document-requests')) {
+        if (! $apiToken->can('write:document-requests')) {
             return response()->json([
                 'message' => 'This token does not have permission to update document requests.',
             ], 403);
@@ -147,7 +147,7 @@ class DocumentRequestController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('delete:document-requests')) {
+        if (! $apiToken->can('delete:document-requests')) {
             return response()->json([
                 'message' => 'This token does not have permission to delete document requests.',
             ], 403);

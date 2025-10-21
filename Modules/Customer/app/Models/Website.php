@@ -3,15 +3,14 @@
 namespace Modules\Customer\Models;
 
 use App\Traits\DispatchesWebhooks;
-use Modules\Customer\Models\Customer;
-use Modules\Customer\Models\Project;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Website extends Model
 {
-    use HasUuids, DispatchesWebhooks;
+    use DispatchesWebhooks;
+    use HasUuids;
 
     protected $fillable = [
         'customer_id',

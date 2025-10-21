@@ -430,7 +430,7 @@ destroy.form = destroyForm
 
 /**
 * @see \Modules\Organisation\Http\Controllers\OrganisationController::switchMethod
-* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:15
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:14
 * @route '/organisation/switch'
 */
 export const switchMethod = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -445,7 +445,7 @@ switchMethod.definition = {
 
 /**
 * @see \Modules\Organisation\Http\Controllers\OrganisationController::switchMethod
-* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:15
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:14
 * @route '/organisation/switch'
 */
 switchMethod.url = (options?: RouteQueryOptions) => {
@@ -454,7 +454,7 @@ switchMethod.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Organisation\Http\Controllers\OrganisationController::switchMethod
-* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:15
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:14
 * @route '/organisation/switch'
 */
 switchMethod.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -464,7 +464,7 @@ switchMethod.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \Modules\Organisation\Http\Controllers\OrganisationController::switchMethod
-* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:15
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:14
 * @route '/organisation/switch'
 */
 const switchMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -474,7 +474,7 @@ const switchMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'pos
 
 /**
 * @see \Modules\Organisation\Http\Controllers\OrganisationController::switchMethod
-* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:15
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:14
 * @route '/organisation/switch'
 */
 switchMethodForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

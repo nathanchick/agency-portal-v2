@@ -3,12 +3,11 @@
 namespace Modules\Document\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
 use App\Http\Traits\HasCurrentOrganisation;
-use Modules\Document\Models\Document;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
+use Modules\Document\Models\Document;
 
 class DocumentTypeController extends Controller
 {
@@ -61,7 +60,7 @@ class DocumentTypeController extends Controller
         // Handle file upload
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = time().'_'.$file->getClientOriginalName();
             $path = $file->storeAs('documents', $filename, 'private');
             $documentData['filename'] = $filename;
             $documentData['content'] = $path;
@@ -88,7 +87,7 @@ class DocumentTypeController extends Controller
             ->where('organisation_id', $organisationId)
             ->first();
 
-        if (!$document) {
+        if (! $document) {
             abort(404, 'Document not found');
         }
 
@@ -110,7 +109,7 @@ class DocumentTypeController extends Controller
             ->where('organisation_id', $organisationId)
             ->first();
 
-        if (!$document) {
+        if (! $document) {
             abort(404, 'Document not found');
         }
 
@@ -134,7 +133,7 @@ class DocumentTypeController extends Controller
             }
 
             $file = $request->file('file');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = time().'_'.$file->getClientOriginalName();
             $path = $file->storeAs('documents', $filename, 'private');
             $documentData['filename'] = $filename;
             $documentData['content'] = $path;
@@ -167,7 +166,7 @@ class DocumentTypeController extends Controller
             ->where('organisation_id', $organisationId)
             ->first();
 
-        if (!$document) {
+        if (! $document) {
             \Log::warning('Document not found or access denied', ['document_id' => $id]);
             abort(404, 'Document not found');
         }
@@ -180,6 +179,7 @@ class DocumentTypeController extends Controller
         // Check if document is being used
         if ($document->documentRequests()->exists()) {
             \Log::warning('Cannot delete - document in use', ['document_id' => $document->id]);
+
             return back()->with('error', 'Cannot delete document type that is being used in document requests.');
         }
 
@@ -208,12 +208,12 @@ class DocumentTypeController extends Controller
             ->where('organisation_id', $organisationId)
             ->first();
 
-        if (!$document) {
+        if (! $document) {
             abort(404, 'Document not found');
         }
 
         // Verify file exists
-        if (!$document->filename || !Storage::disk('private')->exists($document->content)) {
+        if (! $document->filename || ! Storage::disk('private')->exists($document->content)) {
             abort(404, 'File not found.');
         }
 
@@ -234,12 +234,12 @@ class DocumentTypeController extends Controller
             ->where('organisation_id', $organisationId)
             ->first();
 
-        if (!$document) {
+        if (! $document) {
             abort(404, 'Document not found');
         }
 
         // Verify file exists
-        if (!$document->filename || !Storage::disk('private')->exists($document->content)) {
+        if (! $document->filename || ! Storage::disk('private')->exists($document->content)) {
             abort(404, 'File not found.');
         }
 

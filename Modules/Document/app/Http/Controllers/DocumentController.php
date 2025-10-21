@@ -3,16 +3,15 @@
 namespace Modules\Document\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
 use App\Http\Traits\HasCurrentOrganisation;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Modules\Customer\Models\Customer;
 use Modules\Document\Models\Document;
 use Modules\Document\Models\DocumentHistory;
 use Modules\Document\Models\DocumentRequest;
-use Modules\Customer\Models\Customer;
-use App\Models\User;
 use Modules\Document\Notifications\DocumentRequestNotification;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class DocumentController extends Controller
 {
@@ -36,7 +35,7 @@ class DocumentController extends Controller
 
         if ($request->filled('user_name')) {
             $query->whereHas('user', function ($q) use ($request) {
-                $q->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($request->user_name) . '%']);
+                $q->whereRaw('LOWER(name) LIKE ?', ['%'.strtolower($request->user_name).'%']);
             });
         }
 
@@ -86,7 +85,7 @@ class DocumentController extends Controller
 
         if ($request->filled('user_name')) {
             $query->whereHas('user', function ($q) use ($request) {
-                $q->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($request->user_name) . '%']);
+                $q->whereRaw('LOWER(name) LIKE ?', ['%'.strtolower($request->user_name).'%']);
             });
         }
 
@@ -128,7 +127,7 @@ class DocumentController extends Controller
         $customerId = $request->input('customer_id');
         $documentType = $request->input('document_type');
 
-        if (!$customerId || !$documentType) {
+        if (! $customerId || ! $documentType) {
             return redirect()->route('documents.pending')->with('error', 'Invalid request parameters');
         }
 
@@ -214,13 +213,13 @@ class DocumentController extends Controller
         // Handle file upload for upload_pdf type
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = time().'_'.$file->getClientOriginalName();
             $path = $file->storeAs('document_requests', $filename, 'private');
             $documentData['uploaded_file'] = $path;
         }
 
         // Set status based on approval requirement and send option
-        if (!($validated['requires_approval'] ?? true)) {
+        if (! ($validated['requires_approval'] ?? true)) {
             // No approval needed - mark as completed
             $documentData['status'] = 'completed';
         } elseif ($validated['send_option'] === 'now') {
@@ -236,7 +235,8 @@ class DocumentController extends Controller
             $this->sendDocumentRequest($documentRequest);
         }
 
-        return redirect()->route('documents.pending')->with('success',
+        return redirect()->route('documents.pending')->with(
+            'success',
             $validated['send_option'] === 'now' ? 'Document request created and sent successfully' : 'Document request scheduled successfully'
         );
     }
@@ -368,7 +368,7 @@ class DocumentController extends Controller
         // Send to CC if provided (create anonymous notifiable for CC)
         if ($documentRequest->cc_email) {
             \Notification::route('mail', [
-                $documentRequest->cc_email => $documentRequest->cc_name
+                $documentRequest->cc_email => $documentRequest->cc_name,
             ])->notify(new DocumentRequestNotification($documentRequest, $requiresSignature));
 
             // Log the CC send action to history - logged as the org user who sent it

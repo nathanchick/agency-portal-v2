@@ -6,7 +6,6 @@ use Inertia\Inertia;
 /**
  * Main Web Routes
  */
-
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');

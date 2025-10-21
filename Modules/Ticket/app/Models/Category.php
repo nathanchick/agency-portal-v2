@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Category extends BaseCategory
 {
-    use HasUuids, BelongsToTenant;
+    use BelongsToTenant;
+    use HasUuids;
 
     protected $fillable = [
         'organisation_id',

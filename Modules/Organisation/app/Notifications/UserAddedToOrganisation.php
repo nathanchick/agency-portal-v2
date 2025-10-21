@@ -3,7 +3,6 @@
 namespace Modules\Organisation\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -12,6 +11,7 @@ class UserAddedToOrganisation extends Notification
     use Queueable;
 
     public $organisationName;
+
     public $customerName;
 
     /**
@@ -41,9 +41,9 @@ class UserAddedToOrganisation extends Notification
         $loginUrl = url(route('login'));
 
         return (new MailMessage)
-            ->subject('You have been added to ' . $this->organisationName)
-            ->greeting('Hello ' . $notifiable->name . '!')
-            ->line('You have been added to **' . $this->organisationName . '** and assigned to **' . $this->customerName . '**.')
+            ->subject('You have been added to '.$this->organisationName)
+            ->greeting('Hello '.$notifiable->name.'!')
+            ->line('You have been added to **'.$this->organisationName.'** and assigned to **'.$this->customerName.'**.')
             ->line('You can now access this organisation using your existing account credentials.')
             ->action('Login to Your Account', $loginUrl)
             ->line('If you have any questions, please contact your organisation administrator.');

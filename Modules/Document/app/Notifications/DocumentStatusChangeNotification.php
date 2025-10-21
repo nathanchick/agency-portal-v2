@@ -2,19 +2,20 @@
 
 namespace Modules\Document\Notifications;
 
-use Modules\Document\Models\DocumentRequest;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Modules\Document\Models\DocumentRequest;
 
 class DocumentStatusChangeNotification extends Notification
 {
     use Queueable;
 
     public $documentRequest;
+
     public $action; // 'approved' or 'declined'
+
     public $actionBy;
 
     /**
@@ -48,24 +49,24 @@ class DocumentStatusChangeNotification extends Notification
             ? 'Document Approved'
             : 'Document Declined';
 
-        $actionUrl = url('/customer/documents/' . $this->documentRequest->id . '/view-sign');
+        $actionUrl = url('/customer/documents/'.$this->documentRequest->id.'/view-sign');
 
         $message = (new MailMessage)
             ->subject($subject)
-            ->greeting('Hello ' . $notifiable->name . '!');
+            ->greeting('Hello '.$notifiable->name.'!');
 
         if ($this->action === 'approved') {
-            $message->line('A document has been approved by ' . $this->actionBy->name . '.');
+            $message->line('A document has been approved by '.$this->actionBy->name.'.');
         } else {
-            $message->line('A document has been declined by ' . $this->actionBy->name . '.');
+            $message->line('A document has been declined by '.$this->actionBy->name.'.');
         }
 
-        $message->line('**Document:** ' . $this->documentRequest->document->name)
-            ->line('**Customer:** ' . $this->documentRequest->customer->name)
-            ->line('**Action By:** ' . $this->actionBy->name . ' (' . $this->actionBy->email . ')');
+        $message->line('**Document:** '.$this->documentRequest->document->name)
+            ->line('**Customer:** '.$this->documentRequest->customer->name)
+            ->line('**Action By:** '.$this->actionBy->name.' ('.$this->actionBy->email.')');
 
         if ($this->documentRequest->notes) {
-            $message->line('**Original Notes:** ' . $this->documentRequest->notes);
+            $message->line('**Original Notes:** '.$this->documentRequest->notes);
         }
 
         $message->action('View Document', $actionUrl);

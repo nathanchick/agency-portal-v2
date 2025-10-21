@@ -5,12 +5,11 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-
     /**
      * Seed the application's database.
      */
@@ -48,7 +47,7 @@ class DatabaseSeeder extends Seeder
 
         if ($organisation && $orgUser) {
             // Attach user to organisation if not already attached
-            if (!$orgUser->organisations()->where('organisation_id', $organisation->id)->exists()) {
+            if (! $orgUser->organisations()->where('organisation_id', $organisation->id)->exists()) {
                 $orgUser->organisations()->attach($organisation->id);
                 $this->command->info("User {$orgUser->email} assigned to organisation {$organisation->name}");
             }
@@ -68,7 +67,7 @@ class DatabaseSeeder extends Seeder
                     ->where('team_id', $organisation->id)
                     ->exists();
 
-                if (!$hasRole) {
+                if (! $hasRole) {
                     DB::table('model_has_roles')->insert([
                         'role_id' => $role->id,
                         'model_type' => 'App\Models\User',
@@ -85,7 +84,7 @@ class DatabaseSeeder extends Seeder
 
         if ($organisation && $orgUser) {
             // Attach user to organisation if not already attached
-            if (!$orgUser->organisations()->where('organisation_id', $organisation->id)->exists()) {
+            if (! $orgUser->organisations()->where('organisation_id', $organisation->id)->exists()) {
                 $orgUser->organisations()->attach($organisation->id);
                 $this->command->info("User {$orgUser->email} assigned to organisation {$organisation->name}");
             }
@@ -105,7 +104,7 @@ class DatabaseSeeder extends Seeder
                     ->where('team_id', $organisation->id)
                     ->exists();
 
-                if (!$hasRole) {
+                if (! $hasRole) {
                     DB::table('model_has_roles')->insert([
                         'role_id' => $role->id,
                         'model_type' => 'App\Models\User',
@@ -122,7 +121,7 @@ class DatabaseSeeder extends Seeder
 
         if ($customer && $customerUser) {
             // Attach user to customer if not already attached
-            if (!$customerUser->customers()->where('customer_id', $customer->id)->exists()) {
+            if (! $customerUser->customers()->where('customer_id', $customer->id)->exists()) {
                 $customerUser->customers()->attach($customer->id);
                 $this->command->info("User {$customerUser->email} assigned to customer {$customer->name}");
             }
@@ -142,7 +141,7 @@ class DatabaseSeeder extends Seeder
                     ->where('team_id', $customer->id)
                     ->exists();
 
-                if (!$hasCustomerRole) {
+                if (! $hasCustomerRole) {
                     DB::table('model_has_roles')->insert([
                         'role_id' => $customerRole->id,
                         'model_type' => 'App\Models\User',

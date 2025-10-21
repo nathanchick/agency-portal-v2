@@ -4,11 +4,11 @@ namespace Modules\Customer\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\HasCurrentOrganisation;
-use Modules\Organisation\Models\Organisation;
 use App\Models\User;
-use Modules\Customer\Models\Customer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Modules\Customer\Models\Customer;
+use Modules\Organisation\Models\Organisation;
 
 class CustomerController extends Controller
 {
@@ -124,7 +124,7 @@ class CustomerController extends Controller
 
             return [
                 'id' => $user->id,
-                'name' => $hasOrganisationRole ? $user->name . ' (Organisation)' : $user->name,
+                'name' => $hasOrganisationRole ? $user->name.' (Organisation)' : $user->name,
                 'email' => $user->email,
             ];
         });
@@ -202,18 +202,18 @@ class CustomerController extends Controller
 
         // If no role provided, find default role
         $roleId = $validated['role_id'] ?? null;
-        if (!$roleId) {
+        if (! $roleId) {
             // Try 'User' role first
             $defaultRole = \Modules\Organisation\Models\Role::where('name', 'User')
                 ->where('roles.team_id', $organisationId)
                 ->first();
 
             // Fall back to first available role
-            if (!$defaultRole) {
+            if (! $defaultRole) {
                 $defaultRole = \Modules\Organisation\Models\Role::where('roles.team_id', $organisationId)->first();
             }
 
-            if (!$defaultRole) {
+            if (! $defaultRole) {
                 return back()->with('error', 'No roles available for this organisation. Please create roles first.');
             }
 
@@ -255,7 +255,7 @@ class CustomerController extends Controller
         ]);
 
         // Verify user is assigned to this customer
-        if (!$customer->users()->where('users.id', $userId)->exists()) {
+        if (! $customer->users()->where('users.id', $userId)->exists()) {
             return back()->with('error', 'User is not assigned to this customer');
         }
 
@@ -264,7 +264,7 @@ class CustomerController extends Controller
             ->where('roles.team_id', $organisationId)
             ->first();
 
-        if (!$role) {
+        if (! $role) {
             return back()->with('error', 'Role not found');
         }
 
@@ -296,25 +296,25 @@ class CustomerController extends Controller
 
         // Find the role - try provided role, then 'User', then first available role
         $role = null;
-        if (!empty($validated['role'])) {
+        if (! empty($validated['role'])) {
             $role = \Modules\Organisation\Models\Role::where('name', $validated['role'])
                 ->where('roles.team_id', $organisationId)
                 ->first();
         }
 
-        if (!$role) {
+        if (! $role) {
             // Try to find 'User' role
             $role = \Modules\Organisation\Models\Role::where('name', 'User')
                 ->where('roles.team_id', $organisationId)
                 ->first();
         }
 
-        if (!$role) {
+        if (! $role) {
             // Fall back to first available role for this organisation
             $role = \Modules\Organisation\Models\Role::where('roles.team_id', $organisationId)->first();
         }
 
-        if (!$role) {
+        if (! $role) {
             return back()->with('error', 'No roles available for this organisation. Please create roles first.');
         }
 
@@ -328,7 +328,7 @@ class CustomerController extends Controller
 
             // Check if already in this organisation
             $addedToOrganisation = false;
-            if (!$user->organisations()->where('organisations.id', $organisationId)->exists()) {
+            if (! $user->organisations()->where('organisations.id', $organisationId)->exists()) {
                 $user->organisations()->attach($organisationId);
                 $addedToOrganisation = true;
             }

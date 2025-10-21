@@ -3,11 +3,11 @@
 namespace Modules\Ticket\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Modules\Ticket\Models\Ticket;
-use Modules\Ticket\Models\Category;
-use Modules\Ticket\Models\Label;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Modules\Ticket\Models\Category;
+use Modules\Ticket\Models\Label;
+use Modules\Ticket\Models\Ticket;
 
 class TicketController extends Controller
 {
@@ -66,11 +66,11 @@ class TicketController extends Controller
             'status' => 'open',
         ]);
 
-        if (!empty($validated['category_ids'])) {
+        if (! empty($validated['category_ids'])) {
             $ticket->categories()->attach($validated['category_ids']);
         }
 
-        if (!empty($validated['label_ids'])) {
+        if (! empty($validated['label_ids'])) {
             $ticket->labels()->attach($validated['label_ids']);
         }
 

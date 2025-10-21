@@ -3,10 +3,9 @@
 namespace Modules\Organisation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
-use Modules\Organisation\Models\ApiToken;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Modules\Organisation\Models\ApiToken;
 
 class ApiTokenController extends Controller
 {
@@ -22,7 +21,7 @@ class ApiTokenController extends Controller
     {
         $organisationId = $this->getCurrentOrganisationId();
 
-        if (!$organisationId) {
+        if (! $organisationId) {
             abort(403, 'No organisation selected');
         }
 
@@ -32,7 +31,7 @@ class ApiTokenController extends Controller
 
         // Search by name
         if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         }
 
         $tokens = $query->paginate(15)->withQueryString();
@@ -60,7 +59,7 @@ class ApiTokenController extends Controller
     {
         $organisationId = $this->getCurrentOrganisationId();
 
-        if (!$organisationId) {
+        if (! $organisationId) {
             abort(403, 'No organisation selected');
         }
 

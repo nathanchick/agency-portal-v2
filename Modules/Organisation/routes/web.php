@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Organisation\Http\Controllers\OrganisationController;
 use Modules\Organisation\Http\Controllers\ApiTokenController;
+use Modules\Organisation\Http\Controllers\OrganisationController;
 
 /**
  * Organisation Management Routes

@@ -16,7 +16,7 @@ class AuthenticateApiToken
     {
         $token = $request->bearerToken();
 
-        if (!$token) {
+        if (! $token) {
             return response()->json([
                 'message' => 'Unauthenticated. Please provide a valid API token.',
             ], 401);
@@ -28,7 +28,7 @@ class AuthenticateApiToken
         // Find the API token
         $apiToken = ApiToken::where('token', $hashedToken)->first();
 
-        if (!$apiToken) {
+        if (! $apiToken) {
             return response()->json([
                 'message' => 'Invalid API token.',
             ], 401);

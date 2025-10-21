@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Organisation;
 use App\Models\Customer;
-use Modules\Organisation\Models\Role;
+use App\Models\Organisation;
 use Illuminate\Database\Seeder;
+use Modules\Organisation\Models\Role;
 
 class RoleSeeder extends Seeder
 {

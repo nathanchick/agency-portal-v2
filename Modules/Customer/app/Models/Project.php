@@ -4,14 +4,15 @@ namespace Modules\Customer\Models;
 
 use App\Models\Concerns\BelongsToTenant;
 use App\Traits\DispatchesWebhooks;
-use Modules\Customer\Models\Customer;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Project extends Model
 {
-    use HasUuids, BelongsToTenant, DispatchesWebhooks;
+    use BelongsToTenant;
+    use DispatchesWebhooks;
+    use HasUuids;
 
     protected $fillable = [
         'organisation_id',

@@ -2,10 +2,10 @@
 
 namespace Modules\Document\App\Console\Commands;
 
+use Illuminate\Console\Command;
 use Modules\Document\Models\DocumentHistory;
 use Modules\Document\Models\DocumentRequest;
 use Modules\Document\Notifications\DocumentRequestNotification;
-use Illuminate\Console\Command;
 
 class SendScheduledDocumentRequests extends Command
 {
@@ -39,6 +39,7 @@ class SendScheduledDocumentRequests extends Command
 
         if ($documentRequests->isEmpty()) {
             $this->info('No scheduled document requests found.');
+
             return 0;
         }
 
@@ -63,6 +64,7 @@ class SendScheduledDocumentRequests extends Command
         }
 
         $this->info("Completed: {$sent} sent, {$failed} failed.");
+
         return 0;
     }
 
@@ -97,7 +99,7 @@ class SendScheduledDocumentRequests extends Command
         // Send to CC if provided
         if ($documentRequest->cc_email) {
             \Notification::route('mail', [
-                $documentRequest->cc_email => $documentRequest->cc_name
+                $documentRequest->cc_email => $documentRequest->cc_name,
             ])->notify(new DocumentRequestNotification($documentRequest, $requiresSignature));
 
             // Log the CC send action to history

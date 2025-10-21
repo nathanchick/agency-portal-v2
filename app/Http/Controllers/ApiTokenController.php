@@ -20,7 +20,7 @@ class ApiTokenController extends Controller
     {
         $organisationId = $this->getCurrentOrganisationId();
 
-        if (!$organisationId) {
+        if (! $organisationId) {
             abort(403, 'No organisation selected');
         }
 
@@ -30,7 +30,7 @@ class ApiTokenController extends Controller
 
         // Search by name
         if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         }
 
         $tokens = $query->paginate(15)->withQueryString();
@@ -58,7 +58,7 @@ class ApiTokenController extends Controller
     {
         $organisationId = $this->getCurrentOrganisationId();
 
-        if (!$organisationId) {
+        if (! $organisationId) {
             abort(403, 'No organisation selected');
         }
 

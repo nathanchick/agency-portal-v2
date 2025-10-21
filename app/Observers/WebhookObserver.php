@@ -3,8 +3,8 @@
 namespace App\Observers;
 
 use App\Jobs\DispatchWebhook;
-use Modules\Webhook\Models\Webhook;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Webhook\Models\Webhook;
 
 class WebhookObserver
 {
@@ -38,7 +38,7 @@ class WebhookObserver
     protected function dispatchWebhooks(Model $model, string $event): void
     {
         // Check if model should dispatch webhooks
-        if (method_exists($model, 'shouldDispatchWebhooks') && !$model->shouldDispatchWebhooks()) {
+        if (method_exists($model, 'shouldDispatchWebhooks') && ! $model->shouldDispatchWebhooks()) {
             return;
         }
 
@@ -47,7 +47,7 @@ class WebhookObserver
             ? $model->getWebhookOrganisationId()
             : null;
 
-        if (!$organisationId) {
+        if (! $organisationId) {
             return;
         }
 

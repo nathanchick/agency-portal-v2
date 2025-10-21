@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::pending
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:24
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:23
 * @route '/documents/pending'
 */
 export const pending = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ pending.definition = {
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::pending
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:24
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:23
 * @route '/documents/pending'
 */
 pending.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ pending.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::pending
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:24
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:23
 * @route '/documents/pending'
 */
 pending.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ pending.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::pending
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:24
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:23
 * @route '/documents/pending'
 */
 pending.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ pending.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::pending
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:24
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:23
 * @route '/documents/pending'
 */
 const pendingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -55,7 +55,7 @@ const pendingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::pending
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:24
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:23
 * @route '/documents/pending'
 */
 pendingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -65,7 +65,7 @@ pendingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::pending
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:24
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:23
 * @route '/documents/pending'
 */
 pendingForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -82,7 +82,7 @@ pending.form = pendingForm
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::completed
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:74
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:73
 * @route '/documents/completed'
 */
 export const completed = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -97,7 +97,7 @@ completed.definition = {
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::completed
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:74
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:73
 * @route '/documents/completed'
 */
 completed.url = (options?: RouteQueryOptions) => {
@@ -106,7 +106,7 @@ completed.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::completed
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:74
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:73
 * @route '/documents/completed'
 */
 completed.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -116,7 +116,7 @@ completed.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::completed
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:74
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:73
 * @route '/documents/completed'
 */
 completed.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -126,7 +126,7 @@ completed.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::completed
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:74
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:73
 * @route '/documents/completed'
 */
 const completedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -136,7 +136,7 @@ const completedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> 
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::completed
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:74
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:73
 * @route '/documents/completed'
 */
 completedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -146,7 +146,7 @@ completedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::completed
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:74
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:73
 * @route '/documents/completed'
 */
 completedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -163,7 +163,7 @@ completed.form = completedForm
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::create
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:124
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:123
 * @route '/documents/create'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -178,7 +178,7 @@ create.definition = {
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::create
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:124
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:123
 * @route '/documents/create'
 */
 create.url = (options?: RouteQueryOptions) => {
@@ -187,7 +187,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::create
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:124
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:123
 * @route '/documents/create'
 */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -197,7 +197,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::create
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:124
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:123
 * @route '/documents/create'
 */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -207,7 +207,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::create
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:124
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:123
 * @route '/documents/create'
 */
 const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -217,7 +217,7 @@ const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::create
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:124
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:123
 * @route '/documents/create'
 */
 createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -227,7 +227,7 @@ createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::create
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:124
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:123
 * @route '/documents/create'
 */
 createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -244,7 +244,7 @@ create.form = createForm
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::store
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:174
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:173
 * @route '/documents'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -259,7 +259,7 @@ store.definition = {
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::store
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:174
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:173
 * @route '/documents'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -268,7 +268,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::store
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:174
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:173
 * @route '/documents'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -278,7 +278,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::store
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:174
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:173
 * @route '/documents'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -288,7 +288,7 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::store
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:174
+* @see Modules/Document/app/Http/Controllers/DocumentController.php:173
 * @route '/documents'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

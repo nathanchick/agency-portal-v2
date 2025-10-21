@@ -2,21 +2,22 @@
 
 namespace App\Jobs;
 
-use Modules\Webhook\Models\Webhook;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Spatie\WebhookServer\WebhookCall;
 use Illuminate\Support\Facades\Log;
+use Modules\Webhook\Models\Webhook;
 use Spatie\Multitenancy\Jobs\NotTenantAware;
+use Spatie\WebhookServer\WebhookCall;
 
-class DispatchWebhook implements ShouldQueue, NotTenantAware
+class DispatchWebhook implements NotTenantAware, ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $tries = 3;
+
     public $timeout = 30;
 
     /**
@@ -39,8 +40,9 @@ class DispatchWebhook implements ShouldQueue, NotTenantAware
         // Fetch the webhook without any tenant scopes (jobs don't have tenant context)
         $webhook = Webhook::withoutGlobalScopes()->find($this->webhookId);
 
-        if (!$webhook) {
+        if (! $webhook) {
             Log::error('Webhook not found', ['webhook_id' => $this->webhookId]);
+
             return;
         }
 
@@ -51,6 +53,7 @@ class DispatchWebhook implements ShouldQueue, NotTenantAware
                 'expected_org' => $this->organisationId,
                 'actual_org' => $webhook->organisation_id,
             ]);
+
             return;
         }
 

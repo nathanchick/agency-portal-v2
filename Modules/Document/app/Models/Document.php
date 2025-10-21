@@ -3,17 +3,17 @@
 namespace Modules\Document\Models;
 
 use App\Traits\DispatchesWebhooks;
-use Modules\Organisation\Models\Organisation;
-use Modules\Document\Models\DocumentRequest;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Builder;
+use Modules\Organisation\Models\Organisation;
 
 class Document extends Model
 {
-    use HasUuids, DispatchesWebhooks;
+    use DispatchesWebhooks;
+    use HasUuids;
 
     protected $fillable = [
         'organisation_id',

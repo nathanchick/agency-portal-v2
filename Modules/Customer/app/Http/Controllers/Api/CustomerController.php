@@ -3,8 +3,8 @@
 namespace Modules\Customer\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Modules\Customer\Models\Customer;
 use Illuminate\Http\Request;
+use Modules\Customer\Models\Customer;
 
 class CustomerController extends Controller
 {
@@ -29,7 +29,7 @@ class CustomerController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('read:customers')) {
+        if (! $apiToken->can('read:customers')) {
             return response()->json([
                 'message' => 'This token does not have permission to read customers.',
             ], 403);
@@ -50,7 +50,7 @@ class CustomerController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('write:customers')) {
+        if (! $apiToken->can('write:customers')) {
             return response()->json([
                 'message' => 'This token does not have permission to create customers.',
             ], 403);
@@ -79,7 +79,7 @@ class CustomerController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('read:customers')) {
+        if (! $apiToken->can('read:customers')) {
             return response()->json([
                 'message' => 'This token does not have permission to read customers.',
             ], 403);
@@ -100,7 +100,7 @@ class CustomerController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('write:customers')) {
+        if (! $apiToken->can('write:customers')) {
             return response()->json([
                 'message' => 'This token does not have permission to update customers.',
             ], 403);
@@ -129,7 +129,7 @@ class CustomerController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('delete:customers')) {
+        if (! $apiToken->can('delete:customers')) {
             return response()->json([
                 'message' => 'This token does not have permission to delete customers.',
             ], 403);

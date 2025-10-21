@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use Modules\Organisation\Models\Organisation;
-use Modules\Organisation\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Middleware;
+use Modules\Organisation\Models\Organisation;
+use Modules\Organisation\Models\Role;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -109,7 +109,7 @@ class HandleInertiaRequests extends Middleware
         $currentCustomer = null;
 
         // Check if user is an organisation user first (organisation takes priority)
-        if (!$currentOrganisation) {
+        if (! $currentOrganisation) {
             // Check if there's a stored organisation in the session
             $sessionOrganisationId = session('current_organisation_id');
 
@@ -118,7 +118,7 @@ class HandleInertiaRequests extends Middleware
                 $currentOrganisation = $user->organisations()->find($sessionOrganisationId);
 
                 // If not found, check if accessible through customer
-                if (!$currentOrganisation) {
+                if (! $currentOrganisation) {
                     $hasCustomerAccess = DB::table('customers')
                         ->join('customer_user', 'customers.id', '=', 'customer_user.customer_id')
                         ->where('customer_user.user_id', $user->id)
@@ -132,7 +132,7 @@ class HandleInertiaRequests extends Middleware
             }
 
             // Fall back to first organisation if session org not found or not set
-            if (!$currentOrganisation) {
+            if (! $currentOrganisation) {
                 $currentOrganisation = $user->organisations()->first();
             }
         }
@@ -149,6 +149,7 @@ class HandleInertiaRequests extends Middleware
                 // Organisation user takes priority
                 $userType = 'organisation';
                 $userRole = $this->getOrganisationUserRole($user, $currentOrganisation);
+
                 return [$userType, $userRole, $currentOrganisation, $currentCustomer];
             }
         }
@@ -162,13 +163,13 @@ class HandleInertiaRequests extends Middleware
         }
 
         // If no customer found for current org, get first customer
-        if (!$currentCustomer) {
+        if (! $currentCustomer) {
             $currentCustomer = $user->customers()->first();
         }
 
         if ($currentCustomer) {
             // Customer user - get organisation through customer if not already set
-            if (!$currentOrganisation) {
+            if (! $currentOrganisation) {
                 $currentOrganisation = Organisation::find($currentCustomer->organisation_id);
             }
             $userType = 'customer';
@@ -190,6 +191,7 @@ class HandleInertiaRequests extends Middleware
 
         if ($customerUser && $customerUser->role_id) {
             $role = Role::find($customerUser->role_id);
+
             return $role?->name ?? 'User';
         }
 
@@ -217,7 +219,7 @@ class HandleInertiaRequests extends Middleware
      */
     protected function getUserPermissions(?User $user, ?Organisation $currentOrganisation): array
     {
-        if (!$user || !$currentOrganisation) {
+        if (! $user || ! $currentOrganisation) {
             return [];
         }
 
@@ -269,7 +271,7 @@ class HandleInertiaRequests extends Middleware
      */
     protected function getUserRoles(?User $user, ?Organisation $currentOrganisation): array
     {
-        if (!$user || !$currentOrganisation) {
+        if (! $user || ! $currentOrganisation) {
             return [];
         }
 
@@ -306,6 +308,7 @@ class HandleInertiaRequests extends Middleware
                 $roleName = DB::table('roles')
                     ->where('id', $roleId)
                     ->value('name');
+
                 return $roleName ? [$roleName] : [];
             }
         }

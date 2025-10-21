@@ -3,11 +3,11 @@
 namespace Modules\Webhook\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Modules\Webhook\Models\Webhook;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
+use Modules\Webhook\Models\Webhook;
 
 class WebhookController extends Controller
 {
@@ -23,7 +23,7 @@ class WebhookController extends Controller
     {
         $organisationId = $this->getCurrentOrganisationId();
 
-        if (!$organisationId) {
+        if (! $organisationId) {
             abort(403, 'No organisation selected');
         }
 
@@ -38,8 +38,8 @@ class WebhookController extends Controller
         // Search by name or URL
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('url', 'like', '%' . $request->search . '%');
+                $q->where('name', 'like', '%'.$request->search.'%')
+                    ->orWhere('url', 'like', '%'.$request->search.'%');
             });
         }
 
@@ -58,7 +58,7 @@ class WebhookController extends Controller
     {
         $organisationId = $this->getCurrentOrganisationId();
 
-        if (!$organisationId) {
+        if (! $organisationId) {
             abort(403, 'No organisation selected');
         }
 
@@ -100,7 +100,7 @@ class WebhookController extends Controller
                     'uuid' => $job->uuid,
                     'status' => 'failed',
                     'queue' => $job->queue,
-                    'exception' => substr($job->exception, 0, 200) . '...',
+                    'exception' => substr($job->exception, 0, 200).'...',
                     'failed_at' => $job->failed_at,
                     'webhook_id' => $data->webhook->id ?? null,
                     'webhook_name' => $data->webhook->name ?? null,
@@ -140,7 +140,7 @@ class WebhookController extends Controller
     {
         $organisationId = $this->getCurrentOrganisationId();
 
-        if (!$organisationId) {
+        if (! $organisationId) {
             abort(403, 'No organisation selected');
         }
 
@@ -243,7 +243,7 @@ class WebhookController extends Controller
             abort(403, 'You do not have access to this webhook');
         }
 
-        $webhook->update(['active' => !$webhook->active]);
+        $webhook->update(['active' => ! $webhook->active]);
 
         return back()->with('success', 'Webhook status updated successfully');
     }

@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Document\Http\Controllers\CustomerDocumentController;
 use Modules\Document\Http\Controllers\DocumentController;
 use Modules\Document\Http\Controllers\DocumentTypeController;
-use Modules\Document\Http\Controllers\CustomerDocumentController;
 
 /**
  * Organisation Routes for Document Management

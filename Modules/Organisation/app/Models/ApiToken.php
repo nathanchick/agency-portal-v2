@@ -3,8 +3,8 @@
 namespace Modules\Organisation\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
@@ -89,7 +89,7 @@ class ApiToken extends Model
      */
     public function can(string $ability): bool
     {
-        if (!$this->abilities) {
+        if (! $this->abilities) {
             return false;
         }
 

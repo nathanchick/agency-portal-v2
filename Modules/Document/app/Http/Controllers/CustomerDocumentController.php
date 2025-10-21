@@ -3,13 +3,12 @@
 namespace Modules\Document\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
-use Modules\Document\Models\DocumentRequest;
-use Modules\Customer\Models\Customer;
 use App\Models\User;
-use Modules\Document\Notifications\DocumentStatusChangeNotification;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Modules\Customer\Models\Customer;
+use Modules\Document\Models\DocumentRequest;
+use Modules\Document\Notifications\DocumentStatusChangeNotification;
 
 class CustomerDocumentController extends Controller
 {
@@ -104,7 +103,7 @@ class CustomerDocumentController extends Controller
             'document',
             'history' => function ($query) {
                 $query->latest();
-            }
+            },
         ])->findOrFail($id);
 
         // Authorization logic - determine if user can view and/or approve
@@ -120,7 +119,7 @@ class CustomerDocumentController extends Controller
         }
 
         // Option 2: User is a customer manager/admin and document belongs to their customer
-        if (!$canView) {
+        if (! $canView) {
             $userCustomerIds = $user->customers()->pluck('customers.id');
             if ($userCustomerIds->contains($documentRequest->customer_id)) {
                 // Check if user has manager or admin role for this customer
@@ -139,9 +138,11 @@ class CustomerDocumentController extends Controller
         }
 
         // Option 3: User is an organisation user who created the document
-        if (!$canView) {
-            if ($documentRequest->document &&
-                $user->organisations()->where('organisations.id', $documentRequest->organisation_id)->exists()) {
+        if (! $canView) {
+            if (
+                $documentRequest->document &&
+                $user->organisations()->where('organisations.id', $documentRequest->organisation_id)->exists()
+            ) {
                 $canView = true;
                 $canApprove = false; // Creator can only view
                 $accessReason = 'document_creator';
@@ -149,7 +150,7 @@ class CustomerDocumentController extends Controller
         }
 
         // Option 4: User is an admin/manager of the organisation
-        if (!$canView) {
+        if (! $canView) {
             $currentOrgId = session('current_organisation_id') ?? $user->organisations()->first()?->id;
             if ($currentOrgId === $documentRequest->organisation_id) {
                 // Check if user has admin or manager role in the organisation
@@ -162,13 +163,13 @@ class CustomerDocumentController extends Controller
         }
 
         // If user still doesn't have access, abort
-        if (!$canView) {
+        if (! $canView) {
             abort(403, 'You do not have permission to access this document.');
         }
 
         // Log the view in document history (only for active documents and customer users)
         $isCustomerUser = in_array($accessReason, ['assigned_user', 'customer_manager']);
-        if (!in_array($documentRequest->status, ['completed', 'void']) && $isCustomerUser) {
+        if (! in_array($documentRequest->status, ['completed', 'void']) && $isCustomerUser) {
             $documentRequest->history()->create([
                 'action' => 'viewed',
                 'user_id' => $user->id,
@@ -201,7 +202,7 @@ class CustomerDocumentController extends Controller
         $documentRequest = DocumentRequest::with([
             'customer.organisation',
             'user',
-            'document'
+            'document',
         ])->findOrFail($id);
 
         // Re-check authorization (same logic as viewSign)
@@ -213,7 +214,7 @@ class CustomerDocumentController extends Controller
         }
 
         // Option 2: User is a customer manager/admin
-        if (!$canApprove) {
+        if (! $canApprove) {
             $userCustomerIds = $user->customers()->pluck('customers.id');
             if ($userCustomerIds->contains($documentRequest->customer_id)) {
                 $canApprove = true;
@@ -221,7 +222,7 @@ class CustomerDocumentController extends Controller
         }
 
         // Option 4: User is an admin/manager of the organisation
-        if (!$canApprove) {
+        if (! $canApprove) {
             $currentOrgId = session('current_organisation_id') ?? $user->organisations()->first()?->id;
             if ($currentOrgId === $documentRequest->organisation_id) {
                 if ($user->hasAnyRole(['admin', 'manager'])) {
@@ -230,7 +231,7 @@ class CustomerDocumentController extends Controller
             }
         }
 
-        if (!$canApprove) {
+        if (! $canApprove) {
             abort(403, 'You do not have permission to approve this document.');
         }
 
@@ -268,7 +269,7 @@ class CustomerDocumentController extends Controller
         $documentRequest = DocumentRequest::with([
             'customer.organisation',
             'user',
-            'document'
+            'document',
         ])->findOrFail($id);
 
         // Re-check authorization (same logic as viewSign)
@@ -280,7 +281,7 @@ class CustomerDocumentController extends Controller
         }
 
         // Option 2: User is a customer manager/admin
-        if (!$canApprove) {
+        if (! $canApprove) {
             $userCustomerIds = $user->customers()->pluck('customers.id');
             if ($userCustomerIds->contains($documentRequest->customer_id)) {
                 $canApprove = true;
@@ -288,7 +289,7 @@ class CustomerDocumentController extends Controller
         }
 
         // Option 4: User is an admin/manager of the organisation
-        if (!$canApprove) {
+        if (! $canApprove) {
             $currentOrgId = session('current_organisation_id') ?? $user->organisations()->first()?->id;
             if ($currentOrgId === $documentRequest->organisation_id) {
                 if ($user->hasAnyRole(['admin', 'manager'])) {
@@ -297,7 +298,7 @@ class CustomerDocumentController extends Controller
             }
         }
 
-        if (!$canApprove) {
+        if (! $canApprove) {
             abort(403, 'You do not have permission to decline this document.');
         }
 
@@ -350,9 +351,11 @@ class CustomerDocumentController extends Controller
         }
 
         // Notify the assigned user (if different from action taker and creator)
-        if ($documentRequest->user_id &&
+        if (
+            $documentRequest->user_id &&
             $documentRequest->user_id !== $actionBy->id &&
-            !in_array($documentRequest->user_id, $notifiedUsers)) {
+            ! in_array($documentRequest->user_id, $notifiedUsers)
+        ) {
             $documentRequest->user->notify(new DocumentStatusChangeNotification($documentRequest, $action, $actionBy));
         }
     }

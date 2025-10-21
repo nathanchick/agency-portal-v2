@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
-use Modules\Organisation\Models\Organisation;
-use Modules\Customer\Models\Customer;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Coderflex\LaravelTicket\Concerns\HasTickets;
+use Coderflex\LaravelTicket\Contracts\CanUseTickets;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Modules\Customer\Models\Customer;
+use Modules\Organisation\Models\Organisation;
 use Spatie\Permission\Traits\HasRoles;
-use Coderflex\LaravelTicket\Concerns\HasTickets;
-use Coderflex\LaravelTicket\Contracts\CanUseTickets;
 
 class User extends Authenticatable implements CanUseTickets
 {
-    use HasFactory, Notifiable, TwoFactorAuthenticatable, HasUuids, HasRoles , HasTickets;
+    use HasFactory, HasRoles, HasTickets, HasUuids, Notifiable , TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -70,6 +70,7 @@ class User extends Authenticatable implements CanUseTickets
     {
         // Return the current organisation ID from the tenant context
         $currentOrganisation = Organisation::current();
+
         return $currentOrganisation ? $currentOrganisation->id : null;
     }
 }

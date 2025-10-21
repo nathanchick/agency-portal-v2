@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Modules\Organisation\Models\Organisation;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Modules\Organisation\Models\Organisation;
 use Symfony\Component\HttpFoundation\Response;
 
 class RequireOrganisationUser
@@ -20,22 +20,22 @@ class RequireOrganisationUser
     {
         $user = $request->user();
 
-        if (!$user) {
+        if (! $user) {
             abort(403, 'Unauthorized');
         }
 
         // Get current organisation from session or multitenancy
         $currentOrganisation = Organisation::current();
 
-        if (!$currentOrganisation && session('current_organisation_id')) {
+        if (! $currentOrganisation && session('current_organisation_id')) {
             $currentOrganisation = Organisation::find(session('current_organisation_id'));
         }
 
-        if (!$currentOrganisation) {
+        if (! $currentOrganisation) {
             $currentOrganisation = $user->organisations()->first();
         }
 
-        if (!$currentOrganisation) {
+        if (! $currentOrganisation) {
             abort(403, 'You must belong to an organisation to access this resource.');
         }
 
@@ -46,7 +46,7 @@ class RequireOrganisationUser
             ->where('team_id', $currentOrganisation->id)
             ->exists();
 
-        if (!$hasOrganisationRole) {
+        if (! $hasOrganisationRole) {
             abort(403, 'This resource is only accessible to organisation users.');
         }
 

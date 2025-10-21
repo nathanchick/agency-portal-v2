@@ -3,16 +3,17 @@
 namespace Modules\Organisation\Models;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Document\Models\Document;
 use Modules\Document\Models\DocumentRequest;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Spatie\Multitenancy\Models\Concerns\ImplementsTenant;
 use Spatie\Multitenancy\Contracts\IsTenant;
+use Spatie\Multitenancy\Models\Concerns\ImplementsTenant;
 
 class Organisation extends Model implements IsTenant
 {
-    use HasUuids, ImplementsTenant;
+    use HasUuids;
+    use ImplementsTenant;
 
     protected $fillable = [
         'name',

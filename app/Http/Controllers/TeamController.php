@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\HasCurrentOrganisation;
 use App\Models\Customer;
-use Modules\Organisation\Models\Organisation;
-use Modules\Organisation\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Modules\Organisation\Models\Organisation;
+use Modules\Organisation\Models\Role;
 
 class TeamController extends Controller
 {
     use HasCurrentOrganisation;
+
     /**
      * Display a listing of team members
      */
@@ -59,7 +60,7 @@ class TeamController extends Controller
                 // Only include users who have a role (exclude customer users)
                 $teamMembers = DB::table('users')
                     ->join('organisation_user', 'users.id', '=', 'organisation_user.user_id')
-                    ->join('model_has_roles', function($join) use ($currentOrganisation) {
+                    ->join('model_has_roles', function ($join) use ($currentOrganisation) {
                         $join->on('users.id', '=', 'model_has_roles.model_id')
                             ->where('model_has_roles.model_type', '=', User::class)
                             ->where('model_has_roles.team_id', '=', $currentOrganisation->id);
@@ -161,7 +162,7 @@ class TeamController extends Controller
                 }
 
                 // Add to organisation if not already
-                if (!$existingUser->organisations()->where('organisations.id', $currentOrganisation->id)->exists()) {
+                if (! $existingUser->organisations()->where('organisations.id', $currentOrganisation->id)->exists()) {
                     $existingUser->organisations()->attach($currentOrganisation->id);
                 }
 
@@ -327,7 +328,7 @@ class TeamController extends Controller
             ->where('team_id', $currentOrganisation->id)
             ->first();
 
-        if (!$role) {
+        if (! $role) {
             return back()->with('error', 'Role not found.');
         }
 
@@ -486,7 +487,7 @@ class TeamController extends Controller
                 ->where('team_id', $organisation->id)
                 ->first();
 
-            if (!$adminRole) {
+            if (! $adminRole) {
                 return 0;
             }
 
@@ -500,7 +501,7 @@ class TeamController extends Controller
                 ->where('team_id', $organisation->id)
                 ->first();
 
-            if (!$adminRole) {
+            if (! $adminRole) {
                 return 0;
             }
 

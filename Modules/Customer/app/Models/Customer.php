@@ -3,19 +3,19 @@
 namespace Modules\Customer\Models;
 
 use App\Models\Concerns\BelongsToTenant;
-use App\Traits\DispatchesWebhooks;
 use App\Models\User;
-use Modules\Customer\Models\Project;
-use Modules\Customer\Models\Website;
-use Modules\Document\Models\DocumentRequest;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\DispatchesWebhooks;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Document\Models\DocumentRequest;
 
 class Customer extends Model
 {
-    use HasUuids, BelongsToTenant, DispatchesWebhooks;
+    use BelongsToTenant;
+    use DispatchesWebhooks;
+    use HasUuids;
 
     protected $fillable = [
         'organisation_id',

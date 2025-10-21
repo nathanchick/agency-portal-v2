@@ -3,9 +3,9 @@
 namespace Modules\Customer\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Modules\Customer\Models\Website;
-use Modules\Customer\Models\Customer;
 use Illuminate\Http\Request;
+use Modules\Customer\Models\Customer;
+use Modules\Customer\Models\Website;
 
 class WebsiteController extends Controller
 {
@@ -30,7 +30,7 @@ class WebsiteController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('read:websites')) {
+        if (! $apiToken->can('read:websites')) {
             return response()->json([
                 'message' => 'This token does not have permission to read websites.',
             ], 403);
@@ -52,7 +52,7 @@ class WebsiteController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('write:websites')) {
+        if (! $apiToken->can('write:websites')) {
             return response()->json([
                 'message' => 'This token does not have permission to create websites.',
             ], 403);
@@ -71,7 +71,7 @@ class WebsiteController extends Controller
             ->where('organisation_id', $organisation)
             ->first();
 
-        if (!$customer) {
+        if (! $customer) {
             return response()->json([
                 'message' => 'The customer does not belong to this organisation.',
             ], 403);
@@ -91,7 +91,7 @@ class WebsiteController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('read:websites')) {
+        if (! $apiToken->can('read:websites')) {
             return response()->json([
                 'message' => 'This token does not have permission to read websites.',
             ], 403);
@@ -113,7 +113,7 @@ class WebsiteController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('write:websites')) {
+        if (! $apiToken->can('write:websites')) {
             return response()->json([
                 'message' => 'This token does not have permission to update websites.',
             ], 403);
@@ -137,7 +137,7 @@ class WebsiteController extends Controller
                 ->where('organisation_id', $organisation)
                 ->first();
 
-            if (!$customer) {
+            if (! $customer) {
                 return response()->json([
                     'message' => 'The customer does not belong to this organisation.',
                 ], 403);
@@ -158,7 +158,7 @@ class WebsiteController extends Controller
 
         $apiToken = $request->input('api_token');
 
-        if (!$apiToken->can('delete:websites')) {
+        if (! $apiToken->can('delete:websites')) {
             return response()->json([
                 'message' => 'This token does not have permission to delete websites.',
             ], 403);

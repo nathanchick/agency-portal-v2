@@ -20,7 +20,7 @@ return new class extends Migration
                 'signed_user_email',
                 'signed_ip_address',
                 'signed_user_agent',
-                'signed_metadata'
+                'signed_metadata',
             ]);
         });
     }

@@ -2,17 +2,17 @@
 
 namespace Modules\Document\Notifications;
 
-use Modules\Document\Models\DocumentRequest;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Modules\Document\Models\DocumentRequest;
 
 class DocumentRequestNotification extends Notification
 {
     use Queueable;
 
     public $documentRequest;
+
     public $requiresSignature;
 
     /**
@@ -46,8 +46,8 @@ class DocumentRequestNotification extends Notification
             : 'Document Ready for Review';
 
         $actionUrl = $this->requiresSignature
-            ? url('/customer/documents/' . $this->documentRequest->id . '/view-sign')
-            : url('/customer/documents/' . $this->documentRequest->id . '/view');
+            ? url('/customer/documents/'.$this->documentRequest->id.'/view-sign')
+            : url('/customer/documents/'.$this->documentRequest->id.'/view');
 
         $actionText = $this->requiresSignature
             ? 'View & Sign Document'
@@ -55,7 +55,7 @@ class DocumentRequestNotification extends Notification
 
         $message = (new MailMessage)
             ->subject($subject)
-            ->greeting('Hello ' . $notifiable->name . '!');
+            ->greeting('Hello '.$notifiable->name.'!');
 
         if ($this->requiresSignature) {
             $message->line('You have been requested to review and sign the following document:');
@@ -63,15 +63,15 @@ class DocumentRequestNotification extends Notification
             $message->line('You have been sent the following document for review:');
         }
 
-        $message->line('**Document:** ' . $this->documentRequest->document->name)
-            ->line('**From:** ' . $this->documentRequest->organisation->name);
+        $message->line('**Document:** '.$this->documentRequest->document->name)
+            ->line('**From:** '.$this->documentRequest->organisation->name);
 
         if ($this->documentRequest->notes) {
-            $message->line('**Notes:** ' . $this->documentRequest->notes);
+            $message->line('**Notes:** '.$this->documentRequest->notes);
         }
 
         $message->action($actionText, $actionUrl)
-            ->line('If you have any questions about this document, please contact ' . $this->documentRequest->organisation->name . '.');
+            ->line('If you have any questions about this document, please contact '.$this->documentRequest->organisation->name.'.');
 
         return $message;
     }

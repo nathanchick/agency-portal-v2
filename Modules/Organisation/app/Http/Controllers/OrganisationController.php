@@ -3,9 +3,8 @@
 namespace Modules\Organisation\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
-use Modules\Organisation\Models\Organisation;
 use Illuminate\Http\Request;
+use Modules\Organisation\Models\Organisation;
 
 class OrganisationController extends Controller
 {
@@ -30,7 +29,7 @@ class OrganisationController extends Controller
             ->where('customers.organisation_id', $organisationId)
             ->exists();
 
-        if (!$hasDirectAccess && !$hasCustomerAccess) {
+        if (! $hasDirectAccess && ! $hasCustomerAccess) {
             return back()->with('error', 'You do not have access to this organisation.');
         }
 

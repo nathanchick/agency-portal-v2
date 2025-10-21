@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Modules\Organisation\Models\Organisation;
 use Closure;
 use Illuminate\Http\Request;
+use Modules\Organisation\Models\Organisation;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetPermissionTeam
@@ -39,7 +39,7 @@ class SetPermissionTeam
             }
 
             // If still no organisation, get from user
-            if (!$currentOrganisation) {
+            if (! $currentOrganisation) {
                 $currentOrganisation = $user->organisations()->first();
             }
 

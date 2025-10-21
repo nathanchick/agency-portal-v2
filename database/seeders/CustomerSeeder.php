@@ -17,8 +17,9 @@ class CustomerSeeder extends Seeder
         // Get the Deploy eCommerce organisation
         $organisation = Organisation::where('billing_email', 'sarah.woolley@deploy.co.uk')->first();
 
-        if (!$organisation) {
+        if (! $organisation) {
             $this->command->error('Organisation not found. Please run OrganisationSeeder first.');
+
             return;
         }
 

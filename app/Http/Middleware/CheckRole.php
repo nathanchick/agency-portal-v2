@@ -19,7 +19,7 @@ class CheckRole
     {
         $user = $request->user();
 
-        if (!$user) {
+        if (! $user) {
             abort(403, 'Unauthorized');
         }
 
@@ -27,14 +27,14 @@ class CheckRole
         $userRole = $request->attributes->get('inertia_shared_data')['auth']['role'] ?? null;
 
         // If we can't get it from shared data, determine it manually
-        if (!$userRole) {
+        if (! $userRole) {
             $userRole = $this->getUserRole($user);
         }
 
         // Split roles by pipe (Admin|Manager) and check if user has any of them
         $allowedRoles = explode('|', $role);
 
-        if (!in_array($userRole, $allowedRoles)) {
+        if (! in_array($userRole, $allowedRoles)) {
             abort(403, 'Unauthorized - Insufficient permissions');
         }
 
