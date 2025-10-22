@@ -38,17 +38,18 @@ class Document extends Model
         static::addGlobalScope('organisation', function (Builder $builder) {
             if (auth()->check()) {
                 $organisationId = null;
+                $user = auth()->user();
 
-                // Try to get from session first (most reliable for this app)
-                if (session('current_organisation_id')) {
-                    $organisationId = session('current_organisation_id');
+                // Try to get from database first (most reliable for this app)
+                if ($user && $user->last_organisation_id) {
+                    $organisationId = $user->last_organisation_id;
                 }
                 // Fallback to multitenancy current() if available
                 elseif ($currentOrg = Organisation::current()) {
                     $organisationId = $currentOrg->id;
                 }
                 // Last resort: get user's first organisation
-                elseif ($user = auth()->user()) {
+                elseif ($user) {
                     $org = $user->organisations()->first();
                     if ($org) {
                         $organisationId = $org->id;

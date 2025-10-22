@@ -151,7 +151,7 @@ class CustomerDocumentController extends Controller
 
         // Option 4: User is an admin/manager of the organisation
         if (! $canView) {
-            $currentOrgId = session('current_organisation_id') ?? $user->organisations()->first()?->id;
+            $currentOrgId = $user->last_organisation_id ?? $user->organisations()->first()?->id;
             if ($currentOrgId === $documentRequest->organisation_id) {
                 // Check if user has admin or manager role in the organisation
                 if ($user->hasAnyRole(['admin', 'manager'])) {
@@ -223,7 +223,7 @@ class CustomerDocumentController extends Controller
 
         // Option 4: User is an admin/manager of the organisation
         if (! $canApprove) {
-            $currentOrgId = session('current_organisation_id') ?? $user->organisations()->first()?->id;
+            $currentOrgId = $user->last_organisation_id ?? $user->organisations()->first()?->id;
             if ($currentOrgId === $documentRequest->organisation_id) {
                 if ($user->hasAnyRole(['admin', 'manager'])) {
                     $canApprove = true;
@@ -290,7 +290,7 @@ class CustomerDocumentController extends Controller
 
         // Option 4: User is an admin/manager of the organisation
         if (! $canApprove) {
-            $currentOrgId = session('current_organisation_id') ?? $user->organisations()->first()?->id;
+            $currentOrgId = $user->last_organisation_id ?? $user->organisations()->first()?->id;
             if ($currentOrgId === $documentRequest->organisation_id) {
                 if ($user->hasAnyRole(['admin', 'manager'])) {
                     $canApprove = true;

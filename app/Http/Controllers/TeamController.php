@@ -34,7 +34,7 @@ class TeamController extends Controller
         if ($currentCustomer) {
             // Customer admin viewing customer team
             $userType = 'customer';
-            $currentOrganisation = Organisation::find($currentCustomer->organisation_id);
+            $currentOrganisation = $currentCustomer->organisation;
 
             // Get all users for this customer with their roles
             $teamMembers = DB::table('users')
@@ -102,7 +102,7 @@ class TeamController extends Controller
         $user = $request->user();
         $currentCustomer = $user->customers()->first();
         $currentOrganisation = $currentCustomer
-            ? Organisation::find($currentCustomer->organisation_id)
+            ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
 
         // Get available roles for the team
@@ -130,7 +130,7 @@ class TeamController extends Controller
         $user = $request->user();
         $currentCustomer = $user->customers()->first();
         $currentOrganisation = $currentCustomer
-            ? Organisation::find($currentCustomer->organisation_id)
+            ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
 
         // Check if user already exists
@@ -224,7 +224,7 @@ class TeamController extends Controller
         $currentUser = $request->user();
         $currentCustomer = $currentUser->customers()->first();
         $currentOrganisation = $currentCustomer
-            ? Organisation::find($currentCustomer->organisation_id)
+            ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
 
         // Get user's current role
@@ -271,7 +271,7 @@ class TeamController extends Controller
         $currentUser = $request->user();
         $currentCustomer = $currentUser->customers()->first();
         $currentOrganisation = $currentCustomer
-            ? Organisation::find($currentCustomer->organisation_id)
+            ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
 
         $validated = $request->validate([
@@ -320,7 +320,7 @@ class TeamController extends Controller
         $currentUser = $request->user();
         $currentCustomer = $currentUser->customers()->first();
         $currentOrganisation = $currentCustomer
-            ? Organisation::find($currentCustomer->organisation_id)
+            ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
 
         // Find the role by name
@@ -398,7 +398,7 @@ class TeamController extends Controller
 
         $currentCustomer = $currentUser->customers()->first();
         $currentOrganisation = $currentCustomer
-            ? Organisation::find($currentCustomer->organisation_id)
+            ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
 
         // Check if user is an Admin
@@ -460,7 +460,7 @@ class TeamController extends Controller
         $currentUser = $request->user();
         $currentCustomer = $currentUser->customers()->first();
         $currentOrganisation = $currentCustomer
-            ? Organisation::find($currentCustomer->organisation_id)
+            ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
 
         // Check if user has never logged in

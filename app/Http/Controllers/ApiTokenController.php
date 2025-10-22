@@ -10,7 +10,8 @@ class ApiTokenController extends Controller
 {
     protected function getCurrentOrganisationId()
     {
-        return session('current_organisation_id') ?? auth()->user()->organisations()->first()?->id;
+        $user = auth()->user();
+        return $user->last_organisation_id ?? $user->organisations()->first()?->id;
     }
 
     /**

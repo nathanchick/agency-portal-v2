@@ -17,12 +17,9 @@ trait HasCurrentOrganisation
         // Try to get from multitenancy first
         $organisation = Organisation::current();
 
-        // Try session if not found
-        if (! $organisation && session('current_organisation_id')) {
-            $sessionOrgId = session('current_organisation_id');
-
-            // Try direct organisations first
-            $organisation = $user->organisations()->find($sessionOrgId);
+        // Try database if not found
+        if (! $organisation && $user->last_organisation_id) {
+            $organisation = $user->organisations()->find($user->last_organisation_id);
         }
 
         return $organisation;
@@ -42,23 +39,25 @@ trait HasCurrentOrganisation
         // Try to get from multitenancy first
         $organisation = Organisation::current();
 
-        // Try session if not found
-        if (! $organisation && session('current_organisation_id')) {
-            $sessionOrgId = session('current_organisation_id');
-
+        // Try database if not found
+        if (! $organisation && $user->last_organisation_id) {
             // Try direct organisations first
-            $organisation = $user->organisations()->find($sessionOrgId);
+            $organisation = $user->organisations()->find($user->last_organisation_id);
 
             // If not found, check if accessible through customer
             if (! $organisation) {
                 $hasCustomerAccess = \Illuminate\Support\Facades\DB::table('customers')
                     ->join('customer_user', 'customers.id', '=', 'customer_user.customer_id')
                     ->where('customer_user.user_id', $user->id)
-                    ->where('customers.organisation_id', $sessionOrgId)
+                    ->where('customers.organisation_id', $user->last_organisation_id)
                     ->exists();
 
                 if ($hasCustomerAccess) {
-                    $organisation = Organisation::find($sessionOrgId);
+                    // Get through customer relationship, not direct find
+                    $customer = $user->customers()
+                        ->where('customers.organisation_id', $user->last_organisation_id)
+                        ->first();
+                    $organisation = $customer?->organisation;
                 }
             }
         }
@@ -71,7 +70,7 @@ trait HasCurrentOrganisation
             if (! $organisation) {
                 $firstCustomer = $user->customers()->first();
                 if ($firstCustomer) {
-                    $organisation = Organisation::find($firstCustomer->organisation_id);
+                    $organisation = $firstCustomer->organisation;
                 }
             }
         }

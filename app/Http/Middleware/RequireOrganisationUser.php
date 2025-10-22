@@ -30,11 +30,11 @@ class RequireOrganisationUser
 
         $role = $this->getCurrentOrganisationUserRole();
 
-        // Get current organisation from session or multitenancy
+        // Get current organisation from database or multitenancy
         $currentOrganisation = Organisation::current();
 
-        if (! $currentOrganisation && session('current_organisation_id')) {
-            $currentOrganisation = Organisation::find(session('current_organisation_id'));
+        if (! $currentOrganisation && $user->last_organisation_id) {
+            $currentOrganisation = $user->organisations()->find($user->last_organisation_id);
         }
 
         if (! $currentOrganisation) {

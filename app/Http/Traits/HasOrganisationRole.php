@@ -26,7 +26,7 @@ trait HasOrganisationRole
     }
 
     /**
-     * Get the organisation associated with the currently authenticated user as a customer based on session data.
+     * Get the organisation associated with the currently authenticated user as a customer based on database data.
      *
      * @return Organisation|null
      */
@@ -37,16 +37,24 @@ trait HasOrganisationRole
             return null;
         }
 
-        $sessionOrganisationId = session('current_organisation_id');
+        if (! $user->last_organisation_id) {
+            return null;
+        }
 
+        // Verify user has customer access to this organisation
         $hasCustomerAccess = DB::table('customers')
             ->join('customer_user', 'customers.id', '=', 'customer_user.customer_id')
             ->where('customer_user.user_id', $user->id)
-            ->where('customers.organisation_id', $sessionOrganisationId)
+            ->where('customers.organisation_id', $user->last_organisation_id)
             ->exists();
 
         if ($hasCustomerAccess) {
-            return Organisation::find($sessionOrganisationId);
+            // Get organisation through customer relationship, not direct find
+            $customer = $user->customers()
+                ->where('customers.organisation_id', $user->last_organisation_id)
+                ->first();
+
+            return $customer?->organisation;
         }
 
         return null;
