@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../wayfinder'
 /**
-* @see \App\Http\Controllers\Customer\CustomerController::switchMethod
-* @see app/Http/Controllers/Customer/CustomerController.php:13
+* @see \Modules\Customer\Http\Controllers\CustomerSwitcherController::switchMethod
+* @see Modules/Customer/app/Http/Controllers/CustomerSwitcherController.php:13
 * @route '/customer/switch'
 */
 export const switchMethod = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -15,8 +15,8 @@ switchMethod.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\Customer\CustomerController::switchMethod
-* @see app/Http/Controllers/Customer/CustomerController.php:13
+* @see \Modules\Customer\Http\Controllers\CustomerSwitcherController::switchMethod
+* @see Modules/Customer/app/Http/Controllers/CustomerSwitcherController.php:13
 * @route '/customer/switch'
 */
 switchMethod.url = (options?: RouteQueryOptions) => {
@@ -24,8 +24,8 @@ switchMethod.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Customer\CustomerController::switchMethod
-* @see app/Http/Controllers/Customer/CustomerController.php:13
+* @see \Modules\Customer\Http\Controllers\CustomerSwitcherController::switchMethod
+* @see Modules/Customer/app/Http/Controllers/CustomerSwitcherController.php:13
 * @route '/customer/switch'
 */
 switchMethod.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -34,8 +34,8 @@ switchMethod.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Customer\CustomerController::switchMethod
-* @see app/Http/Controllers/Customer/CustomerController.php:13
+* @see \Modules\Customer\Http\Controllers\CustomerSwitcherController::switchMethod
+* @see Modules/Customer/app/Http/Controllers/CustomerSwitcherController.php:13
 * @route '/customer/switch'
 */
 const switchMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -44,8 +44,8 @@ const switchMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'pos
 })
 
 /**
-* @see \App\Http\Controllers\Customer\CustomerController::switchMethod
-* @see app/Http/Controllers/Customer/CustomerController.php:13
+* @see \Modules\Customer\Http\Controllers\CustomerSwitcherController::switchMethod
+* @see Modules/Customer/app/Http/Controllers/CustomerSwitcherController.php:13
 * @route '/customer/switch'
 */
 switchMethodForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -55,6 +55,6 @@ switchMethodForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post
 
 switchMethod.form = switchMethodForm
 
-const CustomerController = { switchMethod, switch: switchMethod }
+const CustomerSwitcherController = { switchMethod, switch: switchMethod }
 
-export default CustomerController
+export default CustomerSwitcherController

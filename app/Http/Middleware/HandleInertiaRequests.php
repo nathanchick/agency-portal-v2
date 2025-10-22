@@ -112,6 +112,40 @@ class HandleInertiaRequests extends Middleware
         $currentOrganisation = Organisation::current();
         $currentCustomer = null;
 
+        // Validate last_organisation_id - if user lost access, clear it
+        if ($user->last_organisation_id) {
+            $hasOrgAccess = $user->organisations()
+                ->where('organisations.id', $user->last_organisation_id)
+                ->exists();
+
+            $hasCustomerAccess = DB::table('customers')
+                ->join('customer_user', 'customers.id', '=', 'customer_user.customer_id')
+                ->where('customer_user.user_id', $user->id)
+                ->where('customers.organisation_id', $user->last_organisation_id)
+                ->exists();
+
+            if (! $hasOrgAccess && ! $hasCustomerAccess) {
+                // User lost access - clear their context
+                $user->update([
+                    'last_organisation_id' => null,
+                    'last_customer_id' => null,
+                ]);
+                $user->refresh();
+            }
+        }
+
+        // Validate last_customer_id - if user lost access, clear it
+        if ($user->last_customer_id) {
+            $hasCustomerAccess = $user->customers()
+                ->where('customers.id', $user->last_customer_id)
+                ->exists();
+
+            if (! $hasCustomerAccess) {
+                $user->update(['last_customer_id' => null]);
+                $user->refresh();
+            }
+        }
+
         // Check if user is an organisation user first (organisation takes priority)
         if (! $currentOrganisation) {
             $currentOrganisation = $this->getCurrentDirectOrganisation();
@@ -131,8 +165,8 @@ class HandleInertiaRequests extends Middleware
         $currentCustomer = $user->last_customer_id ? $user->customers()->find($user->last_customer_id) : null;
 
         if ($currentCustomer) {
-            // Customer user - get organisation through customer if not already set
-            $currentOrganisation = Organisation::find($currentCustomer->organisation_id);
+            // Customer user - get organisation through customer relationship (not direct find)
+            $currentOrganisation = $currentCustomer->organisation;
             $userRole = $this->getCustomerUserRole($user, $currentCustomer);
 
             return [$userType, $userRole, $currentOrganisation, $currentCustomer];

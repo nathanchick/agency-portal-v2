@@ -63,7 +63,6 @@ trait HasOrganisationRole
 
         $organisation = $this->getCurrentDirectOrganisation();
 
-        ray($organisation);
         if($organisation) {
             return $this->getOrganisationUserRole($user, $organisation);
         }

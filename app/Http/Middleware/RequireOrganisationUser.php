@@ -29,7 +29,6 @@ class RequireOrganisationUser
         }
 
         $role = $this->getCurrentOrganisationUserRole();
-        ray($role);
 
         // Get current organisation from session or multitenancy
         $currentOrganisation = Organisation::current();
