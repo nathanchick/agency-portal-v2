@@ -20,11 +20,12 @@ class CheckRole
         $user = $request->user();
 
         if (! $user) {
-            abort(403, 'Unauthorized');
+            abort(403, 'Unauthorized - No authenticated user');
         }
 
         // Get user's current role from shared Inertia data
         $userRole = $request->attributes->get('inertia_shared_data')['auth']['role'] ?? null;
+
 
         // If we can't get it from shared data, determine it manually
         if (! $userRole) {

@@ -344,9 +344,7 @@ class CustomerController extends Controller
             ]);
 
             // Send notification to existing user
-            if ($addedToOrganisation) {
-                $user->notify(new \App\Notifications\UserAddedToOrganisation($organisation->name, $customer->name));
-            }
+            $user->notify(new \Modules\Organisation\Notifications\UserAddedToOrganisation($organisation->name, $customer->name));
 
             $message = 'Existing user added to customer successfully';
         } else {

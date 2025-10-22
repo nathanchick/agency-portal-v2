@@ -1,0 +1,11 @@
+{
+    "name": "CspManagement",
+    "alias": "cspmanagement",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CspManagement\\Providers\\CspManagementServiceProvider"
+    ],
+    "files": []
+}

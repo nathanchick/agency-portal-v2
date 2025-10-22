@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Modules\Organisation\Models\ApiToken;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Modules\Organisation\Models\ApiToken;
 
 class ApiTokenController extends Controller
 {

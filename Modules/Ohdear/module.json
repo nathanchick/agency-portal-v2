@@ -1,0 +1,11 @@
+{
+    "name": "Ohdear",
+    "alias": "ohdear",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Ohdear\\Providers\\OhdearServiceProvider"
+    ],
+    "files": []
+}

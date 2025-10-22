@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/cspmanagement",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\CspManagement\\": "app/",
+            "Modules\\CspManagement\\Database\\Factories\\": "database/factories/",
+            "Modules\\CspManagement\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\CspManagement\\Tests\\": "tests/"
+        }
+    }
+}

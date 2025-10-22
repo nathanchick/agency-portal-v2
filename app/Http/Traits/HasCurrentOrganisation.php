@@ -6,6 +6,28 @@ use Modules\Organisation\Models\Organisation;
 
 trait HasCurrentOrganisation
 {
+    public function getCurrentDirectOrganisation()
+    {
+        $user = auth()->user();
+
+        if (! $user) {
+            return null;
+        }
+
+        // Try to get from multitenancy first
+        $organisation = Organisation::current();
+
+        // Try session if not found
+        if (! $organisation && session('current_organisation_id')) {
+            $sessionOrgId = session('current_organisation_id');
+
+            // Try direct organisations first
+            $organisation = $user->organisations()->find($sessionOrgId);
+        }
+
+        return $organisation;
+    }
+
     /**
      * Get the current organisation for the authenticated user
      */

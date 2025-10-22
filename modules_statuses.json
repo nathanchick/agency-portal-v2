@@ -3,5 +3,11 @@
     "Document": true,
     "Ticket": true,
     "Webhook": true,
-    "Organisation": true
+    "Organisation": true,
+    "Xero": true,
+    "Timesheet": true,
+    "Ohdear": true,
+    "Sansec": true,
+    "CspManagement": true,
+    "Deployment": true
 }

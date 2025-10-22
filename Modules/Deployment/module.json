@@ -1,0 +1,11 @@
+{
+    "name": "Deployment",
+    "alias": "deployment",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Deployment\\Providers\\DeploymentServiceProvider"
+    ],
+    "files": []
+}

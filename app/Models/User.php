@@ -63,6 +63,17 @@ class User extends Authenticatable implements CanUseTickets
         return $this->belongsToMany(Customer::class);
     }
 
+    public function customerOrganisations()
+    {
+        return Organisation::query()
+              ->whereIn('id', function ($query) {
+                  $query->select('organisation_id')
+                      ->from('customers')
+                      ->join('customer_user', 'customers.id', '=', 'customer_user.customer_id')
+                      ->where('customer_user.user_id', $this->id);
+             });
+    }
+
     /**
      * Get the team ID for Spatie Permission team support
      */

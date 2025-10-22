@@ -8,6 +8,7 @@ import {
     LockIcon,
     Map,
     PoundSterling,
+    Rocket,
     SquareTerminal,
     TicketCheckIcon,
     Users,
@@ -52,6 +53,24 @@ export const navigation: NavigationConfig = {
             roles: ['Admin', 'Manager'],
         },
         {
+            title: "Deployments",
+            url: route('deployments.index'),
+            icon: Rocket,
+            roles: ['Admin', 'Manager'],
+            items: [
+                {
+                    title: "History",
+                    url: route('deployments.index'),
+                    roles: ['Admin', 'Manager'],
+                },
+                {
+                    title: "Configuration",
+                    url: route('deployments.config'),
+                    roles: ['Admin', 'Manager'],
+                },
+            ],
+        },
+        {
             title: "Documents",
             url: route('documents.pending'),
             icon: FileText,
@@ -84,21 +103,9 @@ export const navigation: NavigationConfig = {
         },
         {
             title: "Deployments",
-            url: "#",
-            icon: Bot,
+            url: route('deployments.index'),
+            icon: Rocket,
             roles: ['Admin', 'Manager', 'User'],
-            items: [
-                {
-                    title: "History",
-                    url: "#",
-                    roles: ['Admin', 'Manager', 'User'],
-                },
-                {
-                    title: "Future Planned",
-                    url: "#",
-                    roles: ['Admin', 'Manager'],
-                },
-            ],
         },
         {
             title: "Timesheets",

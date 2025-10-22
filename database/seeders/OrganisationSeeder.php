@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Modules\Organisation\Models\Organisation;
 use Illuminate\Database\Seeder;
+use Modules\Organisation\Models\Organisation;
 
 class OrganisationSeeder extends Seeder
 {

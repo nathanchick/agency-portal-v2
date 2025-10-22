@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Modules\Customer\Models\Customer;
-use Modules\Organisation\Models\Organisation;
-use Modules\Project\Models\Project;
 use Illuminate\Database\Seeder;
+use Modules\Customer\Models\Customer;
+use Modules\Customer\Models\Project;
+use Modules\Organisation\Models\Organisation;
 
 class CustomerSeeder extends Seeder
 {

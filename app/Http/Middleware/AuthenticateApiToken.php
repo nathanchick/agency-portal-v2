@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Modules\Organisation\Models\ApiToken;
 use Closure;
 use Illuminate\Http\Request;
+use Modules\Organisation\Models\ApiToken;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticateApiToken

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\HasCurrentOrganisation;
-use Modules\Customer\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Modules\Customer\Models\Customer;
 use Modules\Organisation\Models\Organisation;
 use Modules\Organisation\Models\Role;
 
@@ -176,7 +176,7 @@ class TeamController extends Controller
             }
 
             // Send notification to existing user
-            $existingUser->notify(new \App\Notifications\TeamInvitation($teamName, $user->name));
+            $existingUser->notify(new \Modules\Organisation\Notifications\TeamInvitation($teamName, $user->name));
 
             return redirect()->route('team.index')
                 ->with('success', 'Existing user added to team successfully.');
@@ -209,7 +209,7 @@ class TeamController extends Controller
         }
 
         // Send invitation email
-        $newUser->notify(new \App\Notifications\TeamInvitation($teamName, $user->name));
+        $newUser->notify(new \Modules\Organisation\Notifications\TeamInvitation($teamName, $user->name));
 
         return redirect()->route('team.index')
             ->with('success', 'Team member added successfully. An invitation email has been sent.');
@@ -471,7 +471,7 @@ class TeamController extends Controller
         $teamName = $currentCustomer ? $currentCustomer->name : $currentOrganisation->name;
 
         // Send invitation email
-        $user->notify(new \App\Notifications\TeamInvitation($teamName, $currentUser->name));
+        $user->notify(new \Modules\Organisation\Notifications\TeamInvitation($teamName, $currentUser->name));
 
         return back()->with('success', 'Invitation email has been resent successfully.');
     }

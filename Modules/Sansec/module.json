@@ -1,0 +1,11 @@
+{
+    "name": "Sansec",
+    "alias": "sansec",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Sansec\\Providers\\SansecServiceProvider"
+    ],
+    "files": []
+}

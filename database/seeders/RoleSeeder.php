@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use Modules\Customer\Models\Customer;
 use Modules\Organisation\Models\Organisation;
-use Illuminate\Database\Seeder;
 use Modules\Organisation\Models\Role;
 
 class RoleSeeder extends Seeder
