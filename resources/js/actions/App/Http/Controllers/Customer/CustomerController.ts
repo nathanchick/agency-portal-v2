@@ -1,6 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
-import deployments from './deployments'
-import documents from './documents'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Customer\CustomerController::switchMethod
 * @see app/Http/Controllers/Customer/CustomerController.php:13
@@ -57,10 +55,6 @@ switchMethodForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post
 
 switchMethod.form = switchMethodForm
 
-const customer = {
-    switch: Object.assign(switchMethod, switchMethod),
-    deployments: Object.assign(deployments, deployments),
-    documents: Object.assign(documents, documents),
-}
+const CustomerController = { switchMethod, switch: switchMethod }
 
-export default customer
+export default CustomerController

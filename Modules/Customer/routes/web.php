@@ -30,3 +30,10 @@ Route::middleware(['auth', 'verified', 'organisation'])->group(function () {
     Route::put('customers/{customer}/websites/{website}/project', [CustomerController::class, 'updateWebsiteProject'])->name('customers.websites.update-project')->middleware('role:Admin|Manager|User');
     Route::delete('customers/{customer}/websites/{website}', [CustomerController::class, 'destroyWebsite'])->name('customers.websites.destroy')->middleware('role:Admin|Manager');
 });
+
+/**
+ * Customer Switching (available to all authenticated users)
+ */
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('/customer/switch', [\Modules\Customer\Http\Controllers\CustomerSwitcherController::class, 'switch'])->name('customer.switch');
+});

@@ -36,6 +36,10 @@ class OrganisationController extends Controller
         // Store the selected organisation in the session
         $request->session()->put('current_organisation_id', $organisationId);
 
+        // Update user's last organisation
+        $user->update(['last_organisation_id' => $organisationId]);
+        $user->update(['last_customer_id' => null]);
+
         return redirect()->route('dashboard')->with('success', 'Organisation switched successfully.');
     }
 }

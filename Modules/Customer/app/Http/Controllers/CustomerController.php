@@ -326,19 +326,13 @@ class CustomerController extends Controller
         if ($user) {
             // User exists - just add relationships
 
-            // Check if already in this organisation
-            $addedToOrganisation = false;
-            if (! $user->organisations()->where('organisations.id', $organisationId)->exists()) {
-                $user->organisations()->attach($organisationId);
-                $addedToOrganisation = true;
-            }
-
             // Check if already assigned to this customer
             if ($customer->users()->where('users.id', $user->id)->exists()) {
                 return back()->with('error', 'User is already assigned to this customer');
             }
 
             // Attach user to the customer with role in pivot table
+            // NOTE: Customer users should ONLY be in customer_user table, NOT organisation_user
             $customer->users()->attach($user->id, [
                 'role_id' => $role->id,
             ]);
@@ -355,10 +349,8 @@ class CustomerController extends Controller
                 'password' => bcrypt(\Illuminate\Support\Str::random(32)), // Random password, user will reset via email
             ]);
 
-            // Attach user to the organisation
-            $user->organisations()->attach($organisationId);
-
             // Attach user to the customer with role in pivot table
+            // NOTE: Customer users should ONLY be in customer_user table, NOT organisation_user
             $customer->users()->attach($user->id, [
                 'role_id' => $role->id,
             ]);

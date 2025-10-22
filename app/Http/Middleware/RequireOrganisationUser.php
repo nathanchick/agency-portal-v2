@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Traits\HasOrganisationRole;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,6 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RequireOrganisationUser
 {
+
+    use HasOrganisationRole;
+
     /**
      * Handle an incoming request.
      *
@@ -23,6 +27,9 @@ class RequireOrganisationUser
         if (! $user) {
             abort(403, 'Unauthorized');
         }
+
+        $role = $this->getCurrentOrganisationUserRole();
+        ray($role);
 
         // Get current organisation from session or multitenancy
         $currentOrganisation = Organisation::current();

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import {ChevronsUpDown, GalleryVerticalEnd} from "lucide-react"
+import {ChevronsUpDown, GalleryVerticalEnd, Users} from "lucide-react"
 import { usePage, router } from "@inertiajs/react"
 import { route } from "ziggy-js"
 
@@ -10,6 +10,7 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuLabel,
+    DropdownMenuSeparator,
     DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -20,26 +21,50 @@ import {
     useSidebar,
 } from "@/components/ui/sidebar"
 
+type Organisation = { id: string; name: string };
+type Customer = { id: string; name: string; organisation_id: string; organisation?: Organisation };
+
 export function OrganisationSwitcher() {
     const {isMobile} = useSidebar()
     const { auth } = usePage<{
         auth: {
-            user: { organisations?: Array<{ id: string; name: string }> };
-            currentOrganisation: { id: string; name: string } | null;
+            user: {
+                organisations?: Array<Organisation>;
+                customers?: Array<Customer>;
+            };
+            currentOrganisation: Organisation | null;
+            currentCustomer: Customer | null;
+            userType: 'organisation' | 'customer';
         }
     }>().props
 
-    // Get user's organisations (in the future this will support multiple)
+    // Get user's organisations and customers
     const organisations = auth.user?.organisations || []
+    const customers = auth.user?.customers || []
     const currentOrganisation = auth.currentOrganisation
+    const currentCustomer = auth.currentCustomer
+    const userType = auth.userType
 
     const [activeOrganisation, setActiveOrganisation] = React.useState(currentOrganisation)
-    const hasMultipleOrganisations = organisations.length > 1
+    const [activeCustomer, setActiveCustomer] = React.useState(currentCustomer)
+    const hasMultipleItems = organisations.length + customers.length > 1
 
-    const handleOrganisationSwitch = (organisation: { id: string; name: string }) => {
+    const handleOrganisationSwitch = (organisation: Organisation) => {
         setActiveOrganisation(organisation)
+        setActiveCustomer(null)
         router.post(route('organisation.switch'), {
             organisation_id: organisation.id,
+        }, {
+            preserveScroll: false,
+            preserveState: false,
+        })
+    }
+
+    const handleCustomerSwitch = (customer: Customer) => {
+        setActiveCustomer(customer)
+        setActiveOrganisation(customer.organisation || null)
+        router.post(route('customer.switch'), {
+            customer_id: customer.id,
         }, {
             preserveScroll: false,
             preserveState: false,
@@ -50,18 +75,26 @@ export function OrganisationSwitcher() {
         return null
     }
 
-    // If only one organisation, show simple button without dropdown
-    if (!hasMultipleOrganisations) {
+    // Determine display name and type
+    const displayName = userType === 'customer' && currentCustomer
+        ? currentCustomer.name
+        : currentOrganisation.name
+    const displayType = userType === 'customer' && currentCustomer ? 'Customer' : 'Organisation'
+    const displayIcon = userType === 'customer' && currentCustomer ? Users : GalleryVerticalEnd
+
+    // If only one item total, show simple button without dropdown
+    if (!hasMultipleItems) {
+        const Icon = displayIcon
         return (
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg">
                         <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                            <GalleryVerticalEnd className="size-4"/>
+                            <Icon className="size-4"/>
                         </div>
                         <div className="grid flex-1 text-left text-sm leading-tight">
-                            <span className="truncate font-medium">{currentOrganisation.name}</span>
-                            <span className="truncate text-xs">Organisation</span>
+                            <span className="truncate font-medium">{displayName}</span>
+                            <span className="truncate text-xs">{displayType}</span>
                         </div>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -69,7 +102,8 @@ export function OrganisationSwitcher() {
         )
     }
 
-    // Multiple organisations - show dropdown
+    // Multiple items - show dropdown with both organisations and customers
+    const Icon = displayIcon
     return (
         <SidebarMenu>
             <SidebarMenuItem>
@@ -80,10 +114,11 @@ export function OrganisationSwitcher() {
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                         >
                             <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                                <GalleryVerticalEnd className="size-4"/>
+                                <Icon className="size-4"/>
                             </div>
                             <div className="grid flex-1 text-left text-sm leading-tight">
-                                <span className="truncate font-medium">{activeOrganisation?.name || currentOrganisation.name}</span>
+                                <span className="truncate font-medium">{displayName}</span>
+                                <span className="truncate text-xs">{displayType}</span>
                             </div>
                             <ChevronsUpDown className="ml-auto"/>
                         </SidebarMenuButton>
@@ -94,22 +129,52 @@ export function OrganisationSwitcher() {
                         side={isMobile ? "bottom" : "right"}
                         sideOffset={4}
                     >
-                        <DropdownMenuLabel className="text-muted-foreground text-xs">
-                            Organisations
-                        </DropdownMenuLabel>
-                        {organisations.map((organisation, index) => (
-                            <DropdownMenuItem
-                                key={organisation.id}
-                                onClick={() => handleOrganisationSwitch(organisation)}
-                                className="gap-2 p-2"
-                            >
-                                <div className="flex size-6 items-center justify-center rounded-md border">
-                                    <GalleryVerticalEnd className="size-3.5 shrink-0"/>
-                                </div>
-                                {organisation.name}
-                                <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                        ))}
+                        {organisations.length > 0 && (
+                            <>
+                                <DropdownMenuLabel className="text-muted-foreground text-xs">
+                                    Organisations
+                                </DropdownMenuLabel>
+                                {organisations.map((organisation) => (
+                                    <DropdownMenuItem
+                                        key={organisation.id}
+                                        onClick={() => handleOrganisationSwitch(organisation)}
+                                        className="gap-2 p-2"
+                                    >
+                                        <div className="flex size-6 items-center justify-center rounded-md border">
+                                            <GalleryVerticalEnd className="size-3.5 shrink-0"/>
+                                        </div>
+                                        {organisation.name}
+                                    </DropdownMenuItem>
+                                ))}
+                            </>
+                        )}
+                        {organisations.length > 0 && customers.length > 0 && <DropdownMenuSeparator />}
+                        {customers.length > 0 && (
+                            <>
+                                <DropdownMenuLabel className="text-muted-foreground text-xs">
+                                    Customers
+                                </DropdownMenuLabel>
+                                {customers.map((customer) => (
+                                    <DropdownMenuItem
+                                        key={customer.id}
+                                        onClick={() => handleCustomerSwitch(customer)}
+                                        className="gap-2 p-2"
+                                    >
+                                        <div className="flex size-6 items-center justify-center rounded-md border">
+                                            <Users className="size-3.5 shrink-0"/>
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span>{customer.name}</span>
+                                            {customer.organisation && (
+                                                <span className="text-muted-foreground text-xs">
+                                                    {customer.organisation.name}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </DropdownMenuItem>
+                                ))}
+                            </>
+                        )}
                     </DropdownMenuContent>
                 </DropdownMenu>
             </SidebarMenuItem>

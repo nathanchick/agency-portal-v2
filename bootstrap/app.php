@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\HandleThemeAppearance;
+use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\SetPermissionTeam;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
@@ -23,7 +23,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
 
         $middleware->web(append: [
-            SetPermissionTeam::class,
             HandleThemeAppearance::class,
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,

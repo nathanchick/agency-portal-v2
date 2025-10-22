@@ -26,6 +26,8 @@ class User extends Authenticatable implements CanUseTickets
         'name',
         'email',
         'password',
+        'last_organisation_id',
+        'last_customer_id',
     ];
 
     /**
