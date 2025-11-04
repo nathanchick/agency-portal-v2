@@ -6,6 +6,7 @@ import { createRoot } from 'react-dom/client';
 import { ToastProvider } from './components/toast-provider';
 import { AuthDebug } from './components/auth-debug';
 import { initializeTheme } from './hooks/use-appearance';
+import './echo';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 

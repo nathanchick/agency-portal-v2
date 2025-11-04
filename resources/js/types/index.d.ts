@@ -26,6 +26,7 @@ export interface SharedData {
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
+    unreadNotificationsCount: number;
     sidebarOpen: boolean;
     permissions?: string[];
     roles?: string[];
@@ -42,4 +43,23 @@ export interface User {
     created_at: string;
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
+}
+
+export interface Notification {
+    id: string;
+    type: string;
+    data: {
+        [key: string]: unknown;
+    };
+    read_at: string | null;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface PaginatedNotifications {
+    data: Notification[];
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
 }

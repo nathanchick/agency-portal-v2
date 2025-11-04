@@ -60,7 +60,7 @@ store.form = storeForm
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:818
 * @route '/tickets/statuses/{ticketStatus}'
 */
-export const update = (args: { ticketStatus: string | number | { id: string | number } } | [ticketStatus: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { ticketStatus: string | { id: string } } | [ticketStatus: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -75,7 +75,7 @@ update.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:818
 * @route '/tickets/statuses/{ticketStatus}'
 */
-update.url = (args: { ticketStatus: string | number | { id: string | number } } | [ticketStatus: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+update.url = (args: { ticketStatus: string | { id: string } } | [ticketStatus: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { ticketStatus: args }
     }
@@ -108,7 +108,7 @@ update.url = (args: { ticketStatus: string | number | { id: string | number } } 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:818
 * @route '/tickets/statuses/{ticketStatus}'
 */
-update.put = (args: { ticketStatus: string | number | { id: string | number } } | [ticketStatus: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { ticketStatus: string | { id: string } } | [ticketStatus: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -118,7 +118,7 @@ update.put = (args: { ticketStatus: string | number | { id: string | number } } 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:818
 * @route '/tickets/statuses/{ticketStatus}'
 */
-const updateForm = (args: { ticketStatus: string | number | { id: string | number } } | [ticketStatus: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateForm = (args: { ticketStatus: string | { id: string } } | [ticketStatus: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -133,7 +133,7 @@ const updateForm = (args: { ticketStatus: string | number | { id: string | numbe
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:818
 * @route '/tickets/statuses/{ticketStatus}'
 */
-updateForm.put = (args: { ticketStatus: string | number | { id: string | number } } | [ticketStatus: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.put = (args: { ticketStatus: string | { id: string } } | [ticketStatus: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -150,7 +150,7 @@ update.form = updateForm
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:858
 * @route '/tickets/statuses/{ticketStatus}'
 */
-export const destroy = (args: { ticketStatus: string | number | { id: string | number } } | [ticketStatus: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { ticketStatus: string | { id: string } } | [ticketStatus: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -165,7 +165,7 @@ destroy.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:858
 * @route '/tickets/statuses/{ticketStatus}'
 */
-destroy.url = (args: { ticketStatus: string | number | { id: string | number } } | [ticketStatus: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { ticketStatus: string | { id: string } } | [ticketStatus: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { ticketStatus: args }
     }
@@ -198,7 +198,7 @@ destroy.url = (args: { ticketStatus: string | number | { id: string | number } }
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:858
 * @route '/tickets/statuses/{ticketStatus}'
 */
-destroy.delete = (args: { ticketStatus: string | number | { id: string | number } } | [ticketStatus: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { ticketStatus: string | { id: string } } | [ticketStatus: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -208,7 +208,7 @@ destroy.delete = (args: { ticketStatus: string | number | { id: string | number 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:858
 * @route '/tickets/statuses/{ticketStatus}'
 */
-const destroyForm = (args: { ticketStatus: string | number | { id: string | number } } | [ticketStatus: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { ticketStatus: string | { id: string } } | [ticketStatus: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -223,7 +223,7 @@ const destroyForm = (args: { ticketStatus: string | number | { id: string | numb
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:858
 * @route '/tickets/statuses/{ticketStatus}'
 */
-destroyForm.delete = (args: { ticketStatus: string | number | { id: string | number } } | [ticketStatus: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { ticketStatus: string | { id: string } } | [ticketStatus: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

@@ -1,4 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar"
+import { NotificationBell } from "@/components/notification-bell"
+import { useNotifications } from "@/hooks/useNotifications"
 import { usePage } from '@inertiajs/react'
 import {
     Breadcrumb,
@@ -16,12 +18,14 @@ import {
 } from "@/components/ui/sidebar"
 
 export default function Page() {
+    const { count, refreshCount } = useNotifications();
+
     return (
         <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
                 <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-                    <div className="flex items-center gap-2 px-4">
+                    <div className="flex items-center gap-2 px-4 flex-1">
                         <SidebarTrigger className="-ml-1" />
                         <Separator
                             orientation="vertical"
@@ -36,6 +40,9 @@ export default function Page() {
                                 </BreadcrumbItem>
                             </BreadcrumbList>
                         </Breadcrumb>
+                    </div>
+                    <div className="ml-auto px-4">
+                        <NotificationBell count={count} onUpdate={refreshCount} />
                     </div>
                 </header>
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

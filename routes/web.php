@@ -29,6 +29,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('team/{team}/resend-invite', [\App\Http\Controllers\TeamController::class, 'resendInvite'])
         ->name('team.resend-invite')
         ->middleware('role:Admin');
+
+    // Notification routes
+    Route::prefix('notifications')->name('notifications.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\NotificationController::class, 'index'])->name('index');
+        Route::get('/unread-count', [\App\Http\Controllers\NotificationController::class, 'unreadCount'])->name('unread-count');
+        Route::post('/{id}/read', [\App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('mark-as-read');
+        Route::post('/read-all', [\App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');
+        Route::delete('/{id}', [\App\Http\Controllers\NotificationController::class, 'destroy'])->name('destroy');
+    });
 });
 
 // Organisation routes (customer management, projects, websites)

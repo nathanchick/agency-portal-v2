@@ -92,6 +92,9 @@ class HandleInertiaRequests extends Middleware
                 ->get(['id', 'name', 'filters']);
         }
 
+        // Get unread notifications count
+        $unreadNotificationsCount = $user ? $user->unreadNotifications()->count() : 0;
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
@@ -103,6 +106,7 @@ class HandleInertiaRequests extends Middleware
                 'currentCustomer' => $currentCustomer,
                 'savedTicketFilters' => $savedFilters,
             ],
+            'unreadNotificationsCount' => $unreadNotificationsCount,
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'roles' => $this->getUserRoles($user, $currentOrganisation),
             'flash' => [
