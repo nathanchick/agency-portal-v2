@@ -45,6 +45,11 @@ class ServiceBudgetChange extends Model
         return $this->belongsTo(User::class, 'changed_by');
     }
 
+    public function createdByUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'changed_by');
+    }
+
     public function scopeActive($query, $date = null)
     {
         $date = $date ?? now();

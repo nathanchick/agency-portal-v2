@@ -205,7 +205,7 @@ class ServiceController extends Controller
             'project',
             'serviceManager',
             'budgetPeriods' => fn($q) => $q->orderBy('period_start', 'desc'),
-            'budgetChanges' => fn($q) => $q->orderBy('effective_from', 'desc'),
+            'budgetChanges' => fn($q) => $q->with('createdByUser')->orderBy('effective_from', 'desc'),
             'tasks' => fn($q) => $q->where('is_active', true),
         ]);
 
@@ -228,6 +228,7 @@ class ServiceController extends Controller
             'currentPeriod' => $currentPeriod,
             'timeEntriesStats' => $timeEntriesStats,
             'budgetPeriods' => $service->budgetPeriods,
+            'budgetChanges' => $service->budgetChanges,
         ]);
     }
 
@@ -325,5 +326,87 @@ class ServiceController extends Controller
             'Yearly' => $start->copy()->addYear()->subDay()->toDateString(),
             'OneTime' => $start->copy()->addYears(10)->toDateString(), // Far future date
         };
+    }
+
+    public function storeBudgetAdjustment(Request $request, Service $service)
+    {
+        if ($service->organisation_id !== $this->getCurrentDirectOrganisation()->id) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'new_budget_hours' => 'nullable|numeric|min:0',
+            'new_budget_amount' => 'nullable|numeric|min:0',
+            'effective_from' => 'required|date',
+            'effective_to' => 'nullable|date|after:effective_from',
+            'reason' => 'required|string|max:500',
+            'apply_to_existing_periods' => 'boolean',
+        ]);
+
+        // Find the budget that will be active on the effective_from date
+        $effectiveDate = \Carbon\Carbon::parse($validated['effective_from']);
+
+        // Get active budget change on the effective_from date
+        $activeBudgetChange = $service->budgetChanges()
+            ->where('effective_from', '<=', $effectiveDate)
+            ->where(function ($q) use ($effectiveDate) {
+                $q->whereNull('effective_to')
+                    ->orWhere('effective_to', '>=', $effectiveDate);
+            })
+            ->orderBy('effective_from', 'desc')
+            ->first();
+
+        // Determine the budget that will be active on effective_from date
+        if ($activeBudgetChange) {
+            // If there's an active change, use its new values as the baseline
+            $oldBudgetHours = $activeBudgetChange->new_budget_hours;
+            $oldBudgetAmount = $activeBudgetChange->new_budget_amount;
+        } else {
+            // No active change, use service's base budget
+            $oldBudgetHours = $service->current_budget_hours;
+            $oldBudgetAmount = $service->current_budget_amount;
+        }
+
+        // Record the budget change
+        ServiceBudgetChange::create([
+            'service_id' => $service->id,
+            'changed_by' => auth()->id(),
+            'effective_from' => $validated['effective_from'],
+            'effective_to' => $validated['effective_to'] ?? null,
+            'old_budget_hours' => $oldBudgetHours,
+            'new_budget_hours' => $validated['new_budget_hours'] ?? $oldBudgetHours,
+            'old_budget_amount' => $oldBudgetAmount,
+            'new_budget_amount' => $validated['new_budget_amount'] ?? $oldBudgetAmount,
+            'reason' => $validated['reason'],
+        ]);
+
+        // Update the service's current budget only if this is the most recent change
+        $latestChange = $service->budgetChanges()
+            ->orderBy('effective_from', 'desc')
+            ->first();
+
+        if ($latestChange && $latestChange->effective_from === $validated['effective_from']) {
+            $service->update([
+                'current_budget_hours' => $validated['new_budget_hours'] ?? $oldBudgetHours,
+                'current_budget_amount' => $validated['new_budget_amount'] ?? $oldBudgetAmount,
+            ]);
+        }
+
+        // If apply_to_existing_periods is true, update existing periods
+        if ($validated['apply_to_existing_periods'] ?? false) {
+            $query = $service->budgetPeriods()
+                ->where('period_start', '>=', $validated['effective_from']);
+
+            if (isset($validated['effective_to'])) {
+                $query->where('period_start', '<=', $validated['effective_to']);
+            }
+
+            $query->update([
+                'budget_hours' => $validated['new_budget_hours'] ?? $oldBudgetHours,
+                'budget_amount' => $validated['new_budget_amount'] ?? $oldBudgetAmount,
+            ]);
+        }
+
+        return back()->with('success', 'Budget adjustment recorded successfully.');
     }
 }

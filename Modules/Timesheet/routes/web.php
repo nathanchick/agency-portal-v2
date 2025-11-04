@@ -42,6 +42,9 @@ Route::middleware(['auth', 'verified', 'organisation'])->group(function () {
     Route::post('/timesheet/services/{service}/users/attach', [ServiceController::class, 'attachUser'])->name('timesheet.services.users.attach')->middleware('role:Admin|Manager');
     Route::delete('/timesheet/services/{service}/users/{user}', [ServiceController::class, 'detachUser'])->name('timesheet.services.users.detach')->middleware('role:Admin|Manager');
 
+    // Budget Adjustments
+    Route::post('/timesheet/services/{service}/budget-adjustments', [ServiceController::class, 'storeBudgetAdjustment'])->name('timesheet.services.budget-adjustments.store')->middleware('role:Admin|Manager');
+
     // Budget Periods
     Route::get('/timesheet/services/{service}/budget-periods', [ServiceBudgetPeriodController::class, 'index'])->name('timesheet.services.budget-periods.index')->middleware('role:Admin|Manager');
     Route::get('/timesheet/services/{service}/budget-periods/ledger', [ServiceBudgetPeriodController::class, 'ledger'])->name('timesheet.services.budget-periods.ledger')->middleware('role:Admin|Manager');

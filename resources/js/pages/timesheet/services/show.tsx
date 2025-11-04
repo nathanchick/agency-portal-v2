@@ -25,8 +25,21 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
+import {Input} from '@/components/ui/input';
+import {Label} from '@/components/ui/label';
+import {Textarea} from '@/components/ui/textarea';
+import {Checkbox} from '@/components/ui/checkbox';
 import {Briefcase, Edit, Clock, DollarSign, TrendingUp, Calendar, AlertCircle} from 'lucide-react';
 import {route} from 'ziggy-js';
+import {useState} from 'react';
 import {
     ChartContainer,
     ChartTooltip,
@@ -72,7 +85,10 @@ interface BudgetChange {
     effective_to?: string;
     old_budget_hours?: number;
     new_budget_hours?: number;
+    old_budget_amount?: number;
+    new_budget_amount?: number;
     reason?: string;
+    created_by_user?: User;
 }
 
 interface Service {
@@ -105,9 +121,41 @@ interface Props {
     currentPeriod?: BudgetPeriod;
     timeEntriesStats: TimeEntriesStats;
     budgetPeriods: BudgetPeriod[];
+    budgetChanges: BudgetChange[];
 }
 
-export default function ServiceShow({service, currentPeriod, timeEntriesStats, budgetPeriods}: Props) {
+export default function ServiceShow({service, currentPeriod, timeEntriesStats, budgetPeriods, budgetChanges}: Props) {
+    const [isBudgetDialogOpen, setIsBudgetDialogOpen] = useState(false);
+    const [budgetFormData, setBudgetFormData] = useState({
+        new_budget_hours: service.current_budget_hours?.toString() || '',
+        new_budget_amount: service.current_budget_amount?.toString() || '',
+        effective_from: new Date().toISOString().split('T')[0],
+        effective_to: '',
+        reason: '',
+        apply_to_existing_periods: false,
+    });
+
+    const handleBudgetAdjustment = () => {
+        router.post(
+            route('timesheet.services.budget-adjustments.store', service.id),
+            budgetFormData,
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setIsBudgetDialogOpen(false);
+                    setBudgetFormData({
+                        new_budget_hours: service.current_budget_hours?.toString() || '',
+                        new_budget_amount: service.current_budget_amount?.toString() || '',
+                        effective_from: new Date().toISOString().split('T')[0],
+                        effective_to: '',
+                        reason: '',
+                        apply_to_existing_periods: false,
+                    });
+                },
+            }
+        );
+    };
+
     const getStatusBadge = (status: string) => {
         const variants: Record<string, 'default' | 'secondary' | 'destructive'> = {
             Active: 'default',
@@ -234,6 +282,13 @@ export default function ServiceShow({service, currentPeriod, timeEntriesStats, b
                                 Budget History
                             </Button>
                             <Button
+                                variant="outline"
+                                onClick={() => setIsBudgetDialogOpen(true)}
+                            >
+                                <DollarSign className="h-4 w-4 mr-2" />
+                                Adjust Budget
+                            </Button>
+                            <Button
                                 onClick={() => router.visit(route('timesheet.services.edit', service.id))}
                             >
                                 <Edit className="h-4 w-4 mr-2" />
@@ -331,6 +386,77 @@ export default function ServiceShow({service, currentPeriod, timeEntriesStats, b
                                             style={{width: `${Math.min(getBudgetProgress(), 100)}%`}}
                                         />
                                     </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )}
+
+                    {/* Budget Adjustments */}
+                    {budgetChanges.length > 0 && (
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Budget Adjustments</CardTitle>
+                                <CardDescription>History of budget changes for this service</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-3">
+                                    {budgetChanges.map((change, index) => {
+                                        const isActive = !change.effective_to || new Date(change.effective_to) >= new Date();
+
+                                        // If there's an effective_to date, budget reverts to the old values
+                                        const willRevertTo = change.effective_to
+                                            ? `${Number(change.old_budget_hours || 0).toFixed(2)}h / £${Number(change.old_budget_amount || 0).toFixed(2)}`
+                                            : 'Permanent';
+
+                                        return (
+                                            <div
+                                                key={change.id}
+                                                className={`p-4 rounded-lg border ${isActive ? 'bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800' : 'bg-muted/50'}`}
+                                            >
+                                                <div className="grid gap-4 md:grid-cols-4">
+                                                    <div>
+                                                        <p className="text-xs text-muted-foreground">Budget Change</p>
+                                                        <p className="text-sm font-medium">
+                                                            {Number(change.old_budget_hours || 0).toFixed(2)}h → {Number(change.new_budget_hours || 0).toFixed(2)}h
+                                                        </p>
+                                                        <p className="text-xs text-muted-foreground">
+                                                            £{Number(change.old_budget_amount || 0).toFixed(2)} → £{Number(change.new_budget_amount || 0).toFixed(2)}
+                                                        </p>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-xs text-muted-foreground">Duration</p>
+                                                        <p className="text-sm font-medium">
+                                                            {formatDate(change.effective_from)}
+                                                        </p>
+                                                        <p className="text-xs text-muted-foreground">
+                                                            {change.effective_to ? `to ${formatDate(change.effective_to)}` : 'Ongoing'}
+                                                        </p>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-xs text-muted-foreground">Will Revert To</p>
+                                                        <p className="text-sm font-medium">
+                                                            {willRevertTo}
+                                                        </p>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-xs text-muted-foreground">Changed By</p>
+                                                        <p className="text-sm font-medium">
+                                                            {change.created_by_user?.name || 'System'}
+                                                        </p>
+                                                        {isActive && (
+                                                            <Badge variant="default" className="mt-1">Active</Badge>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                                {change.reason && (
+                                                    <div className="mt-3 pt-3 border-t">
+                                                        <p className="text-xs text-muted-foreground">Reason</p>
+                                                        <p className="text-sm">{change.reason}</p>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             </CardContent>
                         </Card>
@@ -473,6 +599,121 @@ export default function ServiceShow({service, currentPeriod, timeEntriesStats, b
                     )}
                 </div>
             </SidebarInset>
+
+            {/* Budget Adjustment Dialog */}
+            <Dialog open={isBudgetDialogOpen} onOpenChange={setIsBudgetDialogOpen}>
+                <DialogContent className="max-w-2xl">
+                    <DialogHeader>
+                        <DialogTitle>Adjust Service Budget</DialogTitle>
+                        <DialogDescription>
+                            Create a budget adjustment for {service.name}. This will track the change history and optionally update existing budget periods.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4">
+                        <Card>
+                            <CardContent className="pt-6">
+                                <div className="grid gap-4 md:grid-cols-2">
+                                    <div>
+                                        <p className="text-sm text-muted-foreground">Current Budget Hours</p>
+                                        <p className="text-xl font-bold">{Number(service.current_budget_hours || 0).toFixed(2)}h</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-sm text-muted-foreground">Current Budget Amount</p>
+                                        <p className="text-xl font-bold">£{Number(service.current_budget_amount || 0).toFixed(2)}</p>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        <div className="grid gap-4 md:grid-cols-2">
+                            <div>
+                                <Label htmlFor="new_budget_hours">New Budget Hours</Label>
+                                <Input
+                                    id="new_budget_hours"
+                                    type="number"
+                                    step="0.01"
+                                    value={budgetFormData.new_budget_hours}
+                                    onChange={(e) => setBudgetFormData({...budgetFormData, new_budget_hours: e.target.value})}
+                                    placeholder="0.00"
+                                />
+                            </div>
+                            <div>
+                                <Label htmlFor="new_budget_amount">New Budget Amount (£)</Label>
+                                <Input
+                                    id="new_budget_amount"
+                                    type="number"
+                                    step="0.01"
+                                    value={budgetFormData.new_budget_amount}
+                                    onChange={(e) => setBudgetFormData({...budgetFormData, new_budget_amount: e.target.value})}
+                                    placeholder="0.00"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="grid gap-4 md:grid-cols-2">
+                            <div>
+                                <Label htmlFor="effective_from">Effective From *</Label>
+                                <Input
+                                    id="effective_from"
+                                    type="date"
+                                    value={budgetFormData.effective_from}
+                                    onChange={(e) => setBudgetFormData({...budgetFormData, effective_from: e.target.value})}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <Label htmlFor="effective_to">Effective To (Optional)</Label>
+                                <Input
+                                    id="effective_to"
+                                    type="date"
+                                    value={budgetFormData.effective_to}
+                                    onChange={(e) => setBudgetFormData({...budgetFormData, effective_to: e.target.value})}
+                                />
+                                <p className="text-xs text-muted-foreground mt-1">Leave empty for ongoing</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <Label htmlFor="reason">Reason for Adjustment *</Label>
+                            <Textarea
+                                id="reason"
+                                value={budgetFormData.reason}
+                                onChange={(e) => setBudgetFormData({...budgetFormData, reason: e.target.value})}
+                                placeholder="Explain why the budget is being adjusted..."
+                                rows={3}
+                                required
+                            />
+                        </div>
+
+                        <div className="flex items-center space-x-2 p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
+                            <Checkbox
+                                id="apply_to_existing"
+                                checked={budgetFormData.apply_to_existing_periods}
+                                onCheckedChange={(checked) => setBudgetFormData({...budgetFormData, apply_to_existing_periods: checked as boolean})}
+                            />
+                            <div>
+                                <Label htmlFor="apply_to_existing" className="font-medium cursor-pointer">
+                                    Apply to existing budget periods
+                                </Label>
+                                <p className="text-xs text-muted-foreground">
+                                    Update budget for all existing periods within the effective date range
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setIsBudgetDialogOpen(false)}>
+                            Cancel
+                        </Button>
+                        <Button
+                            onClick={handleBudgetAdjustment}
+                            disabled={!budgetFormData.reason || !budgetFormData.effective_from}
+                        >
+                            Create Budget Adjustment
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </SidebarProvider>
     );
 }
