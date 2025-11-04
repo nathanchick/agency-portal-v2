@@ -28,6 +28,10 @@ class RequireOrganisationUser
             abort(403, 'Unauthorized');
         }
 
+        if( $user->last_customer_id !== null ){
+            abort(403, 'This resource is only accessible to organisation users.');
+        }
+
         $role = $this->getCurrentOrganisationUserRole();
 
         // Get current organisation from database or multitenancy

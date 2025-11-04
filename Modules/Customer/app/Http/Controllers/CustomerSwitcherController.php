@@ -45,6 +45,9 @@ class CustomerSwitcherController extends Controller
             'last_organisation_id' => $customer->organisation_id,
         ]);
 
+        // Refresh user model to ensure changes are reflected
+        $user->refresh();
+
         return redirect()->route('dashboard')->with('success', 'Customer switched successfully.');
     }
 }

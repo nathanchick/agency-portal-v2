@@ -31,7 +31,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import {Rocket} from 'lucide-react';
+import {Rocket, X} from 'lucide-react';
 import {useState} from 'react';
 import {route} from 'ziggy-js';
 
@@ -89,10 +89,21 @@ export default function DeploymentsIndex({deployments, customers, filters}: Prop
         }
 
         router.get(route('deployments.index'), newFilters, {
-            preserveState: true,
-            replace: true,
+            preserveState: false,
+            replace: false,
         });
     };
+
+    const handleClearFilters = () => {
+        setSelectedCustomer('');
+        setSelectedStatus('');
+        router.get(route('deployments.index'), {}, {
+            preserveState: false,
+            replace: false,
+        });
+    };
+
+    const hasActiveFilters = selectedCustomer || selectedStatus;
 
     const getStatusBadge = (status: string) => {
         const variants: Record<string, 'default' | 'secondary' | 'destructive'> = {
@@ -142,25 +153,27 @@ export default function DeploymentsIndex({deployments, customers, filters}: Prop
                     <h1 className="text-3xl font-bold">Deployment History</h1>
 
                     {/* Filters */}
-                    <div className="flex gap-4">
-                        <Select
-                            value={selectedCustomer || undefined}
-                            onValueChange={(value) => {
-                                setSelectedCustomer(value);
-                                handleFilterChange('customer_id', value);
-                            }}
-                        >
-                            <SelectTrigger className="w-[200px]">
-                                <SelectValue placeholder="All Customers"/>
-                            </SelectTrigger>
-                            <SelectContent>
-                                {customers.map((customer) => (
-                                    <SelectItem key={customer.id} value={customer.id}>
-                                        {customer.name}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
+                    <div className="flex gap-4 items-center">
+                        {customers.length > 0 && (
+                            <Select
+                                value={selectedCustomer || undefined}
+                                onValueChange={(value) => {
+                                    setSelectedCustomer(value);
+                                    handleFilterChange('customer_id', value);
+                                }}
+                            >
+                                <SelectTrigger className="w-[200px]">
+                                    <SelectValue placeholder="All Customers"/>
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {customers.map((customer) => (
+                                        <SelectItem key={customer.id} value={customer.id}>
+                                            {customer.name}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        )}
 
                         <Select
                             value={selectedStatus || undefined}
@@ -178,6 +191,17 @@ export default function DeploymentsIndex({deployments, customers, filters}: Prop
                                 <SelectItem value="failed">Failed</SelectItem>
                             </SelectContent>
                         </Select>
+
+                        {hasActiveFilters && (
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={handleClearFilters}
+                            >
+                                <X className="h-4 w-4 mr-2"/>
+                                Clear filters
+                            </Button>
+                        )}
                     </div>
 
                     {/* Deployments Table */}

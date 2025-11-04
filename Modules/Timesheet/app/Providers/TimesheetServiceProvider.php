@@ -43,7 +43,11 @@ class TimesheetServiceProvider extends ServiceProvider
      */
     protected function registerCommands(): void
     {
-        // $this->commands([]);
+        $this->commands([
+            \Modules\Timesheet\Console\Commands\GenerateNextBudgetPeriods::class,
+            \Modules\Timesheet\Console\Commands\CreateMissingBudgetPeriods::class,
+            \Modules\Timesheet\Console\Commands\BulkReconcilePeriods::class,
+        ]);
     }
 
     /**
@@ -51,10 +55,12 @@ class TimesheetServiceProvider extends ServiceProvider
      */
     protected function registerCommandSchedules(): void
     {
-        // $this->app->booted(function () {
-        //     $schedule = $this->app->make(Schedule::class);
-        //     $schedule->command('inspire')->hourly();
-        // });
+        $this->app->booted(function () {
+            $schedule = $this->app->make(\Illuminate\Console\Scheduling\Schedule::class);
+
+            // Run daily at 1 AM to create budget periods for services ending in the next 7 days
+            $schedule->command('timesheet:generate-next-periods')->dailyAt('01:00');
+        });
     }
 
     /**

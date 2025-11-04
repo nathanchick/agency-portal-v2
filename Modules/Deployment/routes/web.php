@@ -14,6 +14,9 @@ Route::middleware(['auth', 'verified', 'organisation'])->group(function () {
     Route::delete('/deployments/{deployment}', [DeploymentController::class, 'destroy'])->name('deployments.destroy');
 });
 
-Route::middleware(['auth', 'organisation'])->group(function () {
+/**
+ * Customer Deployment Routes (Customer Users)
+ */
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/customer/deployments', [CustomerDeploymentController::class, 'index'])->name('customer.deployments.index');
 });

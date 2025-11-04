@@ -1,0 +1,478 @@
+import {Head, router} from '@inertiajs/react';
+import {AppSidebar} from '@/components/app-sidebar';
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import {Separator} from '@/components/ui/separator';
+import {
+    SidebarInset,
+    SidebarProvider,
+    SidebarTrigger,
+} from '@/components/ui/sidebar';
+import {Button} from '@/components/ui/button';
+import {Badge} from '@/components/ui/badge';
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from '@/components/ui/table';
+import {Briefcase, Edit, Clock, DollarSign, TrendingUp, Calendar, AlertCircle} from 'lucide-react';
+import {route} from 'ziggy-js';
+import {
+    ChartContainer,
+    ChartTooltip,
+    ChartTooltipContent,
+} from '@/components/ui/chart';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts';
+
+interface Customer {
+    id: string;
+    name: string;
+}
+
+interface Project {
+    id: string;
+    name: string;
+}
+
+interface User {
+    id: string;
+    name: string;
+}
+
+interface Task {
+    id: string;
+    name: string;
+}
+
+interface BudgetPeriod {
+    id: string;
+    period_start: string;
+    period_end: string;
+    budget_hours: number;
+    hours_used: number;
+    hours_rollover_from_previous: number;
+    total_available_hours: number;
+    remaining_hours: number;
+    reconciled: boolean;
+}
+
+interface BudgetChange {
+    id: string;
+    effective_from: string;
+    effective_to?: string;
+    old_budget_hours?: number;
+    new_budget_hours?: number;
+    reason?: string;
+}
+
+interface Service {
+    id: string;
+    name: string;
+    description?: string;
+    customer: Customer;
+    project?: Project;
+    status: string;
+    billing_type: string;
+    budget_period: string;
+    current_budget_hours?: number;
+    current_budget_amount?: number;
+    budget_rollover_enabled: boolean;
+    start_date: string;
+    end_date?: string;
+    default_hourly_rate?: number;
+    service_manager?: User;
+    tasks: Task[];
+}
+
+interface TimeEntriesStats {
+    total_hours: number;
+    billable_hours: number;
+    total_amount: number;
+}
+
+interface Props {
+    service: Service;
+    currentPeriod?: BudgetPeriod;
+    timeEntriesStats: TimeEntriesStats;
+    budgetPeriods: BudgetPeriod[];
+}
+
+export default function ServiceShow({service, currentPeriod, timeEntriesStats, budgetPeriods}: Props) {
+    const getStatusBadge = (status: string) => {
+        const variants: Record<string, 'default' | 'secondary' | 'destructive'> = {
+            Active: 'default',
+            Archived: 'secondary',
+            Completed: 'secondary',
+        };
+
+        return (
+            <Badge variant={variants[status] || 'secondary'}>
+                {status}
+            </Badge>
+        );
+    };
+
+    const formatDate = (dateString: string) => {
+        return new Date(dateString).toLocaleDateString();
+    };
+
+    const getBudgetProgress = () => {
+        if (!currentPeriod) return 0;
+        return (Number(currentPeriod.hours_used) / Number(currentPeriod.total_available_hours)) * 100;
+    };
+
+    const isOverBudget = () => {
+        if (!currentPeriod) return false;
+        return Number(currentPeriod.hours_used) > Number(currentPeriod.total_available_hours);
+    };
+
+    // Prepare chart data
+    const getMaxPeriods = () => {
+        switch (service.budget_period) {
+            case 'Monthly': return 12;
+            case 'Quarterly': return 4;
+            case 'Yearly': return 1;
+            case 'OneTime': return 1;
+            default: return 12;
+        }
+    };
+
+    const maxPeriods = getMaxPeriods();
+
+    const chartData = budgetPeriods
+        .sort((a, b) => new Date(b.period_start).getTime() - new Date(a.period_start).getTime()) // Sort newest first
+        .slice(0, maxPeriods) // Take only the last N periods
+        .reverse() // Reverse for chronological order in chart
+        .map(period => ({
+            period: new Date(period.period_start).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+            budgetHours: Number(period.total_available_hours),
+            usedHours: Number(period.hours_used),
+        }));
+
+    // Check if any period has a non-zero budget
+    const hasBudget = chartData.some(p => p.budgetHours > 0);
+
+    const chartConfig = {
+        ...(hasBudget && {
+            budgetHours: {
+                label: "Budget Hours",
+                color: "hsl(217 91% 60%)",
+            },
+        }),
+        usedHours: {
+            label: "Used Hours",
+            color: "hsl(142.1 76.2% 36.3%)",
+        },
+    };
+
+    const getChartDescription = () => {
+        switch (service.budget_period) {
+            case 'Monthly': return 'Last 12 months comparison';
+            case 'Quarterly': return 'Last 4 quarters comparison';
+            case 'Yearly': return 'Annual comparison';
+            case 'OneTime': return 'Project usage';
+            default: return 'Historical comparison of budget vs. actual usage';
+        }
+    };
+
+    return (
+        <SidebarProvider>
+            <AppSidebar />
+            <SidebarInset>
+                <Head title={`Service: ${service.name}`} />
+                <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+                    <div className="flex items-center gap-2 px-4">
+                        <SidebarTrigger className="-ml-1" />
+                        <Separator orientation="vertical" className="mr-2 h-4" />
+                        <Breadcrumb>
+                            <BreadcrumbList>
+                                <BreadcrumbItem className="hidden md:block">
+                                    <BreadcrumbLink href={route('dashboard')}>
+                                        Dashboard
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                                <BreadcrumbSeparator className="hidden md:block" />
+                                <BreadcrumbItem>
+                                    <BreadcrumbLink href={route('timesheet.services.index')}>
+                                        Services
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                                <BreadcrumbSeparator className="hidden md:block" />
+                                <BreadcrumbItem>
+                                    <BreadcrumbPage>{service.name}</BreadcrumbPage>
+                                </BreadcrumbItem>
+                            </BreadcrumbList>
+                        </Breadcrumb>
+                    </div>
+                </header>
+                <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                    <div className="flex justify-between items-start">
+                        <div className="flex items-center gap-3">
+                            <Briefcase className="h-8 w-8" />
+                            <div>
+                                <h1 className="text-2xl font-bold">{service.name}</h1>
+                                <p className="text-sm text-muted-foreground">
+                                    {service.customer.name} {service.project && `• ${service.project.name}`}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex gap-2">
+                            <Button
+                                variant="outline"
+                                onClick={() => router.visit(route('timesheet.services.budget-periods.index', service.id))}
+                            >
+                                Budget History
+                            </Button>
+                            <Button
+                                onClick={() => router.visit(route('timesheet.services.edit', service.id))}
+                            >
+                                <Edit className="h-4 w-4 mr-2" />
+                                Edit Service
+                            </Button>
+                        </div>
+                    </div>
+
+                    {/* Service Details */}
+                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                        <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">Status</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                {getStatusBadge(service.status)}
+                            </CardContent>
+                        </Card>
+
+                        <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">Billing Type</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-xl font-bold">
+                                    {service.billing_type === 'Hourly' ? 'Hourly' : service.billing_type === 'FixedFee' ? 'Fixed Fee' : 'Non-Billable'}
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">Budget Period</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-xl font-bold">{service.budget_period}</div>
+                            </CardContent>
+                        </Card>
+
+                        <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">Service Manager</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-sm">{service.service_manager?.name || 'Not assigned'}</div>
+                            </CardContent>
+                        </Card>
+                    </div>
+
+                    {/* Current Budget Period */}
+                    {currentPeriod && (
+                        <Card className={isOverBudget() ? 'border-destructive' : ''}>
+                            <CardHeader>
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <CardTitle>Current Budget Period</CardTitle>
+                                        <CardDescription>
+                                            {formatDate(currentPeriod.period_start)} - {formatDate(currentPeriod.period_end)}
+                                        </CardDescription>
+                                    </div>
+                                    {isOverBudget() && (
+                                        <Badge variant="destructive">
+                                            <AlertCircle className="h-3 w-3 mr-1" />
+                                            Over Budget
+                                        </Badge>
+                                    )}
+                                </div>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-4">
+                                    <div className="grid gap-4 md:grid-cols-3">
+                                        <div>
+                                            <p className="text-sm text-muted-foreground">Hours Used</p>
+                                            <p className="text-2xl font-bold">{Number(currentPeriod.hours_used).toFixed(2)}h</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-sm text-muted-foreground">Total Available</p>
+                                            <p className="text-2xl font-bold">{Number(currentPeriod.total_available_hours).toFixed(2)}h</p>
+                                            {Number(currentPeriod.hours_rollover_from_previous) > 0 && (
+                                                <p className="text-xs text-muted-foreground">
+                                                    (includes {Number(currentPeriod.hours_rollover_from_previous).toFixed(2)}h rollover)
+                                                </p>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <p className="text-sm text-muted-foreground">Remaining</p>
+                                            <p className={`text-2xl font-bold ${isOverBudget() ? 'text-destructive' : 'text-green-600'}`}>
+                                                {Number(currentPeriod.remaining_hours).toFixed(2)}h
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="w-full bg-secondary rounded-full h-2">
+                                        <div
+                                            className={`h-2 rounded-full ${isOverBudget() ? 'bg-destructive' : 'bg-primary'}`}
+                                            style={{width: `${Math.min(getBudgetProgress(), 100)}%`}}
+                                        />
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )}
+
+                    {/* Budget Usage Trends Chart */}
+                    {chartData.length > 0 && (
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Budget Usage Trends</CardTitle>
+                                <CardDescription>{getChartDescription()}</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <ChartContainer config={chartConfig} className="min-h-[400px] w-full">
+                                    <ResponsiveContainer width="100%" height={400}>
+                                        <BarChart data={chartData}>
+                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <XAxis
+                                                dataKey="period"
+                                                tick={{ fontSize: 12 }}
+                                                angle={-45}
+                                                textAnchor="end"
+                                                height={80}
+                                            />
+                                            <YAxis
+                                                label={{ value: 'Hours', angle: -90, position: 'insideLeft' }}
+                                            />
+                                            <ChartTooltip content={<ChartTooltipContent />} />
+                                            <Legend />
+                                            {hasBudget && (
+                                                <Bar
+                                                    dataKey="budgetHours"
+                                                    fill="hsl(217 91% 60%)"
+                                                    name="Budget Hours"
+                                                    radius={[4, 4, 0, 0]}
+                                                />
+                                            )}
+                                            <Bar
+                                                dataKey="usedHours"
+                                                fill="hsl(142.1 76.2% 36.3%)"
+                                                name="Used Hours"
+                                                radius={[4, 4, 0, 0]}
+                                            />
+                                        </BarChart>
+                                    </ResponsiveContainer>
+                                </ChartContainer>
+                            </CardContent>
+                        </Card>
+                    )}
+
+                    {/* Time Tracking Stats */}
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Time Tracking Summary</CardTitle>
+                            <CardDescription>All-time statistics for this service</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="grid gap-4 md:grid-cols-3">
+                                <div className="flex items-center gap-4">
+                                    <Clock className="h-8 w-8 text-muted-foreground" />
+                                    <div>
+                                        <p className="text-sm text-muted-foreground">Total Hours</p>
+                                        <p className="text-2xl font-bold">{timeEntriesStats.total_hours ? Number(timeEntriesStats.total_hours).toFixed(2) : '0.00'}h</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <TrendingUp className="h-8 w-8 text-muted-foreground" />
+                                    <div>
+                                        <p className="text-sm text-muted-foreground">Billable Hours</p>
+                                        <p className="text-2xl font-bold">{timeEntriesStats.billable_hours ? Number(timeEntriesStats.billable_hours).toFixed(2) : '0.00'}h</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <DollarSign className="h-8 w-8 text-muted-foreground" />
+                                    <div>
+                                        <p className="text-sm text-muted-foreground">Total Value</p>
+                                        <p className="text-2xl font-bold">${timeEntriesStats.total_amount ? Number(timeEntriesStats.total_amount).toFixed(2) : '0.00'}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    {/* Service Information */}
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Service Details</CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                            {service.description && (
+                                <div>
+                                    <p className="text-sm font-medium">Description</p>
+                                    <p className="text-sm text-muted-foreground">{service.description}</p>
+                                </div>
+                            )}
+                            <div className="grid gap-4 md:grid-cols-2">
+                                <div>
+                                    <p className="text-sm font-medium">Start Date</p>
+                                    <p className="text-sm text-muted-foreground">{formatDate(service.start_date)}</p>
+                                </div>
+                                {service.end_date && (
+                                    <div>
+                                        <p className="text-sm font-medium">End Date</p>
+                                        <p className="text-sm text-muted-foreground">{formatDate(service.end_date)}</p>
+                                    </div>
+                                )}
+                                {service.default_hourly_rate && (
+                                    <div>
+                                        <p className="text-sm font-medium">Default Hourly Rate</p>
+                                        <p className="text-sm text-muted-foreground">${service.default_hourly_rate}</p>
+                                    </div>
+                                )}
+                                <div>
+                                    <p className="text-sm font-medium">Budget Rollover</p>
+                                    <p className="text-sm text-muted-foreground">
+                                        {service.budget_rollover_enabled ? 'Enabled' : 'Disabled'}
+                                    </p>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    {/* Tasks */}
+                    {service.tasks && service.tasks.length > 0 && (
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Associated Tasks</CardTitle>
+                                <CardDescription>Tasks available for time tracking on this service</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="flex flex-wrap gap-2">
+                                    {service.tasks.map((task) => (
+                                        <Badge key={task.id} variant="outline">
+                                            {task.name}
+                                        </Badge>
+                                    ))}
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )}
+                </div>
+            </SidebarInset>
+        </SidebarProvider>
+    );
+}

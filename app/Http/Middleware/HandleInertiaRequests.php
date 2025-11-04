@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Inertia\Middleware;
 use Modules\Organisation\Models\Organisation;
 use Modules\Organisation\Models\Role;
+use Modules\Ticket\Models\SavedTicketFilter;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -82,6 +83,15 @@ class HandleInertiaRequests extends Middleware
             $user->setRelation('customers', $customers);
         }
 
+        // Load saved ticket filters for the current user
+        $savedFilters = [];
+        if ($user && $currentOrganisation) {
+            $savedFilters = SavedTicketFilter::where('user_id', $user->id)
+                ->where('organisation_id', $currentOrganisation->id)
+                ->orderBy('name', 'asc')
+                ->get(['id', 'name', 'filters']);
+        }
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
@@ -91,6 +101,7 @@ class HandleInertiaRequests extends Middleware
                 'role' => $userRole,
                 'currentOrganisation' => $currentOrganisation,
                 'currentCustomer' => $currentCustomer,
+                'savedTicketFilters' => $savedFilters,
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'roles' => $this->getUserRoles($user, $currentOrganisation),

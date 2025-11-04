@@ -1,9 +1,17 @@
 import { usePage } from '@inertiajs/react'
 import { navigation, NavigationItem, UserType, RoleType } from '@/config/navigation'
+import { route } from 'ziggy-js'
+
+interface SavedFilter {
+    id: string
+    name: string
+    filters: Record<string, string>
+}
 
 interface AuthProps {
     userType: UserType
     role: RoleType
+    savedTicketFilters?: SavedFilter[]
 }
 
 export function useNavigation() {
@@ -40,9 +48,40 @@ export function useNavigation() {
     }
 
     const getNavigationItems = (): NavigationItem[] => {
-        const items = auth.userType === 'organisation'
+        let items = auth.userType === 'organisation'
             ? navigation.organisation
             : navigation.customer
+
+        // Inject saved ticket filters dynamically
+        if (auth.savedTicketFilters && auth.savedTicketFilters.length > 0 && auth.userType === 'organisation') {
+            items = items.map(item => {
+                if (item.title === 'Tickets' && item.items) {
+                    // Find the index of "All Tickets"
+                    const allTicketsIndex = item.items.findIndex(sub => sub.title === 'All Tickets')
+
+                    if (allTicketsIndex !== -1) {
+                        // Create filter items
+                        const filterItems = auth.savedTicketFilters!.map(filter => ({
+                            title: filter.name,
+                            url: route('tickets.index', filter.filters),
+                            roles: ['Admin', 'Manager', 'User'] as RoleType[],
+                            isDeletable: true,
+                            filterId: filter.id,
+                        }))
+
+                        // Insert filter items after "All Tickets"
+                        const newItems = [
+                            ...item.items.slice(0, allTicketsIndex + 1),
+                            ...filterItems,
+                            ...item.items.slice(allTicketsIndex + 1),
+                        ]
+
+                        return { ...item, items: newItems }
+                    }
+                }
+                return item
+            })
+        }
 
         return filterByRole(items)
     }

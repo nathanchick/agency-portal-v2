@@ -14,6 +14,9 @@ trait HasCurrentOrganisation
             return null;
         }
 
+        // IMPORTANT: Refresh user to get latest last_organisation_id from database
+        $user->refresh();
+
         // Try to get from multitenancy first
         $organisation = Organisation::current();
 
@@ -35,6 +38,9 @@ trait HasCurrentOrganisation
         if (! $user) {
             return null;
         }
+
+        // IMPORTANT: Refresh user to get latest last_organisation_id from database
+        $user->refresh();
 
         // Try to get from multitenancy first
         $organisation = Organisation::current();

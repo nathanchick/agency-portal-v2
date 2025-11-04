@@ -10,7 +10,10 @@ class ApiTokenController extends Controller
 {
     protected function getCurrentOrganisationId()
     {
+        // IMPORTANT: Refresh user to get latest database values
         $user = auth()->user();
+        $user->refresh();
+
         return $user->last_organisation_id ?? $user->organisations()->first()?->id;
     }
 

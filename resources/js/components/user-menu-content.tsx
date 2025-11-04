@@ -82,7 +82,6 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
                         className="block w-full"
                         href={edit()}
                         as="button"
-                        prefetch
                         onClick={cleanup}
                     >
                         <Settings className="mr-2" />
@@ -95,7 +94,6 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
                             className="block w-full"
                             href={route('team.index')}
                             as="button"
-                            prefetch
                             onClick={cleanup}
                         >
                             <UserCog className="mr-2" />
@@ -109,7 +107,6 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
                             className="block w-full"
                             href={route('webhooks.index')}
                             as="button"
-                            prefetch
                             onClick={cleanup}
                         >
                             <Webhook className="mr-2" />

@@ -76,10 +76,8 @@ export function OrganisationSwitcher() {
     }
 
     // Determine display name and type
-    const displayName = userType === 'customer' && currentCustomer
-        ? currentCustomer.name
-        : currentOrganisation.name
-    const displayType = userType === 'customer' && currentCustomer ? 'Customer' : 'Organisation'
+    const displayName = currentOrganisation.name
+    const displayType = userType === 'customer' && currentCustomer ? currentCustomer.name : 'Organisation'
     const displayIcon = userType === 'customer' && currentCustomer ? Users : GalleryVerticalEnd
 
     // If only one item total, show simple button without dropdown
@@ -129,7 +127,7 @@ export function OrganisationSwitcher() {
                         side={isMobile ? "bottom" : "right"}
                         sideOffset={4}
                     >
-                        {organisations.length > 0 && (
+                        {organisations.length > 1 && (
                             <>
                                 <DropdownMenuLabel className="text-muted-foreground text-xs">
                                     Organisations
@@ -148,8 +146,8 @@ export function OrganisationSwitcher() {
                                 ))}
                             </>
                         )}
-                        {organisations.length > 0 && customers.length > 0 && <DropdownMenuSeparator />}
-                        {customers.length > 0 && (
+                        {organisations.length > 1 && customers.length > 1 && <DropdownMenuSeparator />}
+                        {customers.length > 1 && (
                             <>
                                 <DropdownMenuLabel className="text-muted-foreground text-xs">
                                     Customers

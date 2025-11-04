@@ -1,0 +1,11 @@
+{
+    "name": "Harvest",
+    "alias": "harvest",
+    "description": "Harvest integration for importing clients, projects, tasks and time entries",
+    "keywords": ["harvest", "integration", "timesheet"],
+    "priority": 0,
+    "providers": [
+        "Modules\\Harvest\\Providers\\HarvestServiceProvider"
+    ],
+    "files": []
+}

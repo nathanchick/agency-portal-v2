@@ -1,6 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 import deployments from './deployments'
 import documents from './documents'
+import tickets from './tickets'
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerSwitcherController::switchMethod
 * @see Modules/Customer/app/Http/Controllers/CustomerSwitcherController.php:13
@@ -61,6 +62,7 @@ const customer = {
     switch: Object.assign(switchMethod, switchMethod),
     deployments: Object.assign(deployments, deployments),
     documents: Object.assign(documents, documents),
+    tickets: Object.assign(tickets, tickets),
 }
 
 export default customer

@@ -31,6 +31,8 @@ export interface NavigationSubItem {
     title: string
     url: string
     roles?: RoleType[]
+    isDeletable?: boolean
+    filterId?: string
 }
 
 export interface NavigationConfig {
@@ -93,6 +95,58 @@ export const navigation: NavigationConfig = {
                 },
             ],
         },
+        {
+            title: "Tickets",
+            url: route('tickets.index'),
+            icon: TicketCheckIcon,
+            roles: ['Admin', 'Manager', 'User'],
+            items: [
+                {
+                    title: "All Tickets",
+                    url: route('tickets.index'),
+                    roles: ['Admin', 'Manager', 'User'],
+                },
+                // Saved filters will be dynamically inserted after "All Tickets" by useNavigation hook
+                {
+                    title: "Field Configuration",
+                    url: route('tickets.config'),
+                    roles: ['Admin', 'Manager'],
+                },
+                {
+                    title: "Form Configuration",
+                    url: route('tickets.forms.index'),
+                    roles: ['Admin', 'Manager'],
+                },
+                {
+                    title: "Automation Rules",
+                    url: route('tickets.automation-rules.index'),
+                    roles: ['Admin', 'Manager'],
+                },
+            ],
+        },
+        {
+            title: "Timesheet",
+            url: route('timesheet.entries.index'),
+            icon: Clock,
+            roles: ['Admin', 'Manager', 'User'],
+            items: [
+                {
+                    title: "Time Entries",
+                    url: route('timesheet.entries.index'),
+                    roles: ['Admin', 'Manager', 'User'],
+                },
+                {
+                    title: "Services",
+                    url: route('timesheet.services.index'),
+                    roles: ['Admin', 'Manager'],
+                },
+                {
+                    title: "Tasks",
+                    url: route('timesheet.tasks.index'),
+                    roles: ['Admin', 'Manager'],
+                },
+            ],
+        },
     ],
     customer: [
         {
@@ -103,7 +157,7 @@ export const navigation: NavigationConfig = {
         },
         {
             title: "Deployments",
-            url: route('deployments.index'),
+            url: route('customer.deployments.index'),
             icon: Rocket,
             roles: ['Admin', 'Manager', 'User'],
         },
@@ -160,23 +214,18 @@ export const navigation: NavigationConfig = {
             roles: ['Admin', 'Manager', 'User'],
             items: [
                 {
-                    title: "My Tickets (Open)",
-                    url: route('tickets.view'),
+                    title: "My Open Tickets",
+                    url: route('customer.tickets.view'),
                     roles: ['Admin', 'Manager', 'User'],
                 },
                 {
+                    title: "My Closed Tickets",
+                    url: route('customer.tickets.view.closed'),
+                    roles: ['Admin', 'Manager','User'],
+                },
+                {
                     title: "All Tickets",
-                    url: route('tickets.view.all'),
-                    roles: ['Admin', 'Manager'],
-                },
-                {
-                    title: "Closed Tickets",
-                    url: "#",
-                    roles: ['Admin', 'Manager'],
-                },
-                {
-                    title: "Reports",
-                    url: "#",
+                    url: route('customer.tickets.view.all'),
                     roles: ['Admin', 'Manager'],
                 },
             ],

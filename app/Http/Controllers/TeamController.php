@@ -29,7 +29,8 @@ class TeamController extends Controller
         $teamMembers = [];
 
         // Determine context (organisation or customer)
-        $currentCustomer = $user->customers()->first();
+        // Use last_customer_id to determine if user is logged in as a customer
+        $currentCustomer = $user->last_customer_id ? $user->customers()->find($user->last_customer_id) : null;
 
         if ($currentCustomer) {
             // Customer admin viewing customer team
@@ -100,7 +101,7 @@ class TeamController extends Controller
     public function create(Request $request)
     {
         $user = $request->user();
-        $currentCustomer = $user->customers()->first();
+        $currentCustomer = $user->last_customer_id ? $user->customers()->find($user->last_customer_id) : null;
         $currentOrganisation = $currentCustomer
             ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
@@ -128,7 +129,7 @@ class TeamController extends Controller
         ]);
 
         $user = $request->user();
-        $currentCustomer = $user->customers()->first();
+        $currentCustomer = $user->last_customer_id ? $user->customers()->find($user->last_customer_id) : null;
         $currentOrganisation = $currentCustomer
             ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
@@ -222,7 +223,7 @@ class TeamController extends Controller
     {
         $user = User::findOrFail($id);
         $currentUser = $request->user();
-        $currentCustomer = $currentUser->customers()->first();
+        $currentCustomer = $currentUser->last_customer_id ? $currentUser->customers()->find($currentUser->last_customer_id) : null;
         $currentOrganisation = $currentCustomer
             ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
@@ -269,7 +270,7 @@ class TeamController extends Controller
     {
         $user = User::findOrFail($id);
         $currentUser = $request->user();
-        $currentCustomer = $currentUser->customers()->first();
+        $currentCustomer = $currentUser->last_customer_id ? $currentUser->customers()->find($currentUser->last_customer_id) : null;
         $currentOrganisation = $currentCustomer
             ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
@@ -318,7 +319,7 @@ class TeamController extends Controller
 
         $user = User::findOrFail($id);
         $currentUser = $request->user();
-        $currentCustomer = $currentUser->customers()->first();
+        $currentCustomer = $currentUser->last_customer_id ? $currentUser->customers()->find($currentUser->last_customer_id) : null;
         $currentOrganisation = $currentCustomer
             ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
@@ -396,7 +397,7 @@ class TeamController extends Controller
                 ->with('error', 'You cannot delete yourself.');
         }
 
-        $currentCustomer = $currentUser->customers()->first();
+        $currentCustomer = $currentUser->last_customer_id ? $currentUser->customers()->find($currentUser->last_customer_id) : null;
         $currentOrganisation = $currentCustomer
             ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());
@@ -458,7 +459,7 @@ class TeamController extends Controller
     {
         $user = User::findOrFail($id);
         $currentUser = $request->user();
-        $currentCustomer = $currentUser->customers()->first();
+        $currentCustomer = $currentUser->last_customer_id ? $currentUser->customers()->find($currentUser->last_customer_id) : null;
         $currentOrganisation = $currentCustomer
             ? $currentCustomer->organisation
             : ($this->getCurrentOrganisation());

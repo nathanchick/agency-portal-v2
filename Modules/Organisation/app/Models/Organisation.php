@@ -5,6 +5,7 @@ namespace Modules\Organisation\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Customer\Models\Customer;
 use Modules\Document\Models\Document;
 use Modules\Document\Models\DocumentRequest;
 use Spatie\Multitenancy\Contracts\IsTenant;
@@ -38,6 +39,11 @@ class Organisation extends Model implements IsTenant
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
     }
 
     public function documents()

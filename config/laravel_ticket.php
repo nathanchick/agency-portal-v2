@@ -20,16 +20,16 @@ return [
         /**
          * Categories table for the tickets
          */
-        'categories' => 'categories',
+        'categories' => 'ticket_categories',
         /**
          * Labels table for the tickets
          */
-        'labels' => 'labels',
+        'labels' => 'ticket_labels',
         /**
          * Messages table to appears in the ticket
          */
         'messages' => [
-            'table' => 'messages',
+            'table' => 'ticket_messages',
             /**
              * This is the foreign key for associated to the ticket
              * If you renamed the ticket table, you should consider
@@ -52,7 +52,7 @@ return [
          * @see https://laravel.com/docs/9.x/eloquent-relationships#many-to-many
          */
         'label_ticket' => [
-            'table' => 'label_ticket',
+            'table' => 'ticket_label_ticket',
             'columns' => [
                 'label_foreign_id' => 'label_id',
                 'ticket_foreign_id' => 'ticket_id',
@@ -66,7 +66,7 @@ return [
          * @see https://laravel.com/docs/9.x/eloquent-relationships#many-to-many
          */
         'category_ticket' => [
-            'table' => 'category_ticket',
+            'table' => 'ticket_category_ticket',
             'columns' => [
                 'category_foreign_id' => 'category_id',
                 'ticket_foreign_id' => 'ticket_id',

@@ -1,7 +1,9 @@
 "use client"
 
-import { ChevronRight, type LucideIcon } from "lucide-react"
-import { usePage } from '@inertiajs/react'
+import { ChevronRight, X, type LucideIcon } from "lucide-react"
+import { usePage, router } from '@inertiajs/react'
+import { route } from 'ziggy-js'
+import { useState } from 'react'
 
 import {
     Collapsible,
@@ -18,6 +20,15 @@ import {
     SidebarMenuSubButton,
     SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 export function NavMain({
     items,
@@ -31,10 +42,14 @@ export function NavMain({
             title: string
             url: string
             isActive?: boolean
+            isDeletable?: boolean
+            filterId?: string
         }[]
     }[]
 }) {
     const { url } = usePage()
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
+    const [filterToDelete, setFilterToDelete] = useState<{ id: string; name: string } | null>(null)
 
     // Helper function to check if URLs match (ignoring query strings and domain)
     const urlsMatch = (navUrl: string, currentUrl: string) => {
@@ -42,6 +57,26 @@ export function NavMain({
         const navPath = navUrl.split('?')[0].replace(/^https?:\/\/[^\/]+/, '')
         const currentPath = currentUrl.split('?')[0]
         return navPath === currentPath
+    }
+
+    const handleDeleteFilter = (e: React.MouseEvent, filterId: string, filterName: string) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        setFilterToDelete({ id: filterId, name: filterName })
+        setDeleteDialogOpen(true)
+    }
+
+    const confirmDeleteFilter = () => {
+        if (filterToDelete) {
+            router.delete(route('tickets.filters.destroy', filterToDelete.id), {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setDeleteDialogOpen(false)
+                    setFilterToDelete(null)
+                },
+            })
+        }
     }
 
     return (
@@ -82,10 +117,19 @@ export function NavMain({
                                 <CollapsibleContent>
                                     <SidebarMenuSub>
                                         {item.items?.map((subItem) => (
-                                            <SidebarMenuSubItem key={subItem.title}>
+                                            <SidebarMenuSubItem key={subItem.title} className="group/subitem">
                                                 <SidebarMenuSubButton asChild isActive={urlsMatch(subItem.url, url)}>
-                                                    <a href={subItem.url}>
+                                                    <a href={subItem.url} className="flex items-center justify-between w-full">
                                                         <span>{subItem.title}</span>
+                                                        {subItem.isDeletable && subItem.filterId && (
+                                                            <button
+                                                                onClick={(e) => handleDeleteFilter(e, subItem.filterId!, subItem.title)}
+                                                                className="opacity-0 group-hover/subitem:opacity-100 transition-opacity ml-2 p-0.5 hover:bg-muted rounded"
+                                                                title="Delete filter"
+                                                            >
+                                                                <X className="h-3 w-3" />
+                                                            </button>
+                                                        )}
                                                     </a>
                                                 </SidebarMenuSubButton>
                                             </SidebarMenuSubItem>
@@ -97,6 +141,32 @@ export function NavMain({
                     )
                 })}
             </SidebarMenu>
+
+            {/* Delete Filter Confirmation Dialog */}
+            <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Delete Saved Filter</DialogTitle>
+                        <DialogDescription>
+                            Are you sure you want to delete "{filterToDelete?.name}"? This action cannot be undone.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button
+                            variant="outline"
+                            onClick={() => setDeleteDialogOpen(false)}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            variant="destructive"
+                            onClick={confirmDeleteFilter}
+                        >
+                            Delete
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </SidebarGroup>
     )
 }

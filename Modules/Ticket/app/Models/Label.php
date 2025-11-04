@@ -11,6 +11,8 @@ class Label extends BaseLabel
     use BelongsToTenant;
     use HasUuids;
 
+    protected $table = 'ticket_labels';
+
     protected $fillable = [
         'organisation_id',
         'name',

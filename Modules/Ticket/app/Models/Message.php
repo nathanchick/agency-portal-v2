@@ -9,9 +9,12 @@ class Message extends BaseMessage
 {
     use HasUuids;
 
+    protected $table = 'ticket_messages';
+
     protected $fillable = [
         'user_id',
         'ticket_id',
         'message',
+        'is_private',
     ];
 }

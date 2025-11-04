@@ -1,0 +1,28 @@
+{
+    "name": "nwidart/harvest",
+    "description": "Harvest integration module",
+    "authors": [
+        {
+            "name": "Deploy",
+            "email": "support@deployecommerce.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Harvest\\": "app/",
+            "Modules\\Harvest\\Database\\Factories\\": "database/factories/",
+            "Modules\\Harvest\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Harvest\\Tests\\": "tests/"
+        }
+    }
+}

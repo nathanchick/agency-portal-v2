@@ -11,7 +11,17 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array<string, array<int, string>>
      */
-    protected $listen = [];
+    protected $listen = [
+        'eloquent.created: Modules\Organisation\Models\Organisation' => [
+            \Modules\Ticket\Listeners\CreateDefaultTicketStatuses::class,
+        ],
+        \Modules\Ticket\Events\TicketCreated::class => [
+            \Modules\Ticket\Listeners\ProcessAutomationRules::class,
+        ],
+        \Modules\Ticket\Events\TicketUpdated::class => [
+            \Modules\Ticket\Listeners\ProcessAutomationRules::class,
+        ],
+    ];
 
     /**
      * Indicates if events should be discovered.

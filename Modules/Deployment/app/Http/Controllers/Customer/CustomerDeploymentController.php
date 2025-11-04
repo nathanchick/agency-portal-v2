@@ -19,17 +19,18 @@ class CustomerDeploymentController extends Controller
      */
     public function index(Request $request)
     {
-        $auth = auth();
-        ray($auth);
-
         $user = auth()->user();
 
-        // Get the first customer associated with the user
-        $customer = $user->customers()->first();
+        // Get the customer user is currently logged in as
+        $customer = $user->last_customer_id ? $user->customers()->find($user->last_customer_id) : null;
+
+        if (!$customer) {
+            abort(403, 'You must be logged in as a customer to view deployments.');
+        }
 
         $query = DeploymentHistory::with(['deployment.customer', 'deployment.website', 'deployment.creator'])
-            ->whereHas('deployment', function ($q) use ($customerId) {
-                $q->where('customer_id', $customerId);
+            ->whereHas('deployment', function ($q) use ($customer) {
+                $q->where('customer_id', $customer->id);
             })
             ->latest('deployed_at');
 
@@ -42,6 +43,7 @@ class CustomerDeploymentController extends Controller
 
         return Inertia::render('deployments/index', [
             'deployments' => $deployments,
+            'customers' => [], // Customer users don't need the filter dropdown
             'filters' => $request->only(['status']),
         ]);
     }

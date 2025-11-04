@@ -43,7 +43,10 @@ class TicketServiceProvider extends ServiceProvider
      */
     protected function registerCommands(): void
     {
-        // $this->commands([]);
+        $this->commands([
+            \Modules\Ticket\Console\SeedDefaultStatusesCommand::class,
+            \Modules\Ticket\Console\TestAutomationRulesCommand::class,
+        ]);
     }
 
     /**
