@@ -459,6 +459,16 @@ class ImportHarvestData extends Command
                     continue;
                 }
 
+                // Handle external_reference - Harvest API returns it as an object, so JSON encode it
+                $externalReference = null;
+                if (isset($harvestEntry['external_reference'])) {
+                    if (is_array($harvestEntry['external_reference']) || is_object($harvestEntry['external_reference'])) {
+                        $externalReference = json_encode($harvestEntry['external_reference']);
+                    } else {
+                        $externalReference = (string) $harvestEntry['external_reference'];
+                    }
+                }
+
                 $timeEntry = TimeEntry::create([
                     'organisation_id' => $this->organisationId,
                     'user_id' => $user->id,
@@ -472,6 +482,7 @@ class ImportHarvestData extends Command
                     'hourly_rate' => $harvestEntry['hourly_rate'] ?? 0,
                     'approved' => $harvestEntry['is_closed'],
                     'timer_running' => false,
+                    'external_reference' => $externalReference,
                 ]);
 
                 IntegrationMapping::syncMapping(
