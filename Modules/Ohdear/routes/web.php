@@ -3,6 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Ohdear\Http\Controllers\OhdearController;
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('ohdears', OhdearController::class)->names('ohdear');
+Route::middleware(['auth', 'verified'])->prefix('ohdear')->name('ohdear.')->group(function () {
+    Route::post('websites/{websiteId}/setup', [OhdearController::class, 'setup'])->name('setup');
+    Route::post('websites/{websiteId}/urls', [OhdearController::class, 'addUrl'])->name('add-url');
+    Route::delete('websites/{websiteId}/urls/{ohdearWebsiteId}', [OhdearController::class, 'deleteUrl'])->name('delete-url');
+    Route::get('websites/{websiteId}/uptime', [OhdearController::class, 'uptime'])->name('uptime');
+    Route::get('websites/{websiteId}/broken-links', [OhdearController::class, 'brokenLinks'])->name('broken-links');
+    Route::get('websites/{websiteId}/lighthouse', [OhdearController::class, 'lighthouse'])->name('lighthouse');
+    Route::get('websites/{websiteId}/sitemap', [OhdearController::class, 'sitemap'])->name('sitemap');
 });

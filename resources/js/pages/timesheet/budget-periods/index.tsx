@@ -1,18 +1,9 @@
 import {Head, router} from '@inertiajs/react';
 import {AppSidebar} from '@/components/app-sidebar';
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import {Separator} from '@/components/ui/separator';
+import {AppSidebarHeader} from '@/components/app-sidebar-header';
 import {
     SidebarInset,
     SidebarProvider,
-    SidebarTrigger,
 } from '@/components/ui/sidebar';
 import {Button} from '@/components/ui/button';
 import {
@@ -44,6 +35,7 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import {Textarea} from '@/components/ui/textarea';
+import {Separator} from '@/components/ui/separator';
 
 interface Customer {
     id: string;
@@ -161,37 +153,14 @@ export default function BudgetPeriodsIndex({service, periods, unreconciledPeriod
             <AppSidebar />
             <SidebarInset>
                 <Head title={`Budget Periods - ${service.name}`} />
-                <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-                    <div className="flex items-center gap-2 px-4">
-                        <SidebarTrigger className="-ml-1" />
-                        <Separator orientation="vertical" className="mr-2 h-4" />
-                        <Breadcrumb>
-                            <BreadcrumbList>
-                                <BreadcrumbItem className="hidden md:block">
-                                    <BreadcrumbLink href={route('dashboard')}>
-                                        Dashboard
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator className="hidden md:block" />
-                                <BreadcrumbItem>
-                                    <BreadcrumbLink href={route('timesheet.services.index')}>
-                                        Services
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator className="hidden md:block" />
-                                <BreadcrumbItem>
-                                    <BreadcrumbLink href={route('timesheet.services.show', service.id)}>
-                                        {service.name}
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator className="hidden md:block" />
-                                <BreadcrumbItem>
-                                    <BreadcrumbPage>Budget Periods</BreadcrumbPage>
-                                </BreadcrumbItem>
-                            </BreadcrumbList>
-                        </Breadcrumb>
-                    </div>
-                </header>
+                <AppSidebarHeader
+                    breadcrumbs={[
+                        { label: 'Dashboard', href: route('dashboard') },
+                        { label: 'Services', href: route('timesheet.services.index') },
+                        { label: service.name, href: route('timesheet.services.show', service.id) },
+                        { label: 'Budget Periods' },
+                    ]}
+                />
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
                     <div className="flex justify-between items-start">
                         <div>

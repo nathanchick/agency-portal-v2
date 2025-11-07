@@ -35,6 +35,7 @@ class TimeEntry extends Model
         'approved_by',
         'approved_at',
         'timer_running',
+        'external_reference',
     ];
 
     protected $casts = [

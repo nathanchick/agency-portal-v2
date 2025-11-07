@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/freshdesk",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Freshdesk\\": "app/",
+            "Modules\\Freshdesk\\Database\\Factories\\": "database/factories/",
+            "Modules\\Freshdesk\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Freshdesk\\Tests\\": "tests/"
+        }
+    }
+}

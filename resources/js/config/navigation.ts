@@ -4,6 +4,7 @@ import {
     Bot,
     Clock,
     GalleryVerticalEnd,
+    Globe,
     HeartPulseIcon,
     LockIcon,
     Map,
@@ -13,6 +14,7 @@ import {
     TicketCheckIcon,
     Users,
     FileText,
+    BarChart3,
 } from "lucide-react"
 import { route } from "ziggy-js"
 
@@ -71,6 +73,12 @@ export const navigation: NavigationConfig = {
                     roles: ['Admin', 'Manager'],
                 },
             ],
+        },
+        {
+            title: "Websites",
+            url: route('websites.index'),
+            icon: Globe,
+            roles: ['Admin', 'Manager', 'User'],
         },
         {
             title: "Documents",
@@ -145,6 +153,21 @@ export const navigation: NavigationConfig = {
                     url: route('timesheet.tasks.index'),
                     roles: ['Admin', 'Manager'],
                 },
+                {
+                    title: "Reports",
+                    url: route('timesheet.reports.index'),
+                    roles: ['Admin', 'Manager'],
+                },
+                {
+                    title: "Saved Reports",
+                    url: route('timesheet.reports.saved.index'),
+                    roles: ['Admin', 'Manager'],
+                },
+                {
+                    title: "Scheduled Reports",
+                    url: route('timesheet.reports.scheduled.index'),
+                    roles: ['Admin', 'Manager'],
+                },
             ],
         },
     ],
@@ -162,22 +185,17 @@ export const navigation: NavigationConfig = {
             roles: ['Admin', 'Manager', 'User'],
         },
         {
-            title: "Timesheets",
+            title: "Websites",
+            url: route('customer.websites.index'),
+            icon: Globe,
+            roles: ['Admin', 'Manager', 'User'],
+        },
+        {
+            title: "Timesheet",
             url: "#",
             icon: Clock,
             roles: ['Admin', 'Manager', 'User'],
-            items: [
-                {
-                    title: "Current Usuage",
-                    url: "#",
-                    roles: ['Admin', 'Manager', 'User'],
-                },
-                {
-                    title: "Reports",
-                    url: "#",
-                    roles: ['Admin', 'Manager'],
-                },
-            ],
+            items: [],
         },
         {
             title: "Documents",

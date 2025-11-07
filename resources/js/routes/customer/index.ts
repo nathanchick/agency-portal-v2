@@ -2,6 +2,8 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 import deployments from './deployments'
 import documents from './documents'
 import tickets from './tickets'
+import timesheet from './timesheet'
+import websites from './websites'
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerSwitcherController::switchMethod
 * @see Modules/Customer/app/Http/Controllers/CustomerSwitcherController.php:13
@@ -63,6 +65,8 @@ const customer = {
     deployments: Object.assign(deployments, deployments),
     documents: Object.assign(documents, documents),
     tickets: Object.assign(tickets, tickets),
+    timesheet: Object.assign(timesheet, timesheet),
+    websites: Object.assign(websites, websites),
 }
 
 export default customer

@@ -7,7 +7,7 @@ use App\Http\Traits\HasCurrentOrganisation;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Modules\Customer\Models\Customer;
-use Modules\Customer\Models\Website;
+use Modules\Website\Models\Website;
 use Modules\Deployment\Models\Deployment;
 use Modules\Deployment\Models\DeploymentHistory;
 

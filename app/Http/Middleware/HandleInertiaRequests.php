@@ -12,6 +12,7 @@ use Inertia\Middleware;
 use Modules\Organisation\Models\Organisation;
 use Modules\Organisation\Models\Role;
 use Modules\Ticket\Models\SavedTicketFilter;
+use Modules\Timesheet\Models\Service;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -92,6 +93,17 @@ class HandleInertiaRequests extends Middleware
                 ->get(['id', 'name', 'filters']);
         }
 
+        // Load timesheet services for customer users
+        $timesheetServices = [];
+        if ($user && $currentOrganisation && $currentCustomer) {
+            $timesheetServices = Service::forOrganisation($currentOrganisation->id)
+                ->forCustomer($currentCustomer->id)
+                ->active()
+                ->where('billing_type', 'Hourly')
+                ->orderBy('name', 'asc')
+                ->get(['id', 'name']);
+        }
+
         // Get unread notifications count
         $unreadNotificationsCount = $user ? $user->unreadNotifications()->count() : 0;
 
@@ -105,6 +117,7 @@ class HandleInertiaRequests extends Middleware
                 'currentOrganisation' => $currentOrganisation,
                 'currentCustomer' => $currentCustomer,
                 'savedTicketFilters' => $savedFilters,
+                'timesheetServices' => $timesheetServices,
             ],
             'unreadNotificationsCount' => $unreadNotificationsCount,
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',

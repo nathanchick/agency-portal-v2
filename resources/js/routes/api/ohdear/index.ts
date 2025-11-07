@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::index
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:13
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::index
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:13
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::index
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:13
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::index
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:13
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::index
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:13
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
 */
 const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -55,7 +55,7 @@ const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::index
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:13
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
 */
 indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -65,7 +65,7 @@ indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::index
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:13
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
 */
 indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -82,7 +82,7 @@ index.form = indexForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::store
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:29
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -97,7 +97,7 @@ store.definition = {
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::store
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:29
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -106,7 +106,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::store
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:29
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -116,7 +116,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::store
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:29
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -126,7 +126,7 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::store
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:29
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -138,7 +138,7 @@ store.form = storeForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::show
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:34
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 export const show = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -153,7 +153,7 @@ show.definition = {
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::show
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:34
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 show.url = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -180,7 +180,7 @@ show.url = (args: { ohdear: string | number } | [ohdear: string | number ] | str
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::show
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:34
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 show.get = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -190,7 +190,7 @@ show.get = (args: { ohdear: string | number } | [ohdear: string | number ] | str
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::show
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:34
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 show.head = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -200,7 +200,7 @@ show.head = (args: { ohdear: string | number } | [ohdear: string | number ] | st
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::show
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:34
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 const showForm = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -210,7 +210,7 @@ const showForm = (args: { ohdear: string | number } | [ohdear: string | number ]
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::show
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:34
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 showForm.get = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -220,7 +220,7 @@ showForm.get = (args: { ohdear: string | number } | [ohdear: string | number ] |
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::show
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:34
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 showForm.head = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -237,7 +237,7 @@ show.form = showForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::update
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:50
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 export const update = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -252,7 +252,7 @@ update.definition = {
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::update
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:50
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 update.url = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -279,7 +279,7 @@ update.url = (args: { ohdear: string | number } | [ohdear: string | number ] | s
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::update
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:50
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 update.put = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -289,7 +289,7 @@ update.put = (args: { ohdear: string | number } | [ohdear: string | number ] | s
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::update
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:50
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 update.patch = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -299,7 +299,7 @@ update.patch = (args: { ohdear: string | number } | [ohdear: string | number ] |
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::update
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:50
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 const updateForm = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -314,7 +314,7 @@ const updateForm = (args: { ohdear: string | number } | [ohdear: string | number
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::update
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:50
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 updateForm.put = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -329,7 +329,7 @@ updateForm.put = (args: { ohdear: string | number } | [ohdear: string | number ]
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::update
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:50
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 updateForm.patch = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -346,7 +346,7 @@ update.form = updateForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::destroy
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:55
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 export const destroy = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -361,7 +361,7 @@ destroy.definition = {
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::destroy
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:55
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 destroy.url = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -388,7 +388,7 @@ destroy.url = (args: { ohdear: string | number } | [ohdear: string | number ] | 
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::destroy
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:55
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 destroy.delete = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -398,7 +398,7 @@ destroy.delete = (args: { ohdear: string | number } | [ohdear: string | number ]
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::destroy
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:55
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 const destroyForm = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -413,7 +413,7 @@ const destroyForm = (args: { ohdear: string | number } | [ohdear: string | numbe
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::destroy
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:55
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
 */
 destroyForm.delete = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

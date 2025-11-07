@@ -5,7 +5,7 @@ namespace Modules\Customer\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Customer\Models\Customer;
-use Modules\Customer\Models\Website;
+use Modules\Website\Models\Website;
 
 class WebsiteController extends Controller
 {

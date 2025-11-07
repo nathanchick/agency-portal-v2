@@ -8,10 +8,16 @@ interface SavedFilter {
     filters: Record<string, string>
 }
 
+interface TimesheetService {
+    id: string
+    name: string
+}
+
 interface AuthProps {
     userType: UserType
     role: RoleType
     savedTicketFilters?: SavedFilter[]
+    timesheetServices?: TimesheetService[]
 }
 
 export function useNavigation() {
@@ -78,6 +84,23 @@ export function useNavigation() {
 
                         return { ...item, items: newItems }
                     }
+                }
+                return item
+            })
+        }
+
+        // Inject timesheet services for customer users
+        if (auth.timesheetServices && auth.timesheetServices.length > 0 && auth.userType === 'customer') {
+            items = items.map(item => {
+                if (item.title === 'Timesheet') {
+                    // Create service items
+                    const serviceItems = auth.timesheetServices!.map(service => ({
+                        title: service.name,
+                        url: route('customer.timesheet.services.show', service.id),
+                        roles: ['Admin', 'Manager', 'User'] as RoleType[],
+                    }))
+
+                    return { ...item, items: serviceItems }
                 }
                 return item
             })

@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'ohdear' => [
+        'api_key' => env('OHDEAR_API_KEY'),
+        'team_id' => env('OHDEAR_TEAM_ID'),
+    ],
+
 ];

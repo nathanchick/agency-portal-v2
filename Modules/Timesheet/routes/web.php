@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Timesheet\Http\Controllers\Customer\CustomerReportController;
+use Modules\Timesheet\Http\Controllers\Customer\CustomerServiceController;
+use Modules\Timesheet\Http\Controllers\ReportController;
+use Modules\Timesheet\Http\Controllers\SavedReportController;
+use Modules\Timesheet\Http\Controllers\ScheduledReportController;
 use Modules\Timesheet\Http\Controllers\ServiceBudgetPeriodController;
 use Modules\Timesheet\Http\Controllers\ServiceController;
 use Modules\Timesheet\Http\Controllers\TaskController;
@@ -58,4 +63,35 @@ Route::middleware(['auth', 'verified', 'organisation'])->group(function () {
     Route::get('/timesheet/tasks/{task}/edit', [TaskController::class, 'edit'])->name('timesheet.tasks.edit')->middleware('role:Admin|Manager');
     Route::put('/timesheet/tasks/{task}', [TaskController::class, 'update'])->name('timesheet.tasks.update')->middleware('role:Admin|Manager');
     Route::delete('/timesheet/tasks/{task}', [TaskController::class, 'destroy'])->name('timesheet.tasks.destroy')->middleware('role:Admin|Manager');
+
+    // Reports
+    Route::get('/timesheet/reports', [ReportController::class, 'index'])->name('timesheet.reports.index')->middleware('role:Admin|Manager');
+    Route::post('/timesheet/reports/generate', [ReportController::class, 'generate'])->name('timesheet.reports.generate')->middleware('role:Admin|Manager');
+    Route::post('/timesheet/reports/export', [ReportController::class, 'export'])->name('timesheet.reports.export')->middleware('role:Admin|Manager');
+
+    // Saved Reports
+    Route::get('/timesheet/reports/saved', [SavedReportController::class, 'index'])->name('timesheet.reports.saved.index')->middleware('role:Admin|Manager');
+    Route::post('/timesheet/reports/saved', [SavedReportController::class, 'store'])->name('timesheet.reports.saved.store')->middleware('role:Admin|Manager');
+    Route::put('/timesheet/reports/saved/{savedReport}', [SavedReportController::class, 'update'])->name('timesheet.reports.saved.update')->middleware('role:Admin|Manager');
+    Route::delete('/timesheet/reports/saved/{savedReport}', [SavedReportController::class, 'destroy'])->name('timesheet.reports.saved.destroy')->middleware('role:Admin|Manager');
+    Route::get('/timesheet/reports/saved/{savedReport}/load', [SavedReportController::class, 'load'])->name('timesheet.reports.saved.load')->middleware('role:Admin|Manager');
+
+    // Scheduled Reports
+    Route::get('/timesheet/reports/scheduled', [ScheduledReportController::class, 'index'])->name('timesheet.reports.scheduled.index')->middleware('role:Admin|Manager');
+    Route::post('/timesheet/reports/scheduled', [ScheduledReportController::class, 'store'])->name('timesheet.reports.scheduled.store')->middleware('role:Admin|Manager');
+    Route::put('/timesheet/reports/scheduled/{scheduledReport}', [ScheduledReportController::class, 'update'])->name('timesheet.reports.scheduled.update')->middleware('role:Admin|Manager');
+    Route::delete('/timesheet/reports/scheduled/{scheduledReport}', [ScheduledReportController::class, 'destroy'])->name('timesheet.reports.scheduled.destroy')->middleware('role:Admin|Manager');
+    Route::post('/timesheet/reports/scheduled/{scheduledReport}/toggle', [ScheduledReportController::class, 'toggle'])->name('timesheet.reports.scheduled.toggle')->middleware('role:Admin|Manager');
+});
+
+// Customer Timesheet Routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Customer Service Views
+    Route::get('/customer/timesheet/services/{service}', [CustomerServiceController::class, 'show'])->name('customer.timesheet.services.show');
+    Route::get('/customer/timesheet/services/{service}/ledger', [CustomerServiceController::class, 'ledger'])->name('customer.timesheet.services.ledger');
+
+    // Customer Reports
+    Route::post('/customer/timesheet/services/{service}/report/generate', [CustomerReportController::class, 'generate'])->name('customer.timesheet.services.report.generate');
+    Route::post('/customer/timesheet/services/{service}/report/export', [CustomerReportController::class, 'export'])->name('customer.timesheet.services.report.export');
+    Route::get('/customer/timesheet/services/{service}/external-reference', [CustomerReportController::class, 'getExternalReferenceReport'])->name('customer.timesheet.services.external-reference');
 });

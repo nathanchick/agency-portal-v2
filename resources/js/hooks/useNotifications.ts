@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { usePage, router } from '@inertiajs/react';
-import { getUnreadCount } from '@/actions/notifications';
+import { fetchUnreadCount } from '@/actions/notifications';
 import type { SharedData, Notification } from '@/types';
 import { toast } from 'sonner';
 
@@ -11,8 +11,8 @@ export function useNotifications() {
 
     const refreshCount = async () => {
         try {
-            const newCount = await getUnreadCount();
-            setCount(newCount);
+            const response = await fetchUnreadCount();
+            setCount(response.count);
             // Also refresh the page props so the shared data is updated
             router.reload({ only: ['unreadNotificationsCount'] });
         } catch (error) {

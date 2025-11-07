@@ -10,5 +10,7 @@
     "Sansec": true,
     "CspManagement": true,
     "Deployment": true,
-    "Harvest": true
+    "Harvest": true,
+    "Freshdesk": true,
+    "Website": true
 }

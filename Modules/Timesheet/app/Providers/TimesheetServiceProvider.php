@@ -47,6 +47,7 @@ class TimesheetServiceProvider extends ServiceProvider
             \Modules\Timesheet\Console\Commands\GenerateNextBudgetPeriods::class,
             \Modules\Timesheet\Console\Commands\CreateMissingBudgetPeriods::class,
             \Modules\Timesheet\Console\Commands\BulkReconcilePeriods::class,
+            \Modules\Timesheet\Console\Commands\SendScheduledReports::class,
         ]);
     }
 
@@ -60,6 +61,9 @@ class TimesheetServiceProvider extends ServiceProvider
 
             // Run daily at 1 AM to create budget periods for services ending in the next 7 days
             $schedule->command('timesheet:generate-next-periods')->dailyAt('01:00');
+
+            // Run hourly to send scheduled reports that are due
+            $schedule->command('timesheet:send-scheduled-reports')->hourly();
         });
     }
 

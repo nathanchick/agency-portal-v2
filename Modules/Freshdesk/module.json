@@ -1,0 +1,11 @@
+{
+    "name": "Freshdesk",
+    "alias": "freshdesk",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Freshdesk\\Providers\\FreshdeskServiceProvider"
+    ],
+    "files": []
+}
