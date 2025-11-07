@@ -118,8 +118,8 @@ export default function ServicesIndex({services, customers, filters}: Props) {
                 <Head title="Services" />
                 <AppSidebarHeader
                     breadcrumbs={[
-                        { label: 'Dashboard', href: route('dashboard') },
-                        { label: 'Services' },
+                        { title: 'Dashboard', href: route('dashboard') },
+                        { title: 'Services' },
                     ]}
                 />
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

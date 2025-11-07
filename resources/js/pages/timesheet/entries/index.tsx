@@ -10,16 +10,13 @@ import {Badge} from '@/components/ui/badge';
 import {
     Select,
     SelectContent,
-    SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import {Clock, Plus, Play, Square, Edit, Trash2, ChevronLeft, ChevronRight, Calendar} from 'lucide-react';
+import {Plus, Square, Edit, Trash2, ChevronLeft, ChevronRight, Calendar} from 'lucide-react';
 import {useState, useEffect} from 'react';
 import {route} from 'ziggy-js';
-import {Input} from '@/components/ui/input';
 import {Textarea} from '@/components/ui/textarea';
 import {
     Dialog,
@@ -250,8 +247,8 @@ export default function TimeEntriesIndex({
                 <Head title="Time Entries" />
                 <AppSidebarHeader
                     breadcrumbs={[
-                        { label: 'Dashboard', href: route('dashboard') },
-                        { label: 'Time Entries' },
+                        { title: 'Dashboard', href: route('dashboard') },
+                        { title: 'Time Entries' },
                     ]}
                 />
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

@@ -75,7 +75,7 @@ setup.form = setupForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::addUrl
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:149
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:169
 * @route '/ohdear/websites/{websiteId}/urls'
 */
 export const addUrl = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -90,7 +90,7 @@ addUrl.definition = {
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::addUrl
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:149
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:169
 * @route '/ohdear/websites/{websiteId}/urls'
 */
 addUrl.url = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -117,7 +117,7 @@ addUrl.url = (args: { websiteId: string | number } | [websiteId: string | number
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::addUrl
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:149
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:169
 * @route '/ohdear/websites/{websiteId}/urls'
 */
 addUrl.post = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -127,7 +127,7 @@ addUrl.post = (args: { websiteId: string | number } | [websiteId: string | numbe
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::addUrl
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:149
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:169
 * @route '/ohdear/websites/{websiteId}/urls'
 */
 const addUrlForm = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -137,7 +137,7 @@ const addUrlForm = (args: { websiteId: string | number } | [websiteId: string | 
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::addUrl
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:149
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:169
 * @route '/ohdear/websites/{websiteId}/urls'
 */
 addUrlForm.post = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -149,7 +149,7 @@ addUrl.form = addUrlForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::deleteUrl
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:195
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:215
 * @route '/ohdear/websites/{websiteId}/urls/{ohdearWebsiteId}'
 */
 export const deleteUrl = (args: { websiteId: string | number, ohdearWebsiteId: string | number } | [websiteId: string | number, ohdearWebsiteId: string | number ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -164,7 +164,7 @@ deleteUrl.definition = {
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::deleteUrl
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:195
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:215
 * @route '/ohdear/websites/{websiteId}/urls/{ohdearWebsiteId}'
 */
 deleteUrl.url = (args: { websiteId: string | number, ohdearWebsiteId: string | number } | [websiteId: string | number, ohdearWebsiteId: string | number ], options?: RouteQueryOptions) => {
@@ -190,7 +190,7 @@ deleteUrl.url = (args: { websiteId: string | number, ohdearWebsiteId: string | n
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::deleteUrl
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:195
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:215
 * @route '/ohdear/websites/{websiteId}/urls/{ohdearWebsiteId}'
 */
 deleteUrl.delete = (args: { websiteId: string | number, ohdearWebsiteId: string | number } | [websiteId: string | number, ohdearWebsiteId: string | number ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -200,7 +200,7 @@ deleteUrl.delete = (args: { websiteId: string | number, ohdearWebsiteId: string 
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::deleteUrl
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:195
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:215
 * @route '/ohdear/websites/{websiteId}/urls/{ohdearWebsiteId}'
 */
 const deleteUrlForm = (args: { websiteId: string | number, ohdearWebsiteId: string | number } | [websiteId: string | number, ohdearWebsiteId: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -215,7 +215,7 @@ const deleteUrlForm = (args: { websiteId: string | number, ohdearWebsiteId: stri
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::deleteUrl
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:195
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:215
 * @route '/ohdear/websites/{websiteId}/urls/{ohdearWebsiteId}'
 */
 deleteUrlForm.delete = (args: { websiteId: string | number, ohdearWebsiteId: string | number } | [websiteId: string | number, ohdearWebsiteId: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -331,7 +331,7 @@ uptime.form = uptimeForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::brokenLinks
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:80
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:100
 * @route '/ohdear/websites/{websiteId}/broken-links'
 */
 export const brokenLinks = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -346,7 +346,7 @@ brokenLinks.definition = {
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::brokenLinks
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:80
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:100
 * @route '/ohdear/websites/{websiteId}/broken-links'
 */
 brokenLinks.url = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -373,7 +373,7 @@ brokenLinks.url = (args: { websiteId: string | number } | [websiteId: string | n
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::brokenLinks
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:80
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:100
 * @route '/ohdear/websites/{websiteId}/broken-links'
 */
 brokenLinks.get = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -383,7 +383,7 @@ brokenLinks.get = (args: { websiteId: string | number } | [websiteId: string | n
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::brokenLinks
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:80
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:100
 * @route '/ohdear/websites/{websiteId}/broken-links'
 */
 brokenLinks.head = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -393,7 +393,7 @@ brokenLinks.head = (args: { websiteId: string | number } | [websiteId: string | 
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::brokenLinks
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:80
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:100
 * @route '/ohdear/websites/{websiteId}/broken-links'
 */
 const brokenLinksForm = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -403,7 +403,7 @@ const brokenLinksForm = (args: { websiteId: string | number } | [websiteId: stri
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::brokenLinks
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:80
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:100
 * @route '/ohdear/websites/{websiteId}/broken-links'
 */
 brokenLinksForm.get = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -413,7 +413,7 @@ brokenLinksForm.get = (args: { websiteId: string | number } | [websiteId: string
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::brokenLinks
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:80
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:100
 * @route '/ohdear/websites/{websiteId}/broken-links'
 */
 brokenLinksForm.head = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -430,7 +430,7 @@ brokenLinks.form = brokenLinksForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouse
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:103
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:123
 * @route '/ohdear/websites/{websiteId}/lighthouse'
 */
 export const lighthouse = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -445,7 +445,7 @@ lighthouse.definition = {
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouse
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:103
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:123
 * @route '/ohdear/websites/{websiteId}/lighthouse'
 */
 lighthouse.url = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -472,7 +472,7 @@ lighthouse.url = (args: { websiteId: string | number } | [websiteId: string | nu
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouse
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:103
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:123
 * @route '/ohdear/websites/{websiteId}/lighthouse'
 */
 lighthouse.get = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -482,7 +482,7 @@ lighthouse.get = (args: { websiteId: string | number } | [websiteId: string | nu
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouse
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:103
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:123
 * @route '/ohdear/websites/{websiteId}/lighthouse'
 */
 lighthouse.head = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -492,7 +492,7 @@ lighthouse.head = (args: { websiteId: string | number } | [websiteId: string | n
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouse
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:103
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:123
 * @route '/ohdear/websites/{websiteId}/lighthouse'
 */
 const lighthouseForm = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -502,7 +502,7 @@ const lighthouseForm = (args: { websiteId: string | number } | [websiteId: strin
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouse
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:103
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:123
 * @route '/ohdear/websites/{websiteId}/lighthouse'
 */
 lighthouseForm.get = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -512,7 +512,7 @@ lighthouseForm.get = (args: { websiteId: string | number } | [websiteId: string 
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouse
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:103
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:123
 * @route '/ohdear/websites/{websiteId}/lighthouse'
 */
 lighthouseForm.head = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -529,7 +529,7 @@ lighthouse.form = lighthouseForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::sitemap
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:126
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:146
 * @route '/ohdear/websites/{websiteId}/sitemap'
 */
 export const sitemap = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -544,7 +544,7 @@ sitemap.definition = {
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::sitemap
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:126
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:146
 * @route '/ohdear/websites/{websiteId}/sitemap'
 */
 sitemap.url = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -571,7 +571,7 @@ sitemap.url = (args: { websiteId: string | number } | [websiteId: string | numbe
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::sitemap
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:126
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:146
 * @route '/ohdear/websites/{websiteId}/sitemap'
 */
 sitemap.get = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -581,7 +581,7 @@ sitemap.get = (args: { websiteId: string | number } | [websiteId: string | numbe
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::sitemap
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:126
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:146
 * @route '/ohdear/websites/{websiteId}/sitemap'
 */
 sitemap.head = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -591,7 +591,7 @@ sitemap.head = (args: { websiteId: string | number } | [websiteId: string | numb
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::sitemap
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:126
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:146
 * @route '/ohdear/websites/{websiteId}/sitemap'
 */
 const sitemapForm = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -601,7 +601,7 @@ const sitemapForm = (args: { websiteId: string | number } | [websiteId: string |
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::sitemap
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:126
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:146
 * @route '/ohdear/websites/{websiteId}/sitemap'
 */
 sitemapForm.get = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -611,7 +611,7 @@ sitemapForm.get = (args: { websiteId: string | number } | [websiteId: string | n
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::sitemap
-* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:126
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:146
 * @route '/ohdear/websites/{websiteId}/sitemap'
 */
 sitemapForm.head = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

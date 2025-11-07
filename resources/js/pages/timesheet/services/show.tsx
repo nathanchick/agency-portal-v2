@@ -9,14 +9,6 @@ import {Button} from '@/components/ui/button';
 import {Badge} from '@/components/ui/badge';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/components/ui/table';
-import {
     Dialog,
     DialogContent,
     DialogDescription,
@@ -28,7 +20,7 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
 import {Checkbox} from '@/components/ui/checkbox';
-import {Briefcase, Edit, Clock, DollarSign, TrendingUp, Calendar, AlertCircle} from 'lucide-react';
+import {Briefcase, Edit, Clock, DollarSign, TrendingUp, AlertCircle} from 'lucide-react';
 import {route} from 'ziggy-js';
 import {useState} from 'react';
 import {
@@ -231,9 +223,9 @@ export default function ServiceShow({service, currentPeriod, timeEntriesStats, b
                 <Head title={`Service: ${service.name}`} />
 p                <AppSidebarHeader
                     breadcrumbs={[
-                        { label: 'Dashboard', href: route('dashboard') },
-                        { label: 'Services', href: route('timesheet.services.index') },
-                        { label: service.name },
+                        { title: 'Dashboard', href: route('dashboard') },
+                        { title: 'Services', href: route('timesheet.services.index') },
+                        { title: '${service.name}' },
                     ]}
                 />
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
@@ -373,7 +365,7 @@ p                <AppSidebarHeader
                             </CardHeader>
                             <CardContent>
                                 <div className="space-y-3">
-                                    {budgetChanges.map((change, index) => {
+                                    {budgetChanges.map((change) => {
                                         const isActive = !change.effective_to || new Date(change.effective_to) >= new Date();
 
                                         // If there's an effective_to date, budget reverts to the old values
