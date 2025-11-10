@@ -5,6 +5,7 @@ namespace Modules\Customer\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\HasCurrentOrganisation;
 use App\Models\User;
+use App\Services\ModuleSettingsService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Modules\Customer\Models\Customer;
@@ -77,7 +78,7 @@ class CustomerController extends Controller
         return redirect()->route('customers.edit', $customer)->with('success', 'Customer created successfully');
     }
 
-    public function edit(Customer $customer)
+    public function edit(Customer $customer, ModuleSettingsService $settingsService)
     {
         $organisationId = $this->getCurrentOrganisationId();
 
@@ -132,6 +133,9 @@ class CustomerController extends Controller
         // Get roles for this organisation
         $roles = \Modules\Organisation\Models\Role::where('team_id', $organisationId)->get(['id', 'name']);
 
+        // Get module settings for this customer
+        $moduleSettings = $settingsService->getCustomerSettings($customer);
+
         return Inertia::render('customers/edit', [
             'customer' => [
                 'id' => $customer->id,
@@ -144,10 +148,11 @@ class CustomerController extends Controller
             ],
             'availableUsers' => $availableUsers,
             'roles' => $roles,
+            'moduleSettings' => $moduleSettings,
         ]);
     }
 
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, Customer $customer, ModuleSettingsService $settingsService)
     {
         $organisationId = $this->getCurrentOrganisationId();
 
@@ -164,7 +169,34 @@ class CustomerController extends Controller
 
         $customer->update($validated);
 
+        // Save module settings if provided
+        if ($request->has('module_settings')) {
+            $settingsService->saveCustomerSettings($customer, $request->input('module_settings'));
+        }
+
         return redirect()->route('customers.index')->with('success', 'Customer updated successfully');
+    }
+
+    public function updateModuleSettings(Request $request, Customer $customer, ModuleSettingsService $settingsService)
+    {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        // Ensure customer belongs to the current organisation
+        if ($customer->organisation_id !== $organisationId) {
+            abort(403, 'You do not have access to this customer.');
+        }
+
+        $validated = $request->validate([
+            'module_name' => 'required|string',
+            'settings' => 'required|array',
+        ]);
+
+        // Save settings for the specific module
+        $settingsService->saveCustomerSettings($customer, [
+            $validated['module_name'] => $validated['settings'],
+        ]);
+
+        return back()->with('success', 'Module settings updated successfully');
     }
 
     public function destroy(Customer $customer)

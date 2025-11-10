@@ -13,6 +13,9 @@ Route::middleware(['auth', 'verified', 'organisation'])->group(function () {
     // Customer Management - Only Admin and Manager can access
     Route::resource('customers', CustomerController::class)->middleware('role:Admin|Manager');
 
+    // Customer Module Settings
+    Route::patch('customers/{customer}/modules', [CustomerController::class, 'updateModuleSettings'])->name('customers.modules.update')->middleware('role:Admin|Manager');
+
     // Customer Users - Only Admin and Manager can manage users
     Route::post('customers/{customer}/users/create', [CustomerController::class, 'createUser'])->name('customers.users.create')->middleware('role:Admin|Manager');
     Route::post('customers/{customer}/users', [CustomerController::class, 'attachUser'])->name('customers.users.attach')->middleware('role:Admin|Manager');

@@ -37,6 +37,7 @@ import { Trash2, Plus, UserPlus, Pencil } from 'lucide-react'
 import { Textarea } from '@/components/ui/textarea'
 import { Switch } from '@/components/ui/switch'
 import { useState } from 'react'
+import ModuleSettings, {type ModuleSettingsData} from '@/components/settings/module-settings'
 
 interface User {
     id: string
@@ -80,9 +81,10 @@ interface Props {
     customer: Customer
     availableUsers: User[]
     roles: Role[]
+    moduleSettings: Record<string, ModuleSettingsData>
 }
 
-export default function EditCustomer({ customer, availableUsers, roles }: Props) {
+export default function EditCustomer({ customer, availableUsers, roles, moduleSettings }: Props) {
     const [selectedUserId, setSelectedUserId] = useState<string>('')
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
     const [isCreateProjectDialogOpen, setIsCreateProjectDialogOpen] = useState(false)
@@ -1142,6 +1144,13 @@ export default function EditCustomer({ customer, availableUsers, roles }: Props)
                                 </form>
                             </DialogContent>
                         </Dialog>
+
+                        {/* Module Settings Section */}
+                        <ModuleSettings
+                            moduleSettings={moduleSettings}
+                            saveUrl={route('customers.modules.update', {customer: customer.id})}
+                            disableCollapse={true}
+                        />
 
                         <Dialog open={deleteCustomerDialogOpen} onOpenChange={setDeleteCustomerDialogOpen}>
                             <DialogContent>

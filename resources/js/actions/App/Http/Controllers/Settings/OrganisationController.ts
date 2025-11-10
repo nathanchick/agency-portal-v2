@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::edit
-* @see app/Http/Controllers/Settings/OrganisationController.php:19
+* @see app/Http/Controllers/Settings/OrganisationController.php:20
 * @route '/settings/organisation'
 */
 export const edit = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ edit.definition = {
 
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::edit
-* @see app/Http/Controllers/Settings/OrganisationController.php:19
+* @see app/Http/Controllers/Settings/OrganisationController.php:20
 * @route '/settings/organisation'
 */
 edit.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ edit.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::edit
-* @see app/Http/Controllers/Settings/OrganisationController.php:19
+* @see app/Http/Controllers/Settings/OrganisationController.php:20
 * @route '/settings/organisation'
 */
 edit.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ edit.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::edit
-* @see app/Http/Controllers/Settings/OrganisationController.php:19
+* @see app/Http/Controllers/Settings/OrganisationController.php:20
 * @route '/settings/organisation'
 */
 edit.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ edit.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::edit
-* @see app/Http/Controllers/Settings/OrganisationController.php:19
+* @see app/Http/Controllers/Settings/OrganisationController.php:20
 * @route '/settings/organisation'
 */
 const editForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -55,7 +55,7 @@ const editForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::edit
-* @see app/Http/Controllers/Settings/OrganisationController.php:19
+* @see app/Http/Controllers/Settings/OrganisationController.php:20
 * @route '/settings/organisation'
 */
 editForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -65,7 +65,7 @@ editForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::edit
-* @see app/Http/Controllers/Settings/OrganisationController.php:19
+* @see app/Http/Controllers/Settings/OrganisationController.php:20
 * @route '/settings/organisation'
 */
 editForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -82,7 +82,7 @@ edit.form = editForm
 
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::update
-* @see app/Http/Controllers/Settings/OrganisationController.php:45
+* @see app/Http/Controllers/Settings/OrganisationController.php:49
 * @route '/settings/organisation'
 */
 export const update = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -97,7 +97,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::update
-* @see app/Http/Controllers/Settings/OrganisationController.php:45
+* @see app/Http/Controllers/Settings/OrganisationController.php:49
 * @route '/settings/organisation'
 */
 update.url = (options?: RouteQueryOptions) => {
@@ -106,7 +106,7 @@ update.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::update
-* @see app/Http/Controllers/Settings/OrganisationController.php:45
+* @see app/Http/Controllers/Settings/OrganisationController.php:49
 * @route '/settings/organisation'
 */
 update.patch = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -116,7 +116,7 @@ update.patch = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
 
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::update
-* @see app/Http/Controllers/Settings/OrganisationController.php:45
+* @see app/Http/Controllers/Settings/OrganisationController.php:49
 * @route '/settings/organisation'
 */
 const updateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -131,7 +131,7 @@ const updateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> =>
 
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::update
-* @see app/Http/Controllers/Settings/OrganisationController.php:45
+* @see app/Http/Controllers/Settings/OrganisationController.php:49
 * @route '/settings/organisation'
 */
 updateForm.patch = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -146,6 +146,72 @@ updateForm.patch = (options?: RouteQueryOptions): RouteFormDefinition<'post'> =>
 
 update.form = updateForm
 
-const OrganisationController = { edit, update }
+/**
+* @see \App\Http\Controllers\Settings\OrganisationController::updateModuleSettings
+* @see app/Http/Controllers/Settings/OrganisationController.php:89
+* @route '/settings/organisation/modules'
+*/
+export const updateModuleSettings = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+    url: updateModuleSettings.url(options),
+    method: 'patch',
+})
+
+updateModuleSettings.definition = {
+    methods: ["patch"],
+    url: '/settings/organisation/modules',
+} satisfies RouteDefinition<["patch"]>
+
+/**
+* @see \App\Http\Controllers\Settings\OrganisationController::updateModuleSettings
+* @see app/Http/Controllers/Settings/OrganisationController.php:89
+* @route '/settings/organisation/modules'
+*/
+updateModuleSettings.url = (options?: RouteQueryOptions) => {
+    return updateModuleSettings.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Settings\OrganisationController::updateModuleSettings
+* @see app/Http/Controllers/Settings/OrganisationController.php:89
+* @route '/settings/organisation/modules'
+*/
+updateModuleSettings.patch = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+    url: updateModuleSettings.url(options),
+    method: 'patch',
+})
+
+/**
+* @see \App\Http\Controllers\Settings\OrganisationController::updateModuleSettings
+* @see app/Http/Controllers/Settings/OrganisationController.php:89
+* @route '/settings/organisation/modules'
+*/
+const updateModuleSettingsForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateModuleSettings.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\Settings\OrganisationController::updateModuleSettings
+* @see app/Http/Controllers/Settings/OrganisationController.php:89
+* @route '/settings/organisation/modules'
+*/
+updateModuleSettingsForm.patch = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateModuleSettings.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+updateModuleSettings.form = updateModuleSettingsForm
+
+const OrganisationController = { edit, update, updateModuleSettings }
 
 export default OrganisationController

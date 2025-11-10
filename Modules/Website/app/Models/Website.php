@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Customer\Models\Customer;
 use Modules\Customer\Models\Project;
 use Modules\Ohdear\Models\OhdearWebsite;
+use Modules\Website\Models\WebsiteSetting;
 
 class Website extends Model
 {
@@ -53,5 +54,10 @@ class Website extends Model
     public function getWebhookOrganisationId(): ?string
     {
         return $this->customer?->organisation_id;
+    }
+
+    public function settings(): HasMany
+    {
+        return $this->hasMany(WebsiteSetting::class);
     }
 }

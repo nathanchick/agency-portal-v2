@@ -9,6 +9,7 @@ import InputError from '@/components/input-error';
 import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
+import ModuleSettings, {type ModuleSettingsData} from '@/components/settings/module-settings';
 import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 import {edit} from '@/routes/organisation';
@@ -29,8 +30,10 @@ interface OrganisationData {
 
 export default function Organisation({
     organisation,
+    moduleSettings,
 }: {
     organisation: OrganisationData;
+    moduleSettings: Record<string, ModuleSettingsData>;
 }) {
     const [logoPreview, setLogoPreview] = useState<string | null>(
         organisation.logo,
@@ -164,6 +167,14 @@ export default function Organisation({
                             </>
                         )}
                     </Form>
+
+                    {/* Module settings - independent from main form */}
+                    <ModuleSettings
+                        moduleSettings={moduleSettings}
+                        saveUrl={
+                            OrganisationController.updateModuleSettings.url()
+                        }
+                    />
                 </div>
             </SettingsLayout>
         </AppLayout>

@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -55,7 +55,7 @@ const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -65,7 +65,7 @@ indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -237,7 +237,7 @@ show.form = showForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
 export const update = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -252,7 +252,7 @@ update.definition = {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
 update.url = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -279,7 +279,7 @@ update.url = (args: { website: string | number } | [website: string | number ] |
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
 update.put = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -289,7 +289,7 @@ update.put = (args: { website: string | number } | [website: string | number ] |
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
 update.patch = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -299,7 +299,7 @@ update.patch = (args: { website: string | number } | [website: string | number ]
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
 const updateForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -314,7 +314,7 @@ const updateForm = (args: { website: string | number } | [website: string | numb
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
 updateForm.put = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -329,7 +329,7 @@ updateForm.put = (args: { website: string | number } | [website: string | number
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
 updateForm.patch = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

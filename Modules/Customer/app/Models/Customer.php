@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Customer\Models\CustomerSetting;
 use Modules\Document\Models\DocumentRequest;
+use Modules\Organisation\Models\Organisation;
 use Modules\Website\Models\Website;
 
 class Customer extends Model
@@ -48,5 +50,15 @@ class Customer extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)->withPivot('role_id');
+    }
+
+    public function organisation()
+    {
+        return $this->belongsTo(Organisation::class);
+    }
+
+    public function settings(): HasMany
+    {
+        return $this->hasMany(CustomerSetting::class);
     }
 }

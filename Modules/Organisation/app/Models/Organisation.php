@@ -5,9 +5,11 @@ namespace Modules\Organisation\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Customer\Models\Customer;
 use Modules\Document\Models\Document;
 use Modules\Document\Models\DocumentRequest;
+use Modules\Organisation\Models\OrganisationSetting;
 use Spatie\Multitenancy\Contracts\IsTenant;
 use Spatie\Multitenancy\Models\Concerns\ImplementsTenant;
 
@@ -54,5 +56,10 @@ class Organisation extends Model implements IsTenant
     public function documentRequests()
     {
         return $this->hasMany(DocumentRequest::class);
+    }
+
+    public function settings(): HasMany
+    {
+        return $this->hasMany(OrganisationSetting::class);
     }
 }

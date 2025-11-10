@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 const index87030a6d51e278e383690f38c04b0670 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index87030a6d51e278e383690f38c04b0670.definition = {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 index87030a6d51e278e383690f38c04b0670.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index87030a6d51e278e383690f38c04b0670.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 index87030a6d51e278e383690f38c04b0670.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index87030a6d51e278e383690f38c04b0670.get = (options?: RouteQueryOptions): Route
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 index87030a6d51e278e383690f38c04b0670.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ index87030a6d51e278e383690f38c04b0670.head = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 const index87030a6d51e278e383690f38c04b0670Form = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -55,7 +55,7 @@ const index87030a6d51e278e383690f38c04b0670Form = (options?: RouteQueryOptions):
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 index87030a6d51e278e383690f38c04b0670Form.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -65,7 +65,7 @@ index87030a6d51e278e383690f38c04b0670Form.get = (options?: RouteQueryOptions): R
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/api/v1/websites'
 */
 index87030a6d51e278e383690f38c04b0670Form.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -81,7 +81,7 @@ index87030a6d51e278e383690f38c04b0670Form.head = (options?: RouteQueryOptions): 
 index87030a6d51e278e383690f38c04b0670.form = index87030a6d51e278e383690f38c04b0670Form
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/websites'
 */
 const index0d6d11c6003bae51aabe78809ed722ab = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -96,7 +96,7 @@ index0d6d11c6003bae51aabe78809ed722ab.definition = {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/websites'
 */
 index0d6d11c6003bae51aabe78809ed722ab.url = (options?: RouteQueryOptions) => {
@@ -105,7 +105,7 @@ index0d6d11c6003bae51aabe78809ed722ab.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/websites'
 */
 index0d6d11c6003bae51aabe78809ed722ab.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -115,7 +115,7 @@ index0d6d11c6003bae51aabe78809ed722ab.get = (options?: RouteQueryOptions): Route
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/websites'
 */
 index0d6d11c6003bae51aabe78809ed722ab.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -125,7 +125,7 @@ index0d6d11c6003bae51aabe78809ed722ab.head = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/websites'
 */
 const index0d6d11c6003bae51aabe78809ed722abForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -135,7 +135,7 @@ const index0d6d11c6003bae51aabe78809ed722abForm = (options?: RouteQueryOptions):
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/websites'
 */
 index0d6d11c6003bae51aabe78809ed722abForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -145,7 +145,7 @@ index0d6d11c6003bae51aabe78809ed722abForm.get = (options?: RouteQueryOptions): R
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:18
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/websites'
 */
 index0d6d11c6003bae51aabe78809ed722abForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -322,25 +322,25 @@ show.form = showForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
-export const update = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
-    url: update.url(args, options),
+const updatef36216e1b3ef283ab2953682f239e84e = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: updatef36216e1b3ef283ab2953682f239e84e.url(args, options),
     method: 'put',
 })
 
-update.definition = {
+updatef36216e1b3ef283ab2953682f239e84e.definition = {
     methods: ["put","patch"],
     url: '/api/v1/websites/{website}',
 } satisfies RouteDefinition<["put","patch"]>
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
-update.url = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions) => {
+updatef36216e1b3ef283ab2953682f239e84e.url = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { website: args }
     }
@@ -357,38 +357,38 @@ update.url = (args: { website: string | number } | [website: string | number ] |
         website: args.website,
     }
 
-    return update.definition.url
+    return updatef36216e1b3ef283ab2953682f239e84e.definition.url
             .replace('{website}', parsedArgs.website.toString())
             .replace(/\/+$/, '') + queryParams(options)
 }
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
-update.put = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
-    url: update.url(args, options),
+updatef36216e1b3ef283ab2953682f239e84e.put = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: updatef36216e1b3ef283ab2953682f239e84e.url(args, options),
     method: 'put',
 })
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
-update.patch = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
-    url: update.url(args, options),
+updatef36216e1b3ef283ab2953682f239e84e.patch = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+    url: updatef36216e1b3ef283ab2953682f239e84e.url(args, options),
     method: 'patch',
 })
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
-const updateForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
+const updatef36216e1b3ef283ab2953682f239e84eForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updatef36216e1b3ef283ab2953682f239e84e.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
             ...(options?.query ?? options?.mergeQuery ?? {}),
@@ -399,11 +399,11 @@ const updateForm = (args: { website: string | number } | [website: string | numb
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
-updateForm.put = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
+updatef36216e1b3ef283ab2953682f239e84eForm.put = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updatef36216e1b3ef283ab2953682f239e84e.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
             ...(options?.query ?? options?.mergeQuery ?? {}),
@@ -414,11 +414,11 @@ updateForm.put = (args: { website: string | number } | [website: string | number
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
 */
-updateForm.patch = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
+updatef36216e1b3ef283ab2953682f239e84eForm.patch = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updatef36216e1b3ef283ab2953682f239e84e.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
             ...(options?.query ?? options?.mergeQuery ?? {}),
@@ -427,7 +427,95 @@ updateForm.patch = (args: { website: string | number } | [website: string | numb
     method: 'post',
 })
 
-update.form = updateForm
+updatef36216e1b3ef283ab2953682f239e84e.form = updatef36216e1b3ef283ab2953682f239e84eForm
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::update
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
+* @route '/websites/{id}'
+*/
+const updateb68aea2c530ec496d47a00dc7e7b5049 = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: updateb68aea2c530ec496d47a00dc7e7b5049.url(args, options),
+    method: 'put',
+})
+
+updateb68aea2c530ec496d47a00dc7e7b5049.definition = {
+    methods: ["put"],
+    url: '/websites/{id}',
+} satisfies RouteDefinition<["put"]>
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::update
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
+* @route '/websites/{id}'
+*/
+updateb68aea2c530ec496d47a00dc7e7b5049.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { id: args }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            id: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+        id: args.id,
+    }
+
+    return updateb68aea2c530ec496d47a00dc7e7b5049.definition.url
+            .replace('{id}', parsedArgs.id.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::update
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
+* @route '/websites/{id}'
+*/
+updateb68aea2c530ec496d47a00dc7e7b5049.put = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: updateb68aea2c530ec496d47a00dc7e7b5049.url(args, options),
+    method: 'put',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::update
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
+* @route '/websites/{id}'
+*/
+const updateb68aea2c530ec496d47a00dc7e7b5049Form = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateb68aea2c530ec496d47a00dc7e7b5049.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::update
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
+* @route '/websites/{id}'
+*/
+updateb68aea2c530ec496d47a00dc7e7b5049Form.put = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateb68aea2c530ec496d47a00dc7e7b5049.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+updateb68aea2c530ec496d47a00dc7e7b5049.form = updateb68aea2c530ec496d47a00dc7e7b5049Form
+
+export const update = {
+    '/api/v1/websites/{website}': updatef36216e1b3ef283ab2953682f239e84e,
+    '/websites/{id}': updateb68aea2c530ec496d47a00dc7e7b5049,
+}
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::destroy
@@ -514,8 +602,107 @@ destroyForm.delete = (args: { website: string | number } | [website: string | nu
 destroy.form = destroyForm
 
 /**
+* @see \Modules\Website\Http\Controllers\WebsiteController::edit
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:150
+* @route '/websites/{id}/edit'
+*/
+export const edit = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: edit.url(args, options),
+    method: 'get',
+})
+
+edit.definition = {
+    methods: ["get","head"],
+    url: '/websites/{id}/edit',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::edit
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:150
+* @route '/websites/{id}/edit'
+*/
+edit.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { id: args }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            id: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+        id: args.id,
+    }
+
+    return edit.definition.url
+            .replace('{id}', parsedArgs.id.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::edit
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:150
+* @route '/websites/{id}/edit'
+*/
+edit.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: edit.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::edit
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:150
+* @route '/websites/{id}/edit'
+*/
+edit.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: edit.url(args, options),
+    method: 'head',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::edit
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:150
+* @route '/websites/{id}/edit'
+*/
+const editForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: edit.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::edit
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:150
+* @route '/websites/{id}/edit'
+*/
+editForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: edit.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::edit
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:150
+* @route '/websites/{id}/edit'
+*/
+editForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: edit.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+edit.form = editForm
+
+/**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performance
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:42
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:43
 * @route '/websites/{id}/performance'
 */
 export const performance = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -530,7 +717,7 @@ performance.definition = {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performance
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:42
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:43
 * @route '/websites/{id}/performance'
 */
 performance.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -557,7 +744,7 @@ performance.url = (args: { id: string | number } | [id: string | number ] | stri
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performance
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:42
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:43
 * @route '/websites/{id}/performance'
 */
 performance.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -567,7 +754,7 @@ performance.get = (args: { id: string | number } | [id: string | number ] | stri
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performance
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:42
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:43
 * @route '/websites/{id}/performance'
 */
 performance.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -577,7 +764,7 @@ performance.head = (args: { id: string | number } | [id: string | number ] | str
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performance
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:42
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:43
 * @route '/websites/{id}/performance'
 */
 const performanceForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -587,7 +774,7 @@ const performanceForm = (args: { id: string | number } | [id: string | number ] 
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performance
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:42
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:43
 * @route '/websites/{id}/performance'
 */
 performanceForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -597,7 +784,7 @@ performanceForm.get = (args: { id: string | number } | [id: string | number ] | 
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performance
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:42
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:43
 * @route '/websites/{id}/performance'
 */
 performanceForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -614,7 +801,7 @@ performance.form = performanceForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceUptime
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:50
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:51
 * @route '/websites/{id}/performance/uptime'
 */
 export const performanceUptime = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -629,7 +816,7 @@ performanceUptime.definition = {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceUptime
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:50
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:51
 * @route '/websites/{id}/performance/uptime'
 */
 performanceUptime.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -656,7 +843,7 @@ performanceUptime.url = (args: { id: string | number } | [id: string | number ] 
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceUptime
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:50
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:51
 * @route '/websites/{id}/performance/uptime'
 */
 performanceUptime.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -666,7 +853,7 @@ performanceUptime.get = (args: { id: string | number } | [id: string | number ] 
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceUptime
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:50
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:51
 * @route '/websites/{id}/performance/uptime'
 */
 performanceUptime.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -676,7 +863,7 @@ performanceUptime.head = (args: { id: string | number } | [id: string | number ]
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceUptime
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:50
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:51
 * @route '/websites/{id}/performance/uptime'
 */
 const performanceUptimeForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -686,7 +873,7 @@ const performanceUptimeForm = (args: { id: string | number } | [id: string | num
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceUptime
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:50
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:51
 * @route '/websites/{id}/performance/uptime'
 */
 performanceUptimeForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -696,7 +883,7 @@ performanceUptimeForm.get = (args: { id: string | number } | [id: string | numbe
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceUptime
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:50
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:51
 * @route '/websites/{id}/performance/uptime'
 */
 performanceUptimeForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -713,7 +900,7 @@ performanceUptime.form = performanceUptimeForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceBrokenLinks
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:70
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:71
 * @route '/websites/{id}/performance/broken-links'
 */
 export const performanceBrokenLinks = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -728,7 +915,7 @@ performanceBrokenLinks.definition = {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceBrokenLinks
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:70
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:71
 * @route '/websites/{id}/performance/broken-links'
 */
 performanceBrokenLinks.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -755,7 +942,7 @@ performanceBrokenLinks.url = (args: { id: string | number } | [id: string | numb
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceBrokenLinks
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:70
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:71
 * @route '/websites/{id}/performance/broken-links'
 */
 performanceBrokenLinks.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -765,7 +952,7 @@ performanceBrokenLinks.get = (args: { id: string | number } | [id: string | numb
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceBrokenLinks
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:70
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:71
 * @route '/websites/{id}/performance/broken-links'
 */
 performanceBrokenLinks.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -775,7 +962,7 @@ performanceBrokenLinks.head = (args: { id: string | number } | [id: string | num
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceBrokenLinks
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:70
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:71
 * @route '/websites/{id}/performance/broken-links'
 */
 const performanceBrokenLinksForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -785,7 +972,7 @@ const performanceBrokenLinksForm = (args: { id: string | number } | [id: string 
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceBrokenLinks
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:70
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:71
 * @route '/websites/{id}/performance/broken-links'
 */
 performanceBrokenLinksForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -795,7 +982,7 @@ performanceBrokenLinksForm.get = (args: { id: string | number } | [id: string | 
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceBrokenLinks
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:70
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:71
 * @route '/websites/{id}/performance/broken-links'
 */
 performanceBrokenLinksForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -812,7 +999,7 @@ performanceBrokenLinks.form = performanceBrokenLinksForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceLighthouse
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:90
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:91
 * @route '/websites/{id}/performance/lighthouse'
 */
 export const performanceLighthouse = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -827,7 +1014,7 @@ performanceLighthouse.definition = {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceLighthouse
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:90
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:91
 * @route '/websites/{id}/performance/lighthouse'
 */
 performanceLighthouse.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -854,7 +1041,7 @@ performanceLighthouse.url = (args: { id: string | number } | [id: string | numbe
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceLighthouse
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:90
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:91
 * @route '/websites/{id}/performance/lighthouse'
 */
 performanceLighthouse.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -864,7 +1051,7 @@ performanceLighthouse.get = (args: { id: string | number } | [id: string | numbe
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceLighthouse
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:90
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:91
 * @route '/websites/{id}/performance/lighthouse'
 */
 performanceLighthouse.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -874,7 +1061,7 @@ performanceLighthouse.head = (args: { id: string | number } | [id: string | numb
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceLighthouse
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:90
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:91
 * @route '/websites/{id}/performance/lighthouse'
 */
 const performanceLighthouseForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -884,7 +1071,7 @@ const performanceLighthouseForm = (args: { id: string | number } | [id: string |
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceLighthouse
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:90
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:91
 * @route '/websites/{id}/performance/lighthouse'
 */
 performanceLighthouseForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -894,7 +1081,7 @@ performanceLighthouseForm.get = (args: { id: string | number } | [id: string | n
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceLighthouse
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:90
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:91
 * @route '/websites/{id}/performance/lighthouse'
 */
 performanceLighthouseForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -911,7 +1098,7 @@ performanceLighthouse.form = performanceLighthouseForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceSitemap
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:110
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:111
 * @route '/websites/{id}/performance/sitemap'
 */
 export const performanceSitemap = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -926,7 +1113,7 @@ performanceSitemap.definition = {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceSitemap
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:110
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:111
 * @route '/websites/{id}/performance/sitemap'
 */
 performanceSitemap.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -953,7 +1140,7 @@ performanceSitemap.url = (args: { id: string | number } | [id: string | number ]
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceSitemap
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:110
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:111
 * @route '/websites/{id}/performance/sitemap'
 */
 performanceSitemap.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -963,7 +1150,7 @@ performanceSitemap.get = (args: { id: string | number } | [id: string | number ]
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceSitemap
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:110
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:111
 * @route '/websites/{id}/performance/sitemap'
 */
 performanceSitemap.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -973,7 +1160,7 @@ performanceSitemap.head = (args: { id: string | number } | [id: string | number 
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceSitemap
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:110
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:111
 * @route '/websites/{id}/performance/sitemap'
 */
 const performanceSitemapForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -983,7 +1170,7 @@ const performanceSitemapForm = (args: { id: string | number } | [id: string | nu
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceSitemap
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:110
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:111
 * @route '/websites/{id}/performance/sitemap'
 */
 performanceSitemapForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -993,7 +1180,7 @@ performanceSitemapForm.get = (args: { id: string | number } | [id: string | numb
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceSitemap
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:110
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:111
 * @route '/websites/{id}/performance/sitemap'
 */
 performanceSitemapForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -1010,7 +1197,7 @@ performanceSitemap.form = performanceSitemapForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::security
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:130
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:131
 * @route '/websites/{id}/security'
 */
 export const security = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -1025,7 +1212,7 @@ security.definition = {
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::security
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:130
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:131
 * @route '/websites/{id}/security'
 */
 security.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -1052,7 +1239,7 @@ security.url = (args: { id: string | number } | [id: string | number ] | string 
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::security
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:130
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:131
 * @route '/websites/{id}/security'
 */
 security.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -1062,7 +1249,7 @@ security.get = (args: { id: string | number } | [id: string | number ] | string 
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::security
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:130
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:131
 * @route '/websites/{id}/security'
 */
 security.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -1072,7 +1259,7 @@ security.head = (args: { id: string | number } | [id: string | number ] | string
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::security
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:130
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:131
 * @route '/websites/{id}/security'
 */
 const securityForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -1082,7 +1269,7 @@ const securityForm = (args: { id: string | number } | [id: string | number ] | s
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::security
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:130
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:131
 * @route '/websites/{id}/security'
 */
 securityForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -1092,7 +1279,7 @@ securityForm.get = (args: { id: string | number } | [id: string | number ] | str
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::security
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:130
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:131
 * @route '/websites/{id}/security'
 */
 securityForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -1107,6 +1294,6 @@ securityForm.head = (args: { id: string | number } | [id: string | number ] | st
 
 security.form = securityForm
 
-const WebsiteController = { index, store, show, update, destroy, performance, performanceUptime, performanceBrokenLinks, performanceLighthouse, performanceSitemap, security }
+const WebsiteController = { index, store, show, update, destroy, edit, performance, performanceUptime, performanceBrokenLinks, performanceLighthouse, performanceSitemap, security }
 
 export default WebsiteController
