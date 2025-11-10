@@ -1,5 +1,6 @@
 import {useState} from 'react';
-import {Head, router} from '@inertiajs/react';
+import {Head, router, Link} from '@inertiajs/react';
+import {route} from 'ziggy-js';
 import {AppSidebar} from '@/components/app-sidebar';
 import {AppSidebarHeader} from '@/components/app-sidebar-header';
 import {
@@ -9,7 +10,7 @@ import {
 import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Badge} from '@/components/ui/badge';
-import {Activity, Shield, ExternalLink, Settings} from 'lucide-react';
+import {Activity, Shield, ExternalLink, Settings, Pencil} from 'lucide-react';
 import SetupMonitoringDialog from '@/components/setup-monitoring-dialog';
 
 interface Customer {
@@ -128,6 +129,11 @@ export default function WebsitesIndex({websites, isCustomerView}: Props) {
                                                 </p>
                                             )}
                                         </div>
+                                        <Link href={route('websites.edit', {id: website.id})}>
+                                            <Button variant="ghost" size="icon">
+                                                <Pencil className="h-4 w-4" />
+                                            </Button>
+                                        </Link>
                                     </div>
                                 </CardHeader>
                                 <CardContent>

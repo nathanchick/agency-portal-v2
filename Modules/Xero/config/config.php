@@ -10,12 +10,12 @@ return [
         ],
         'XERO_TENANT_ID' => [
             'label' => 'Xero Tenant ID',
-            'type' => 'encrypted',
+            'type' => 'text',
             'description' => 'Your Xero tenant ID',
         ],
         'XERO_CLIENT_ID' => [
             'label' => 'Xero Client ID',
-            'type' => 'encrypted',
+            'type' => 'text',
             'description' => 'Your Xero OAuth 2.0 client ID',
         ],
         'XERO_CLIENT_SECRET' => [

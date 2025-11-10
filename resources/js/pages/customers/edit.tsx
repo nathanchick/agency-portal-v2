@@ -1129,17 +1129,29 @@ export default function EditCustomer({ customer, availableUsers, roles, moduleSe
                                         )}
                                     </div>
 
-                                    <div className="flex gap-2 justify-end">
-                                        <Button
-                                            type="button"
-                                            variant="outline"
-                                            onClick={() => setIsEditWebsiteDialogOpen(false)}
-                                        >
-                                            Cancel
-                                        </Button>
-                                        <Button type="submit" disabled={updatingWebsite}>
-                                            {updatingWebsite ? 'Updating...' : 'Update Website'}
-                                        </Button>
+                                    <div className="flex gap-2 justify-between">
+                                        {editingWebsite?.id && (
+                                            <Link href={route('websites.edit', {id: editingWebsite.id})}>
+                                                <Button
+                                                    type="button"
+                                                    variant="outline"
+                                                >
+                                                    Advanced Settings
+                                                </Button>
+                                            </Link>
+                                        )}
+                                        <div className="flex gap-2">
+                                            <Button
+                                                type="button"
+                                                variant="outline"
+                                                onClick={() => setIsEditWebsiteDialogOpen(false)}
+                                            >
+                                                Cancel
+                                            </Button>
+                                            <Button type="submit" disabled={updatingWebsite}>
+                                                {updatingWebsite ? 'Updating...' : 'Update Website'}
+                                            </Button>
+                                        </div>
                                     </div>
                                 </form>
                             </DialogContent>

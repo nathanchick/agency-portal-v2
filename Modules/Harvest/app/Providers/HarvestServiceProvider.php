@@ -2,9 +2,11 @@
 
 namespace Modules\Harvest\Providers;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 use Modules\Harvest\Console\Commands\DebugService;
 use Modules\Harvest\Console\Commands\ImportHarvestData;
+use Modules\Harvest\Console\Commands\SyncHarvestData;
 use Nwidart\Modules\Traits\PathNamespace;
 
 class HarvestServiceProvider extends ServiceProvider
@@ -41,6 +43,7 @@ class HarvestServiceProvider extends ServiceProvider
     {
         $this->commands([
             ImportHarvestData::class,
+            SyncHarvestData::class,
             DebugService::class,
         ]);
     }
@@ -50,7 +53,10 @@ class HarvestServiceProvider extends ServiceProvider
      */
     protected function registerCommandSchedules(): void
     {
-        // Schedules moved to TimesheetServiceProvider
+        $this->app->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+            $schedule->command('harvest:sync')->hourly();
+        });
     }
 
     /**

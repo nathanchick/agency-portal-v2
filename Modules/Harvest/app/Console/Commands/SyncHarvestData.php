@@ -2,20 +2,66 @@
 
 namespace Modules\Harvest\Console\Commands;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Modules\Harvest\Services\HarvestImportService;
 use Modules\Organisation\Models\Organisation;
 
-class ImportHarvestData extends Command
+class SyncHarvestData extends Command
 {
-    protected $signature = 'harvest:import-data {organisation_id} {--force : Skip confirmation prompt}';
+    protected $signature = 'harvest:sync {organisation_id? : Organisation ID to sync (syncs all orgs if omitted)}';
 
-    protected $description = '⚠️  FULL REIMPORT of ALL Harvest data. May overwrite manual changes. Use harvest:sync for incremental updates.';
+    protected $description = 'Incrementally sync Harvest data (tasks, projects, time entries only - does not create users or customers)';
 
     public function handle(): int
     {
         $organisationId = $this->argument('organisation_id');
 
+        if ($organisationId) {
+            // Sync specific organisation
+            return $this->syncOrganisation($organisationId);
+        }
+
+        // Sync all organisations with Harvest enabled
+        $this->info('Syncing Harvest data for all organisations with Harvest enabled...');
+
+        $organisations = Organisation::whereHas('settings', function ($query) {
+            $query->where('module', 'Harvest')
+                ->where('key', 'status')
+                ->where('value', '1');
+        })->get();
+
+        if ($organisations->isEmpty()) {
+            $this->info('No organisations with Harvest enabled found.');
+
+            return 0;
+        }
+
+        $successCount = 0;
+        $failedCount = 0;
+
+        foreach ($organisations as $organisation) {
+            $result = $this->syncOrganisation($organisation->id);
+
+            if ($result === 0) {
+                $successCount++;
+            } else {
+                $failedCount++;
+            }
+        }
+
+        $this->newLine();
+        $this->info("=== Sync Summary ===");
+        $this->info("Successful: {$successCount}");
+        if ($failedCount > 0) {
+            $this->warn("Failed: {$failedCount}");
+        }
+
+        return $failedCount > 0 ? 1 : 0;
+    }
+
+    private function syncOrganisation(string $organisationId): int
+    {
         // Validate organisation exists and load settings
         $organisation = Organisation::with('settings')->find($organisationId);
         if (! $organisation) {
@@ -31,8 +77,7 @@ class ImportHarvestData extends Command
             ->first()?->value;
 
         if ($harvestEnabled !== '1') {
-            $this->error('Harvest module is not enabled for this organisation.');
-            $this->info('Please enable Harvest in Organisation Settings and configure the API credentials.');
+            $this->warn("Harvest module is not enabled for organisation: {$organisation->name}");
 
             return 1;
         }
@@ -50,27 +95,9 @@ class ImportHarvestData extends Command
 
         // Validate credentials are configured
         if (! $harvestAccountId || ! $harvestToken) {
-            $this->error('Harvest API credentials are not configured for this organisation.');
-            $this->info('Please configure HARVEST_ACCOUNT_ID and HARVEST_BEARER in Organisation Settings.');
+            $this->error("Harvest API credentials not configured for organisation: {$organisation->name}");
 
             return 1;
-        }
-
-        // Show warning and require confirmation unless --force is used
-        if (! $this->option('force')) {
-            $this->warn('⚠️  WARNING: This is a FULL REIMPORT that will:');
-            $this->warn('   • Import ALL users, customers, projects, tasks, and time entries from Harvest');
-            $this->warn('   • Overwrite existing data where duplicates are found');
-            $this->warn('   • Potentially overwrite manual changes made in the portal');
-            $this->newLine();
-            $this->info('For incremental updates without data loss, use: harvest:sync');
-            $this->newLine();
-
-            if (! $this->confirm('Do you want to continue with the full reimport?', false)) {
-                $this->info('Import cancelled.');
-
-                return 0;
-            }
         }
 
         try {
@@ -86,32 +113,31 @@ class ImportHarvestData extends Command
                 };
             });
 
-            // Run full import
+            // Run incremental sync - skip users and customers, filter time entries to last 7 days
             $statistics = $service->run([
-                'users' => true,
+                'users' => false,
                 'tasks' => true,
-                'clients' => true,
+                'clients' => false,
                 'projects' => true,
                 'time_entries' => true,
+                'time_entries_since' => Carbon::now()->subDays(7),
             ]);
 
             // Create missing budget periods and update hours used
-            $this->info("\nCreating/updating budget periods...");
+            $this->info("\nUpdating budget periods...");
             $this->call('timesheet:create-missing-budget-periods', [
                 'organisation_id' => $organisationId,
             ]);
 
-            $this->info("\n=== Import Complete ===");
-            $this->info("Users: {$statistics['users']}");
+            $this->info("\n=== Sync Complete for {$organisation->name} ===");
             $this->info("Tasks: {$statistics['tasks']}");
-            $this->info("Clients: {$statistics['clients']}");
             $this->info("Projects: {$statistics['projects']}");
             $this->info("Task Assignments: {$statistics['task_assignments']}");
             $this->info("Time Entries: {$statistics['time_entries']}");
 
             return 0;
         } catch (\Exception $e) {
-            $this->error("Import failed: {$e->getMessage()}");
+            $this->error("Sync failed for {$organisation->name}: {$e->getMessage()}");
 
             return 1;
         }
