@@ -6,7 +6,7 @@ import {
 } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 import { NotificationList } from './notification-list';
-import { fetchNotifications, markAllNotificationsAsRead } from '@/actions/notifications';
+import { fetchNotifications, markAllNotificationsAsRead } from '@/api/notifications';
 import type { Notification } from '@/types';
 import { CheckCheck } from 'lucide-react';
 import { Separator } from './ui/separator';

@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { markNotificationAsRead, deleteNotification } from '@/actions/notifications';
+import { markNotificationAsRead, deleteNotification } from '@/api/notifications';
 import type { Notification } from '@/types';
 import { formatDistanceToNow } from 'date-fns';
 import { X, FileText, Users, UserPlus, CheckCircle, XCircle } from 'lucide-react';

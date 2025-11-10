@@ -10,5 +10,8 @@ Route::middleware(['auth', 'verified'])->prefix('ohdear')->name('ohdear.')->grou
     Route::get('websites/{websiteId}/uptime', [OhdearController::class, 'uptime'])->name('uptime');
     Route::get('websites/{websiteId}/broken-links', [OhdearController::class, 'brokenLinks'])->name('broken-links');
     Route::get('websites/{websiteId}/lighthouse', [OhdearController::class, 'lighthouse'])->name('lighthouse');
+    Route::get('websites/{websiteId}/lighthouse/history/{monitorId}', [OhdearController::class, 'lighthouseHistory'])->name('lighthouse-history');
+    Route::get('websites/{websiteId}/lighthouse/report/{monitorId}/{reportId}', [OhdearController::class, 'lighthouseReportDetails'])->name('lighthouse-report-details');
     Route::get('websites/{websiteId}/sitemap', [OhdearController::class, 'sitemap'])->name('sitemap');
+    Route::put('websites/{websiteId}/sitemap-url', [OhdearController::class, 'updateSitemapUrl'])->name('update-sitemap-url');
 });

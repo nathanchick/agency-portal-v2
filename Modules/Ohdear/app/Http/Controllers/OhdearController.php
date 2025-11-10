@@ -76,7 +76,7 @@ class OhdearController extends Controller
 
                 $monitors[] = [
                     'id' => $ohdearWebsite->id,
-                    'url' => $ohdearWebsite->url,
+                    'url' => $ohdearWebsite->url ?? $metrics['monitor']['url'] ?? '',
                     'ohdear_site_id' => $ohdearWebsite->ohdear_site_id,
                     'metrics' => $metrics,
                     'daily_breakdown' => $dailyBreakdown,
@@ -118,24 +118,105 @@ class OhdearController extends Controller
     }
 
     /**
-     * Get lighthouse report for a website
+     * Get lighthouse reports for a website
      */
     public function lighthouse(string $websiteId)
     {
-        $website = Website::with('ohdearWebsite')->findOrFail($websiteId);
+        $website = Website::with('ohdearWebsites')->findOrFail($websiteId);
 
-        if (!$website->ohdearWebsite) {
+        if ($website->ohdearWebsites->isEmpty()) {
             return response()->json([
                 'error' => 'Oh Dear monitoring is not setup for this website.',
             ], 404);
         }
 
         try {
-            $data = $this->ohdearService->getLighthouseReport($website->ohdearWebsite->ohdear_site_id);
-            return response()->json($data);
+            $monitors = [];
+
+            // Get lighthouse report for each monitored URL
+            foreach ($website->ohdearWebsites as $ohdearWebsite) {
+                $report = $this->ohdearService->getLighthouseReport($ohdearWebsite->ohdear_site_id);
+
+                if ($report) {
+                    $monitors[] = [
+                        'id' => $ohdearWebsite->id,
+                        'url' => $ohdearWebsite->url ?? '',
+                        'ohdear_site_id' => $ohdearWebsite->ohdear_site_id,
+                        'report' => $report,
+                    ];
+                }
+            }
+
+            return response()->json([
+                'monitors' => $monitors,
+            ]);
         } catch (\Exception $e) {
             return response()->json([
-                'error' => 'Failed to fetch lighthouse report: ' . $e->getMessage(),
+                'error' => 'Failed to fetch lighthouse reports: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Get historical lighthouse reports for a monitor
+     */
+    public function lighthouseHistory(string $websiteId, string $monitorId)
+    {
+        $website = Website::with('ohdearWebsites')->findOrFail($websiteId);
+
+        // Find the specific monitor
+        $ohdearWebsite = $website->ohdearWebsites()->where('ohdear_site_id', $monitorId)->first();
+
+        if (!$ohdearWebsite) {
+            return response()->json([
+                'error' => 'Monitor not found for this website.',
+            ], 404);
+        }
+
+        try {
+            $reports = $this->ohdearService->getLighthouseReports($monitorId);
+
+            return response()->json([
+                'monitor_id' => $monitorId,
+                'url' => $ohdearWebsite->url ?? '',
+                'reports' => $reports,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to fetch lighthouse history: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Get detailed lighthouse report by ID
+     */
+    public function lighthouseReportDetails(string $websiteId, string $monitorId, string $reportId)
+    {
+        $website = Website::with('ohdearWebsites')->findOrFail($websiteId);
+
+        // Find the specific monitor
+        $ohdearWebsite = $website->ohdearWebsites()->where('ohdear_site_id', $monitorId)->first();
+
+        if (!$ohdearWebsite) {
+            return response()->json([
+                'error' => 'Monitor not found for this website.',
+            ], 404);
+        }
+
+        try {
+            $report = $this->ohdearService->getLighthouseReportById($monitorId, $reportId);
+
+            if (!$report) {
+                return response()->json([
+                    'error' => 'Report not found.',
+                ], 404);
+            }
+
+            return response()->json($report);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to fetch lighthouse report details: ' . $e->getMessage(),
             ], 500);
         }
     }
@@ -239,6 +320,62 @@ class OhdearController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to delete URL from monitoring: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Update sitemap URL for a website
+     */
+    public function updateSitemapUrl(Request $request, string $websiteId)
+    {
+        $validator = Validator::make($request->all(), [
+            'sitemap_url' => 'required|url',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $website = Website::with('ohdearWebsites')->findOrFail($websiteId);
+
+        // Get the first (base) monitor - only the base URL has sitemap check enabled
+        // The base URL is always created first in the monitoring setup
+        $baseMonitor = $website->ohdearWebsites->first();
+
+        if (!$baseMonitor) {
+            return response()->json([
+                'error' => 'No monitors found for this website. Please setup monitoring first.',
+            ], 404);
+        }
+
+        try {
+            $this->ohdearService->updateSitemapUrl($baseMonitor->ohdear_site_id, $request->sitemap_url);
+
+            // Log the update for debugging
+            \Log::info('Sitemap URL updated', [
+                'monitor_id' => $baseMonitor->ohdear_site_id,
+                'sitemap_url' => $request->sitemap_url,
+            ]);
+
+            return response()->json([
+                'message' => 'Sitemap URL updated successfully!',
+                'monitor_id' => $baseMonitor->ohdear_site_id,
+                'sitemap_url' => $request->sitemap_url,
+            ]);
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            \Log::error('Failed to update sitemap URL', [
+                'monitor_id' => $baseMonitor->ohdear_site_id,
+                'sitemap_url' => $request->sitemap_url,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+
+            return response()->json([
+                'error' => 'Failed to update sitemap URL: ' . $e->getMessage(),
             ], 500);
         }
     }

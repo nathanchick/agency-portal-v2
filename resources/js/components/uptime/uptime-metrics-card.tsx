@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Alert, AlertDescription} from '@/components/ui/alert';
 import {AlertCircle, Activity, Loader2} from 'lucide-react';
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
 import PerformanceHistoryChart from './performance-history-chart';
 import UptimeVisualization from './uptime-visualization';
 import UptimeStatistics from './uptime-statistics';
@@ -34,6 +35,7 @@ export default function UptimeMetricsCard({websiteId}: UptimeMetricsCardProps) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [range, setRange] = useState('day');
+    const [selectedMonitorId, setSelectedMonitorId] = useState<string | null>(null);
 
     const fetchUptimeData = async (selectedRange: string) => {
         setLoading(true);
@@ -64,6 +66,13 @@ export default function UptimeMetricsCard({websiteId}: UptimeMetricsCardProps) {
     useEffect(() => {
         fetchUptimeData(range);
     }, [websiteId, range]);
+
+    // Set initial selected monitor when data loads
+    useEffect(() => {
+        if (data && data.monitors.length > 0 && !selectedMonitorId) {
+            setSelectedMonitorId(data.monitors[0].id);
+        }
+    }, [data]);
 
     const handleRangeChange = (newRange: string) => {
         setRange(newRange);
@@ -131,19 +140,40 @@ export default function UptimeMetricsCard({websiteId}: UptimeMetricsCardProps) {
         );
     }
 
-    // Use the first monitor (base URL) for display
-    const monitor = data.monitors[0];
+    // Use the selected monitor for display
+    const monitor = data.monitors.find(m => m.id === selectedMonitorId) || data.monitors[0];
 
     return (
         <Card>
             <CardHeader>
                 <div className="flex items-center justify-between">
-                    <div>
+                    <div className="flex-1">
                         <CardTitle>Uptime Monitoring</CardTitle>
                         <CardDescription>
-                            Monitoring: {monitor.url}
+                            {data.monitors.length > 1 ? (
+                                <span>Select a URL to view its metrics</span>
+                            ) : (
+                                <span>Monitoring: {monitor.url}</span>
+                            )}
                         </CardDescription>
                     </div>
+                    {data.monitors.length > 1 && (
+                        <Select
+                            value={selectedMonitorId || undefined}
+                            onValueChange={(value) => setSelectedMonitorId(value)}
+                        >
+                            <SelectTrigger className="w-[300px]">
+                                <SelectValue placeholder="Select a URL" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {data.monitors.map((mon) => (
+                                    <SelectItem key={mon.id} value={mon.id}>
+                                        {mon.url}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    )}
                 </div>
             </CardHeader>
             <CardContent className="space-y-6">

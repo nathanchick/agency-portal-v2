@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { edit as editAppearance } from '@/routes/appearance';
+import { edit as editOrganisation } from '@/routes/organisation';
 import { edit as editPassword } from '@/routes/password';
 import { edit } from '@/routes/profile';
 import { show } from '@/routes/two-factor';
@@ -14,6 +15,11 @@ const sidebarNavItems: NavItem[] = [
     {
         title: 'Profile',
         href: edit(),
+        icon: null,
+    },
+    {
+        title: 'Organisation',
+        href: editOrganisation(),
         icon: null,
     },
     {

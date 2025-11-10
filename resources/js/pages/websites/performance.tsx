@@ -5,12 +5,14 @@ import {
     SidebarInset,
     SidebarProvider,
 } from '@/components/ui/sidebar';
-import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Button} from '@/components/ui/button';
 import {Badge} from '@/components/ui/badge';
-import {ArrowLeft, Activity, Link2, Lightbulb, Map} from 'lucide-react';
+import {ArrowLeft} from 'lucide-react';
+import {WebsitePerformanceNav} from '@/components/website-performance-nav';
 import UptimeMetricsCard from '@/components/uptime/uptime-metrics-card';
+import BrokenLinksCard from '@/components/broken-links/broken-links-card';
+import SitemapCard from '@/components/sitemap/sitemap-card';
+import LighthouseCard from '@/components/lighthouse/lighthouse-card';
 
 interface Customer {
     id: string;
@@ -36,9 +38,10 @@ interface Website {
 interface Props {
     website: Website;
     isCustomerView: boolean;
+    currentSection: 'uptime' | 'broken-links' | 'lighthouse' | 'sitemap';
 }
 
-export default function WebsitePerformance({website, isCustomerView}: Props) {
+export default function WebsitePerformance({website, isCustomerView, currentSection}: Props) {
     const baseRoute = isCustomerView ? '/customer/websites' : '/websites';
     return (
         <SidebarProvider>
@@ -53,7 +56,9 @@ export default function WebsitePerformance({website, isCustomerView}: Props) {
                     ]}
                 />
 
-                <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                <WebsitePerformanceNav websiteId={website.id} isCustomerView={isCustomerView}/>
+
+                <div className="flex flex-1 flex-col gap-4 p-4">
                     <div className="flex items-center justify-between">
                         <div>
                             <h2 className="text-3xl font-bold tracking-tight">
@@ -77,90 +82,21 @@ export default function WebsitePerformance({website, isCustomerView}: Props) {
                         </Button>
                     </div>
 
-                    <Tabs defaultValue="uptime" className="w-full">
-                        <TabsList className="grid w-full grid-cols-4">
-                            <TabsTrigger value="uptime">
-                                <Activity className="h-4 w-4 mr-2"/>
-                                Uptime
-                            </TabsTrigger>
-                            <TabsTrigger value="broken-links">
-                                <Link2 className="h-4 w-4 mr-2"/>
-                                Broken Links
-                            </TabsTrigger>
-                            <TabsTrigger value="lighthouse">
-                                <Lightbulb className="h-4 w-4 mr-2"/>
-                                Lighthouse
-                            </TabsTrigger>
-                            <TabsTrigger value="sitemap">
-                                <Map className="h-4 w-4 mr-2"/>
-                                Sitemap
-                            </TabsTrigger>
-                        </TabsList>
+                    {currentSection === 'uptime' && (
+                        <UptimeMetricsCard websiteId={website.id}/>
+                    )}
 
-                        <TabsContent value="uptime">
-                            <UptimeMetricsCard websiteId={website.id}/>
-                        </TabsContent>
+                    {currentSection === 'broken-links' && (
+                        <BrokenLinksCard websiteId={website.id}/>
+                    )}
 
-                        <TabsContent value="broken-links">
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>Broken Links</CardTitle>
-                                    <CardDescription>
-                                        View broken links detected on your website
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="flex items-center justify-center h-64 text-muted-foreground">
-                                        <div className="text-center">
-                                            <Link2 className="h-12 w-12 mx-auto mb-4 opacity-50"/>
-                                            <p>Broken links data will appear here</p>
-                                            <p className="text-sm mt-2">Monitoring integration pending</p>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </TabsContent>
+                    {currentSection === 'lighthouse' && (
+                        <LighthouseCard websiteId={website.id}/>
+                    )}
 
-                        <TabsContent value="lighthouse">
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>Lighthouse Scores</CardTitle>
-                                    <CardDescription>
-                                        Performance, accessibility, and SEO metrics
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="flex items-center justify-center h-64 text-muted-foreground">
-                                        <div className="text-center">
-                                            <Lightbulb className="h-12 w-12 mx-auto mb-4 opacity-50"/>
-                                            <p>Lighthouse scores will appear here</p>
-                                            <p className="text-sm mt-2">Monitoring integration pending</p>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </TabsContent>
-
-                        <TabsContent value="sitemap">
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>Sitemap</CardTitle>
-                                    <CardDescription>
-                                        Sitemap validation and monitoring
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="flex items-center justify-center h-64 text-muted-foreground">
-                                        <div className="text-center">
-                                            <Map className="h-12 w-12 mx-auto mb-4 opacity-50"/>
-                                            <p>Sitemap data will appear here</p>
-                                            <p className="text-sm mt-2">Monitoring integration pending</p>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </TabsContent>
-                    </Tabs>
+                    {currentSection === 'sitemap' && (
+                        <SitemapCard websiteId={website.id} websiteUrl={website.url}/>
+                    )}
                 </div>
             </SidebarInset>
         </SidebarProvider>

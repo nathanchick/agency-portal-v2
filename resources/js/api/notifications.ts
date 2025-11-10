@@ -1,4 +1,4 @@
-import * as NotificationController from './App/Http/Controllers/NotificationController';
+import * as NotificationController from '@/actions/App/Http/Controllers/NotificationController';
 import type { Notification } from '@/types';
 
 interface NotificationsResponse {

@@ -5,15 +5,11 @@ import {Download} from 'lucide-react';
 interface UptimeStatisticsProps {
     uptimePercentage7Days: number;
     uptimePercentage12Months: number;
-    onDailyUptimeClick?: () => void;
-    onRunHistoryClick?: () => void;
 }
 
 export default function UptimeStatistics({
     uptimePercentage7Days,
     uptimePercentage12Months,
-    onDailyUptimeClick,
-    onRunHistoryClick,
 }: UptimeStatisticsProps) {
     const getBadgeVariant = (percentage: number): 'default' | 'destructive' | 'secondary' => {
         if (percentage === 100) return 'destructive';
@@ -36,25 +32,6 @@ export default function UptimeStatistics({
                         {uptimePercentage12Months.toFixed(2)}%
                     </Badge>
                 </div>
-            </div>
-
-            <div className="flex gap-2">
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={onDailyUptimeClick}
-                >
-                    <Download className="mr-2 h-4 w-4"/>
-                    DAILY UPTIME
-                </Button>
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={onRunHistoryClick}
-                >
-                    <Download className="mr-2 h-4 w-4"/>
-                    RUN HISTORY
-                </Button>
             </div>
         </div>
     );

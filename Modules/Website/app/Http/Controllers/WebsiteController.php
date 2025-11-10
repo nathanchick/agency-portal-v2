@@ -37,9 +37,17 @@ class WebsiteController extends Controller
     }
 
     /**
-     * Display the performance page for a website
+     * Redirect to uptime section (default)
      */
     public function performance(string $id)
+    {
+        return redirect()->route('websites.performance.uptime', $id);
+    }
+
+    /**
+     * Display the uptime performance section
+     */
+    public function performanceUptime(string $id)
     {
         $organisationId = $this->getCurrentOrganisationId();
 
@@ -52,6 +60,67 @@ class WebsiteController extends Controller
         return Inertia::render('websites/performance', [
             'website' => $website,
             'isCustomerView' => false,
+            'currentSection' => 'uptime',
+        ]);
+    }
+
+    /**
+     * Display the broken links performance section
+     */
+    public function performanceBrokenLinks(string $id)
+    {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        $website = Website::with(['customer', 'project', 'ohdearWebsites'])
+            ->whereHas('customer', function ($query) use ($organisationId) {
+                $query->where('organisation_id', $organisationId);
+            })
+            ->findOrFail($id);
+
+        return Inertia::render('websites/performance', [
+            'website' => $website,
+            'isCustomerView' => false,
+            'currentSection' => 'broken-links',
+        ]);
+    }
+
+    /**
+     * Display the lighthouse performance section
+     */
+    public function performanceLighthouse(string $id)
+    {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        $website = Website::with(['customer', 'project', 'ohdearWebsites'])
+            ->whereHas('customer', function ($query) use ($organisationId) {
+                $query->where('organisation_id', $organisationId);
+            })
+            ->findOrFail($id);
+
+        return Inertia::render('websites/performance', [
+            'website' => $website,
+            'isCustomerView' => false,
+            'currentSection' => 'lighthouse',
+        ]);
+    }
+
+    /**
+     * Display the sitemap performance section
+     */
+    public function performanceSitemap(string $id)
+    {
+        $organisationId = $this->getCurrentOrganisationId();
+
+        $website = Website::with(['customer', 'project', 'ohdearWebsites'])
+            ->whereHas('customer', function ($query) use ($organisationId) {
+                $query->where('organisation_id', $organisationId);
+            })
+            ->findOrFail($id);
+
+        return Inertia::render('websites/performance', [
+            'website' => $website,
+            'isCustomerView' => false,
+            'currentSection' => 'sitemap',
         ]);
     }
 

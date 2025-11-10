@@ -1,4 +1,5 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
+import performance3c75d9 from './performance'
 /**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::index
 * @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:18
@@ -181,7 +182,7 @@ performance.form = performanceForm
 
 /**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::security
-* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:68
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:152
 * @route '/customer/websites/{id}/security'
 */
 export const security = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -196,7 +197,7 @@ security.definition = {
 
 /**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::security
-* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:68
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:152
 * @route '/customer/websites/{id}/security'
 */
 security.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -223,7 +224,7 @@ security.url = (args: { id: string | number } | [id: string | number ] | string 
 
 /**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::security
-* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:68
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:152
 * @route '/customer/websites/{id}/security'
 */
 security.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -233,7 +234,7 @@ security.get = (args: { id: string | number } | [id: string | number ] | string 
 
 /**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::security
-* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:68
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:152
 * @route '/customer/websites/{id}/security'
 */
 security.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -243,7 +244,7 @@ security.head = (args: { id: string | number } | [id: string | number ] | string
 
 /**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::security
-* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:68
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:152
 * @route '/customer/websites/{id}/security'
 */
 const securityForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -253,7 +254,7 @@ const securityForm = (args: { id: string | number } | [id: string | number ] | s
 
 /**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::security
-* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:68
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:152
 * @route '/customer/websites/{id}/security'
 */
 securityForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -263,7 +264,7 @@ securityForm.get = (args: { id: string | number } | [id: string | number ] | str
 
 /**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::security
-* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:68
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:152
 * @route '/customer/websites/{id}/security'
 */
 securityForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -280,7 +281,7 @@ security.form = securityForm
 
 const websites = {
     index: Object.assign(index, index),
-    performance: Object.assign(performance, performance),
+    performance: Object.assign(performance, performance3c75d9),
     security: Object.assign(security, security),
 }
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { usePage, router } from '@inertiajs/react';
-import { fetchUnreadCount } from '@/actions/notifications';
+import { fetchUnreadCount } from '@/api/notifications';
 import type { SharedData, Notification } from '@/types';
 import { toast } from 'sonner';
 

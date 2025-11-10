@@ -114,7 +114,11 @@ class HandleInertiaRequests extends Middleware
                 'user' => $user,
                 'userType' => $userType,
                 'role' => $userRole,
-                'currentOrganisation' => $currentOrganisation,
+                'currentOrganisation' => $currentOrganisation ? [
+                    'id' => $currentOrganisation->id,
+                    'name' => $currentOrganisation->name,
+                    'logo' => $currentOrganisation->logo ? \Storage::url($currentOrganisation->logo) : null,
+                ] : null,
                 'currentCustomer' => $currentCustomer,
                 'savedTicketFilters' => $savedFilters,
                 'timesheetServices' => $timesheetServices,

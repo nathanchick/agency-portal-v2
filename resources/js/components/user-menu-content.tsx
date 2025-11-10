@@ -21,6 +21,7 @@ interface UserMenuContentProps {
 interface Organisation {
     id: string;
     name: string;
+    logo: string | null;
 }
 
 interface Customer {

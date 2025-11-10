@@ -4,6 +4,7 @@ import * as React from "react"
 import {ChevronsUpDown, GalleryVerticalEnd, Users} from "lucide-react"
 import { usePage, router } from "@inertiajs/react"
 import { route } from "ziggy-js"
+import AppLogoIcon from "@/components/app-logo-icon"
 
 import {
     DropdownMenu,
@@ -21,7 +22,7 @@ import {
     useSidebar,
 } from "@/components/ui/sidebar"
 
-type Organisation = { id: string; name: string };
+type Organisation = { id: string; name: string; logo: string | null };
 type Customer = { id: string; name: string; organisation_id: string; organisation?: Organisation };
 
 export function OrganisationSwitcher() {
@@ -83,12 +84,18 @@ export function OrganisationSwitcher() {
     // If only one item total, show simple button without dropdown
     if (!hasMultipleItems) {
         const Icon = displayIcon
+        const isOrganisation = userType === 'organisation'
+
         return (
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg">
                         <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                            <Icon className="size-4"/>
+                            {isOrganisation ? (
+                                <AppLogoIcon className="size-4"/>
+                            ) : (
+                                <Icon className="size-4"/>
+                            )}
                         </div>
                         <div className="grid flex-1 text-left text-sm leading-tight">
                             <span className="truncate font-medium">{displayName}</span>
@@ -102,6 +109,8 @@ export function OrganisationSwitcher() {
 
     // Multiple items - show dropdown with both organisations and customers
     const Icon = displayIcon
+    const isOrganisation = userType === 'organisation'
+
     return (
         <SidebarMenu>
             <SidebarMenuItem>
@@ -111,8 +120,12 @@ export function OrganisationSwitcher() {
                             size="lg"
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                         >
-                            <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                                <Icon className="size-4"/>
+                            <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg overflow-hidden">
+                                {isOrganisation ? (
+                                    <AppLogoIcon className="size-8"/>
+                                ) : (
+                                    <Icon className="size-4"/>
+                                )}
                             </div>
                             <div className="grid flex-1 text-left text-sm leading-tight">
                                 <span className="truncate font-medium">{displayName}</span>

@@ -3,6 +3,7 @@ import { send } from '@/routes/verification';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 import { Transition } from '@headlessui/react';
 import { Form, Head, Link, usePage } from '@inertiajs/react';
+import { useState } from 'react';
 
 import DeleteUser from '@/components/delete-user';
 import HeadingSmall from '@/components/heading-small';
@@ -29,6 +30,20 @@ export default function Profile({
     status?: string;
 }) {
     const { auth } = usePage<SharedData>().props;
+    const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+
+    const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setAvatarPreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const currentAvatar = avatarPreview || (auth.user.avatar ? `/storage/${auth.user.avatar}` : null);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -45,11 +60,50 @@ export default function Profile({
                         {...ProfileController.update.form()}
                         options={{
                             preserveScroll: true,
+                            forceFormData: true,
                         }}
                         className="space-y-6"
                     >
                         {({ processing, recentlySuccessful, errors }) => (
                             <>
+                                <div className="grid gap-2">
+                                    <Label htmlFor="avatar">Profile picture</Label>
+                                    <div className="flex items-center gap-4">
+                                        <div className="relative">
+                                            {currentAvatar ? (
+                                                <img
+                                                    src={currentAvatar}
+                                                    alt="Profile"
+                                                    className="h-24 w-24 rounded-full object-cover border-2 border-gray-200"
+                                                />
+                                            ) : (
+                                                <div className="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center border-2 border-gray-300">
+                                                    <span className="text-3xl text-gray-500 font-semibold">
+                                                        {auth.user.name.charAt(0).toUpperCase()}
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="flex-1">
+                                            <Input
+                                                id="avatar"
+                                                type="file"
+                                                name="avatar"
+                                                accept=".jpg,.jpeg,.png"
+                                                onChange={handleAvatarChange}
+                                                className="cursor-pointer"
+                                            />
+                                            <p className="mt-1 text-sm text-muted-foreground">
+                                                Square image, JPG or PNG only. 100-1000px.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <InputError
+                                        className="mt-2"
+                                        message={errors.avatar}
+                                    />
+                                </div>
+
                                 <div className="grid gap-2">
                                     <Label htmlFor="name">Name</Label>
 
