@@ -12,5 +12,7 @@
     "Deployment": true,
     "Harvest": true,
     "Freshdesk": true,
-    "Website": true
+    "Website": true,
+    "OpenAi": true,
+    "PostMark": true
 }
