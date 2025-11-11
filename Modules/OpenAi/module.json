@@ -1,0 +1,11 @@
+{
+    "name": "OpenAi",
+    "alias": "openai",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\OpenAi\\Providers\\OpenAiServiceProvider"
+    ],
+    "files": []
+}
