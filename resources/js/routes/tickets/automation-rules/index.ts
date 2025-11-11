@@ -163,7 +163,7 @@ create.form = createForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::store
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:97
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:108
 * @route '/tickets/automation-rules'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -178,7 +178,7 @@ store.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::store
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:97
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:108
 * @route '/tickets/automation-rules'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -187,7 +187,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::store
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:97
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:108
 * @route '/tickets/automation-rules'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -197,7 +197,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::store
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:97
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:108
 * @route '/tickets/automation-rules'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -207,7 +207,7 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::store
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:97
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:108
 * @route '/tickets/automation-rules'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -219,7 +219,7 @@ store.form = storeForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::edit
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:149
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
 export const edit = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -234,7 +234,7 @@ edit.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::edit
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:149
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
 edit.url = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -267,7 +267,7 @@ edit.url = (args: { automationRule: string | { id: string } } | [automationRule:
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::edit
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:149
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
 edit.get = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -277,7 +277,7 @@ edit.get = (args: { automationRule: string | { id: string } } | [automationRule:
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::edit
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:149
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
 edit.head = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -287,7 +287,7 @@ edit.head = (args: { automationRule: string | { id: string } } | [automationRule
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::edit
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:149
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
 const editForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -297,7 +297,7 @@ const editForm = (args: { automationRule: string | { id: string } } | [automatio
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::edit
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:149
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
 editForm.get = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -307,7 +307,7 @@ editForm.get = (args: { automationRule: string | { id: string } } | [automationR
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::edit
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:149
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
 editForm.head = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -324,7 +324,7 @@ edit.form = editForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::update
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:187
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
 * @route '/tickets/automation-rules/{automationRule}'
 */
 export const update = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -339,7 +339,7 @@ update.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::update
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:187
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
 * @route '/tickets/automation-rules/{automationRule}'
 */
 update.url = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -372,7 +372,7 @@ update.url = (args: { automationRule: string | { id: string } } | [automationRul
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::update
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:187
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
 * @route '/tickets/automation-rules/{automationRule}'
 */
 update.put = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -382,7 +382,7 @@ update.put = (args: { automationRule: string | { id: string } } | [automationRul
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::update
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:187
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
 * @route '/tickets/automation-rules/{automationRule}'
 */
 const updateForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -397,7 +397,7 @@ const updateForm = (args: { automationRule: string | { id: string } } | [automat
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::update
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:187
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
 * @route '/tickets/automation-rules/{automationRule}'
 */
 updateForm.put = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -414,7 +414,7 @@ update.form = updateForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::destroy
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:243
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:265
 * @route '/tickets/automation-rules/{automationRule}'
 */
 export const destroy = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -429,7 +429,7 @@ destroy.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::destroy
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:243
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:265
 * @route '/tickets/automation-rules/{automationRule}'
 */
 destroy.url = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -462,7 +462,7 @@ destroy.url = (args: { automationRule: string | { id: string } } | [automationRu
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::destroy
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:243
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:265
 * @route '/tickets/automation-rules/{automationRule}'
 */
 destroy.delete = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -472,7 +472,7 @@ destroy.delete = (args: { automationRule: string | { id: string } } | [automatio
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::destroy
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:243
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:265
 * @route '/tickets/automation-rules/{automationRule}'
 */
 const destroyForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -487,7 +487,7 @@ const destroyForm = (args: { automationRule: string | { id: string } } | [automa
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::destroy
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:243
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:265
 * @route '/tickets/automation-rules/{automationRule}'
 */
 destroyForm.delete = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -504,7 +504,7 @@ destroy.form = destroyForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::toggle
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:256
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
 * @route '/tickets/automation-rules/{automationRule}/toggle'
 */
 export const toggle = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -519,7 +519,7 @@ toggle.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::toggle
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:256
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
 * @route '/tickets/automation-rules/{automationRule}/toggle'
 */
 toggle.url = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -552,7 +552,7 @@ toggle.url = (args: { automationRule: string | { id: string } } | [automationRul
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::toggle
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:256
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
 * @route '/tickets/automation-rules/{automationRule}/toggle'
 */
 toggle.patch = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -562,7 +562,7 @@ toggle.patch = (args: { automationRule: string | { id: string } } | [automationR
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::toggle
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:256
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
 * @route '/tickets/automation-rules/{automationRule}/toggle'
 */
 const toggleForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -577,7 +577,7 @@ const toggleForm = (args: { automationRule: string | { id: string } } | [automat
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::toggle
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:256
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
 * @route '/tickets/automation-rules/{automationRule}/toggle'
 */
 toggleForm.patch = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -594,7 +594,7 @@ toggle.form = toggleForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::priority
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:270
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
 * @route '/tickets/automation-rules/{automationRule}/priority'
 */
 export const priority = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -609,7 +609,7 @@ priority.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::priority
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:270
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
 * @route '/tickets/automation-rules/{automationRule}/priority'
 */
 priority.url = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -642,7 +642,7 @@ priority.url = (args: { automationRule: string | { id: string } } | [automationR
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::priority
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:270
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
 * @route '/tickets/automation-rules/{automationRule}/priority'
 */
 priority.patch = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -652,7 +652,7 @@ priority.patch = (args: { automationRule: string | { id: string } } | [automatio
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::priority
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:270
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
 * @route '/tickets/automation-rules/{automationRule}/priority'
 */
 const priorityForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -667,7 +667,7 @@ const priorityForm = (args: { automationRule: string | { id: string } } | [autom
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::priority
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:270
+* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
 * @route '/tickets/automation-rules/{automationRule}/priority'
 */
 priorityForm.patch = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

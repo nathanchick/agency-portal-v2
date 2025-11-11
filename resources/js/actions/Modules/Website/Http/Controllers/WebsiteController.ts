@@ -701,6 +701,90 @@ editForm.head = (args: { id: string | number } | [id: string | number ] | string
 edit.form = editForm
 
 /**
+* @see \Modules\Website\Http\Controllers\WebsiteController::updateModuleSettings
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:212
+* @route '/websites/{id}/modules'
+*/
+export const updateModuleSettings = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+    url: updateModuleSettings.url(args, options),
+    method: 'patch',
+})
+
+updateModuleSettings.definition = {
+    methods: ["patch"],
+    url: '/websites/{id}/modules',
+} satisfies RouteDefinition<["patch"]>
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::updateModuleSettings
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:212
+* @route '/websites/{id}/modules'
+*/
+updateModuleSettings.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { id: args }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            id: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+        id: args.id,
+    }
+
+    return updateModuleSettings.definition.url
+            .replace('{id}', parsedArgs.id.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::updateModuleSettings
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:212
+* @route '/websites/{id}/modules'
+*/
+updateModuleSettings.patch = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+    url: updateModuleSettings.url(args, options),
+    method: 'patch',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::updateModuleSettings
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:212
+* @route '/websites/{id}/modules'
+*/
+const updateModuleSettingsForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateModuleSettings.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::updateModuleSettings
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:212
+* @route '/websites/{id}/modules'
+*/
+updateModuleSettingsForm.patch = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateModuleSettings.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+updateModuleSettings.form = updateModuleSettingsForm
+
+/**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performance
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:43
 * @route '/websites/{id}/performance'
@@ -1294,6 +1378,6 @@ securityForm.head = (args: { id: string | number } | [id: string | number ] | st
 
 security.form = securityForm
 
-const WebsiteController = { index, store, show, update, destroy, edit, performance, performanceUptime, performanceBrokenLinks, performanceLighthouse, performanceSitemap, security }
+const WebsiteController = { index, store, show, update, destroy, edit, updateModuleSettings, performance, performanceUptime, performanceBrokenLinks, performanceLighthouse, performanceSitemap, security }
 
 export default WebsiteController

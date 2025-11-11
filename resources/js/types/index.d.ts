@@ -63,3 +63,25 @@ export interface PaginatedNotifications {
     per_page: number;
     total: number;
 }
+
+export interface Media {
+    id: number;
+    model_type: string;
+    model_id: number;
+    uuid: string;
+    collection_name: string;
+    name: string;
+    file_name: string;
+    mime_type: string;
+    disk: string;
+    conversions_disk: string | null;
+    size: number;
+    manipulations: Record<string, unknown>;
+    custom_properties: Record<string, unknown>;
+    generated_conversions: Record<string, unknown>;
+    responsive_images: Record<string, unknown>;
+    order_column: number | null;
+    created_at: string;
+    updated_at: string;
+    human_readable_size: string;
+}

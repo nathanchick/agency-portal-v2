@@ -4,7 +4,9 @@ import Deployment from './Deployment'
 import Document from './Document'
 import Freshdesk from './Freshdesk'
 import Ohdear from './Ohdear'
+import OpenAi from './OpenAi'
 import Organisation from './Organisation'
+import PostMark from './PostMark'
 import Sansec from './Sansec'
 import Ticket from './Ticket'
 import Timesheet from './Timesheet'
@@ -19,7 +21,9 @@ const Modules = {
     Document: Object.assign(Document, Document),
     Freshdesk: Object.assign(Freshdesk, Freshdesk),
     Ohdear: Object.assign(Ohdear, Ohdear),
+    OpenAi: Object.assign(OpenAi, OpenAi),
     Organisation: Object.assign(Organisation, Organisation),
+    PostMark: Object.assign(PostMark, PostMark),
     Sansec: Object.assign(Sansec, Sansec),
     Ticket: Object.assign(Ticket, Ticket),
     Timesheet: Object.assign(Timesheet, Timesheet),

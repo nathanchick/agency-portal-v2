@@ -1,4 +1,5 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
+import modules from './modules'
 import performance3c75d9 from './performance'
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
@@ -466,6 +467,7 @@ const websites = {
     index: Object.assign(index, index),
     edit: Object.assign(edit, edit),
     update: Object.assign(update, update),
+    modules: Object.assign(modules, modules),
     performance: Object.assign(performance, performance3c75d9),
     security: Object.assign(security, security),
 }

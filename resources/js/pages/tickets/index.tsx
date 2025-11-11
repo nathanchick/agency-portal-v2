@@ -144,7 +144,7 @@ export default function TicketsIndex({tickets, customers, labels, categories, st
             sort_by: newSortBy,
             sort_order: newSortOrder,
         }, {
-            preserveState: true,
+            preserveState: false,
             preserveScroll: true,
         });
     };

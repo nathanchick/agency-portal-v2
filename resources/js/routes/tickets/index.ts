@@ -2,12 +2,13 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 import filters from './filters'
 import forms from './forms'
 import automationRules from './automation-rules'
+import summary from './summary'
 import labels from './labels'
 import categories from './categories'
 import statuses from './statuses'
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::index
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:26
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:31
 * @route '/tickets'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -22,7 +23,7 @@ index.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::index
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:26
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:31
 * @route '/tickets'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -31,7 +32,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::index
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:26
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:31
 * @route '/tickets'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -41,7 +42,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::index
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:26
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:31
 * @route '/tickets'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -51,7 +52,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::index
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:26
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:31
 * @route '/tickets'
 */
 const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -61,7 +62,7 @@ const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::index
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:26
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:31
 * @route '/tickets'
 */
 indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -71,7 +72,7 @@ indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::index
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:26
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:31
 * @route '/tickets'
 */
 indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -88,7 +89,7 @@ index.form = indexForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::config
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:155
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:172
 * @route '/tickets/config'
 */
 export const config = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -103,7 +104,7 @@ config.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::config
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:155
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:172
 * @route '/tickets/config'
 */
 config.url = (options?: RouteQueryOptions) => {
@@ -112,7 +113,7 @@ config.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::config
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:155
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:172
 * @route '/tickets/config'
 */
 config.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -122,7 +123,7 @@ config.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::config
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:155
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:172
 * @route '/tickets/config'
 */
 config.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -132,7 +133,7 @@ config.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::config
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:155
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:172
 * @route '/tickets/config'
 */
 const configForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -142,7 +143,7 @@ const configForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::config
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:155
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:172
 * @route '/tickets/config'
 */
 configForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -152,7 +153,7 @@ configForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::config
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:155
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:172
 * @route '/tickets/config'
 */
 configForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -169,7 +170,7 @@ config.form = configForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::create
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:454
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:471
 * @route '/tickets/create'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -184,7 +185,7 @@ create.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::create
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:454
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:471
 * @route '/tickets/create'
 */
 create.url = (options?: RouteQueryOptions) => {
@@ -193,7 +194,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::create
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:454
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:471
 * @route '/tickets/create'
 */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -203,7 +204,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::create
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:454
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:471
 * @route '/tickets/create'
 */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -213,7 +214,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::create
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:454
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:471
 * @route '/tickets/create'
 */
 const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -223,7 +224,7 @@ const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::create
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:454
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:471
 * @route '/tickets/create'
 */
 createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -233,7 +234,7 @@ createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::create
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:454
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:471
 * @route '/tickets/create'
 */
 createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -250,7 +251,7 @@ create.form = createForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::store
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:483
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:500
 * @route '/tickets'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -265,7 +266,7 @@ store.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::store
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:483
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:500
 * @route '/tickets'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -274,7 +275,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::store
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:483
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:500
 * @route '/tickets'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -284,7 +285,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::store
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:483
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:500
 * @route '/tickets'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -294,7 +295,7 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::store
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:483
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:500
 * @route '/tickets'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -306,7 +307,7 @@ store.form = storeForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::show
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:521
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
 export const show = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -321,7 +322,7 @@ show.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::show
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:521
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
 show.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -354,7 +355,7 @@ show.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::show
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:521
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
 show.get = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -364,7 +365,7 @@ show.get = (args: { ticket: string | { id: string } } | [ticket: string | { id: 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::show
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:521
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
 show.head = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -374,7 +375,7 @@ show.head = (args: { ticket: string | { id: string } } | [ticket: string | { id:
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::show
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:521
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
 const showForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -384,7 +385,7 @@ const showForm = (args: { ticket: string | { id: string } } | [ticket: string | 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::show
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:521
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
 showForm.get = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -394,7 +395,7 @@ showForm.get = (args: { ticket: string | { id: string } } | [ticket: string | { 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::show
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:521
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
 showForm.head = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -411,7 +412,7 @@ show.form = showForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateStatus
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:612
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
 * @route '/tickets/{ticket}/status'
 */
 export const updateStatus = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -426,7 +427,7 @@ updateStatus.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateStatus
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:612
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
 * @route '/tickets/{ticket}/status'
 */
 updateStatus.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -459,7 +460,7 @@ updateStatus.url = (args: { ticket: string | { id: string } } | [ticket: string 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateStatus
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:612
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
 * @route '/tickets/{ticket}/status'
 */
 updateStatus.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -469,7 +470,7 @@ updateStatus.patch = (args: { ticket: string | { id: string } } | [ticket: strin
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateStatus
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:612
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
 * @route '/tickets/{ticket}/status'
 */
 const updateStatusForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -484,7 +485,7 @@ const updateStatusForm = (args: { ticket: string | { id: string } } | [ticket: s
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateStatus
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:612
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
 * @route '/tickets/{ticket}/status'
 */
 updateStatusForm.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -501,7 +502,7 @@ updateStatus.form = updateStatusForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updatePriority
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:637
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:699
 * @route '/tickets/{ticket}/priority'
 */
 export const updatePriority = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -516,7 +517,7 @@ updatePriority.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updatePriority
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:637
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:699
 * @route '/tickets/{ticket}/priority'
 */
 updatePriority.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -549,7 +550,7 @@ updatePriority.url = (args: { ticket: string | { id: string } } | [ticket: strin
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updatePriority
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:637
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:699
 * @route '/tickets/{ticket}/priority'
 */
 updatePriority.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -559,7 +560,7 @@ updatePriority.patch = (args: { ticket: string | { id: string } } | [ticket: str
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updatePriority
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:637
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:699
 * @route '/tickets/{ticket}/priority'
 */
 const updatePriorityForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -574,7 +575,7 @@ const updatePriorityForm = (args: { ticket: string | { id: string } } | [ticket:
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updatePriority
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:637
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:699
 * @route '/tickets/{ticket}/priority'
 */
 updatePriorityForm.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -591,7 +592,7 @@ updatePriority.form = updatePriorityForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateAssignment
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:657
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
 * @route '/tickets/{ticket}/assignment'
 */
 export const updateAssignment = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -606,7 +607,7 @@ updateAssignment.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateAssignment
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:657
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
 * @route '/tickets/{ticket}/assignment'
 */
 updateAssignment.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -639,7 +640,7 @@ updateAssignment.url = (args: { ticket: string | { id: string } } | [ticket: str
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateAssignment
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:657
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
 * @route '/tickets/{ticket}/assignment'
 */
 updateAssignment.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -649,7 +650,7 @@ updateAssignment.patch = (args: { ticket: string | { id: string } } | [ticket: s
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateAssignment
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:657
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
 * @route '/tickets/{ticket}/assignment'
 */
 const updateAssignmentForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -664,7 +665,7 @@ const updateAssignmentForm = (args: { ticket: string | { id: string } } | [ticke
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateAssignment
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:657
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
 * @route '/tickets/{ticket}/assignment'
 */
 updateAssignmentForm.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -681,7 +682,7 @@ updateAssignment.form = updateAssignmentForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateCategory
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:677
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:739
 * @route '/tickets/{ticket}/category'
 */
 export const updateCategory = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -696,7 +697,7 @@ updateCategory.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateCategory
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:677
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:739
 * @route '/tickets/{ticket}/category'
 */
 updateCategory.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -729,7 +730,7 @@ updateCategory.url = (args: { ticket: string | { id: string } } | [ticket: strin
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateCategory
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:677
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:739
 * @route '/tickets/{ticket}/category'
 */
 updateCategory.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -739,7 +740,7 @@ updateCategory.patch = (args: { ticket: string | { id: string } } | [ticket: str
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateCategory
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:677
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:739
 * @route '/tickets/{ticket}/category'
 */
 const updateCategoryForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -754,7 +755,7 @@ const updateCategoryForm = (args: { ticket: string | { id: string } } | [ticket:
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateCategory
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:677
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:739
 * @route '/tickets/{ticket}/category'
 */
 updateCategoryForm.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -771,7 +772,7 @@ updateCategory.form = updateCategoryForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::addLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:698
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
 * @route '/tickets/{ticket}/labels'
 */
 export const addLabel = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -786,7 +787,7 @@ addLabel.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::addLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:698
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
 * @route '/tickets/{ticket}/labels'
 */
 addLabel.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -819,7 +820,7 @@ addLabel.url = (args: { ticket: string | { id: string } } | [ticket: string | { 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::addLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:698
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
 * @route '/tickets/{ticket}/labels'
 */
 addLabel.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -829,7 +830,7 @@ addLabel.post = (args: { ticket: string | { id: string } } | [ticket: string | {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::addLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:698
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
 * @route '/tickets/{ticket}/labels'
 */
 const addLabelForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -839,7 +840,7 @@ const addLabelForm = (args: { ticket: string | { id: string } } | [ticket: strin
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::addLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:698
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
 * @route '/tickets/{ticket}/labels'
 */
 addLabelForm.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -851,7 +852,7 @@ addLabel.form = addLabelForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::removeLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:726
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
 * @route '/tickets/{ticket}/labels/{label}'
 */
 export const removeLabel = (args: { ticket: string | { id: string }, label: string | { id: string } } | [ticket: string | { id: string }, label: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -866,7 +867,7 @@ removeLabel.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::removeLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:726
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
 * @route '/tickets/{ticket}/labels/{label}'
 */
 removeLabel.url = (args: { ticket: string | { id: string }, label: string | { id: string } } | [ticket: string | { id: string }, label: string | { id: string } ], options?: RouteQueryOptions) => {
@@ -896,7 +897,7 @@ removeLabel.url = (args: { ticket: string | { id: string }, label: string | { id
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::removeLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:726
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
 * @route '/tickets/{ticket}/labels/{label}'
 */
 removeLabel.delete = (args: { ticket: string | { id: string }, label: string | { id: string } } | [ticket: string | { id: string }, label: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -906,7 +907,7 @@ removeLabel.delete = (args: { ticket: string | { id: string }, label: string | {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::removeLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:726
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
 * @route '/tickets/{ticket}/labels/{label}'
 */
 const removeLabelForm = (args: { ticket: string | { id: string }, label: string | { id: string } } | [ticket: string | { id: string }, label: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -921,7 +922,7 @@ const removeLabelForm = (args: { ticket: string | { id: string }, label: string 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::removeLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:726
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
 * @route '/tickets/{ticket}/labels/{label}'
 */
 removeLabelForm.delete = (args: { ticket: string | { id: string }, label: string | { id: string } } | [ticket: string | { id: string }, label: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -938,7 +939,7 @@ removeLabel.form = removeLabelForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::addMessage
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:746
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:808
 * @route '/tickets/{ticket}/messages'
 */
 export const addMessage = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -953,7 +954,7 @@ addMessage.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::addMessage
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:746
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:808
 * @route '/tickets/{ticket}/messages'
 */
 addMessage.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -986,7 +987,7 @@ addMessage.url = (args: { ticket: string | { id: string } } | [ticket: string | 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::addMessage
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:746
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:808
 * @route '/tickets/{ticket}/messages'
 */
 addMessage.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -996,7 +997,7 @@ addMessage.post = (args: { ticket: string | { id: string } } | [ticket: string |
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::addMessage
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:746
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:808
 * @route '/tickets/{ticket}/messages'
 */
 const addMessageForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1006,7 +1007,7 @@ const addMessageForm = (args: { ticket: string | { id: string } } | [ticket: str
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::addMessage
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:746
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:808
 * @route '/tickets/{ticket}/messages'
 */
 addMessageForm.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1032,6 +1033,7 @@ const tickets = {
     addLabel: Object.assign(addLabel, addLabel),
     removeLabel: Object.assign(removeLabel, removeLabel),
     addMessage: Object.assign(addMessage, addMessage),
+    summary: Object.assign(summary, summary),
     labels: Object.assign(labels, labels),
     categories: Object.assign(categories, categories),
     statuses: Object.assign(statuses, statuses),

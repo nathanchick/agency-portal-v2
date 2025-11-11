@@ -1,4 +1,5 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
+import modules from './modules'
 import users from './users'
 import projects from './projects'
 import websites from './websites'
@@ -541,7 +542,7 @@ update.form = updateForm
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::destroy
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:180
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:202
 * @route '/customers/{customer}'
 */
 export const destroy = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -556,7 +557,7 @@ destroy.definition = {
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::destroy
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:180
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:202
 * @route '/customers/{customer}'
 */
 destroy.url = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -589,7 +590,7 @@ destroy.url = (args: { customer: string | { id: string } } | [customer: string |
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::destroy
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:180
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:202
 * @route '/customers/{customer}'
 */
 destroy.delete = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -599,7 +600,7 @@ destroy.delete = (args: { customer: string | { id: string } } | [customer: strin
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::destroy
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:180
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:202
 * @route '/customers/{customer}'
 */
 const destroyForm = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -614,7 +615,7 @@ const destroyForm = (args: { customer: string | { id: string } } | [customer: st
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::destroy
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:180
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:202
 * @route '/customers/{customer}'
 */
 destroyForm.delete = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -637,6 +638,7 @@ const customers = {
     edit: Object.assign(edit, edit),
     update: Object.assign(update, update),
     destroy: Object.assign(destroy, destroy),
+    modules: Object.assign(modules, modules),
     users: Object.assign(users, users),
     projects: Object.assign(projects, projects),
     websites: Object.assign(websites, websites),

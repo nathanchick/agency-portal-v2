@@ -18,9 +18,13 @@ import {
 import {Label as FormLabel} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
 import {Checkbox} from '@/components/ui/checkbox';
+import {Separator} from '@/components/ui/separator';
 import {ArrowLeft, X} from 'lucide-react';
 import {route} from 'ziggy-js';
 import {FormEvent, useState} from 'react';
+import {Media} from '@/types';
+import {FileUpload} from '@/components/tickets/FileUpload';
+import {AttachmentList} from '@/components/tickets/AttachmentList';
 
 interface User {
     id: string;
@@ -54,6 +58,14 @@ interface Message {
     user: User;
     message: string;
     created_at: string;
+    media?: Media[];
+}
+
+interface TicketSummary {
+    id: string;
+    summary: string;
+    message_count: number;
+    generated_at: string;
 }
 
 interface Ticket {
@@ -73,6 +85,7 @@ interface Ticket {
     labels: Label[];
     messages: Message[];
     assigned_to?: User;
+    media?: Media[];
 }
 
 interface Props {
@@ -81,17 +94,99 @@ interface Props {
     categories: Category[];
     labels: Label[];
     statuses: TicketStatus[];
+    summary?: TicketSummary | null;
 }
 
-export default function ShowTicket({ticket, organisationUsers, categories, labels, statuses}: Props) {
+export default function ShowTicket({ticket, organisationUsers, categories, labels, statuses, summary}: Props) {
     const [selectedLabels, setSelectedLabels] = useState<string[]>(ticket.labels.map(l => l.id));
     const [availableLabel, setAvailableLabel] = useState('');
+    const [conversationExpanded, setConversationExpanded] = useState(false);
+    const [currentSummary, setCurrentSummary] = useState<TicketSummary | null | undefined>(summary);
+    const [isRegeneratingSummary, setIsRegeneratingSummary] = useState(false);
+    const [summaryError, setSummaryError] = useState<string | null>(null);
+    const [attachmentFiles, setAttachmentFiles] = useState<File[]>([]);
 
     const {data, setData, post, processing, reset} = useForm({
         message: '',
         is_private: false,
         set_status: '',
+        attachments: [] as File[],
     });
+
+    // Helper function to get initials from name
+    const getInitials = (name: string): string => {
+        const parts = name.trim().split(' ');
+        if (parts.length >= 2) {
+            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+        }
+        return name.substring(0, 2).toUpperCase();
+    };
+
+    // Helper function to get consistent avatar color
+    const getAvatarColor = (userId: string): string => {
+        const colors = [
+            'bg-blue-500',
+            'bg-purple-500',
+            'bg-pink-500',
+            'bg-green-500',
+            'bg-yellow-500',
+            'bg-red-500',
+            'bg-indigo-500',
+            'bg-teal-500',
+        ];
+        const hash = userId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+        return colors[hash % colors.length];
+    };
+
+    // Helper function to parse message into paragraphs
+    const parseMessageParagraphs = (message: string): {paragraphs: string[], signature: string | null} => {
+        // Common signature indicators (ordered by specificity - most specific first)
+        const signaturePatterns = [
+            // Freshdesk-specific patterns
+            /\n\n?Powered by Freshdesk/i,
+            /\n\n?View this ticket online/i,
+            /\n\n?This is an automated message/i,
+            /\n\n?Check your ticket status/i,
+            /\n\n?To respond to this ticket/i,
+            /\n\n?Reply to this email/i,
+            // Generic signature patterns
+            /\n\n---+\s*$/,
+            /\n---+\s*$/,
+            /\n\n--\s*$/,
+            /\n--\s*$/,
+            /\n\nBest regards,?/i,
+            /\n\nBest,?/i,
+            /\n\nThanks,?/i,
+            /\n\nThank you,?/i,
+            /\n\nRegards,?/i,
+            /\n\nSincerely,?/i,
+            /\n\nKind regards,?/i,
+            /\n\nWarm regards,?/i,
+        ];
+
+        let signatureIndex = -1;
+
+        for (const pattern of signaturePatterns) {
+            const match = message.match(pattern);
+            if (match && match.index !== undefined) {
+                signatureIndex = match.index;
+                break;
+            }
+        }
+
+        if (signatureIndex > -1) {
+            const body = message.substring(0, signatureIndex).trim();
+            const signature = message.substring(signatureIndex).trim();
+
+            // Split body into paragraphs by double line breaks
+            const paragraphs = body.split(/\n\n+/).filter(p => p.trim().length > 0);
+            return {paragraphs, signature};
+        }
+
+        // Split into paragraphs by double line breaks
+        const paragraphs = message.split(/\n\n+/).filter(p => p.trim().length > 0);
+        return {paragraphs, signature: null};
+    };
 
     const handleAssignmentChange = (assignedTo: string) => {
         router.patch(route('tickets.update-assignment', ticket.id), {
@@ -134,12 +229,55 @@ export default function ShowTicket({ticket, organisationUsers, categories, label
         });
     };
 
+    const handleFilesSelected = (files: File[]) => {
+        const updatedFiles = [...attachmentFiles, ...files];
+        setAttachmentFiles(updatedFiles);
+        setData('attachments', updatedFiles);
+    };
+
+    const handleRemoveFile = (index: number) => {
+        const updatedFiles = attachmentFiles.filter((_, i) => i !== index);
+        setAttachmentFiles(updatedFiles);
+        setData('attachments', updatedFiles);
+    };
+
     const handleSubmitMessage = (e: FormEvent, setStatus = false) => {
         e.preventDefault();
         post(route('tickets.add-message', ticket.id), {
             preserveScroll: true,
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                reset();
+                setAttachmentFiles([]);
+            },
         });
+    };
+
+    const handleRegenerateSummary = async () => {
+        setIsRegeneratingSummary(true);
+        setSummaryError(null);
+
+        try {
+            const response = await fetch(route('tickets.summary.regenerate', ticket.id), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+                },
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setCurrentSummary(data.summary);
+                setSummaryError(null);
+            } else {
+                setSummaryError(data.message || 'Failed to generate summary');
+            }
+        } catch (error) {
+            setSummaryError('An error occurred while generating the summary');
+        } finally {
+            setIsRegeneratingSummary(false);
+        }
     };
     const getPriorityBadge = (priority: string) => {
         const variants: Record<string, 'default' | 'secondary' | 'destructive'> = {
@@ -175,6 +313,21 @@ export default function ShowTicket({ticket, organisationUsers, categories, label
 
     const isClosed = ticket.status === 'closed';
 
+    // Component to render text with proper line breaks
+    const TextWithLineBreaks = ({text}: {text: string}) => {
+        const lines = text.split('\n');
+        return (
+            <>
+                {lines.map((line, idx) => (
+                    <span key={idx}>
+                        {line}
+                        {idx < lines.length - 1 && <br />}
+                    </span>
+                ))}
+            </>
+        );
+    };
+
     return (
         <SidebarProvider>
             <AppSidebar/>
@@ -186,7 +339,7 @@ export default function ShowTicket({ticket, organisationUsers, categories, label
                     { title: ticket.title, href: route('tickets.show', ticket.id) }
                 ]} />
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 mt-4">
                         <Button
                             variant="outline"
                             size="sm"
@@ -224,9 +377,39 @@ export default function ShowTicket({ticket, organisationUsers, categories, label
                                     <div>
                                         <p className="text-sm font-medium text-muted-foreground mb-2">Original Message</p>
                                         <div className="rounded-lg bg-muted p-4">
-                                            <p className="text-sm whitespace-pre-wrap">{ticket.message}</p>
+                                            {(() => {
+                                                const {paragraphs, signature} = parseMessageParagraphs(ticket.message);
+                                                return (
+                                                    <>
+                                                        <div className="space-y-3 text-sm leading-relaxed">
+                                                            {paragraphs.map((paragraph, idx) => (
+                                                                <p key={idx}>
+                                                                    <TextWithLineBreaks text={paragraph} />
+                                                                </p>
+                                                            ))}
+                                                        </div>
+                                                        {signature && (
+                                                            <div className="mt-4 pt-3 border-t border-border/50 text-sm text-muted-foreground">
+                                                                <TextWithLineBreaks text={signature} />
+                                                            </div>
+                                                        )}
+                                                    </>
+                                                );
+                                            })()}
                                         </div>
                                     </div>
+
+                                    {/* Ticket Attachments */}
+                                    {ticket.media && ticket.media.length > 0 && (
+                                        <>
+                                            <Separator className="my-4"/>
+                                            <AttachmentList
+                                                attachments={ticket.media}
+                                                canDelete={true}
+                                                showTimestamp={true}
+                                            />
+                                        </>
+                                    )}
 
                                     {ticket.metadata && Object.keys(ticket.metadata).length > 0 && (
                                         <>
@@ -247,6 +430,74 @@ export default function ShowTicket({ticket, organisationUsers, categories, label
                                 </CardContent>
                             </Card>
 
+                            {/* AI Summary */}
+                            {currentSummary && (
+                                <Card className="border-l-4 border-l-blue-500">
+                                    <CardHeader>
+                                        <div className="flex items-center justify-between">
+                                            <div>
+                                                <CardTitle className="flex items-center gap-2">
+                                                    <span>AI Summary</span>
+                                                    <Badge variant="secondary" className="text-xs">Beta</Badge>
+                                                </CardTitle>
+                                                <CardDescription>
+                                                    Generated {new Date(currentSummary.generated_at).toLocaleString()} • {currentSummary.message_count} messages analyzed
+                                                </CardDescription>
+                                            </div>
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={handleRegenerateSummary}
+                                                disabled={isRegeneratingSummary}
+                                            >
+                                                {isRegeneratingSummary ? 'Regenerating...' : 'Refresh Summary'}
+                                            </Button>
+                                        </div>
+                                    </CardHeader>
+                                    <CardContent>
+                                        {summaryError ? (
+                                            <div className="p-4 bg-destructive/10 text-destructive rounded-lg">
+                                                {summaryError}
+                                            </div>
+                                        ) : (
+                                            <div className="space-y-3 text-sm">
+                                                {currentSummary.summary.split('\n').map((line, idx) => {
+                                                    const trimmedLine = line.trim();
+
+                                                    if (!trimmedLine) return null;
+
+                                                    // Bold headers (e.g., **Issue Summary:**)
+                                                    if (trimmedLine.match(/^\*\*.*\*\*:?/)) {
+                                                        const text = trimmedLine.replace(/\*\*/g, '');
+                                                        return (
+                                                            <h4 key={idx} className="font-semibold text-base mt-4 first:mt-0">
+                                                                {text}
+                                                            </h4>
+                                                        );
+                                                    }
+
+                                                    // Bullet points
+                                                    if (trimmedLine.startsWith('- ')) {
+                                                        return (
+                                                            <li key={idx} className="ml-4 list-disc">
+                                                                {trimmedLine.substring(2)}
+                                                            </li>
+                                                        );
+                                                    }
+
+                                                    // Regular paragraphs
+                                                    return (
+                                                        <p key={idx} className="leading-relaxed">
+                                                            {trimmedLine}
+                                                        </p>
+                                                    );
+                                                })}
+                                            </div>
+                                        )}
+                                    </CardContent>
+                                </Card>
+                            )}
+
                             {/* Responses */}
                             <Card>
                                 <CardHeader>
@@ -261,21 +512,89 @@ export default function ShowTicket({ticket, organisationUsers, categories, label
                                             <p>No responses yet</p>
                                         </div>
                                     ) : (
-                                        <div className="space-y-4">
-                                            {ticket.messages.map((message) => (
-                                                <div key={message.id} className="border rounded-lg p-4">
-                                                    <div className="flex items-start justify-between mb-2">
-                                                        <div>
-                                                            <p className="font-medium text-sm">{message.user.name}</p>
-                                                            <p className="text-xs text-muted-foreground">
+                                        <>
+                                            {/* Show collapse/expand button if there are more than 6 messages */}
+                                            {ticket.messages.length > 6 && (
+                                                <div className="mb-4 flex justify-center">
+                                                    <Button
+                                                        variant="outline"
+                                                        size="sm"
+                                                        onClick={() => setConversationExpanded(!conversationExpanded)}
+                                                    >
+                                                        {conversationExpanded ? (
+                                                            <>Hide earlier responses</>
+                                                        ) : (
+                                                            <>Show {ticket.messages.length - 3} earlier responses</>
+                                                        )}
+                                                    </Button>
+                                                </div>
+                                            )}
+
+                                            <div className="space-y-6">
+                                                {(() => {
+                                                    // Determine which messages to show
+                                                    const messagesToShow = ticket.messages.length > 6 && !conversationExpanded
+                                                        ? ticket.messages.slice(-3) // Show last 3 messages
+                                                        : ticket.messages; // Show all messages
+
+                                                    return messagesToShow.map((message) => {
+                                                const {paragraphs, signature} = parseMessageParagraphs(message.message);
+                                                const initials = getInitials(message.user.name);
+                                                const avatarColor = getAvatarColor(message.user.id);
+
+                                                return (
+                                                    <div key={message.id} className="flex gap-4 hover:bg-muted/50 -mx-4 px-4 py-3 rounded-lg transition-colors">
+                                                        {/* Avatar */}
+                                                        <div className="flex-shrink-0">
+                                                            <div className={`w-10 h-10 rounded-full ${avatarColor} text-white flex items-center justify-center font-semibold text-sm`}>
+                                                                {initials}
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Content */}
+                                                        <div className="flex-1 min-w-0">
+                                                            {/* Header */}
+                                                            <div className="flex items-baseline gap-2 mb-1">
+                                                                <span className="font-semibold text-primary">{message.user.name}</span>
+                                                                <span className="text-sm text-muted-foreground">replied</span>
+                                                            </div>
+                                                            <div className="text-xs text-muted-foreground mb-3">
                                                                 {formatDate(message.created_at)}
-                                                            </p>
+                                                            </div>
+
+                                                            {/* Message body with paragraphs */}
+                                                            <div className="space-y-3 text-sm leading-relaxed">
+                                                                {paragraphs.map((paragraph, idx) => (
+                                                                    <p key={idx}>
+                                                                        <TextWithLineBreaks text={paragraph} />
+                                                                    </p>
+                                                                ))}
+                                                            </div>
+
+                                                            {/* Signature if detected */}
+                                                            {signature && (
+                                                                <div className="mt-4 pt-3 border-t text-sm text-muted-foreground">
+                                                                    <TextWithLineBreaks text={signature} />
+                                                                </div>
+                                                            )}
+
+                                                            {/* Message Attachments */}
+                                                            {message.media && message.media.length > 0 && (
+                                                                <div className="mt-4">
+                                                                    <AttachmentList
+                                                                        attachments={message.media}
+                                                                        canDelete={true}
+                                                                        showTimestamp={false}
+                                                                    />
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
-                                                    <p className="text-sm whitespace-pre-wrap">{message.message}</p>
-                                                </div>
-                                            ))}
-                                        </div>
+                                                );
+                                                    });
+                                                })()}
+                                            </div>
+                                        </>
                                     )}
                                 </CardContent>
                             </Card>
@@ -310,6 +629,33 @@ export default function ShowTicket({ticket, organisationUsers, categories, label
                                                 <FormLabel htmlFor="is_private" className="cursor-pointer text-sm font-normal">
                                                     Private message (only visible to organisation users)
                                                 </FormLabel>
+                                            </div>
+
+                                            {/* File Upload */}
+                                            <div>
+                                                <FileUpload
+                                                    onFilesSelected={handleFilesSelected}
+                                                    existingFiles={attachmentFiles}
+                                                    disabled={processing}
+                                                />
+                                                {attachmentFiles.length > 0 && (
+                                                    <div className="mt-3 space-y-2">
+                                                        {attachmentFiles.map((file, index) => (
+                                                            <div key={index} className="flex items-center justify-between p-2 bg-muted rounded text-sm">
+                                                                <span className="truncate flex-1">{file.name}</span>
+                                                                <Button
+                                                                    type="button"
+                                                                    variant="ghost"
+                                                                    size="sm"
+                                                                    onClick={() => handleRemoveFile(index)}
+                                                                    disabled={processing}
+                                                                >
+                                                                    <X className="h-4 w-4" />
+                                                                </Button>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             <div className="flex gap-2">
