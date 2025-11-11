@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/postmark",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\PostMark\\": "app/",
+            "Modules\\PostMark\\Database\\Factories\\": "database/factories/",
+            "Modules\\PostMark\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\PostMark\\Tests\\": "tests/"
+        }
+    }
+}

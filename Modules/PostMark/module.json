@@ -1,0 +1,11 @@
+{
+    "name": "PostMark",
+    "alias": "postmark",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PostMark\\Providers\\PostMarkServiceProvider"
+    ],
+    "files": []
+}
