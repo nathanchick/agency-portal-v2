@@ -2,8 +2,10 @@
 
 namespace Modules\Freshdesk\Providers;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Freshdesk\Console\Commands\SyncFreshdeskData;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -43,7 +45,9 @@ class FreshdeskServiceProvider extends ServiceProvider
      */
     protected function registerCommands(): void
     {
-        // $this->commands([]);
+        $this->commands([
+            SyncFreshdeskData::class,
+        ]);
     }
 
     /**
@@ -51,10 +55,10 @@ class FreshdeskServiceProvider extends ServiceProvider
      */
     protected function registerCommandSchedules(): void
     {
-        // $this->app->booted(function () {
-        //     $schedule = $this->app->make(Schedule::class);
-        //     $schedule->command('inspire')->hourly();
-        // });
+        $this->app->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+            $schedule->command('freshdesk:sync')->hourly();
+        });
     }
 
     /**
