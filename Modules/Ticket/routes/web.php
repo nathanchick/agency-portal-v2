@@ -48,6 +48,11 @@ Route::middleware(['auth', 'verified', 'organisation'])->group(function () {
     Route::post('/tickets/{ticket}/labels', [TicketController::class, 'addLabel'])->name('tickets.add-label')->middleware('role:Admin|Manager|User');
     Route::delete('/tickets/{ticket}/labels/{label}', [TicketController::class, 'removeLabel'])->name('tickets.remove-label')->middleware('role:Admin|Manager|User');
     Route::post('/tickets/{ticket}/messages', [TicketController::class, 'addMessage'])->name('tickets.add-message')->middleware('role:Admin|Manager|User');
+    Route::post('/tickets/{ticket}/summary/regenerate', [TicketController::class, 'regenerateSummary'])->name('tickets.summary.regenerate')->middleware('role:Admin|Manager|User');
+
+    // Media attachment routes
+    Route::get('/media/{media}/download', [TicketController::class, 'downloadAttachment'])->name('media.download')->middleware('role:Admin|Manager|User');
+    Route::delete('/media/{media}', [TicketController::class, 'deleteAttachment'])->name('media.delete')->middleware('role:Admin|Manager|User');
 
     // Label management
     Route::post('/tickets/labels', [TicketController::class, 'storeLabel'])->name('tickets.labels.store')->middleware('role:Admin|Manager');

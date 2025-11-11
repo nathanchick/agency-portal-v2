@@ -80,7 +80,18 @@ class AutomationRuleController extends Controller
         $labels = Label::where('organisation_id', $organisationId)->get(['id', 'name']);
         $statuses = TicketStatus::where('organisation_id', $organisationId)->get(['id', 'name', 'color']);
         $forms = TicketForm::where('organisation_id', $organisationId)->get(['id', 'name', 'content']);
-        $users = $this->getCurrentDirectOrganisation()->users()->get(['id', 'name', 'email']);
+        // Get organisation users (only users with roles)
+        $users = User::query()
+            ->join('organisation_user', 'users.id', '=', 'organisation_user.user_id')
+            ->join('model_has_roles', function ($join) use ($organisationId) {
+                $join->on('users.id', '=', 'model_has_roles.model_id')
+                    ->where('model_has_roles.model_type', '=', User::class)
+                    ->where('model_has_roles.team_id', '=', $organisationId);
+            })
+            ->where('organisation_user.organisation_id', $organisationId)
+            ->select('users.id', 'users.name', 'users.email')
+            ->distinct()
+            ->get();
         $customers = $this->getCurrentDirectOrganisation()->customers()->get(['id', 'name']);
 
         return Inertia::render('tickets/automation-rules/create', [
@@ -159,7 +170,18 @@ class AutomationRuleController extends Controller
         $labels = Label::where('organisation_id', $organisationId)->get(['id', 'name']);
         $statuses = TicketStatus::where('organisation_id', $organisationId)->get(['id', 'name', 'color']);
         $forms = TicketForm::where('organisation_id', $organisationId)->get(['id', 'name', 'content']);
-        $users = $this->getCurrentDirectOrganisation()->users()->get(['id', 'name', 'email']);
+        // Get organisation users (only users with roles)
+        $users = User::query()
+            ->join('organisation_user', 'users.id', '=', 'organisation_user.user_id')
+            ->join('model_has_roles', function ($join) use ($organisationId) {
+                $join->on('users.id', '=', 'model_has_roles.model_id')
+                    ->where('model_has_roles.model_type', '=', User::class)
+                    ->where('model_has_roles.team_id', '=', $organisationId);
+            })
+            ->where('organisation_user.organisation_id', $organisationId)
+            ->select('users.id', 'users.name', 'users.email')
+            ->distinct()
+            ->get();
         $customers = $this->getCurrentDirectOrganisation()->customers()->get(['id', 'name']);
 
         return Inertia::render('tickets/automation-rules/edit', [

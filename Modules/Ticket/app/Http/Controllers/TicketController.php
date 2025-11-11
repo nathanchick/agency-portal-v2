@@ -4,6 +4,7 @@ namespace Modules\Ticket\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\HasOrganisationRole;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Modules\Customer\Models\Customer;
@@ -13,6 +14,10 @@ use Modules\Ticket\Models\SavedTicketFilter;
 use Modules\Ticket\Models\Ticket;
 use Modules\Ticket\Models\TicketForm;
 use Modules\Ticket\Models\TicketStatus;
+use Modules\Ticket\Services\TicketSummaryService;
+use Modules\OpenAi\Services\OpenAiService;
+use Modules\OpenAi\Services\PiiRedactionService;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class TicketController extends Controller
 {
@@ -60,17 +65,19 @@ class TicketController extends Controller
             'assignedTo',
             'messages' => fn($q) => $q->latest()->limit(1)->with('user')
         ])
-            ->whereIn('customer_id', $customerIds)
-            ->latest();
+            ->whereIn('customer_id', $customerIds);
 
         // Filter by customer if provided
         if ($request->filled('customer_id')) {
             $query->where('customer_id', $request->customer_id);
         }
 
-        // Filter by status if provided
+        // Filter by status if provided, otherwise exclude closed tickets
         if ($request->filled('status')) {
             $query->where('status', $request->status);
+        } else {
+            // By default, exclude closed tickets unless explicitly filtered
+            $query->where('status', '!=', 'closed');
         }
 
         // Filter by label if provided
@@ -125,8 +132,18 @@ class TicketController extends Controller
             ->orderBy('name')
             ->get(['id', 'name']);
 
-        // Get organisation users for assignment
-        $organisationUsers = $user->organisations()->find($organisationId)->users()->get(['id', 'name']);
+        // Get organisation users for assignment (only users with roles)
+        $organisationUsers = User::query()
+            ->join('organisation_user', 'users.id', '=', 'organisation_user.user_id')
+            ->join('model_has_roles', function ($join) use ($organisationId) {
+                $join->on('users.id', '=', 'model_has_roles.model_id')
+                    ->where('model_has_roles.model_type', '=', User::class)
+                    ->where('model_has_roles.team_id', '=', $organisationId);
+            })
+            ->where('organisation_user.organisation_id', $organisationId)
+            ->select('users.id', 'users.name')
+            ->distinct()
+            ->get();
 
         // Get statuses for filters and dropdowns
         $statuses = TicketStatus::where('organisation_id', $organisationId)
@@ -491,6 +508,8 @@ class TicketController extends Controller
             'priority' => 'required|in:low,medium,high',
             'message' => 'required|string',
             'form_data' => 'nullable|array',
+            'attachments' => 'nullable|array|max:5',
+            'attachments.*' => 'file|max:10240|mimes:jpeg,png,gif,webp,pdf,zip,txt,csv,xls,xlsx,doc,docx',
         ]);
 
         // Verify customer belongs to organisation
@@ -511,6 +530,17 @@ class TicketController extends Controller
 
         // Attach the category
         $ticket->categories()->attach($validated['category_id']);
+
+        // Handle file attachments
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                $ticket->addMedia($file)
+                    ->sanitizingFileName(function($fileName) {
+                        return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
+                    })
+                    ->toMediaCollection('attachments');
+            }
+        }
 
         return redirect()->route('tickets.index')->with('success', 'Ticket created successfully');
     }
@@ -534,12 +564,43 @@ class TicketController extends Controller
             'categories',
             'labels',
             'assignedTo',
-            'messages.user'
+            'messages.user',
+            'messages.media',
+            'media',
+            'summary',
         ]);
 
-        // Get organisation users for assignment
+        // Try to get or generate summary (non-blocking)
+        $summary = null;
+        try {
+            $organisation = $this->getCurrentDirectOrganisation();
+            $piiRedactionService = app(PiiRedactionService::class);
+            $openAiService = new OpenAiService($organisation, $piiRedactionService);
+            $summaryService = new TicketSummaryService($openAiService, $piiRedactionService);
+
+            if ($summaryService->isEnabledForOrganisation($ticket)) {
+                $summary = $summaryService->getSummary($ticket);
+            }
+        } catch (\Exception $e) {
+            \Log::warning('Failed to load ticket summary', [
+                'ticket_id' => $ticket->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
+
+        // Get organisation users for assignment (only users with roles)
         $user = request()->user();
-        $organisationUsers = $user->organisations()->find($organisationId)->users()->get(['id', 'name']);
+        $organisationUsers = User::query()
+            ->join('organisation_user', 'users.id', '=', 'organisation_user.user_id')
+            ->join('model_has_roles', function ($join) use ($organisationId) {
+                $join->on('users.id', '=', 'model_has_roles.model_id')
+                    ->where('model_has_roles.model_type', '=', User::class)
+                    ->where('model_has_roles.team_id', '=', $organisationId);
+            })
+            ->where('organisation_user.organisation_id', $organisationId)
+            ->select('users.id', 'users.name')
+            ->distinct()
+            ->get();
 
         // Get all categories and labels for editing
         $categories = Category::where('organisation_id', $organisationId)
@@ -563,6 +624,7 @@ class TicketController extends Controller
             'categories' => $categories,
             'labels' => $labels,
             'statuses' => $statuses,
+            'summary' => $summary,
         ]);
     }
 
@@ -760,13 +822,26 @@ class TicketController extends Controller
             'message' => 'required|string',
             'is_private' => 'boolean',
             'set_status' => 'nullable|in:' . implode(',', $validStatuses),
+            'attachments' => 'nullable|array|max:5',
+            'attachments.*' => 'file|max:10240|mimes:jpeg,png,gif,webp,pdf,zip,txt,csv,xls,xlsx,doc,docx',
         ]);
 
-        $ticket->messages()->create([
+        $message = $ticket->messages()->create([
             'user_id' => $request->user()->id,
             'message' => $validated['message'],
             'is_private' => $validated['is_private'] ?? false,
         ]);
+
+        // Handle file attachments
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                $message->addMedia($file)
+                    ->sanitizingFileName(function($fileName) {
+                        return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
+                    })
+                    ->toMediaCollection('attachments');
+            }
+        }
 
         // Update status if requested
         if (!empty($validated['set_status'])) {
@@ -866,5 +941,142 @@ class TicketController extends Controller
         $ticketStatus->delete();
 
         return back()->with('success', 'Status deleted successfully');
+    }
+
+    /**
+     * Regenerate AI summary for a ticket
+     */
+    public function regenerateSummary(Ticket $ticket)
+    {
+        $organisationId = $this->getCurrentDirectOrganisation()->id;
+
+        // Verify ticket belongs to organisation
+        if ($ticket->organisation_id !== $organisationId) {
+            abort(403);
+        }
+
+        try {
+            $organisation = $this->getCurrentDirectOrganisation();
+            $piiRedactionService = app(PiiRedactionService::class);
+            $openAiService = new OpenAiService($organisation, $piiRedactionService);
+            $summaryService = new TicketSummaryService($openAiService, $piiRedactionService);
+
+            // Check if feature is enabled
+            if (!$summaryService->isEnabledForOrganisation($ticket)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'AI summaries are not enabled for this organisation',
+                ], 403);
+            }
+
+            // Regenerate summary
+            $summary = $summaryService->regenerateSummary($ticket);
+
+            if ($summary) {
+                return response()->json([
+                    'success' => true,
+                    'summary' => $summary,
+                    'message' => 'Summary regenerated successfully',
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Failed to generate summary. Please check OpenAI configuration.',
+                ], 500);
+            }
+
+        } catch (\Exception $e) {
+            \Log::error('Failed to regenerate ticket summary', [
+                'ticket_id' => $ticket->id,
+                'error' => $e->getMessage(),
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to generate summary: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Download a media attachment
+     */
+    public function downloadAttachment(Media $media)
+    {
+        $organisationId = $this->getCurrentDirectOrganisation()->id;
+
+        // Get the model (either Ticket or Message)
+        $model = $media->model;
+
+        // Verify access based on model type
+        if ($model instanceof Ticket) {
+            if ($model->organisation_id !== $organisationId) {
+                abort(403, 'Unauthorized access to attachment');
+            }
+        } elseif ($model instanceof \Modules\Ticket\Models\Message) {
+            $ticket = $model->ticket;
+            if ($ticket->organisation_id !== $organisationId) {
+                abort(403, 'Unauthorized access to attachment');
+            }
+
+            // Check private message visibility
+            if ($model->is_private) {
+                $role = $this->getCurrentOrganisationUserRole();
+                if (!in_array($role, ['Admin', 'Manager', 'User'])) {
+                    abort(403, 'Private message attachments are not accessible');
+                }
+            }
+        } else {
+            abort(403, 'Invalid attachment');
+        }
+
+        return response()->download($media->getPath(), $media->file_name);
+    }
+
+    /**
+     * Delete a media attachment
+     */
+    public function deleteAttachment(Media $media)
+    {
+        $organisationId = $this->getCurrentDirectOrganisation()->id;
+
+        // Get the model (either Ticket or Message)
+        $model = $media->model;
+
+        // Verify access and ownership
+        if ($model instanceof Ticket) {
+            if ($model->organisation_id !== $organisationId) {
+                abort(403, 'Unauthorized access to attachment');
+            }
+
+            // Only ticket creator, assigned user, or admins can delete
+            $user = request()->user();
+            $role = $this->getCurrentOrganisationUserRole();
+
+            if ($model->user_id !== $user->id &&
+                $model->assigned_to !== $user->id &&
+                !in_array($role, ['Admin', 'Manager'])) {
+                abort(403, 'You do not have permission to delete this attachment');
+            }
+        } elseif ($model instanceof \Modules\Ticket\Models\Message) {
+            $ticket = $model->ticket;
+            if ($ticket->organisation_id !== $organisationId) {
+                abort(403, 'Unauthorized access to attachment');
+            }
+
+            // Only message creator or admins can delete
+            $user = request()->user();
+            $role = $this->getCurrentOrganisationUserRole();
+
+            if ($model->user_id !== $user->id && !in_array($role, ['Admin', 'Manager'])) {
+                abort(403, 'You do not have permission to delete this attachment');
+            }
+        } else {
+            abort(403, 'Invalid attachment');
+        }
+
+        $media->delete();
+
+        return back()->with('success', 'Attachment deleted successfully');
     }
 }
