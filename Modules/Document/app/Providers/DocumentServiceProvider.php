@@ -5,7 +5,7 @@ namespace Modules\Document\Providers;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Modules\Document\App\Console\Commands\SendScheduledDocumentRequests;
+use Modules\Document\Console\Commands\SendScheduledDocumentRequests;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;

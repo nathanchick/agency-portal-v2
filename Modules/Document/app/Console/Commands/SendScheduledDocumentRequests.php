@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Document\App\Console\Commands;
+namespace Modules\Document\Console\Commands;
 
 use Illuminate\Console\Command;
 use Modules\Document\Models\DocumentHistory;
