@@ -1,4 +1,6 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
+import oauth from './oauth'
+import invoices from './invoices'
 /**
 * @see \Modules\Xero\Http\Controllers\XeroController::index
 * @see Modules/Xero/app/Http/Controllers/XeroController.php:13
@@ -609,6 +611,8 @@ destroyForm.delete = (args: { xero: string | number } | [xero: string | number ]
 destroy.form = destroyForm
 
 const xero = {
+    oauth: Object.assign(oauth, oauth),
+    invoices: Object.assign(invoices, invoices),
     index: Object.assign(index, index),
     create: Object.assign(create, create),
     store: Object.assign(store, store),

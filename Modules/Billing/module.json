@@ -1,0 +1,11 @@
+{
+    "name": "Billing",
+    "alias": "billing",
+    "description": "Provider-agnostic billing module that supports multiple accounting systems (Xero, QuickBooks, etc.)",
+    "keywords": ["billing", "invoices", "accounting", "xero", "quickbooks"],
+    "priority": 0,
+    "providers": [
+        "Modules\\Billing\\Providers\\BillingServiceProvider"
+    ],
+    "files": []
+}

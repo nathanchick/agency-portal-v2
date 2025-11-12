@@ -1,0 +1,28 @@
+{
+    "name": "deploy-ecommerce/billing",
+    "description": "Provider-agnostic billing module",
+    "authors": [
+        {
+            "name": "Nathan Chick",
+            "email": "nathan.chick@deploy.co.uk"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Billing\\": "app/",
+            "Modules\\Billing\\Database\\Factories\\": "database/factories/",
+            "Modules\\Billing\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Billing\\Tests\\": "tests/"
+        }
+    }
+}
