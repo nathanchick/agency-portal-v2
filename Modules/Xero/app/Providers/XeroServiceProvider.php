@@ -2,6 +2,7 @@
 
 namespace Modules\Xero\Providers;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
@@ -36,6 +37,16 @@ class XeroServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+
+        // Note: Xero OAuth Provider is NOT registered as singleton
+        // Each organisation has their own credentials, so the provider
+        // is created dynamically per-organisation in the services
+
+        // Register Xero Services
+        $this->app->singleton(\Modules\Xero\Services\XeroTokenService::class);
+        $this->app->singleton(\Modules\Xero\Services\XeroApiService::class);
+        $this->app->singleton(\Modules\Xero\Services\XeroInvoiceSyncService::class);
+        $this->app->singleton(\Modules\Xero\Services\XeroInvoiceCreationService::class);
     }
 
     /**
@@ -43,7 +54,9 @@ class XeroServiceProvider extends ServiceProvider
      */
     protected function registerCommands(): void
     {
-        // $this->commands([]);
+        $this->commands([
+            \Modules\Xero\Console\SyncXeroInvoicesCommand::class,
+        ]);
     }
 
     /**
@@ -51,10 +64,15 @@ class XeroServiceProvider extends ServiceProvider
      */
     protected function registerCommandSchedules(): void
     {
-        // $this->app->booted(function () {
-        //     $schedule = $this->app->make(Schedule::class);
-        //     $schedule->command('inspire')->hourly();
-        // });
+        $this->app->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+
+            // Run incremental invoice sync daily at 2 AM
+            $schedule->command('xero:sync-invoices --incremental')
+                ->dailyAt('02:00')
+                ->withoutOverlapping()
+                ->runInBackground();
+        });
     }
 
     /**

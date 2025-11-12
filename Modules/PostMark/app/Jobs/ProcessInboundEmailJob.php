@@ -11,9 +11,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Modules\PostMark\Models\InboundEmail;
 use Modules\PostMark\Services\InboundEmailProcessor;
-use Spatie\Multitenancy\Jobs\TenantAware;
 
-class ProcessInboundEmailJob implements ShouldQueue, TenantAware
+class ProcessInboundEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -34,14 +33,6 @@ class ProcessInboundEmailJob implements ShouldQueue, TenantAware
         public InboundEmail $inboundEmail
     ) {
         $this->onQueue('webhooks');
-    }
-
-    /**
-     * Get the tenant ID for multi-tenancy
-     */
-    public function getTenantId(): string
-    {
-        return $this->inboundEmail->organisation_id;
     }
 
     /**
