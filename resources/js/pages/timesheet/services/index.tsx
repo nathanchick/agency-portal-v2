@@ -179,7 +179,7 @@ export default function ServicesIndex({services, customers, filters}: Props) {
                                     <TableHead className="w-[50px]">
                                         <input type="checkbox" className="rounded" />
                                     </TableHead>
-                                    <TableHead>Client</TableHead>
+                                    <TableHead>Customer</TableHead>
                                     <TableHead className="text-right">Budget</TableHead>
                                     <TableHead className="text-right">Spent</TableHead>
                                     <TableHead className="w-[200px]"></TableHead>

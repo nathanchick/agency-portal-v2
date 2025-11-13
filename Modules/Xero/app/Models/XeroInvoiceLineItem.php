@@ -45,6 +45,7 @@ class XeroInvoiceLineItem extends Model
         'tax_type',
         'tax_amount',
         'line_amount',
+        'line_order',
     ];
 
     /**

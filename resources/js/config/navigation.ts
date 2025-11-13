@@ -55,6 +55,23 @@ export const navigation: NavigationConfig = {
             url: route('customers.index'),
             icon: Users,
             roles: ['Admin', 'Manager'],
+            items: [
+                {
+                    title: "Customers",
+                    url: route('customers.index'),
+                    roles: ['Admin', 'Manager'],
+                },
+                {
+                    title: "Services",
+                    url: route('timesheet.services.index'),
+                    roles: ['Admin', 'Manager'],
+                },
+                {
+                    title: "Billing",
+                    url: route('customers.billing.overview'),
+                    roles: ['Admin', 'Manager'],
+                },
+            ],
         },
         {
             title: "Deployments",
@@ -142,11 +159,6 @@ export const navigation: NavigationConfig = {
                     title: "Time Entries",
                     url: route('timesheet.entries.index'),
                     roles: ['Admin', 'Manager', 'User'],
-                },
-                {
-                    title: "Services",
-                    url: route('timesheet.services.index'),
-                    roles: ['Admin', 'Manager'],
                 },
                 {
                     title: "Tasks",
@@ -305,20 +317,20 @@ export const navigation: NavigationConfig = {
             ],
         },
         {
-            title: "Billing/Subscriptions",
-            url: "#",
+            title: "Billing",
+            url: route('customer.billing.index'),
             icon: PoundSterling,
             roles: ['Admin', 'Manager'],
             items: [
                 {
                     title: "Invoices",
-                    url: "#",
+                    url: route('customer.billing.index'),
                     roles: ['Admin', 'Manager'],
                 },
                 {
-                    title: "Active Billing",
-                    url: "#",
-                    roles: ['Admin'],
+                    title: "Statistics",
+                    url: route('customer.billing.stats'),
+                    roles: ['Admin', 'Manager'],
                 },
             ],
         },

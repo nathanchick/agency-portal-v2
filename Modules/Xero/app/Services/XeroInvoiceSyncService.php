@@ -293,20 +293,41 @@ class XeroInvoiceSyncService
      * Creates or updates the invoice record and all associated line items.
      * Uses database transactions to ensure data consistency.
      *
+     * Note: The bulk getInvoices() endpoint returns empty LineItems arrays.
+     * We must fetch individual invoice details to get line items.
+     *
      * @param  Organisation  $organisation
      * @param  Customer  $customer
-     * @param  Invoice  $xeroInvoice  XeroAPI Invoice object
+     * @param  Invoice  $xeroInvoice  XeroAPI Invoice object from bulk endpoint
      * @return bool True if created, false if updated
      */
     private function processInvoice(Organisation $organisation, Customer $customer, Invoice $xeroInvoice): bool
     {
         return DB::transaction(function () use ($organisation, $customer, $xeroInvoice) {
+            // Fetch full invoice details including line items
+            // The bulk getInvoices() endpoint doesn't return line items, so we need to fetch individually
+            try {
+                $fullInvoice = $this->apiService->getInvoice($organisation, $xeroInvoice->getInvoiceId());
+
+                // Add small delay to avoid rate limits (60 calls/minute = ~1 second per call)
+                // This ensures we stay under the rate limit during bulk syncs
+                usleep(1000000); // 1 second delay
+            } catch (\Exception $e) {
+                Log::warning('Xero Sync: Failed to fetch full invoice details, using bulk data', [
+                    'organisation_id' => $organisation->id,
+                    'xero_invoice_id' => $xeroInvoice->getInvoiceId(),
+                    'error' => $e->getMessage(),
+                ]);
+                // Fall back to the bulk invoice data (won't have line items)
+                $fullInvoice = $xeroInvoice;
+            }
+
             // Extract invoice data
-            $invoiceData = $this->extractInvoiceData($organisation, $customer, $xeroInvoice);
+            $invoiceData = $this->extractInvoiceData($organisation, $customer, $fullInvoice);
 
             // Create or update invoice
             $invoice = XeroInvoice::updateOrCreate(
-                ['xero_invoice_id' => $xeroInvoice->getInvoiceId()],
+                ['xero_invoice_id' => $fullInvoice->getInvoiceId()],
                 $invoiceData
             );
 
@@ -318,8 +339,16 @@ class XeroInvoiceSyncService
             }
 
             // Create line items
-            $lineItems = $this->extractLineItems($invoice, $xeroInvoice);
-            $invoice->lineItems()->createMany($lineItems);
+            $lineItems = $this->extractLineItems($invoice, $fullInvoice);
+            if (count($lineItems) > 0) {
+                $invoice->lineItems()->createMany($lineItems);
+            } else {
+                Log::debug('Xero Sync: No line items found for invoice', [
+                    'organisation_id' => $organisation->id,
+                    'xero_invoice_id' => $fullInvoice->getInvoiceId(),
+                    'invoice_number' => $fullInvoice->getInvoiceNumber(),
+                ]);
+            }
 
             return $wasCreated;
         });
@@ -337,17 +366,9 @@ class XeroInvoiceSyncService
      */
     private function extractInvoiceData(Organisation $organisation, Customer $customer, Invoice $xeroInvoice): array
     {
-        // Fetch online invoice URL (separate API call)
+        // Skip fetching online invoice URL during bulk sync to avoid rate limits
+        // The online invoice URL is not critical for core functionality
         $onlineInvoiceUrl = null;
-        try {
-            $onlineInvoiceUrl = $this->apiService->getOnlineInvoiceUrl($organisation, $xeroInvoice->getInvoiceId());
-        } catch (\Exception $e) {
-            Log::warning('Xero Sync: Failed to fetch online invoice URL', [
-                'organisation_id' => $organisation->id,
-                'xero_invoice_id' => $xeroInvoice->getInvoiceId(),
-                'error' => $e->getMessage(),
-            ]);
-        }
 
         return [
             'organisation_id' => $organisation->id,

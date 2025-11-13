@@ -1,3 +1,4 @@
+import Billing from './Billing'
 import CspManagement from './CspManagement'
 import Customer from './Customer'
 import Deployment from './Deployment'
@@ -15,6 +16,7 @@ import Website from './Website'
 import Xero from './Xero'
 
 const Modules = {
+    Billing: Object.assign(Billing, Billing),
     CspManagement: Object.assign(CspManagement, CspManagement),
     Customer: Object.assign(Customer, Customer),
     Deployment: Object.assign(Deployment, Deployment),

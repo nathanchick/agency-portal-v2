@@ -61,4 +61,20 @@ class Customer extends Model
     {
         return $this->hasMany(CustomerSetting::class);
     }
+
+    /**
+     * Get the Xero contact ID from customer settings.
+     *
+     * This accessor allows $customer->xero_contact_id to retrieve
+     * the value from customer_settings table.
+     *
+     * @return string|null
+     */
+    public function getXeroContactIdAttribute(): ?string
+    {
+        return $this->settings()
+            ->where('module', 'Xero')
+            ->where('key', 'xero_contact_id')
+            ->first()?->value;
+    }
 }

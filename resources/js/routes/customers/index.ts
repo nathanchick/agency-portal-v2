@@ -1,4 +1,5 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
+import billing from './billing'
 import modules from './modules'
 import users from './users'
 import projects from './projects'
@@ -631,6 +632,7 @@ destroyForm.delete = (args: { customer: string | { id: string } } | [customer: s
 destroy.form = destroyForm
 
 const customers = {
+    billing: Object.assign(billing, billing),
     index: Object.assign(index, index),
     create: Object.assign(create, create),
     store: Object.assign(store, store),

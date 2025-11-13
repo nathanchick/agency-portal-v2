@@ -409,4 +409,79 @@ class ServiceController extends Controller
 
         return back()->with('success', 'Budget adjustment recorded successfully.');
     }
+
+    public function destroyBudgetAdjustment(Request $request, Service $service, ServiceBudgetChange $budgetChange)
+    {
+        if ($service->organisation_id !== $this->getCurrentDirectOrganisation()->id) {
+            abort(403);
+        }
+
+        if ($budgetChange->service_id !== $service->id) {
+            abort(403, 'Budget change does not belong to this service.');
+        }
+
+        // Check if this adjustment affects any reconciled periods
+        $affectedReconciledPeriods = $service->budgetPeriods()
+            ->where('reconciled', true)
+            ->where('period_start', '>=', $budgetChange->effective_from)
+            ->when($budgetChange->effective_to, fn($q) => $q->where('period_start', '<=', $budgetChange->effective_to))
+            ->exists();
+
+        if ($affectedReconciledPeriods) {
+            return back()->withErrors([
+                'budget_adjustment' => 'Cannot delete budget adjustment that affects reconciled periods. Please unreconcile those periods first.'
+            ]);
+        }
+
+        // Find what the budget should revert to after deletion
+        $effectiveDate = \Carbon\Carbon::parse($budgetChange->effective_from);
+
+        // Get the previous active budget change before this one
+        $previousBudgetChange = $service->budgetChanges()
+            ->where('id', '!=', $budgetChange->id)
+            ->where('effective_from', '<=', $effectiveDate)
+            ->where(function ($q) use ($effectiveDate) {
+                $q->whereNull('effective_to')
+                    ->orWhere('effective_to', '>=', $effectiveDate);
+            })
+            ->orderBy('effective_from', 'desc')
+            ->first();
+
+        // Determine what budget to revert to
+        if ($previousBudgetChange) {
+            $revertBudgetHours = $previousBudgetChange->new_budget_hours;
+            $revertBudgetAmount = $previousBudgetChange->new_budget_amount;
+        } else {
+            // No previous change, use the original budget stored in the change being deleted
+            $revertBudgetHours = $budgetChange->old_budget_hours;
+            $revertBudgetAmount = $budgetChange->old_budget_amount;
+        }
+
+        // If this was the most recent change, update the service's current budget
+        $latestChange = $service->budgetChanges()
+            ->orderBy('effective_from', 'desc')
+            ->first();
+
+        if ($latestChange && $latestChange->id === $budgetChange->id) {
+            $service->update([
+                'current_budget_hours' => $revertBudgetHours,
+                'current_budget_amount' => $revertBudgetAmount,
+            ]);
+        }
+
+        // Revert budget periods that were affected by this adjustment
+        $affectedPeriods = $service->budgetPeriods()
+            ->where('period_start', '>=', $budgetChange->effective_from)
+            ->when($budgetChange->effective_to, fn($q) => $q->where('period_start', '<=', $budgetChange->effective_to));
+
+        $affectedPeriods->update([
+            'budget_hours' => $revertBudgetHours,
+            'budget_amount' => $revertBudgetAmount,
+        ]);
+
+        // Delete the budget change
+        $budgetChange->delete();
+
+        return back()->with('success', 'Budget adjustment deleted successfully. Budget has been reverted.');
+    }
 }

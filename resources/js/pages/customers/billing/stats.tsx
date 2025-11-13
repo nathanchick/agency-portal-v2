@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 import { useState } from 'react'
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
@@ -13,7 +13,8 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { FileText, Clock, TrendingDown, ChevronDown, ChevronRight } from "lucide-react"
+import { FileText, Clock, TrendingDown, ChevronDown, ChevronRight, ArrowLeft } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 interface BillingStats {
     total_invoices: number
@@ -49,12 +50,18 @@ interface BillingStats {
     }>
 }
 
+interface Customer {
+    id: string
+    name: string
+}
+
 interface Props {
+    customer: Customer
     stats: BillingStats
     provider: string
 }
 
-export default function BillingStats({ stats, provider }: Props) {
+export default function CustomerBillingStats({ customer, stats, provider }: Props) {
     const [expandedInvoices, setExpandedInvoices] = useState<Set<string>>(new Set())
 
     const formatCurrency = (amount: number) => {
@@ -105,19 +112,28 @@ export default function BillingStats({ stats, provider }: Props) {
         <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-                <Head title="Billing Statistics" />
+                <Head title={`${customer.name} - Billing Statistics`} />
                 <AppSidebarHeader breadcrumbs={[
                     { title: 'Dashboard', href: '/dashboard' },
-                    { title: 'Billing', href: '/customer/billing' },
-                    { title: 'Statistics', href: '/customer/billing/stats' }
+                    { title: 'Customers', href: '/customers' },
+                    { title: 'Billing', href: '/customers/billing' },
+                    { title: customer.name, href: `/customers/${customer.id}/billing/stats` }
                 ]} />
 
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
                     <div className="flex items-center justify-between">
                         <div>
-                            <h1 className="text-2xl font-bold">Billing Statistics</h1>
+                            <div className="flex items-center gap-2 mb-2">
+                                <Button variant="ghost" size="sm" asChild>
+                                    <Link href="/customers/billing">
+                                        <ArrowLeft className="h-4 w-4 mr-2" />
+                                        Back to Overview
+                                    </Link>
+                                </Button>
+                            </div>
+                            <h1 className="text-2xl font-bold">{customer.name} - Billing Statistics</h1>
                             <p className="text-sm text-muted-foreground">
-                                Overview of your billing history and metrics
+                                Overview of billing history and metrics
                             </p>
                         </div>
                         <Badge variant="outline">powered by {provider}</Badge>
@@ -168,6 +184,21 @@ export default function BillingStats({ stats, provider }: Props) {
                                 </p>
                             </CardContent>
                         </Card>
+
+                        <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">
+                                    Paid
+                                </CardTitle>
+                                <FileText className="h-4 w-4 text-green-500" />
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-2xl font-bold">{formatCurrency(stats.paid_amount)}</div>
+                                <p className="text-xs text-muted-foreground">
+                                    {stats.total_paid} invoices paid
+                                </p>
+                            </CardContent>
+                        </Card>
                     </div>
 
                     {/* Average Time to Pay */}
@@ -201,7 +232,7 @@ export default function BillingStats({ stats, provider }: Props) {
                             <CardHeader>
                                 <CardTitle>Recent Invoices</CardTitle>
                                 <CardDescription>
-                                    Your most recent invoices (click to expand line items)
+                                    Most recent invoices (click to expand line items)
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
@@ -233,13 +264,7 @@ export default function BillingStats({ stats, provider }: Props) {
                                                             )}
                                                         </TableCell>
                                                         <TableCell className="font-medium">
-                                                            <a
-                                                                href={`/customer/billing/${invoice.id}`}
-                                                                className="hover:underline"
-                                                                onClick={(e) => e.stopPropagation()}
-                                                            >
-                                                                {invoice.invoice_number}
-                                                            </a>
+                                                            {invoice.invoice_number}
                                                         </TableCell>
                                                         <TableCell>
                                                             {new Date(invoice.date).toLocaleDateString('en-GB')}

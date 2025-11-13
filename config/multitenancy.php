@@ -132,5 +132,8 @@ return [
      */
     'not_tenant_aware_jobs' => [
         \Spatie\WebhookServer\CallWebhookJob::class,
+        \Modules\PostMark\Jobs\ProcessInboundEmailJob::class,
+        \Modules\Xero\Jobs\SyncXeroInvoicesJob::class,
+        \Modules\Xero\Jobs\CreateXeroInvoiceJob::class,
     ],
 ];

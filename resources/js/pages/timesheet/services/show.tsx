@@ -20,7 +20,7 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
 import {Checkbox} from '@/components/ui/checkbox';
-import {Briefcase, Edit, Clock, DollarSign, TrendingUp, AlertCircle} from 'lucide-react';
+import {Briefcase, Edit, Clock, DollarSign, TrendingUp, AlertCircle, Trash2} from 'lucide-react';
 import {route} from 'ziggy-js';
 import {useState} from 'react';
 import {
@@ -109,6 +109,8 @@ interface Props {
 
 export default function ServiceShow({service, currentPeriod, timeEntriesStats, budgetPeriods, budgetChanges}: Props) {
     const [isBudgetDialogOpen, setIsBudgetDialogOpen] = useState(false);
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const [budgetChangeToDelete, setBudgetChangeToDelete] = useState<BudgetChange | null>(null);
     const [budgetFormData, setBudgetFormData] = useState({
         new_budget_hours: service.current_budget_hours?.toString() || '',
         new_budget_amount: service.current_budget_amount?.toString() || '',
@@ -134,6 +136,33 @@ export default function ServiceShow({service, currentPeriod, timeEntriesStats, b
                         reason: '',
                         apply_to_existing_periods: false,
                     });
+                },
+            }
+        );
+    };
+
+    const handleDeleteBudgetChange = (change: BudgetChange) => {
+        setBudgetChangeToDelete(change);
+        setIsDeleteDialogOpen(true);
+    };
+
+    const confirmDeleteBudgetChange = () => {
+        if (!budgetChangeToDelete) return;
+
+        router.delete(
+            route('timesheet.services.budget-adjustments.destroy', {
+                service: service.id,
+                budgetChange: budgetChangeToDelete.id,
+            }),
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setIsDeleteDialogOpen(false);
+                    setBudgetChangeToDelete(null);
+                },
+                onError: () => {
+                    setIsDeleteDialogOpen(false);
+                    setBudgetChangeToDelete(null);
                 },
             }
         );
@@ -221,11 +250,11 @@ export default function ServiceShow({service, currentPeriod, timeEntriesStats, b
             <AppSidebar />
             <SidebarInset>
                 <Head title={`Service: ${service.name}`} />
-p                <AppSidebarHeader
+                <AppSidebarHeader
                     breadcrumbs={[
                         { title: 'Dashboard', href: route('dashboard') },
                         { title: 'Services', href: route('timesheet.services.index') },
-                        { title: '${service.name}' },
+                        { title: service.name }
                     ]}
                 />
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
@@ -367,6 +396,7 @@ p                <AppSidebarHeader
                                 <div className="space-y-3">
                                     {budgetChanges.map((change) => {
                                         const isActive = !change.effective_to || new Date(change.effective_to) >= new Date();
+                                        const canDelete = currentPeriod && new Date(change.effective_from) >= new Date(currentPeriod.period_start);
 
                                         // If there's an effective_to date, budget reverts to the old values
                                         const willRevertTo = change.effective_to
@@ -378,6 +408,23 @@ p                <AppSidebarHeader
                                                 key={change.id}
                                                 className={`p-4 rounded-lg border ${isActive ? 'bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800' : 'bg-muted/50'}`}
                                             >
+                                                <div className="flex items-start justify-between mb-3">
+                                                    <div className="flex items-center gap-2">
+                                                        {isActive && (
+                                                            <Badge variant="default">Active</Badge>
+                                                        )}
+                                                    </div>
+                                                    {canDelete && (
+                                                        <Button
+                                                            variant="ghost"
+                                                            size="sm"
+                                                            onClick={() => handleDeleteBudgetChange(change)}
+                                                            className="h-8 w-8 p-0 text-destructive hover:text-destructive hover:bg-destructive/10"
+                                                        >
+                                                            <Trash2 className="h-4 w-4" />
+                                                        </Button>
+                                                    )}
+                                                </div>
                                                 <div className="grid gap-4 md:grid-cols-4">
                                                     <div>
                                                         <p className="text-xs text-muted-foreground">Budget Change</p>
@@ -408,9 +455,6 @@ p                <AppSidebarHeader
                                                         <p className="text-sm font-medium">
                                                             {change.created_by_user?.name || 'System'}
                                                         </p>
-                                                        {isActive && (
-                                                            <Badge variant="default" className="mt-1">Active</Badge>
-                                                        )}
                                                     </div>
                                                 </div>
                                                 {change.reason && (
@@ -675,6 +719,40 @@ p                <AppSidebarHeader
                             disabled={!budgetFormData.reason || !budgetFormData.effective_from}
                         >
                             Create Budget Adjustment
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
+            {/* Delete Budget Adjustment Confirmation Dialog */}
+            <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Delete Budget Adjustment</DialogTitle>
+                        <DialogDescription>
+                            Are you sure you want to delete this budget adjustment? This action cannot be undone.
+                            {budgetChangeToDelete && (
+                                <div className="mt-4 p-4 rounded-lg bg-muted">
+                                    <p className="text-sm font-medium mb-2">This will revert the budget to:</p>
+                                    <p className="text-sm">
+                                        {Number(budgetChangeToDelete.old_budget_hours || 0).toFixed(2)}h / £{Number(budgetChangeToDelete.old_budget_amount || 0).toFixed(2)}
+                                    </p>
+                                    <p className="text-xs text-muted-foreground mt-2">
+                                        Effective from: {formatDate(budgetChangeToDelete.effective_from)}
+                                    </p>
+                                </div>
+                            )}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+                            Cancel
+                        </Button>
+                        <Button
+                            variant="destructive"
+                            onClick={confirmDeleteBudgetChange}
+                        >
+                            Delete Adjustment
                         </Button>
                     </DialogFooter>
                 </DialogContent>

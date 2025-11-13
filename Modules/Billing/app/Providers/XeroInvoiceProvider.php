@@ -135,6 +135,14 @@ class XeroInvoiceProvider implements InvoiceProviderInterface
                     'status' => $dto->status,
                     'is_overdue' => $dto->isOverdue(),
                     'is_paid' => $dto->isPaid(),
+                    'line_items' => $dto->lineItems->map(fn ($item) => [
+                        'id' => $item->id,
+                        'description' => $item->description,
+                        'quantity' => $item->quantity,
+                        'unit_amount' => $item->unitAmount,
+                        'line_amount' => $item->lineAmount,
+                        'tax_amount' => $item->taxAmount,
+                    ])->toArray(),
                 ];
             });
 
@@ -152,6 +160,10 @@ class XeroInvoiceProvider implements InvoiceProviderInterface
             })
             ->values();
 
+        // Get last invoice date
+        $lastInvoice = (clone $baseQuery)->orderBy('date', 'desc')->first();
+        $lastInvoiceDate = $lastInvoice?->date?->toISOString();
+
         return [
             'total_invoices' => $totalInvoices,
             'total_outstanding' => $totalOutstanding,
@@ -162,6 +174,7 @@ class XeroInvoiceProvider implements InvoiceProviderInterface
             'overdue_amount' => $overdueAmount,
             'currency_code' => $currencyCode,
             'average_days_to_pay' => $averageDaysToPay,
+            'last_invoice_date' => $lastInvoiceDate,
             'recent_invoices' => $recentInvoices->toArray(),
             'monthly_totals' => $monthlyTotals->toArray(),
         ];

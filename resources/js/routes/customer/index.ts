@@ -1,4 +1,5 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
+import billing from './billing'
 import deployments from './deployments'
 import documents from './documents'
 import tickets from './tickets'
@@ -61,6 +62,7 @@ switchMethodForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post
 switchMethod.form = switchMethodForm
 
 const customer = {
+    billing: Object.assign(billing, billing),
     switch: Object.assign(switchMethod, switchMethod),
     deployments: Object.assign(deployments, deployments),
     documents: Object.assign(documents, documents),

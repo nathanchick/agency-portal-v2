@@ -3,6 +3,7 @@
 namespace Modules\Ohdear\Services;
 
 use OhDear\PhpSdk\Enums\UptimeMetricsSplit;
+use OhDear\PhpSdk\Enums\UptimeSplit;
 use OhDear\PhpSdk\OhDear;
 use Modules\Ohdear\Models\OhdearWebsite;
 use Modules\Website\Models\Website;
@@ -81,30 +82,55 @@ class OhdearService
         $endDate = now()->format('Y-m-d H:i:s');
 
         try {
-            // Get HTTP uptime metrics
+            // Get HTTP uptime metrics (for performance chart)
             $metrics = $this->client->httpUptimeMetrics($monitorId, $startDate, $endDate, $config['split']);
+
+            // Get downtime periods to determine success/failure status
+            $downtimePeriods = $this->client->downtime($monitorId, $startDate, $endDate);
 
             // Transform metrics from camelCase to snake_case for frontend
             $transformedMetrics = [];
             foreach ($metrics as $metric) {
+                $metricTime = $metric->date ?? null;
+
+                // Determine if this metric overlaps with any downtime period
+                $wasSuccessful = true; // Default to successful (uptime)
+
+                foreach ($downtimePeriods as $downtime) {
+                    $downtimeStart = $downtime->startedAt ?? null;
+                    $downtimeEnd = $downtime->endedAt ?? now()->toIso8601String(); // Ongoing if no end
+
+                    if ($metricTime && $downtimeStart) {
+                        // Check if metric time falls within downtime period
+                        if ($metricTime >= $downtimeStart && $metricTime <= $downtimeEnd) {
+                            $wasSuccessful = false;
+                            break;
+                        }
+                    }
+                }
+
                 $transformedMetrics[] = [
-                    'datetime' => $metric->date ?? null,
+                    'datetime' => $metricTime,
                     'total_time_in_seconds' => $metric->totalTimeInSeconds ?? null,
                     'dns_time_in_seconds' => $metric->dnsTimeInSeconds ?? null,
                     'tcp_time_in_seconds' => $metric->tcpTimeInSeconds ?? null,
                     'ssl_handshake_time_in_seconds' => $metric->sslHandshakeTimeInSeconds ?? null,
                     'download_time_in_seconds' => $metric->downloadTimeInSeconds ?? null,
-                    'was_successful' => $metric->was_successful ?? $metric->wasSuccessful ?? null,
+                    'was_successful' => $wasSuccessful,
                 ];
             }
 
-            // Get monitor details for uptime percentage
+            // Get monitor details
             $monitor = $this->client->monitor($monitorId);
+
+            // Calculate accurate uptime percentages for specific time periods
+            $uptime7Days = $this->calculateUptimePercentage($monitorId, 7, 'days');
+            $uptime12Months = $this->calculateUptimePercentage($monitorId, 12, 'months');
 
             return [
                 'metrics' => $transformedMetrics,
-                'uptime_percentage_7_days' => $monitor->uptimePercentage ?? 100,
-                'uptime_percentage_12_months' => $monitor->uptimePercentage ?? 100,
+                'uptime_percentage_7_days' => $uptime7Days,
+                'uptime_percentage_12_months' => $uptime12Months,
                 'monitor' => [
                     'id' => $monitor->id ?? $monitorId,
                     'url' => $monitor->url ?? '',
@@ -122,6 +148,55 @@ class OhdearService
     }
 
     /**
+     * Calculate uptime percentage for a specific time period
+     */
+    private function calculateUptimePercentage(int $monitorId, int $amount, string $unit): float
+    {
+        try {
+            // Determine the start date based on the period
+            if ($unit === 'days') {
+                $startDate = now()->subDays($amount)->format('Y-m-d H:i:s');
+                $split = UptimeSplit::Day;
+            } else { // months
+                $startDate = now()->subMonths($amount)->format('Y-m-d H:i:s');
+                $split = UptimeSplit::Month;
+            }
+
+            $endDate = now()->format('Y-m-d H:i:s');
+
+            // Get uptime data from Oh Dear API
+            $uptimeData = $this->client->uptime($monitorId, $startDate, $endDate, $split);
+
+            if (empty($uptimeData)) {
+                return 0;
+            }
+
+            $totalUptime = 0;
+            $count = 0;
+
+            foreach ($uptimeData as $uptime) {
+                if ($uptime->uptimePercentage !== null) {
+                    $totalUptime += $uptime->uptimePercentage;
+                    $count++;
+                }
+            }
+
+            // Return average uptime percentage
+            return $count > 0 ? round($totalUptime / $count, 2) : 0;
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            \Log::warning('Failed to calculate uptime percentage', [
+                'monitor_id' => $monitorId,
+                'amount' => $amount,
+                'unit' => $unit,
+                'error' => $e->getMessage(),
+            ]);
+
+            return 0;
+        }
+    }
+
+    /**
      * Get daily uptime breakdown for the last 8 days
      */
     public function getDailyUptimeBreakdown(int $monitorId): array
@@ -129,39 +204,38 @@ class OhdearService
         $breakdown = [];
 
         try {
+            // Get uptime data for the last 8 days using Oh Dear's aggregated data
+            $startDate = now()->subDays(8)->format('Y-m-d H:i:s');
+            $endDate = now()->format('Y-m-d H:i:s');
+
+            $uptimeData = $this->client->uptime($monitorId, $startDate, $endDate, UptimeSplit::Day);
+
+            // Create a map of date => uptime percentage
+            $uptimeByDate = [];
+            foreach ($uptimeData as $uptime) {
+                $date = date('Y-m-d', strtotime($uptime->datetime));
+                $uptimeByDate[$date] = $uptime->uptimePercentage;
+            }
+
+            // Build breakdown for last 8 days
             for ($i = 0; $i < 8; $i++) {
                 $date = now()->subDays($i);
-                $startDate = $date->copy()->startOfDay()->format('Y-m-d H:i:s');
-                $endDate = $date->copy()->endOfDay()->format('Y-m-d H:i:s');
+                $dateStr = $date->format('Y-m-d');
 
-                // Get metrics for this day
-                $metrics = $this->client->httpUptimeMetrics($monitorId, $startDate, $endDate, UptimeMetricsSplit::Hour);
-                $metricsArray = iterator_to_array($metrics);
-
-                // Calculate uptime percentage for the day
-                // Filter out metrics where was_successful is null (no data yet)
-                $validMetrics = array_filter($metricsArray, function($metric) {
-                    $wasSuccessful = $metric->was_successful ?? $metric->wasSuccessful ?? null;
-                    return $wasSuccessful !== null;
-                });
-
-                $totalChecks = count($validMetrics);
-                $successfulChecks = count(array_filter($validMetrics, function($metric) {
-                    $wasSuccessful = $metric->was_successful ?? $metric->wasSuccessful ?? false;
-                    return $wasSuccessful === true;
-                }));
-
-                // If no valid metrics, return 100% (no downtime recorded)
-                $uptimePercentage = $totalChecks > 0 ? ($successfulChecks / $totalChecks) * 100 : 100;
+                // Use Oh Dear's calculated percentage, default to 100 if no data
+                $uptimePercentage = $uptimeByDate[$dateStr] ?? 100;
 
                 $breakdown[] = [
-                    'date' => $date->format('Y-m-d'),
-                    'label' => $i === 0 ? 'Today' : ($i === 1 ? 'Yesterday' : $date->format('Y-m-d')),
+                    'date' => $dateStr,
+                    'label' => $i === 0 ? 'Today' : ($i === 1 ? 'Yesterday' : $dateStr),
                     'uptime_percentage' => round($uptimePercentage, 2),
                 ];
             }
         } catch (\Exception $e) {
-            // Return empty breakdown on error
+            \Log::warning('Failed to get daily uptime breakdown', [
+                'monitor_id' => $monitorId,
+                'error' => $e->getMessage(),
+            ]);
         }
 
         return $breakdown;

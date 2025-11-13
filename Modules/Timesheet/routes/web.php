@@ -49,6 +49,7 @@ Route::middleware(['auth', 'verified', 'organisation'])->group(function () {
 
     // Budget Adjustments
     Route::post('/timesheet/services/{service}/budget-adjustments', [ServiceController::class, 'storeBudgetAdjustment'])->name('timesheet.services.budget-adjustments.store')->middleware('role:Admin|Manager');
+    Route::delete('/timesheet/services/{service}/budget-adjustments/{budgetChange}', [ServiceController::class, 'destroyBudgetAdjustment'])->name('timesheet.services.budget-adjustments.destroy')->middleware('role:Admin|Manager');
 
     // Budget Periods
     Route::get('/timesheet/services/{service}/budget-periods', [ServiceBudgetPeriodController::class, 'index'])->name('timesheet.services.budget-periods.index')->middleware('role:Admin|Manager');

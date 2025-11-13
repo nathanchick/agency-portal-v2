@@ -14,5 +14,6 @@
     "Freshdesk": true,
     "Website": true,
     "OpenAi": true,
-    "PostMark": true
+    "PostMark": true,
+    "Billing": true
 }

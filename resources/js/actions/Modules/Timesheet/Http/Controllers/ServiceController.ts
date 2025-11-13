@@ -1021,6 +1021,93 @@ storeBudgetAdjustmentForm.post = (args: { service: string | { id: string } } | [
 
 storeBudgetAdjustment.form = storeBudgetAdjustmentForm
 
-const ServiceController = { index, create, store, show, edit, update, destroy, attachTask, detachTask, attachUser, detachUser, storeBudgetAdjustment }
+/**
+* @see \Modules\Timesheet\Http\Controllers\ServiceController::destroyBudgetAdjustment
+* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
+* @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
+*/
+export const destroyBudgetAdjustment = (args: { service: string | { id: string }, budgetChange: string | { id: string } } | [service: string | { id: string }, budgetChange: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: destroyBudgetAdjustment.url(args, options),
+    method: 'delete',
+})
+
+destroyBudgetAdjustment.definition = {
+    methods: ["delete"],
+    url: '/timesheet/services/{service}/budget-adjustments/{budgetChange}',
+} satisfies RouteDefinition<["delete"]>
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\ServiceController::destroyBudgetAdjustment
+* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
+* @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
+*/
+destroyBudgetAdjustment.url = (args: { service: string | { id: string }, budgetChange: string | { id: string } } | [service: string | { id: string }, budgetChange: string | { id: string } ], options?: RouteQueryOptions) => {
+    if (Array.isArray(args)) {
+        args = {
+            service: args[0],
+            budgetChange: args[1],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+        service: typeof args.service === 'object'
+        ? args.service.id
+        : args.service,
+        budgetChange: typeof args.budgetChange === 'object'
+        ? args.budgetChange.id
+        : args.budgetChange,
+    }
+
+    return destroyBudgetAdjustment.definition.url
+            .replace('{service}', parsedArgs.service.toString())
+            .replace('{budgetChange}', parsedArgs.budgetChange.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\ServiceController::destroyBudgetAdjustment
+* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
+* @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
+*/
+destroyBudgetAdjustment.delete = (args: { service: string | { id: string }, budgetChange: string | { id: string } } | [service: string | { id: string }, budgetChange: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: destroyBudgetAdjustment.url(args, options),
+    method: 'delete',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\ServiceController::destroyBudgetAdjustment
+* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
+* @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
+*/
+const destroyBudgetAdjustmentForm = (args: { service: string | { id: string }, budgetChange: string | { id: string } } | [service: string | { id: string }, budgetChange: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroyBudgetAdjustment.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\ServiceController::destroyBudgetAdjustment
+* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
+* @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
+*/
+destroyBudgetAdjustmentForm.delete = (args: { service: string | { id: string }, budgetChange: string | { id: string } } | [service: string | { id: string }, budgetChange: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroyBudgetAdjustment.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroyBudgetAdjustment.form = destroyBudgetAdjustmentForm
+
+const ServiceController = { index, create, store, show, edit, update, destroy, attachTask, detachTask, attachUser, detachUser, storeBudgetAdjustment, destroyBudgetAdjustment }
 
 export default ServiceController

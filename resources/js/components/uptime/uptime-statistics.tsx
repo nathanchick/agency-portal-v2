@@ -12,9 +12,9 @@ export default function UptimeStatistics({
     uptimePercentage12Months,
 }: UptimeStatisticsProps) {
     const getBadgeVariant = (percentage: number): 'default' | 'destructive' | 'secondary' => {
-        if (percentage === 100) return 'destructive';
-        if (percentage >= 99) return 'default';
-        return 'secondary';
+        if (percentage >= 99) return 'default';        // Green for excellent uptime (99-100%)
+        if (percentage >= 95) return 'secondary';      // Yellow for good uptime (95-99%)
+        return 'destructive';                          // Red for poor uptime (<95%)
     };
 
     return (

@@ -1,10 +1,10 @@
 {
-    "name": "nwidart/document",
+    "name": "deploy-ecommerce/document",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Nathan Chick",
+            "email": "nathan.chick@deploy.co.uk"
         }
     ],
     "extra": {
