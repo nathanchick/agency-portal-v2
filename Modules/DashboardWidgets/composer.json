@@ -1,0 +1,28 @@
+{
+    "name": "deploy-ecommerce/dashboardwidgets",
+    "description": "Customizable dashboard widget system for the Deploy portal",
+    "authors": [
+        {
+            "name": "Nathan Chick",
+            "email": "nathan.chick@deploy.co.uk"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\DashboardWidgets\\": "app/",
+            "Modules\\DashboardWidgets\\Database\\Factories\\": "database/factories/",
+            "Modules\\DashboardWidgets\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\DashboardWidgets\\Tests\\": "tests/"
+        }
+    }
+}

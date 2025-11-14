@@ -1,0 +1,11 @@
+{
+    "name": "DashboardWidgets",
+    "alias": "dashboardwidgets",
+    "description": "Customizable dashboard widget system",
+    "keywords": ["dashboard", "widgets", "customization"],
+    "priority": 0,
+    "providers": [
+        "Modules\\DashboardWidgets\\Providers\\DashboardWidgetsServiceProvider"
+    ],
+    "files": []
+}

@@ -15,5 +15,8 @@
     "Website": true,
     "OpenAi": true,
     "PostMark": true,
-    "Billing": true
+    "Billing": true,
+    "GitHub": true,
+    "Csp": true,
+    "DashboardWidgets": true
 }
