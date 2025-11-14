@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_dashboard_widgets', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('user_id');
             $table->uuid('organisation_id')->nullable();
             $table->uuid('customer_id')->nullable();
