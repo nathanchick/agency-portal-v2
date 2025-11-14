@@ -460,8 +460,8 @@ class DashboardWidgetService
      */
     private function isModuleEnabled(User $user, string $moduleName): bool
     {
-        // Get the organisation based on context
-        $organisationId = $this->getContextOrganisationId($user);
+        // Get the organisation ID - for customer users, use their customer's organisation
+        $organisationId = $user->last_organisation_id;
 
         if (!$organisationId) {
             return false;
