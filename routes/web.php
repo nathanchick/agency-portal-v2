@@ -16,9 +16,8 @@ Route::get('/', function () {
  * Global authenticated routes
  */
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
+        ->name('dashboard');
 
     // Organisation Switcher - moved to Modules/Organisation/routes/web.php
 
