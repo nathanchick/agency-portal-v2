@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\DashboardWidgets\Http\Controllers\DashboardWidgetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,4 +12,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Routes will be added here
+Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
+    Route::get('widgets', [DashboardWidgetController::class, 'index'])->name('dashboard.widgets.index');
+    Route::post('widgets/save', [DashboardWidgetController::class, 'save'])->name('dashboard.widgets.save');
+    Route::post('widgets/reset', [DashboardWidgetController::class, 'reset'])->name('dashboard.widgets.reset');
+    Route::post('widgets/{widgetKey}/toggle', [DashboardWidgetController::class, 'toggle'])->name('dashboard.widgets.toggle');
+});
