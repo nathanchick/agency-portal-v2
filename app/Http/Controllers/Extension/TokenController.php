@@ -56,7 +56,7 @@ class TokenController extends Controller
             $request->input('name', 'Chrome Extension')
         );
 
-        return back()->with('success', [
+        return back()->with('tokenData', [
             'token' => $tokenData['token'],
             'expires_at' => $tokenData['model']->expires_at->toIso8601String(),
         ]);

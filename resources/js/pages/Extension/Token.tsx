@@ -50,9 +50,9 @@ export default function ExtensionToken({ existingTokens }: Props) {
       {
         preserveScroll: true,
         onSuccess: (page: any) => {
-          const response = page.props.flash?.success;
-          if (response && typeof response === 'object' && 'token' in response) {
-            setGeneratedToken(response.token);
+          const tokenData = page.props.flash?.tokenData;
+          if (tokenData && typeof tokenData === 'object' && 'token' in tokenData) {
+            setGeneratedToken(tokenData.token);
             setTokenName('Chrome Extension');
           }
         },
