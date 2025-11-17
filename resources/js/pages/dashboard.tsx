@@ -4,6 +4,7 @@ import { route } from 'ziggy-js'
 import { AppSidebar } from "@/components/app-sidebar"
 import { NotificationBell } from "@/components/notification-bell"
 import { useNotifications } from "@/hooks/useNotifications"
+import { AddWidgetDialog } from "@/components/dashboard/AddWidgetDialog"
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -20,7 +21,7 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Edit, Save, X, AlertCircle, LayoutGrid, GripVertical } from "lucide-react"
+import { Edit, Save, X, AlertCircle, LayoutGrid, GripVertical, Plus } from "lucide-react"
 import { toast } from "sonner"
 import { getWidget } from "@/widgets"
 import {
@@ -142,6 +143,7 @@ export default function Page() {
     const [isSaving, setIsSaving] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [isAddWidgetDialogOpen, setIsAddWidgetDialogOpen] = useState(false)
 
     // Configure drag-and-drop sensors
     const sensors = useSensors(
@@ -208,6 +210,22 @@ export default function Page() {
         // Reset to original widgets from props
         setWidgets(props.widgets || [])
         setIsEditing(false)
+        setIsAddWidgetDialogOpen(false)
+    }
+
+    const handleAddWidget = (widgetConfig: WidgetConfig) => {
+        // Create a new widget with a temporary ID (will be replaced by backend)
+        const newWidget: UserWidget = {
+            id: Date.now(), // Temporary ID
+            widget_key: widgetConfig.key,
+            position: widgets.length, // Add at the end
+            width: widgetConfig.default_width,
+            is_visible: true,
+            settings: {}, // Start with empty settings, can be configured later
+        }
+
+        setWidgets([...widgets, newWidget])
+        toast.success(`Added ${widgetConfig.name} to your dashboard`)
     }
 
     const handleSave = async () => {
@@ -495,16 +513,30 @@ export default function Page() {
                                         <GripVertical className="h-4 w-4" />
                                         Editing Mode Active
                                     </p>
-                                    <p className="text-xs">
-                                        Drag the grip icon on each widget to reorder. Click "Save" to keep your changes.
+                                    <p className="text-xs mb-4">
+                                        Drag the grip icon on each widget to reorder. Click "Add Widget" to add more widgets to your dashboard.
                                     </p>
-                                    <p className="text-xs mt-2">
-                                        Widget settings and add widget features will be implemented in subsequent tasks.
-                                    </p>
+                                    <Button
+                                        onClick={() => setIsAddWidgetDialogOpen(true)}
+                                        variant="outline"
+                                        className="gap-2"
+                                    >
+                                        <Plus className="h-4 w-4" />
+                                        Add Widget
+                                    </Button>
                                 </div>
                             </CardContent>
                         </Card>
                     )}
+
+                    {/* Add Widget Dialog */}
+                    <AddWidgetDialog
+                        open={isAddWidgetDialogOpen}
+                        onClose={() => setIsAddWidgetDialogOpen(false)}
+                        availableWidgets={availableWidgets}
+                        currentWidgets={widgets}
+                        onAdd={handleAddWidget}
+                    />
                 </div>
             </SidebarInset>
         </SidebarProvider>
