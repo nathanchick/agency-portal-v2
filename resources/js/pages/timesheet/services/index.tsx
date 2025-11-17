@@ -70,7 +70,7 @@ interface Props {
 
 export default function ServicesIndex({services, customers, filters}: Props) {
     const [selectedCustomer, setSelectedCustomer] = useState(filters.customer_id || '');
-    const [selectedStatus, setSelectedStatus] = useState(filters.status || '');
+    const [selectedStatus, setSelectedStatus] = useState(filters.status || 'Active');
 
     const handleFilterChange = (key: string, value: string | undefined) => {
         const newFilters = {...filters};
@@ -140,7 +140,6 @@ export default function ServicesIndex({services, customers, filters}: Props) {
                                     <SelectContent>
                                         <SelectItem value="Active">Active services</SelectItem>
                                         <SelectItem value="Archived">Archived services</SelectItem>
-                                        <SelectItem value="Completed">Completed services</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
@@ -176,9 +175,7 @@ export default function ServicesIndex({services, customers, filters}: Props) {
                         <Table>
                             <TableHeader>
                                 <TableRow className="bg-muted/50">
-                                    <TableHead className="w-[50px]">
-                                        <input type="checkbox" className="rounded" />
-                                    </TableHead>
+                                    <TableHead className="w-[50px]"></TableHead>
                                     <TableHead>Customer</TableHead>
                                     <TableHead className="text-right">Budget</TableHead>
                                     <TableHead className="text-right">Spent</TableHead>
@@ -224,9 +221,7 @@ export default function ServicesIndex({services, customers, filters}: Props) {
 
                                                     return (
                                                         <TableRow key={service.id} className="hover:bg-muted/20">
-                                                            <TableCell>
-                                                                <input type="checkbox" className="rounded" />
-                                                            </TableCell>
+                                                            <TableCell></TableCell>
                                                             <TableCell>
                                                                 <div className="flex items-center gap-2">
                                                                     <span className="font-medium">{service.name}</span>

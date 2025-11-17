@@ -1,9 +1,11 @@
 import Billing from './Billing'
 import CspManagement from './CspManagement'
 import Customer from './Customer'
+import DashboardWidgets from './DashboardWidgets'
 import Deployment from './Deployment'
 import Document from './Document'
 import Freshdesk from './Freshdesk'
+import GitHub from './GitHub'
 import Ohdear from './Ohdear'
 import OpenAi from './OpenAi'
 import Organisation from './Organisation'
@@ -19,9 +21,11 @@ const Modules = {
     Billing: Object.assign(Billing, Billing),
     CspManagement: Object.assign(CspManagement, CspManagement),
     Customer: Object.assign(Customer, Customer),
+    DashboardWidgets: Object.assign(DashboardWidgets, DashboardWidgets),
     Deployment: Object.assign(Deployment, Deployment),
     Document: Object.assign(Document, Document),
     Freshdesk: Object.assign(Freshdesk, Freshdesk),
+    GitHub: Object.assign(GitHub, GitHub),
     Ohdear: Object.assign(Ohdear, Ohdear),
     OpenAi: Object.assign(OpenAi, OpenAi),
     Organisation: Object.assign(Organisation, Organisation),

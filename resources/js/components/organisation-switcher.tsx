@@ -90,11 +90,15 @@ export function OrganisationSwitcher() {
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg">
-                        <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                            {isOrganisation ? (
-                                <AppLogoIcon className="size-4"/>
+                        <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg overflow-hidden">
+                            {currentOrganisation.logo ? (
+                                <img src={currentOrganisation.logo} alt={currentOrganisation.name} className="size-8 object-cover" />
                             ) : (
-                                <Icon className="size-4"/>
+                                isOrganisation ? (
+                                    <AppLogoIcon className="size-4"/>
+                                ) : (
+                                    <Icon className="size-4"/>
+                                )
                             )}
                         </div>
                         <div className="grid flex-1 text-left text-sm leading-tight">
@@ -121,10 +125,14 @@ export function OrganisationSwitcher() {
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                         >
                             <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg overflow-hidden">
-                                {isOrganisation ? (
-                                    <AppLogoIcon className="size-8"/>
+                                {currentOrganisation.logo ? (
+                                    <img src={currentOrganisation.logo} alt={currentOrganisation.name} className="size-8 object-cover" />
                                 ) : (
-                                    <Icon className="size-4"/>
+                                    isOrganisation ? (
+                                        <AppLogoIcon className="size-8"/>
+                                    ) : (
+                                        <Icon className="size-4"/>
+                                    )
                                 )}
                             </div>
                             <div className="grid flex-1 text-left text-sm leading-tight">

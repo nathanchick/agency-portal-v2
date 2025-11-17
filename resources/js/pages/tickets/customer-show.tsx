@@ -1,6 +1,6 @@
 import {AppSidebar} from '@/components/app-sidebar';
 import {AppSidebarHeader} from '@/components/app-sidebar-header';
-import {Head, router} from '@inertiajs/react';
+import {Head, router, useForm} from '@inertiajs/react';
 import {
     SidebarInset,
     SidebarProvider,
@@ -8,8 +8,14 @@ import {
 import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Badge} from '@/components/ui/badge';
-import {ArrowLeft} from 'lucide-react';
+import {Separator} from '@/components/ui/separator';
+import {Textarea} from '@/components/ui/textarea';
+import {ArrowLeft, X} from 'lucide-react';
 import {route} from 'ziggy-js';
+import {FormEvent, useState, useMemo} from 'react';
+import {Media} from '@/types';
+import {FileUpload} from '@/components/tickets/FileUpload';
+import {AttachmentList} from '@/components/tickets/AttachmentList';
 
 interface User {
     id: string;
@@ -24,6 +30,11 @@ interface Customer {
 interface Category {
     id: string;
     name: string;
+    form?: {
+        id: string;
+        name: string;
+        content: string;
+    };
 }
 
 interface Label {
@@ -36,6 +47,7 @@ interface Message {
     user: User;
     message: string;
     created_at: string;
+    media?: Media[];
 }
 
 interface Ticket {
@@ -54,6 +66,7 @@ interface Ticket {
     categories: Category[];
     labels: Label[];
     messages: Message[];
+    media?: Media[];
 }
 
 interface Props {
@@ -61,6 +74,61 @@ interface Props {
 }
 
 export default function CustomerShowTicket({ticket}: Props) {
+    const [attachmentFiles, setAttachmentFiles] = useState<File[]>([]);
+
+    const {data, setData, post, processing, reset} = useForm({
+        message: '',
+        attachments: [] as File[],
+    });
+
+    // Create a mapping of field IDs to labels from category forms
+    const formFieldLabels = useMemo(() => {
+        const labelMap = new Map<string, string>();
+
+        ticket.categories.forEach(category => {
+            if (category.form?.content) {
+                try {
+                    const fields = JSON.parse(category.form.content);
+                    fields.forEach((field: any) => {
+                        if (field.id && field.label) {
+                            labelMap.set(field.id, field.label);
+                        }
+                    });
+                } catch (e) {
+                    // Ignore parsing errors
+                    console.error('Failed to parse form content:', e);
+                }
+            }
+        });
+
+        return labelMap;
+    }, [ticket.categories]);
+
+    const handleFilesSelected = (files: File[]) => {
+        const updatedFiles = [...attachmentFiles, ...files];
+        setAttachmentFiles(updatedFiles);
+        setData('attachments', updatedFiles);
+    };
+
+    const handleRemoveFile = (index: number) => {
+        const updatedFiles = attachmentFiles.filter((_, i) => i !== index);
+        setAttachmentFiles(updatedFiles);
+        setData('attachments', updatedFiles);
+    };
+
+    const handleSubmitMessage = (e: FormEvent) => {
+        e.preventDefault();
+        post(route('customer.tickets.add-message', ticket.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                reset();
+                setAttachmentFiles([]);
+            },
+        });
+    };
+
+    const isClosed = ticket.status === 'closed';
+
     const getPriorityBadge = (priority: string) => {
         const variants: Record<string, 'default' | 'secondary' | 'destructive'> = {
             high: 'destructive',
@@ -140,6 +208,18 @@ export default function CustomerShowTicket({ticket}: Props) {
                                         </div>
                                     </div>
 
+                                    {/* Ticket Attachments */}
+                                    {ticket.media && ticket.media.length > 0 && (
+                                        <>
+                                            <Separator className="my-4"/>
+                                            <AttachmentList
+                                                attachments={ticket.media}
+                                                canDelete={false}
+                                                showTimestamp={true}
+                                            />
+                                        </>
+                                    )}
+
                                     {ticket.metadata && Object.keys(ticket.metadata).length > 0 && (
                                         <>
                                             <Separator className="my-4"/>
@@ -148,7 +228,9 @@ export default function CustomerShowTicket({ticket}: Props) {
                                                 <div className="grid gap-2">
                                                     {Object.entries(ticket.metadata).map(([key, value]) => (
                                                         <div key={key} className="grid grid-cols-3 gap-4 text-sm">
-                                                            <span className="font-medium text-muted-foreground">{key}:</span>
+                                                            <span className="font-medium text-muted-foreground">
+                                                                {formFieldLabels.get(key) || key}:
+                                                            </span>
                                                             <span className="col-span-2">{String(value)}</span>
                                                         </div>
                                                     ))}
@@ -185,12 +267,81 @@ export default function CustomerShowTicket({ticket}: Props) {
                                                         </div>
                                                     </div>
                                                     <p className="text-sm whitespace-pre-wrap">{message.message}</p>
+
+                                                    {/* Message Attachments */}
+                                                    {message.media && message.media.length > 0 && (
+                                                        <div className="mt-4">
+                                                            <AttachmentList
+                                                                attachments={message.media}
+                                                                canDelete={false}
+                                                                showTimestamp={false}
+                                                            />
+                                                        </div>
+                                                    )}
                                                 </div>
                                             ))}
                                         </div>
                                     )}
                                 </CardContent>
                             </Card>
+
+                            {/* Message Response Area - Only show if not closed */}
+                            {!isClosed && (
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>Add Response</CardTitle>
+                                        <CardDescription>
+                                            Send a message to respond to this ticket
+                                        </CardDescription>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <form onSubmit={handleSubmitMessage} className="space-y-4">
+                                            <div>
+                                                <Textarea
+                                                    value={data.message}
+                                                    onChange={(e) => setData('message', e.target.value)}
+                                                    placeholder="Type your response here..."
+                                                    rows={5}
+                                                    required
+                                                />
+                                            </div>
+
+                                            {/* File Upload */}
+                                            <div>
+                                                <FileUpload
+                                                    onFilesSelected={handleFilesSelected}
+                                                    existingFiles={attachmentFiles}
+                                                    disabled={processing}
+                                                />
+                                                {attachmentFiles.length > 0 && (
+                                                    <div className="mt-3 space-y-2">
+                                                        {attachmentFiles.map((file, index) => (
+                                                            <div key={index} className="flex items-center justify-between p-2 bg-muted rounded text-sm">
+                                                                <span className="truncate flex-1">{file.name}</span>
+                                                                <Button
+                                                                    type="button"
+                                                                    variant="ghost"
+                                                                    size="sm"
+                                                                    onClick={() => handleRemoveFile(index)}
+                                                                    disabled={processing}
+                                                                >
+                                                                    <X className="h-4 w-4" />
+                                                                </Button>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <div className="flex gap-2">
+                                                <Button type="submit" disabled={processing}>
+                                                    {processing ? 'Sending...' : 'Send'}
+                                                </Button>
+                                            </div>
+                                        </form>
+                                    </CardContent>
+                                </Card>
+                            )}
                         </div>
 
                         {/* Sidebar - 1/3 width */}

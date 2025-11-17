@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\GitHub\Services\GitHubTokenService;
 use Modules\Organisation\Models\Organisation;
 
 class OrganisationController extends Controller
@@ -17,7 +18,7 @@ class OrganisationController extends Controller
     /**
      * Show the organisation settings page.
      */
-    public function edit(Request $request, ModuleSettingsService $settingsService): Response
+    public function edit(Request $request, ModuleSettingsService $settingsService, GitHubTokenService $githubTokenService): Response
     {
         $user = $request->user();
 
@@ -32,6 +33,23 @@ class OrganisationController extends Controller
 
         $moduleSettings = $settingsService->getOrganisationSettings($organisation);
 
+        // Get GitHub connection status
+        $githubToken = $githubTokenService->getToken($organisation);
+        $githubConnection = null;
+
+        if ($githubToken) {
+            $githubConnection = [
+                'connected' => true,
+                'account_login' => $githubToken->github_account_login,
+                'account_type' => $githubToken->github_account_type,
+                'scope' => $githubToken->scope,
+            ];
+        } else {
+            $githubConnection = [
+                'connected' => false,
+            ];
+        }
+
         return Inertia::render('settings/organisation', [
             'organisation' => [
                 'id' => $organisation->id,
@@ -40,6 +58,7 @@ class OrganisationController extends Controller
                 'billing_email' => $organisation->billing_email,
             ],
             'moduleSettings' => $moduleSettings,
+            'githubConnection' => $githubConnection,
         ]);
     }
 

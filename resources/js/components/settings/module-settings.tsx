@@ -172,6 +172,7 @@ export default function ModuleSettings({
                                         statusSetting.status.value
                                     }
                                     description={statusSetting.status.description}
+                                    options={statusSetting.status.options}
                                     onChange={handleSettingChange}
                                 />
                             )}
@@ -209,6 +210,7 @@ export default function ModuleSettings({
                                                         ] ?? setting.value
                                                     }
                                                     description={setting.description}
+                                                    options={setting.options}
                                                     onChange={handleSettingChange}
                                                 />
                                             ),
@@ -234,6 +236,7 @@ export default function ModuleSettings({
                                                     ] ?? setting.value
                                                 }
                                                 description={setting.description}
+                                                options={setting.options}
                                                 onChange={handleSettingChange}
                                             />
                                         ),

@@ -19,4 +19,9 @@ Route::middleware(['auth', 'verified', 'organisation'])->group(function () {
  */
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/customer/deployments', [CustomerDeploymentController::class, 'index'])->name('customer.deployments.index');
+
+    // Widget API endpoints
+    Route::prefix('api/widgets/deployments')->name('api.widgets.deployments.')->group(function () {
+        Route::get('recent-customer', [\Modules\Deployment\Http\Controllers\Api\Widget\DeploymentWidgetController::class, 'recentCustomerDeployments'])->name('recent-customer');
+    });
 });

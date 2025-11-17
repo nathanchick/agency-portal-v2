@@ -3,6 +3,31 @@ import { LucideIcon } from 'lucide-react';
 
 export interface Auth {
     user: User;
+    userType?: 'organisation' | 'customer';
+    role?: string;
+    currentOrganisation?: {
+        id: string;
+        name: string;
+        logo: string | null;
+    } | null;
+    currentCustomer?: {
+        id: string;
+        name: string;
+        [key: string]: unknown;
+    } | null;
+    savedTicketFilters?: Array<{
+        id: string;
+        name: string;
+        filters: Record<string, string>;
+    }>;
+    timesheetServices?: Array<{
+        id: string;
+        name: string;
+    }>;
+    customerWebsiteWithOhDear?: {
+        id: string;
+        url: string;
+    } | null;
 }
 
 export interface BreadcrumbItem {

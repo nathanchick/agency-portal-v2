@@ -79,8 +79,8 @@ export default function DocumentTypesIndex({documents}: Props) {
                 <Head title="Document Types"/>
                 <AppSidebarHeader
                     breadcrumbs={[
-                        {label: 'Dashboard', href: '/dashboard'},
-                        {label: 'Document Types'},
+                        {title: 'Dashboard', href: '/dashboard'},
+                        {title: 'Document Types', href: '/document-types'},
                     ]}
                 />
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

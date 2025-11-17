@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | API routes for billing operations (if needed).
+| Widget routes are in web.php to be included in Ziggy.
 |
 */
 

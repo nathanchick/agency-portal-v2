@@ -129,11 +129,13 @@ export default function WebsitesIndex({websites, isCustomerView}: Props) {
                                                 </p>
                                             )}
                                         </div>
-                                        <Link href={route('websites.edit', {id: website.id})}>
-                                            <Button variant="ghost" size="icon">
-                                                <Pencil className="h-4 w-4" />
-                                            </Button>
-                                        </Link>
+                                        {!isCustomerView && (
+                                            <Link href={route('websites.edit', {id: website.id})}>
+                                                <Button variant="ghost" size="icon">
+                                                    <Pencil className="h-4 w-4" />
+                                                </Button>
+                                            </Link>
+                                        )}
                                     </div>
                                 </CardHeader>
                                 <CardContent>
@@ -143,7 +145,7 @@ export default function WebsitesIndex({websites, isCustomerView}: Props) {
                                         </p>
                                     )}
                                     <div className="flex gap-2">
-                                        {website.ohdear_websites?.length > 0 ? (
+                                        {!isCustomerView && website.ohdear_websites?.length > 0 ? (
                                             <>
                                                 <Button
                                                     variant="outline"
@@ -163,7 +165,7 @@ export default function WebsitesIndex({websites, isCustomerView}: Props) {
                                                     Performance
                                                 </Button>
                                             </>
-                                        ) : (
+                                        ) : !isCustomerView && website.ohdear_websites?.length === 0 ? (
                                             <Button
                                                 variant="default"
                                                 size="sm"
@@ -173,7 +175,17 @@ export default function WebsitesIndex({websites, isCustomerView}: Props) {
                                                 <Settings className="h-4 w-4 mr-2"/>
                                                 Setup Monitoring
                                             </Button>
-                                        )}
+                                        ) : website.ohdear_websites?.length > 0 ? (
+                                            <Button
+                                                variant="default"
+                                                size="sm"
+                                                onClick={() => handlePerformance(website.id)}
+                                                className="flex-1"
+                                            >
+                                                <Activity className="h-4 w-4 mr-2"/>
+                                                Performance
+                                            </Button>
+                                        ) : null}
                                         <Button
                                             variant="outline"
                                             size="sm"

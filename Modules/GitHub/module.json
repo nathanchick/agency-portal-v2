@@ -1,0 +1,11 @@
+{
+    "name": "GitHub",
+    "alias": "github",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\GitHub\\Providers\\GitHubServiceProvider"
+    ],
+    "files": []
+}

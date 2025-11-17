@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/api/v1/openais'
 */
 const index94775ba2b6f81c2ce9b24feb101f9d3e = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index94775ba2b6f81c2ce9b24feb101f9d3e.definition = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/api/v1/openais'
 */
 index94775ba2b6f81c2ce9b24feb101f9d3e.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index94775ba2b6f81c2ce9b24feb101f9d3e.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/api/v1/openais'
 */
 index94775ba2b6f81c2ce9b24feb101f9d3e.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index94775ba2b6f81c2ce9b24feb101f9d3e.get = (options?: RouteQueryOptions): Route
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/api/v1/openais'
 */
 index94775ba2b6f81c2ce9b24feb101f9d3e.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ index94775ba2b6f81c2ce9b24feb101f9d3e.head = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/api/v1/openais'
 */
 const index94775ba2b6f81c2ce9b24feb101f9d3eForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -55,7 +55,7 @@ const index94775ba2b6f81c2ce9b24feb101f9d3eForm = (options?: RouteQueryOptions):
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/api/v1/openais'
 */
 index94775ba2b6f81c2ce9b24feb101f9d3eForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -65,7 +65,7 @@ index94775ba2b6f81c2ce9b24feb101f9d3eForm.get = (options?: RouteQueryOptions): R
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/api/v1/openais'
 */
 index94775ba2b6f81c2ce9b24feb101f9d3eForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -81,7 +81,7 @@ index94775ba2b6f81c2ce9b24feb101f9d3eForm.head = (options?: RouteQueryOptions): 
 index94775ba2b6f81c2ce9b24feb101f9d3e.form = index94775ba2b6f81c2ce9b24feb101f9d3eForm
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/openais'
 */
 const index9f6cdd85b774eeb8f4cb0259ce9e3b04 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -96,7 +96,7 @@ index9f6cdd85b774eeb8f4cb0259ce9e3b04.definition = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/openais'
 */
 index9f6cdd85b774eeb8f4cb0259ce9e3b04.url = (options?: RouteQueryOptions) => {
@@ -105,7 +105,7 @@ index9f6cdd85b774eeb8f4cb0259ce9e3b04.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/openais'
 */
 index9f6cdd85b774eeb8f4cb0259ce9e3b04.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -115,7 +115,7 @@ index9f6cdd85b774eeb8f4cb0259ce9e3b04.get = (options?: RouteQueryOptions): Route
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/openais'
 */
 index9f6cdd85b774eeb8f4cb0259ce9e3b04.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -125,7 +125,7 @@ index9f6cdd85b774eeb8f4cb0259ce9e3b04.head = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/openais'
 */
 const index9f6cdd85b774eeb8f4cb0259ce9e3b04Form = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -135,7 +135,7 @@ const index9f6cdd85b774eeb8f4cb0259ce9e3b04Form = (options?: RouteQueryOptions):
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/openais'
 */
 index9f6cdd85b774eeb8f4cb0259ce9e3b04Form.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -145,7 +145,7 @@ index9f6cdd85b774eeb8f4cb0259ce9e3b04Form.get = (options?: RouteQueryOptions): R
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:13
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
 * @route '/openais'
 */
 index9f6cdd85b774eeb8f4cb0259ce9e3b04Form.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -167,7 +167,7 @@ export const index = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:29
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
 * @route '/api/v1/openais'
 */
 const store94775ba2b6f81c2ce9b24feb101f9d3e = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -182,7 +182,7 @@ store94775ba2b6f81c2ce9b24feb101f9d3e.definition = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:29
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
 * @route '/api/v1/openais'
 */
 store94775ba2b6f81c2ce9b24feb101f9d3e.url = (options?: RouteQueryOptions) => {
@@ -191,7 +191,7 @@ store94775ba2b6f81c2ce9b24feb101f9d3e.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:29
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
 * @route '/api/v1/openais'
 */
 store94775ba2b6f81c2ce9b24feb101f9d3e.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -201,7 +201,7 @@ store94775ba2b6f81c2ce9b24feb101f9d3e.post = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:29
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
 * @route '/api/v1/openais'
 */
 const store94775ba2b6f81c2ce9b24feb101f9d3eForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -211,7 +211,7 @@ const store94775ba2b6f81c2ce9b24feb101f9d3eForm = (options?: RouteQueryOptions):
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:29
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
 * @route '/api/v1/openais'
 */
 store94775ba2b6f81c2ce9b24feb101f9d3eForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -222,7 +222,7 @@ store94775ba2b6f81c2ce9b24feb101f9d3eForm.post = (options?: RouteQueryOptions): 
 store94775ba2b6f81c2ce9b24feb101f9d3e.form = store94775ba2b6f81c2ce9b24feb101f9d3eForm
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:29
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
 * @route '/openais'
 */
 const store9f6cdd85b774eeb8f4cb0259ce9e3b04 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -237,7 +237,7 @@ store9f6cdd85b774eeb8f4cb0259ce9e3b04.definition = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:29
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
 * @route '/openais'
 */
 store9f6cdd85b774eeb8f4cb0259ce9e3b04.url = (options?: RouteQueryOptions) => {
@@ -246,7 +246,7 @@ store9f6cdd85b774eeb8f4cb0259ce9e3b04.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:29
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
 * @route '/openais'
 */
 store9f6cdd85b774eeb8f4cb0259ce9e3b04.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -256,7 +256,7 @@ store9f6cdd85b774eeb8f4cb0259ce9e3b04.post = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:29
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
 * @route '/openais'
 */
 const store9f6cdd85b774eeb8f4cb0259ce9e3b04Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -266,7 +266,7 @@ const store9f6cdd85b774eeb8f4cb0259ce9e3b04Form = (options?: RouteQueryOptions):
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:29
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
 * @route '/openais'
 */
 store9f6cdd85b774eeb8f4cb0259ce9e3b04Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -283,7 +283,7 @@ export const store = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/api/v1/openais/{openai}'
 */
 const show54c8f1c505caf721ae116a4eecdd9b44 = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -298,7 +298,7 @@ show54c8f1c505caf721ae116a4eecdd9b44.definition = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/api/v1/openais/{openai}'
 */
 show54c8f1c505caf721ae116a4eecdd9b44.url = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -325,7 +325,7 @@ show54c8f1c505caf721ae116a4eecdd9b44.url = (args: { openai: string | number } | 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/api/v1/openais/{openai}'
 */
 show54c8f1c505caf721ae116a4eecdd9b44.get = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -335,7 +335,7 @@ show54c8f1c505caf721ae116a4eecdd9b44.get = (args: { openai: string | number } | 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/api/v1/openais/{openai}'
 */
 show54c8f1c505caf721ae116a4eecdd9b44.head = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -345,7 +345,7 @@ show54c8f1c505caf721ae116a4eecdd9b44.head = (args: { openai: string | number } |
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/api/v1/openais/{openai}'
 */
 const show54c8f1c505caf721ae116a4eecdd9b44Form = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -355,7 +355,7 @@ const show54c8f1c505caf721ae116a4eecdd9b44Form = (args: { openai: string | numbe
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/api/v1/openais/{openai}'
 */
 show54c8f1c505caf721ae116a4eecdd9b44Form.get = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -365,7 +365,7 @@ show54c8f1c505caf721ae116a4eecdd9b44Form.get = (args: { openai: string | number 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/api/v1/openais/{openai}'
 */
 show54c8f1c505caf721ae116a4eecdd9b44Form.head = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -381,7 +381,7 @@ show54c8f1c505caf721ae116a4eecdd9b44Form.head = (args: { openai: string | number
 show54c8f1c505caf721ae116a4eecdd9b44.form = show54c8f1c505caf721ae116a4eecdd9b44Form
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/openais/{openai}'
 */
 const showb88027ba1f5be153a24fb7e14ad44888 = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -396,7 +396,7 @@ showb88027ba1f5be153a24fb7e14ad44888.definition = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/openais/{openai}'
 */
 showb88027ba1f5be153a24fb7e14ad44888.url = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -423,7 +423,7 @@ showb88027ba1f5be153a24fb7e14ad44888.url = (args: { openai: string | number } | 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/openais/{openai}'
 */
 showb88027ba1f5be153a24fb7e14ad44888.get = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -433,7 +433,7 @@ showb88027ba1f5be153a24fb7e14ad44888.get = (args: { openai: string | number } | 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/openais/{openai}'
 */
 showb88027ba1f5be153a24fb7e14ad44888.head = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -443,7 +443,7 @@ showb88027ba1f5be153a24fb7e14ad44888.head = (args: { openai: string | number } |
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/openais/{openai}'
 */
 const showb88027ba1f5be153a24fb7e14ad44888Form = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -453,7 +453,7 @@ const showb88027ba1f5be153a24fb7e14ad44888Form = (args: { openai: string | numbe
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/openais/{openai}'
 */
 showb88027ba1f5be153a24fb7e14ad44888Form.get = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -463,7 +463,7 @@ showb88027ba1f5be153a24fb7e14ad44888Form.get = (args: { openai: string | number 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:34
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
 * @route '/openais/{openai}'
 */
 showb88027ba1f5be153a24fb7e14ad44888Form.head = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -485,7 +485,7 @@ export const show = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/api/v1/openais/{openai}'
 */
 const update54c8f1c505caf721ae116a4eecdd9b44 = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -500,7 +500,7 @@ update54c8f1c505caf721ae116a4eecdd9b44.definition = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/api/v1/openais/{openai}'
 */
 update54c8f1c505caf721ae116a4eecdd9b44.url = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -527,7 +527,7 @@ update54c8f1c505caf721ae116a4eecdd9b44.url = (args: { openai: string | number } 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/api/v1/openais/{openai}'
 */
 update54c8f1c505caf721ae116a4eecdd9b44.put = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -537,7 +537,7 @@ update54c8f1c505caf721ae116a4eecdd9b44.put = (args: { openai: string | number } 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/api/v1/openais/{openai}'
 */
 update54c8f1c505caf721ae116a4eecdd9b44.patch = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -547,7 +547,7 @@ update54c8f1c505caf721ae116a4eecdd9b44.patch = (args: { openai: string | number 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/api/v1/openais/{openai}'
 */
 const update54c8f1c505caf721ae116a4eecdd9b44Form = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -562,7 +562,7 @@ const update54c8f1c505caf721ae116a4eecdd9b44Form = (args: { openai: string | num
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/api/v1/openais/{openai}'
 */
 update54c8f1c505caf721ae116a4eecdd9b44Form.put = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -577,7 +577,7 @@ update54c8f1c505caf721ae116a4eecdd9b44Form.put = (args: { openai: string | numbe
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/api/v1/openais/{openai}'
 */
 update54c8f1c505caf721ae116a4eecdd9b44Form.patch = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -593,7 +593,7 @@ update54c8f1c505caf721ae116a4eecdd9b44Form.patch = (args: { openai: string | num
 update54c8f1c505caf721ae116a4eecdd9b44.form = update54c8f1c505caf721ae116a4eecdd9b44Form
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/openais/{openai}'
 */
 const updateb88027ba1f5be153a24fb7e14ad44888 = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -608,7 +608,7 @@ updateb88027ba1f5be153a24fb7e14ad44888.definition = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/openais/{openai}'
 */
 updateb88027ba1f5be153a24fb7e14ad44888.url = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -635,7 +635,7 @@ updateb88027ba1f5be153a24fb7e14ad44888.url = (args: { openai: string | number } 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/openais/{openai}'
 */
 updateb88027ba1f5be153a24fb7e14ad44888.put = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -645,7 +645,7 @@ updateb88027ba1f5be153a24fb7e14ad44888.put = (args: { openai: string | number } 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/openais/{openai}'
 */
 updateb88027ba1f5be153a24fb7e14ad44888.patch = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -655,7 +655,7 @@ updateb88027ba1f5be153a24fb7e14ad44888.patch = (args: { openai: string | number 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/openais/{openai}'
 */
 const updateb88027ba1f5be153a24fb7e14ad44888Form = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -670,7 +670,7 @@ const updateb88027ba1f5be153a24fb7e14ad44888Form = (args: { openai: string | num
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/openais/{openai}'
 */
 updateb88027ba1f5be153a24fb7e14ad44888Form.put = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -685,7 +685,7 @@ updateb88027ba1f5be153a24fb7e14ad44888Form.put = (args: { openai: string | numbe
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:50
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
 * @route '/openais/{openai}'
 */
 updateb88027ba1f5be153a24fb7e14ad44888Form.patch = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -707,7 +707,7 @@ export const update = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:55
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
 * @route '/api/v1/openais/{openai}'
 */
 const destroy54c8f1c505caf721ae116a4eecdd9b44 = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -722,7 +722,7 @@ destroy54c8f1c505caf721ae116a4eecdd9b44.definition = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:55
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
 * @route '/api/v1/openais/{openai}'
 */
 destroy54c8f1c505caf721ae116a4eecdd9b44.url = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -749,7 +749,7 @@ destroy54c8f1c505caf721ae116a4eecdd9b44.url = (args: { openai: string | number }
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:55
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
 * @route '/api/v1/openais/{openai}'
 */
 destroy54c8f1c505caf721ae116a4eecdd9b44.delete = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -759,7 +759,7 @@ destroy54c8f1c505caf721ae116a4eecdd9b44.delete = (args: { openai: string | numbe
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:55
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
 * @route '/api/v1/openais/{openai}'
 */
 const destroy54c8f1c505caf721ae116a4eecdd9b44Form = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -774,7 +774,7 @@ const destroy54c8f1c505caf721ae116a4eecdd9b44Form = (args: { openai: string | nu
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:55
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
 * @route '/api/v1/openais/{openai}'
 */
 destroy54c8f1c505caf721ae116a4eecdd9b44Form.delete = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -790,7 +790,7 @@ destroy54c8f1c505caf721ae116a4eecdd9b44Form.delete = (args: { openai: string | n
 destroy54c8f1c505caf721ae116a4eecdd9b44.form = destroy54c8f1c505caf721ae116a4eecdd9b44Form
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:55
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
 * @route '/openais/{openai}'
 */
 const destroyb88027ba1f5be153a24fb7e14ad44888 = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -805,7 +805,7 @@ destroyb88027ba1f5be153a24fb7e14ad44888.definition = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:55
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
 * @route '/openais/{openai}'
 */
 destroyb88027ba1f5be153a24fb7e14ad44888.url = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -832,7 +832,7 @@ destroyb88027ba1f5be153a24fb7e14ad44888.url = (args: { openai: string | number }
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:55
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
 * @route '/openais/{openai}'
 */
 destroyb88027ba1f5be153a24fb7e14ad44888.delete = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -842,7 +842,7 @@ destroyb88027ba1f5be153a24fb7e14ad44888.delete = (args: { openai: string | numbe
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:55
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
 * @route '/openais/{openai}'
 */
 const destroyb88027ba1f5be153a24fb7e14ad44888Form = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -857,7 +857,7 @@ const destroyb88027ba1f5be153a24fb7e14ad44888Form = (args: { openai: string | nu
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:55
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
 * @route '/openais/{openai}'
 */
 destroyb88027ba1f5be153a24fb7e14ad44888Form.delete = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -878,8 +878,240 @@ export const destroy = {
 }
 
 /**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
+* @route '/api/v1/openai/analyze-ticket'
+*/
+const analyzeTicketa7aa41883880c9721f68cc025343ee98 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: analyzeTicketa7aa41883880c9721f68cc025343ee98.url(options),
+    method: 'post',
+})
+
+analyzeTicketa7aa41883880c9721f68cc025343ee98.definition = {
+    methods: ["post"],
+    url: '/api/v1/openai/analyze-ticket',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
+* @route '/api/v1/openai/analyze-ticket'
+*/
+analyzeTicketa7aa41883880c9721f68cc025343ee98.url = (options?: RouteQueryOptions) => {
+    return analyzeTicketa7aa41883880c9721f68cc025343ee98.definition.url + queryParams(options)
+}
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
+* @route '/api/v1/openai/analyze-ticket'
+*/
+analyzeTicketa7aa41883880c9721f68cc025343ee98.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: analyzeTicketa7aa41883880c9721f68cc025343ee98.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
+* @route '/api/v1/openai/analyze-ticket'
+*/
+const analyzeTicketa7aa41883880c9721f68cc025343ee98Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: analyzeTicketa7aa41883880c9721f68cc025343ee98.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
+* @route '/api/v1/openai/analyze-ticket'
+*/
+analyzeTicketa7aa41883880c9721f68cc025343ee98Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: analyzeTicketa7aa41883880c9721f68cc025343ee98.url(options),
+    method: 'post',
+})
+
+analyzeTicketa7aa41883880c9721f68cc025343ee98.form = analyzeTicketa7aa41883880c9721f68cc025343ee98Form
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
+* @route '/openai/analyze-ticket'
+*/
+const analyzeTicket93a184fc069528728e53c3dc55fe0176 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: analyzeTicket93a184fc069528728e53c3dc55fe0176.url(options),
+    method: 'post',
+})
+
+analyzeTicket93a184fc069528728e53c3dc55fe0176.definition = {
+    methods: ["post"],
+    url: '/openai/analyze-ticket',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
+* @route '/openai/analyze-ticket'
+*/
+analyzeTicket93a184fc069528728e53c3dc55fe0176.url = (options?: RouteQueryOptions) => {
+    return analyzeTicket93a184fc069528728e53c3dc55fe0176.definition.url + queryParams(options)
+}
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
+* @route '/openai/analyze-ticket'
+*/
+analyzeTicket93a184fc069528728e53c3dc55fe0176.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: analyzeTicket93a184fc069528728e53c3dc55fe0176.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
+* @route '/openai/analyze-ticket'
+*/
+const analyzeTicket93a184fc069528728e53c3dc55fe0176Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: analyzeTicket93a184fc069528728e53c3dc55fe0176.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
+* @route '/openai/analyze-ticket'
+*/
+analyzeTicket93a184fc069528728e53c3dc55fe0176Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: analyzeTicket93a184fc069528728e53c3dc55fe0176.url(options),
+    method: 'post',
+})
+
+analyzeTicket93a184fc069528728e53c3dc55fe0176.form = analyzeTicket93a184fc069528728e53c3dc55fe0176Form
+
+export const analyzeTicket = {
+    '/api/v1/openai/analyze-ticket': analyzeTicketa7aa41883880c9721f68cc025343ee98,
+    '/openai/analyze-ticket': analyzeTicket93a184fc069528728e53c3dc55fe0176,
+}
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
+* @route '/api/v1/openai/analyze-csp-violation'
+*/
+const analyzeCspViolation765b8e777ced0acb727162d7027fb3c1 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: analyzeCspViolation765b8e777ced0acb727162d7027fb3c1.url(options),
+    method: 'post',
+})
+
+analyzeCspViolation765b8e777ced0acb727162d7027fb3c1.definition = {
+    methods: ["post"],
+    url: '/api/v1/openai/analyze-csp-violation',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
+* @route '/api/v1/openai/analyze-csp-violation'
+*/
+analyzeCspViolation765b8e777ced0acb727162d7027fb3c1.url = (options?: RouteQueryOptions) => {
+    return analyzeCspViolation765b8e777ced0acb727162d7027fb3c1.definition.url + queryParams(options)
+}
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
+* @route '/api/v1/openai/analyze-csp-violation'
+*/
+analyzeCspViolation765b8e777ced0acb727162d7027fb3c1.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: analyzeCspViolation765b8e777ced0acb727162d7027fb3c1.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
+* @route '/api/v1/openai/analyze-csp-violation'
+*/
+const analyzeCspViolation765b8e777ced0acb727162d7027fb3c1Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: analyzeCspViolation765b8e777ced0acb727162d7027fb3c1.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
+* @route '/api/v1/openai/analyze-csp-violation'
+*/
+analyzeCspViolation765b8e777ced0acb727162d7027fb3c1Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: analyzeCspViolation765b8e777ced0acb727162d7027fb3c1.url(options),
+    method: 'post',
+})
+
+analyzeCspViolation765b8e777ced0acb727162d7027fb3c1.form = analyzeCspViolation765b8e777ced0acb727162d7027fb3c1Form
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
+* @route '/openai/analyze-csp-violation'
+*/
+const analyzeCspViolationbc51549f9afd6c0105b5d81874074c98 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: analyzeCspViolationbc51549f9afd6c0105b5d81874074c98.url(options),
+    method: 'post',
+})
+
+analyzeCspViolationbc51549f9afd6c0105b5d81874074c98.definition = {
+    methods: ["post"],
+    url: '/openai/analyze-csp-violation',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
+* @route '/openai/analyze-csp-violation'
+*/
+analyzeCspViolationbc51549f9afd6c0105b5d81874074c98.url = (options?: RouteQueryOptions) => {
+    return analyzeCspViolationbc51549f9afd6c0105b5d81874074c98.definition.url + queryParams(options)
+}
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
+* @route '/openai/analyze-csp-violation'
+*/
+analyzeCspViolationbc51549f9afd6c0105b5d81874074c98.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: analyzeCspViolationbc51549f9afd6c0105b5d81874074c98.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
+* @route '/openai/analyze-csp-violation'
+*/
+const analyzeCspViolationbc51549f9afd6c0105b5d81874074c98Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: analyzeCspViolationbc51549f9afd6c0105b5d81874074c98.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
+* @route '/openai/analyze-csp-violation'
+*/
+analyzeCspViolationbc51549f9afd6c0105b5d81874074c98Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: analyzeCspViolationbc51549f9afd6c0105b5d81874074c98.url(options),
+    method: 'post',
+})
+
+analyzeCspViolationbc51549f9afd6c0105b5d81874074c98.form = analyzeCspViolationbc51549f9afd6c0105b5d81874074c98Form
+
+export const analyzeCspViolation = {
+    '/api/v1/openai/analyze-csp-violation': analyzeCspViolation765b8e777ced0acb727162d7027fb3c1,
+    '/openai/analyze-csp-violation': analyzeCspViolationbc51549f9afd6c0105b5d81874074c98,
+}
+
+/**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::create
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:21
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:31
 * @route '/openais/create'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -894,7 +1126,7 @@ create.definition = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::create
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:21
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:31
 * @route '/openais/create'
 */
 create.url = (options?: RouteQueryOptions) => {
@@ -903,7 +1135,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::create
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:21
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:31
 * @route '/openais/create'
 */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -913,7 +1145,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::create
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:21
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:31
 * @route '/openais/create'
 */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -923,7 +1155,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::create
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:21
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:31
 * @route '/openais/create'
 */
 const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -933,7 +1165,7 @@ const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::create
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:21
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:31
 * @route '/openais/create'
 */
 createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -943,7 +1175,7 @@ createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::create
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:21
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:31
 * @route '/openais/create'
 */
 createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -960,7 +1192,7 @@ create.form = createForm
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::edit
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:42
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:52
 * @route '/openais/{openai}/edit'
 */
 export const edit = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -975,7 +1207,7 @@ edit.definition = {
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::edit
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:42
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:52
 * @route '/openais/{openai}/edit'
 */
 edit.url = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -1002,7 +1234,7 @@ edit.url = (args: { openai: string | number } | [openai: string | number ] | str
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::edit
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:42
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:52
 * @route '/openais/{openai}/edit'
 */
 edit.get = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -1012,7 +1244,7 @@ edit.get = (args: { openai: string | number } | [openai: string | number ] | str
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::edit
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:42
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:52
 * @route '/openais/{openai}/edit'
 */
 edit.head = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -1022,7 +1254,7 @@ edit.head = (args: { openai: string | number } | [openai: string | number ] | st
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::edit
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:42
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:52
 * @route '/openais/{openai}/edit'
 */
 const editForm = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -1032,7 +1264,7 @@ const editForm = (args: { openai: string | number } | [openai: string | number ]
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::edit
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:42
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:52
 * @route '/openais/{openai}/edit'
 */
 editForm.get = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -1042,7 +1274,7 @@ editForm.get = (args: { openai: string | number } | [openai: string | number ] |
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::edit
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:42
+* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:52
 * @route '/openais/{openai}/edit'
 */
 editForm.head = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -1057,6 +1289,6 @@ editForm.head = (args: { openai: string | number } | [openai: string | number ] 
 
 edit.form = editForm
 
-const OpenAiController = { index, store, show, update, destroy, create, edit }
+const OpenAiController = { index, store, show, update, destroy, analyzeTicket, analyzeCspViolation, create, edit }
 
 export default OpenAiController

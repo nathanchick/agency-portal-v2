@@ -1,7 +1,9 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 import billing from './billing'
+import csp from './csp'
 import deployments from './deployments'
 import documents from './documents'
+import health from './health'
 import tickets from './tickets'
 import timesheet from './timesheet'
 import websites from './websites'
@@ -63,9 +65,11 @@ switchMethod.form = switchMethodForm
 
 const customer = {
     billing: Object.assign(billing, billing),
+    csp: Object.assign(csp, csp),
     switch: Object.assign(switchMethod, switchMethod),
     deployments: Object.assign(deployments, deployments),
     documents: Object.assign(documents, documents),
+    health: Object.assign(health, health),
     tickets: Object.assign(tickets, tickets),
     timesheet: Object.assign(timesheet, timesheet),
     websites: Object.assign(websites, websites),

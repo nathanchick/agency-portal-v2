@@ -13,11 +13,17 @@ interface TimesheetService {
     name: string
 }
 
+interface CustomerWebsiteWithOhDear {
+    id: string
+    url: string
+}
+
 interface AuthProps {
     userType: UserType
     role: RoleType
     savedTicketFilters?: SavedFilter[]
     timesheetServices?: TimesheetService[]
+    customerWebsiteWithOhDear?: CustomerWebsiteWithOhDear | null
 }
 
 export function useNavigation() {
@@ -101,6 +107,52 @@ export function useNavigation() {
                     }))
 
                     return { ...item, items: serviceItems }
+                }
+                return item
+            })
+        }
+
+        // Inject Site Health items for customer users
+        if (auth.userType === 'customer') {
+            items = items.map(item => {
+                if (item.title === 'Site Health') {
+                    if (auth.customerWebsiteWithOhDear) {
+                        // Customer has OhDear configured - show actual links
+                        const websiteId = auth.customerWebsiteWithOhDear.id
+                        const healthItems = [
+                            {
+                                title: 'Uptime Report',
+                                url: route('customer.health.uptime', { website: websiteId }),
+                                roles: ['Admin', 'Manager'] as RoleType[],
+                            },
+                            {
+                                title: 'Broken Links',
+                                url: route('customer.health.broken-links', { website: websiteId }),
+                                roles: ['Admin', 'Manager'] as RoleType[],
+                            },
+                            {
+                                title: 'Google Page Speed',
+                                url: route('customer.health.lighthouse', { website: websiteId }),
+                                roles: ['Admin', 'Manager'] as RoleType[],
+                            },
+                            {
+                                title: 'Sitemap Status',
+                                url: route('customer.health.sitemap', { website: websiteId }),
+                                roles: ['Admin', 'Manager'] as RoleType[],
+                            },
+                        ]
+                        return { ...item, items: healthItems }
+                    } else {
+                        // No OhDear configured - show message
+                        const healthItems = [
+                            {
+                                title: 'No monitoring configured',
+                                url: '#',
+                                roles: ['Admin', 'Manager'] as RoleType[],
+                            },
+                        ]
+                        return { ...item, items: healthItems }
+                    }
                 }
                 return item
             })

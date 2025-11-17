@@ -104,6 +104,27 @@ class HandleInertiaRequests extends Middleware
                 ->get(['id', 'name']);
         }
 
+        // Get customer's website with OhDear configured (for Site Health navigation)
+        $customerWebsiteWithOhDear = null;
+        if ($user && $currentCustomer) {
+            // Try to get production website with OhDear first
+            $website = \Modules\Website\Models\Website::where('customer_id', $currentCustomer->id)
+                ->where('type', 'production')
+                ->whereHas('ohdearWebsites')
+                ->select('id', 'url')
+                ->first();
+
+            // Fallback to any website with OhDear
+            if (!$website) {
+                $website = \Modules\Website\Models\Website::where('customer_id', $currentCustomer->id)
+                    ->whereHas('ohdearWebsites')
+                    ->select('id', 'url')
+                    ->first();
+            }
+
+            $customerWebsiteWithOhDear = $website;
+        }
+
         // Get unread notifications count
         $unreadNotificationsCount = $user ? $user->unreadNotifications()->count() : 0;
 
@@ -122,6 +143,7 @@ class HandleInertiaRequests extends Middleware
                 'currentCustomer' => $currentCustomer,
                 'savedTicketFilters' => $savedFilters,
                 'timesheetServices' => $timesheetServices,
+                'customerWebsiteWithOhDear' => $customerWebsiteWithOhDear,
             ],
             'unreadNotificationsCount' => $unreadNotificationsCount,
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',

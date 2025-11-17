@@ -20,6 +20,7 @@ class Project extends Model
         'name',
         'notes',
         'is_default',
+        'github_repository_id',
     ];
 
     protected $casts = [
@@ -29,5 +30,10 @@ class Project extends Model
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function githubRepository(): BelongsTo
+    {
+        return $this->belongsTo(\Modules\GitHub\Models\GitHubRepository::class, 'github_repository_id');
     }
 }

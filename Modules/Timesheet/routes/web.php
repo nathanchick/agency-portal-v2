@@ -95,4 +95,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/customer/timesheet/services/{service}/report/generate', [CustomerReportController::class, 'generate'])->name('customer.timesheet.services.report.generate');
     Route::post('/customer/timesheet/services/{service}/report/export', [CustomerReportController::class, 'export'])->name('customer.timesheet.services.report.export');
     Route::get('/customer/timesheet/services/{service}/external-reference', [CustomerReportController::class, 'getExternalReferenceReport'])->name('customer.timesheet.services.external-reference');
+
+    // Widget API Routes - Use web middleware for session authentication
+    Route::prefix('api/widgets/timesheet')->name('api.widgets.timesheet.')->group(function () {
+        Route::get('weekly-summary', [\Modules\Timesheet\Http\Controllers\Api\Widget\TimesheetWidgetController::class, 'weeklySummary'])->name('weekly-summary');
+    });
 });

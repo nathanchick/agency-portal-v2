@@ -167,4 +167,86 @@ class TicketWidgetController extends Controller
             'date_range' => "{$dateRange} days",
         ]);
     }
+
+    /**
+     * Get tickets for the current customer user
+     *
+     * Returns a list of tickets belonging to the authenticated customer user's
+     * customer account, filtered by status and limited to a configurable number.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function myTickets(Request $request): JsonResponse
+    {
+        // Validate request parameters
+        $validated = $request->validate([
+            'limit' => ['sometimes', 'integer', 'min:5', 'max:20'],
+            'status' => ['sometimes', 'string', 'in:all,open,closed'],
+        ]);
+
+        $limit = $validated['limit'] ?? 5;
+        $statusFilter = $validated['status'] ?? 'all';
+
+        // Get authenticated user
+        $user = $request->user();
+
+        if (!$user) {
+            return response()->json([
+                'error' => 'Unauthenticated',
+                'tickets' => [],
+            ], 401);
+        }
+
+        // Get customer for current user
+        $customer = $user->last_customer_id ? $user->customers()->find($user->last_customer_id) : null;
+
+        if (!$customer) {
+            return response()->json([
+                'error' => 'No customer associated with user',
+                'tickets' => [],
+            ], 400);
+        }
+
+        // Build query
+        $query = Ticket::query()
+            ->where('user_id', $user->id)
+            ->where('customer_id', $customer->id)
+            ->select([
+                'id',
+                'title',
+                'status',
+                'priority',
+                'created_at',
+                'updated_at',
+            ])
+            ->orderBy('created_at', 'desc');
+
+        // Apply status filter
+        if ($statusFilter === 'open') {
+            $query->where('is_resolved', false);
+        } elseif ($statusFilter === 'closed') {
+            $query->where('is_resolved', true);
+        }
+        // 'all' means no status filter
+
+        // Limit results
+        $tickets = $query->limit($limit)->get();
+
+        // Transform data for widget consumption
+        $ticketData = $tickets->map(function ($ticket) {
+            return [
+                'id' => $ticket->id,
+                'title' => $ticket->title,
+                'status' => $ticket->status ?? 'open',
+                'priority' => $ticket->priority ?? 'medium',
+                'created_at' => $ticket->created_at->toIso8601String(),
+                'updated_at' => $ticket->updated_at->toIso8601String(),
+            ];
+        });
+
+        return response()->json([
+            'tickets' => $ticketData,
+        ]);
+    }
 }

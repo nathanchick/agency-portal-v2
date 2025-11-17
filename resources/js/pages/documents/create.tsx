@@ -96,9 +96,9 @@ export default function CreateDocumentRequest({customer, customerUsers, document
                 <Head title="Create Document Request"/>
                 <AppSidebarHeader
                     breadcrumbs={[
-                        {label: 'Dashboard', href: '/dashboard'},
-                        {label: 'Documents', href: route('documents.pending')},
-                        {label: 'Create Request'},
+                        {title: 'Dashboard', href: '/dashboard'},
+                        {title: 'Documents', href: route('documents.pending')},
+                        {title: 'Create Request', href: route('documents.create')},
                     ]}
                 />
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

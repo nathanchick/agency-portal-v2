@@ -561,7 +561,7 @@ class TicketController extends Controller
         $ticket->load([
             'user',
             'customer',
-            'categories',
+            'categories.form',
             'labels',
             'assignedTo',
             'messages.user',

@@ -83,7 +83,7 @@ view.form = viewForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::create
-* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:283
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:284
 * @route '/customer/tickets/create'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -98,7 +98,7 @@ create.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::create
-* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:283
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:284
 * @route '/customer/tickets/create'
 */
 create.url = (options?: RouteQueryOptions) => {
@@ -107,7 +107,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::create
-* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:283
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:284
 * @route '/customer/tickets/create'
 */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -117,7 +117,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::create
-* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:283
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:284
 * @route '/customer/tickets/create'
 */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -127,7 +127,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::create
-* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:283
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:284
 * @route '/customer/tickets/create'
 */
 const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -137,7 +137,7 @@ const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::create
-* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:283
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:284
 * @route '/customer/tickets/create'
 */
 createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -147,7 +147,7 @@ createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::create
-* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:283
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:284
 * @route '/customer/tickets/create'
 */
 createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -164,7 +164,7 @@ create.form = createForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::store
-* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:321
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:367
 * @route '/customer/tickets'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -179,7 +179,7 @@ store.definition = {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::store
-* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:321
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:367
 * @route '/customer/tickets'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -188,7 +188,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::store
-* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:321
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:367
 * @route '/customer/tickets'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -198,7 +198,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::store
-* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:321
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:367
 * @route '/customer/tickets'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -208,7 +208,7 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::store
-* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:321
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:367
 * @route '/customer/tickets'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -323,11 +323,92 @@ showForm.head = (args: { ticket: string | { id: string } } | [ticket: string | {
 
 show.form = showForm
 
+/**
+* @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::addMessage
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:431
+* @route '/customer/tickets/{ticket}/messages'
+*/
+export const addMessage = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: addMessage.url(args, options),
+    method: 'post',
+})
+
+addMessage.definition = {
+    methods: ["post"],
+    url: '/customer/tickets/{ticket}/messages',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::addMessage
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:431
+* @route '/customer/tickets/{ticket}/messages'
+*/
+addMessage.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { ticket: args }
+    }
+
+    if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
+        args = { ticket: args.id }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            ticket: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+        ticket: typeof args.ticket === 'object'
+        ? args.ticket.id
+        : args.ticket,
+    }
+
+    return addMessage.definition.url
+            .replace('{ticket}', parsedArgs.ticket.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::addMessage
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:431
+* @route '/customer/tickets/{ticket}/messages'
+*/
+addMessage.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: addMessage.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::addMessage
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:431
+* @route '/customer/tickets/{ticket}/messages'
+*/
+const addMessageForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: addMessage.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::addMessage
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:431
+* @route '/customer/tickets/{ticket}/messages'
+*/
+addMessageForm.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: addMessage.url(args, options),
+    method: 'post',
+})
+
+addMessage.form = addMessageForm
+
 const tickets = {
     view: Object.assign(view, view381131),
     create: Object.assign(create, create),
     store: Object.assign(store, store),
     show: Object.assign(show, show),
+    addMessage: Object.assign(addMessage, addMessage),
 }
 
 export default tickets

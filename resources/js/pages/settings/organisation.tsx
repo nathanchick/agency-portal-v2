@@ -1,14 +1,18 @@
 import OrganisationController from '@/actions/App/Http/Controllers/Settings/OrganisationController';
+import GitHubOAuthController from '@/actions/Modules/GitHub/Http/Controllers/GitHubOAuthController';
 import {type BreadcrumbItem} from '@/types';
 import {Transition} from '@headlessui/react';
-import {Form, Head} from '@inertiajs/react';
+import {Form, Head, router} from '@inertiajs/react';
 import {useState} from 'react';
+import {Github} from 'lucide-react';
 
 import HeadingSmall from '@/components/heading-small';
 import InputError from '@/components/input-error';
 import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
+import {Badge} from '@/components/ui/badge';
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import ModuleSettings, {type ModuleSettingsData} from '@/components/settings/module-settings';
 import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
@@ -28,12 +32,21 @@ interface OrganisationData {
     billing_email: string;
 }
 
+interface GitHubConnection {
+    connected: boolean;
+    account_login?: string;
+    account_type?: string;
+    scope?: string;
+}
+
 export default function Organisation({
     organisation,
     moduleSettings,
+    githubConnection,
 }: {
     organisation: OrganisationData;
     moduleSettings: Record<string, ModuleSettingsData>;
+    githubConnection: GitHubConnection;
 }) {
     const [logoPreview, setLogoPreview] = useState<string | null>(
         organisation.logo,
@@ -167,6 +180,69 @@ export default function Organisation({
                             </>
                         )}
                     </Form>
+
+                    {/* GitHub Integration */}
+                    <Card>
+                        <CardHeader>
+                            <div className="flex items-center gap-2">
+                                <Github className="h-5 w-5" />
+                                <CardTitle>GitHub Integration</CardTitle>
+                            </div>
+                            <CardDescription>
+                                Connect your GitHub account to link repositories with projects
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            {githubConnection.connected ? (
+                                <div className="space-y-4">
+                                    <div className="flex items-start justify-between rounded-lg border p-4">
+                                        <div className="space-y-1">
+                                            <p className="text-sm font-medium">
+                                                Connected as{' '}
+                                                <span className="font-semibold">
+                                                    {githubConnection.account_login}
+                                                </span>
+                                            </p>
+                                            <div className="flex items-center gap-2">
+                                                <Badge variant="outline" className="text-xs">
+                                                    {githubConnection.account_type}
+                                                </Badge>
+                                                <span className="text-xs text-muted-foreground">
+                                                    Scopes: {githubConnection.scope}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <Button
+                                            variant="destructive"
+                                            size="sm"
+                                            onClick={() => {
+                                                if (confirm('Are you sure you want to disconnect from GitHub? This will remove access to repository data.')) {
+                                                    router.delete(GitHubOAuthController.disconnect.url());
+                                                }
+                                            }}
+                                        >
+                                            Disconnect
+                                        </Button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="space-y-4">
+                                    <p className="text-sm text-muted-foreground">
+                                        Connect your GitHub account to enable repository linking and synchronization features.
+                                    </p>
+                                    <Button
+                                        onClick={() => {
+                                            window.location.href = GitHubOAuthController.connect.url();
+                                        }}
+                                        className="gap-2"
+                                    >
+                                        <Github className="h-4 w-4" />
+                                        Connect GitHub
+                                    </Button>
+                                </div>
+                            )}
+                        </CardContent>
+                    </Card>
 
                     {/* Module settings - independent from main form */}
                     <ModuleSettings

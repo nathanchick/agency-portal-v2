@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::update
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:180
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:220
 * @route '/customers/{customer}/modules'
 */
 export const update = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -16,7 +16,7 @@ update.definition = {
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::update
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:180
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:220
 * @route '/customers/{customer}/modules'
 */
 update.url = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -49,7 +49,7 @@ update.url = (args: { customer: string | { id: string } } | [customer: string | 
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::update
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:180
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:220
 * @route '/customers/{customer}/modules'
 */
 update.patch = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -59,7 +59,7 @@ update.patch = (args: { customer: string | { id: string } } | [customer: string 
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::update
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:180
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:220
 * @route '/customers/{customer}/modules'
 */
 const updateForm = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -74,7 +74,7 @@ const updateForm = (args: { customer: string | { id: string } } | [customer: str
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::update
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:180
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:220
 * @route '/customers/{customer}/modules'
 */
 updateForm.patch = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

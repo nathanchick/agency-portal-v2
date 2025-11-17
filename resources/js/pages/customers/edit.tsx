@@ -33,10 +33,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog'
-import { Trash2, Plus, UserPlus, Pencil } from 'lucide-react'
+import { Trash2, Plus, UserPlus, Pencil, Github, ExternalLink, Search, RefreshCw } from 'lucide-react'
 import { Textarea } from '@/components/ui/textarea'
 import { Switch } from '@/components/ui/switch'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import ModuleSettings, {type ModuleSettingsData} from '@/components/settings/module-settings'
 
 interface User {
@@ -46,11 +46,23 @@ interface User {
     role_name?: string
 }
 
+interface GitHubRepository {
+    id: string
+    name: string
+    full_name: string
+    owner: string
+    description?: string
+    html_url: string
+    is_private: boolean
+}
+
 interface Project {
     id: string
     name: string
     notes?: string
     is_default?: boolean
+    github_repository_id?: string
+    github_repository?: GitHubRepository
 }
 
 interface Website {
@@ -82,9 +94,10 @@ interface Props {
     availableUsers: User[]
     roles: Role[]
     moduleSettings: Record<string, ModuleSettingsData>
+    githubRepositories: any[]
 }
 
-export default function EditCustomer({ customer, availableUsers, roles, moduleSettings }: Props) {
+export default function EditCustomer({ customer, availableUsers, roles, moduleSettings, githubRepositories }: Props) {
     const [selectedUserId, setSelectedUserId] = useState<string>('')
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
     const [isCreateProjectDialogOpen, setIsCreateProjectDialogOpen] = useState(false)
@@ -101,6 +114,9 @@ export default function EditCustomer({ customer, availableUsers, roles, moduleSe
     const [websiteToDelete, setWebsiteToDelete] = useState<string | null>(null)
     const [deleteCustomerDialogOpen, setDeleteCustomerDialogOpen] = useState(false)
     const [deleteConfirmText, setDeleteConfirmText] = useState('')
+    const [newProjectRepoSearch, setNewProjectRepoSearch] = useState('')
+    const [editProjectRepoSearch, setEditProjectRepoSearch] = useState('')
+    const [refreshingRepos, setRefreshingRepos] = useState(false)
 
 
     const { data, setData, put, processing, errors } = useForm({
@@ -132,6 +148,7 @@ export default function EditCustomer({ customer, availableUsers, roles, moduleSe
     } = useForm({
         name: '',
         notes: '',
+        github_repository_id: '',
     })
 
     const {
@@ -144,6 +161,7 @@ export default function EditCustomer({ customer, availableUsers, roles, moduleSe
     } = useForm({
         name: '',
         notes: '',
+        github_repository_id: '',
     })
 
     const {
@@ -237,15 +255,35 @@ export default function EditCustomer({ customer, availableUsers, roles, moduleSe
             onSuccess: () => {
                 setIsCreateProjectDialogOpen(false)
                 resetNewProject()
+                setNewProjectRepoSearch('')
             },
         })
     }
+
+    const handleRefreshRepos = () => {
+        setRefreshingRepos(true)
+        router.reload({
+            data: { refresh_github: true },
+            preserveScroll: true,
+            onFinish: () => setRefreshingRepos(false),
+        })
+    }
+
+    const filteredNewProjectRepos = useMemo(() => {
+        if (!newProjectRepoSearch) return githubRepositories
+        const search = newProjectRepoSearch.toLowerCase()
+        return githubRepositories.filter((repo: any) =>
+            repo.full_name.toLowerCase().includes(search) ||
+            repo.description?.toLowerCase().includes(search)
+        )
+    }, [githubRepositories, newProjectRepoSearch])
 
     const handleEditProject = (project: Project) => {
         setEditingProject(project)
         setEditProjectData({
             name: project.name,
             notes: project.notes || '',
+            github_repository_id: project.github_repository_id || '',
         })
         setIsEditProjectDialogOpen(true)
     }
@@ -259,10 +297,20 @@ export default function EditCustomer({ customer, availableUsers, roles, moduleSe
                     setIsEditProjectDialogOpen(false)
                     setEditingProject(null)
                     resetEditProject()
+                    setEditProjectRepoSearch('')
                 },
             })
         }
     }
+
+    const filteredEditProjectRepos = useMemo(() => {
+        if (!editProjectRepoSearch) return githubRepositories
+        const search = editProjectRepoSearch.toLowerCase()
+        return githubRepositories.filter((repo: any) =>
+            repo.full_name.toLowerCase().includes(search) ||
+            repo.description?.toLowerCase().includes(search)
+        )
+    }, [githubRepositories, editProjectRepoSearch])
 
     const handleDeleteProject = (projectId: string) => {
         setProjectToDelete(projectId)
@@ -697,6 +745,75 @@ export default function EditCustomer({ customer, availableUsers, roles, moduleSe
                                                         )}
                                                     </div>
 
+                                                    {githubRepositories.length > 0 && (
+                                                        <div className="space-y-2">
+                                                            <div className="flex items-center justify-between">
+                                                                <Label htmlFor="project-github-repo">
+                                                                    <div className="flex items-center gap-2">
+                                                                        <Github className="h-4 w-4" />
+                                                                        GitHub Repository (Optional)
+                                                                    </div>
+                                                                </Label>
+                                                                <Button
+                                                                    type="button"
+                                                                    variant="ghost"
+                                                                    size="sm"
+                                                                    onClick={handleRefreshRepos}
+                                                                    disabled={refreshingRepos}
+                                                                    className="h-8"
+                                                                >
+                                                                    <RefreshCw className={`h-3 w-3 mr-1 ${refreshingRepos ? 'animate-spin' : ''}`} />
+                                                                    Refresh
+                                                                </Button>
+                                                            </div>
+                                                            <Select
+                                                                value={newProjectData.github_repository_id || undefined}
+                                                                onValueChange={(value) => setNewProjectData('github_repository_id', value === 'none' ? '' : value)}
+                                                            >
+                                                                <SelectTrigger>
+                                                                    <SelectValue placeholder="None - Select a repository (optional)" />
+                                                                </SelectTrigger>
+                                                                <SelectContent>
+                                                                    <div className="sticky top-0 bg-background p-2 border-b">
+                                                                        <div className="relative">
+                                                                            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                                                                            <Input
+                                                                                placeholder="Search repositories..."
+                                                                                value={newProjectRepoSearch}
+                                                                                onChange={(e) => setNewProjectRepoSearch(e.target.value)}
+                                                                                className="pl-8"
+                                                                                onClick={(e) => e.stopPropagation()}
+                                                                                onKeyDown={(e) => e.stopPropagation()}
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="max-h-[300px] overflow-y-auto">
+                                                                        <SelectItem value="none">None</SelectItem>
+                                                                        {filteredNewProjectRepos.length > 0 ? (
+                                                                            filteredNewProjectRepos.map((repo: any) => (
+                                                                                <SelectItem key={repo.id} value={repo.id}>
+                                                                                    <div className="flex items-center gap-2">
+                                                                                        <span>{repo.full_name}</span>
+                                                                                        {repo.is_private && (
+                                                                                            <span className="text-xs text-muted-foreground">(Private)</span>
+                                                                                        )}
+                                                                                    </div>
+                                                                                </SelectItem>
+                                                                            ))
+                                                                        ) : (
+                                                                            <div className="py-6 text-center text-sm text-muted-foreground">
+                                                                                No repositories found
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                </SelectContent>
+                                                            </Select>
+                                                            {newProjectErrors.github_repository_id && (
+                                                                <p className="text-sm text-red-500">{newProjectErrors.github_repository_id}</p>
+                                                            )}
+                                                        </div>
+                                                    )}
+
                                                     <div className="flex gap-2 justify-end">
                                                         <Button
                                                             type="button"
@@ -720,6 +837,7 @@ export default function EditCustomer({ customer, availableUsers, roles, moduleSe
                                                 <TableRow>
                                                     <TableHead>Name</TableHead>
                                                     <TableHead>Notes</TableHead>
+                                                    <TableHead>GitHub Repository</TableHead>
                                                     <TableHead className="w-[100px]">Actions</TableHead>
                                                 </TableRow>
                                             </TableHeader>
@@ -728,6 +846,24 @@ export default function EditCustomer({ customer, availableUsers, roles, moduleSe
                                                     <TableRow key={project.id}>
                                                         <TableCell>{project.name}</TableCell>
                                                         <TableCell>{project.notes || '-'}</TableCell>
+                                                        <TableCell>
+                                                            {project.github_repository ? (
+                                                                <div className="flex items-center gap-2">
+                                                                    <Github className="h-4 w-4 text-muted-foreground" />
+                                                                    <a
+                                                                        href={project.github_repository.html_url}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="flex items-center gap-1 text-sm hover:underline"
+                                                                    >
+                                                                        {project.github_repository.full_name}
+                                                                        <ExternalLink className="h-3 w-3" />
+                                                                    </a>
+                                                                </div>
+                                                            ) : (
+                                                                <span className="text-sm text-muted-foreground">-</span>
+                                                            )}
+                                                        </TableCell>
                                                         <TableCell>
                                                             <div className="flex gap-2">
                                                                 <Button
@@ -825,6 +961,75 @@ export default function EditCustomer({ customer, availableUsers, roles, moduleSe
                                             <p className="text-sm text-red-500">{editProjectErrors.notes}</p>
                                         )}
                                     </div>
+
+                                    {githubRepositories.length > 0 && (
+                                        <div className="space-y-2">
+                                            <div className="flex items-center justify-between">
+                                                <Label htmlFor="edit-project-github-repo">
+                                                    <div className="flex items-center gap-2">
+                                                        <Github className="h-4 w-4" />
+                                                        GitHub Repository (Optional)
+                                                    </div>
+                                                </Label>
+                                                <Button
+                                                    type="button"
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    onClick={handleRefreshRepos}
+                                                    disabled={refreshingRepos}
+                                                    className="h-8"
+                                                >
+                                                    <RefreshCw className={`h-3 w-3 mr-1 ${refreshingRepos ? 'animate-spin' : ''}`} />
+                                                    Refresh
+                                                </Button>
+                                            </div>
+                                            <Select
+                                                value={editProjectData.github_repository_id || undefined}
+                                                onValueChange={(value) => setEditProjectData('github_repository_id', value === 'none' ? '' : value)}
+                                            >
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="None - Select a repository (optional)" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <div className="sticky top-0 bg-background p-2 border-b">
+                                                        <div className="relative">
+                                                            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                                                            <Input
+                                                                placeholder="Search repositories..."
+                                                                value={editProjectRepoSearch}
+                                                                onChange={(e) => setEditProjectRepoSearch(e.target.value)}
+                                                                className="pl-8"
+                                                                onClick={(e) => e.stopPropagation()}
+                                                                onKeyDown={(e) => e.stopPropagation()}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="max-h-[300px] overflow-y-auto">
+                                                        <SelectItem value="none">None</SelectItem>
+                                                        {filteredEditProjectRepos.length > 0 ? (
+                                                            filteredEditProjectRepos.map((repo: any) => (
+                                                                <SelectItem key={repo.id} value={repo.id}>
+                                                                    <div className="flex items-center gap-2">
+                                                                        <span>{repo.full_name}</span>
+                                                                        {repo.is_private && (
+                                                                            <span className="text-xs text-muted-foreground">(Private)</span>
+                                                                        )}
+                                                                    </div>
+                                                                </SelectItem>
+                                                            ))
+                                                        ) : (
+                                                            <div className="py-6 text-center text-sm text-muted-foreground">
+                                                                No repositories found
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </SelectContent>
+                                            </Select>
+                                            {editProjectErrors.github_repository_id && (
+                                                <p className="text-sm text-red-500">{editProjectErrors.github_repository_id}</p>
+                                            )}
+                                        </div>
+                                    )}
 
                                     <div className="flex gap-2 justify-end">
                                         <Button

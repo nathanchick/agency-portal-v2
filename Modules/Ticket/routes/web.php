@@ -78,4 +78,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/customer/tickets/create', [CustomerTicketController::class, 'create'])->name('customer.tickets.create');
     Route::post('/customer/tickets', [CustomerTicketController::class, 'store'])->name('customer.tickets.store');
     Route::get('/customer/tickets/{ticket}', [CustomerTicketController::class, 'show'])->name('customer.tickets.show');
+    Route::post('/customer/tickets/{ticket}/messages', [CustomerTicketController::class, 'addMessage'])->name('customer.tickets.add-message');
+
+    // Widget API Routes - Use web middleware for session authentication
+    Route::prefix('api/widgets/tickets')->name('api.widgets.tickets.')->group(function () {
+        Route::get('recent', [\Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::class, 'recent'])->name('recent');
+        Route::get('statistics', [\Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::class, 'statistics'])->name('statistics');
+        Route::get('my-tickets', [\Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::class, 'myTickets'])->name('my-tickets');
+    });
 });

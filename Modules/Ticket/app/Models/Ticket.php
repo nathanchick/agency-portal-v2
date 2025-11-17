@@ -7,6 +7,7 @@ use Coderflex\LaravelTicket\Models\Ticket as BaseTicket;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Customer\Models\Customer;
+use Modules\Website\Models\Website;
 use Modules\Ticket\Events\TicketCreated;
 use Modules\Ticket\Events\TicketUpdated;
 use Spatie\MediaLibrary\HasMedia;
@@ -32,6 +33,7 @@ class Ticket extends BaseTicket implements HasMedia
         'uuid',
         'organisation_id',
         'customer_id',
+        'website_id',
         'user_id',
         'title',
         'message',
@@ -52,6 +54,11 @@ class Ticket extends BaseTicket implements HasMedia
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function website(): BelongsTo
+    {
+        return $this->belongsTo(Website::class);
     }
 
     public function assignedTo(): BelongsTo

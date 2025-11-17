@@ -7,6 +7,7 @@ import ReportController from './ReportController'
 import SavedReportController from './SavedReportController'
 import ScheduledReportController from './ScheduledReportController'
 import Customer from './Customer'
+import Api from './Api'
 
 const Controllers = {
     TimesheetController: Object.assign(TimesheetController, TimesheetController),
@@ -18,6 +19,7 @@ const Controllers = {
     SavedReportController: Object.assign(SavedReportController, SavedReportController),
     ScheduledReportController: Object.assign(ScheduledReportController, ScheduledReportController),
     Customer: Object.assign(Customer, Customer),
+    Api: Object.assign(Api, Api),
 }
 
 export default Controllers

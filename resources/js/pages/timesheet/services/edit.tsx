@@ -268,7 +268,6 @@ export default function ServiceEdit({service, customers, projects, users, tasks}
                                                 <SelectContent>
                                                     <SelectItem value="Active">Active</SelectItem>
                                                     <SelectItem value="Archived">Archived</SelectItem>
-                                                    <SelectItem value="Completed">Completed</SelectItem>
                                                 </SelectContent>
                                             </Select>
                                         </div>

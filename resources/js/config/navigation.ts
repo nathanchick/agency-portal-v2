@@ -197,12 +197,6 @@ export const navigation: NavigationConfig = {
             roles: ['Admin', 'Manager', 'User'],
         },
         {
-            title: "Websites",
-            url: route('customer.websites.index'),
-            icon: Globe,
-            roles: ['Admin', 'Manager', 'User'],
-        },
-        {
             title: "Timesheet",
             url: "#",
             icon: Clock,
@@ -265,28 +259,7 @@ export const navigation: NavigationConfig = {
             url: "#",
             icon: HeartPulseIcon,
             roles: ['Admin', 'Manager'],
-            items: [
-                {
-                    title: "Broken Links",
-                    url: "#",
-                    roles: ['Admin', 'Manager'],
-                },
-                {
-                    title: "Cron Status",
-                    url: "#",
-                    roles: ['Admin', 'Manager'],
-                },
-                {
-                    title: "Uptime Report",
-                    url: "#",
-                    roles: ['Admin', 'Manager'],
-                },
-                {
-                    title: "Google Page Speed",
-                    url: "#",
-                    roles: ['Admin', 'Manager'],
-                },
-            ],
+            items: [], // Dynamically populated in useNavigation hook
         },
         {
             title: "Security",
@@ -300,17 +273,12 @@ export const navigation: NavigationConfig = {
                     roles: ['Admin'],
                 },
                 {
-                    title: "CSP Monitoring",
-                    url: "#",
+                    title: "CSP Violations",
+                    url: route('customer.csp.violations.index'),
                     roles: ['Admin'],
                 },
                 {
                     title: "Vulnerability Report",
-                    url: "#",
-                    roles: ['Admin'],
-                },
-                {
-                    title: "SSL Status",
                     url: "#",
                     roles: ['Admin'],
                 },

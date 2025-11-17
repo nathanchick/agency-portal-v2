@@ -270,9 +270,10 @@ class CustomerTicketController extends Controller
         $ticket->load([
             'user',
             'customer',
-            'categories',
+            'categories.form',
             'labels',
-            'messages' => fn($q) => $q->with('user')->latest()
+            'media',
+            'messages' => fn($q) => $q->with(['user', 'media'])->latest()
         ]);
 
         return Inertia::render('tickets/customer-show', [
@@ -310,11 +311,56 @@ class CustomerTicketController extends Controller
             ->where('is_visible', true)
             ->get();
 
+        // Get customer's websites with platform information
+        $websites = $customer->websites()
+            ->with('settings')
+            ->get()
+            ->map(function ($website) {
+                // Get platform type from settings
+                $platformTypeSetting = $website->settings()
+                    ->where('module', 'Website')
+                    ->where('key', 'platform_type')
+                    ->first();
+
+                return [
+                    'id' => $website->id,
+                    'url' => $website->url,
+                    'type' => $website->type,
+                    'platform_type' => $platformTypeSetting?->value ?? null,
+                ];
+            });
+
+        // Get OpenAI quality settings for the organization
+        $organisation = $customer->organisation;
+        $qualitySettings = $organisation->settings()
+            ->where('module', 'OpenAi')
+            ->whereIn('key', [
+                'status',
+                'ticket_quality_assistant_status',
+                'ticket_quality_auto_check',
+                'ticket_quality_min_score',
+                'ticket_quality_good_threshold',
+                'ticket_quality_fair_threshold'
+            ])
+            ->get()
+            ->pluck('value', 'key');
+
+        $ticketQualityConfig = [
+            'enabled' => ($qualitySettings['status'] ?? '0') === '1'
+                && ($qualitySettings['ticket_quality_assistant_status'] ?? '0') === '1',
+            'autoCheck' => ($qualitySettings['ticket_quality_auto_check'] ?? '0') === '1',
+            'minScore' => (int) ($qualitySettings['ticket_quality_min_score'] ?? 60),
+            'goodThreshold' => (int) ($qualitySettings['ticket_quality_good_threshold'] ?? 75),
+            'fairThreshold' => (int) ($qualitySettings['ticket_quality_fair_threshold'] ?? 60),
+        ];
+
         return Inertia::render('tickets/create', [
             'customer' => $customer,
             'categories' => $categories,
             'labels' => $labels,
             'selectedCategory' => $selectedCategory,
+            'websites' => $websites,
+            'ticketQualityConfig' => $ticketQualityConfig,
         ]);
     }
 
@@ -337,7 +383,10 @@ class CustomerTicketController extends Controller
             'category_ids.*' => 'exists:ticket_categories,id',
             'label_ids' => 'array',
             'label_ids.*' => 'exists:ticket_labels,id',
+            'website_id' => 'nullable|uuid|exists:websites,id',
             'metadata' => 'array',
+            'attachments' => 'nullable|array|max:5',
+            'attachments.*' => 'file|max:10240|mimes:jpeg,png,gif,webp,pdf,zip,txt,csv,xls,xlsx,doc,docx',
         ]);
 
         // Get the default status for this organisation
@@ -348,6 +397,7 @@ class CustomerTicketController extends Controller
         $ticket = Ticket::create([
             'organisation_id' => $customer->organisation_id,
             'customer_id' => $customer->id,
+            'website_id' => $validated['website_id'] ?? null,
             'user_id' => $user->id,
             'title' => $validated['title'],
             'message' => $validated['message'],
@@ -364,6 +414,59 @@ class CustomerTicketController extends Controller
             $ticket->labels()->attach($validated['label_ids']);
         }
 
+        // Handle file attachments
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                $ticket->addMedia($file)
+                    ->sanitizingFileName(function($fileName) {
+                        return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
+                    })
+                    ->toMediaCollection('attachments');
+            }
+        }
+
         return redirect()->route('customer.tickets.view')->with('success', 'Ticket created successfully!');
+    }
+
+    public function addMessage(Request $request, Ticket $ticket)
+    {
+        $user = $request->user();
+
+        // Get customer for current user
+        $customer = $user->last_customer_id ? $user->customers()->find($user->last_customer_id) : null;
+
+        if (!$customer) {
+            abort(403, 'No customer associated with this user');
+        }
+
+        // Ensure ticket belongs to this customer
+        if ($ticket->customer_id !== $customer->id) {
+            abort(403, 'You do not have access to this ticket');
+        }
+
+        $validated = $request->validate([
+            'message' => 'required|string',
+            'attachments' => 'nullable|array|max:5',
+            'attachments.*' => 'file|max:10240|mimes:jpeg,png,gif,webp,pdf,zip,txt,csv,xls,xlsx,doc,docx',
+        ]);
+
+        $message = $ticket->messages()->create([
+            'user_id' => $user->id,
+            'message' => $validated['message'],
+            'is_private' => false, // Customer messages are never private
+        ]);
+
+        // Handle file attachments
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                $message->addMedia($file)
+                    ->sanitizingFileName(function($fileName) {
+                        return strtolower(str_replace(['#', '/', '\\', ' '], '-', $fileName));
+                    })
+                    ->toMediaCollection('attachments');
+            }
+        }
+
+        return back()->with('success', 'Message added successfully');
     }
 }

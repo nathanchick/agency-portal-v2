@@ -9,11 +9,15 @@ use OpenAI;
 class OpenAiService
 {
     protected ?string $apiKey;
+    protected string $model;
     protected PiiRedactionService $piiRedactionService;
+    protected Organisation $organisation;
 
     public function __construct(Organisation $organisation, PiiRedactionService $piiRedactionService)
     {
+        $this->organisation = $organisation;
         $this->apiKey = $this->getApiKey($organisation);
+        $this->model = $this->getModel($organisation);
         $this->piiRedactionService = $piiRedactionService;
     }
 
@@ -28,6 +32,27 @@ class OpenAiService
             ->first();
 
         return $setting?->value;
+    }
+
+    /**
+     * Get OpenAI model from organisation settings
+     */
+    protected function getModel(Organisation $organisation): string
+    {
+        $setting = $organisation->settings()
+            ->where('module', 'OpenAi')
+            ->where('key', 'openai_model')
+            ->first();
+
+        return $setting?->value ?? 'gpt-4o-mini';
+    }
+
+    /**
+     * Get the current model being used
+     */
+    public function getCurrentModel(): string
+    {
+        return $this->model;
     }
 
     /**
@@ -59,7 +84,7 @@ class OpenAiService
             $client = OpenAI::client($this->apiKey);
 
             $response = $client->chat()->create([
-                'model' => 'gpt-3.5-turbo',
+                'model' => $this->model,
                 'messages' => [
                     [
                         'role' => 'system',
@@ -121,6 +146,178 @@ class OpenAiService
     }
 
     /**
+     * Analyze ticket quality and provide suggestions
+     *
+     * @param string $promptData JSON-encoded prompt with 'system' and 'user' keys
+     * @return array
+     * @throws \Exception
+     */
+    public function analyzeTicketQuality(string $promptData): array
+    {
+        if (!$this->isConfigured()) {
+            throw new \Exception('OpenAI API key not configured for this organisation');
+        }
+
+        $promptArray = json_decode($promptData, true);
+        if (!$promptArray || !isset($promptArray['system']) || !isset($promptArray['user'])) {
+            throw new \InvalidArgumentException('Invalid prompt data format');
+        }
+
+        try {
+            $client = OpenAI::client($this->apiKey);
+
+            $requestData = [
+                'model' => $this->model,
+                'messages' => [
+                    [
+                        'role' => 'system',
+                        'content' => $promptArray['system'],
+                    ],
+                    [
+                        'role' => 'user',
+                        'content' => $promptArray['user'],
+                    ],
+                ],
+                'temperature' => 0.3, // Lower temperature for more consistent output
+                'max_tokens' => 800,
+                'response_format' => ['type' => 'json_object'], // Force JSON response
+            ];
+
+            // Log the full request data
+            \Log::debug('OpenAI Ticket Quality Analysis Request', [
+                'model' => $requestData['model'],
+                'temperature' => $requestData['temperature'],
+                'max_tokens' => $requestData['max_tokens'],
+                'system_prompt_length' => strlen($promptArray['system']),
+                'system_prompt_preview' => substr($promptArray['system'], 0, 200) . '...',
+                'user_prompt_length' => strlen($promptArray['user']),
+                'user_prompt' => $promptArray['user'],
+                'estimated_tokens' => (int)((strlen($promptArray['system']) + strlen($promptArray['user'])) / 4),
+            ]);
+
+            $response = $client->chat()->create($requestData);
+
+            $content = trim($response->choices[0]->message->content);
+            $parsed = json_decode($content, true);
+
+            // Log the response
+            \Log::debug('OpenAI Ticket Quality Analysis Response', [
+                'response_length' => strlen($content),
+                'tokens_used' => $response->usage->totalTokens ?? null,
+                'prompt_tokens' => $response->usage->promptTokens ?? null,
+                'completion_tokens' => $response->usage->completionTokens ?? null,
+                'overall_score' => $parsed['overallScore'] ?? null,
+                'suggestions_count' => count($parsed['suggestions'] ?? []),
+            ]);
+
+            if (!$parsed) {
+                throw new \Exception('Failed to parse OpenAI response as JSON');
+            }
+
+            // Add usage information for cost tracking
+            $parsed['usage'] = [
+                'prompt_tokens' => $response->usage->promptTokens,
+                'completion_tokens' => $response->usage->completionTokens,
+                'total_tokens' => $response->usage->totalTokens,
+            ];
+
+            return $parsed;
+
+        } catch (\Exception $e) {
+            \Log::error('OpenAI Ticket Quality Analysis Error', [
+                'error' => $e->getMessage(),
+            ]);
+
+            throw new \Exception('Failed to analyze ticket quality: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Analyze CSP violation and provide security assessment
+     *
+     * @param string $promptData JSON-encoded prompt with 'system' and 'user' keys
+     * @return array
+     * @throws \Exception
+     */
+    public function analyzeCspViolation(string $promptData): array
+    {
+        if (!$this->isConfigured()) {
+            throw new \Exception('OpenAI API key not configured for this organisation');
+        }
+
+        $promptArray = json_decode($promptData, true);
+        if (!$promptArray || !isset($promptArray['system']) || !isset($promptArray['user'])) {
+            throw new \InvalidArgumentException('Invalid prompt data format');
+        }
+
+        try {
+            $client = OpenAI::client($this->apiKey);
+
+            $requestData = [
+                'model' => $this->model,
+                'messages' => [
+                    [
+                        'role' => 'system',
+                        'content' => $promptArray['system'],
+                    ],
+                    [
+                        'role' => 'user',
+                        'content' => $promptArray['user'],
+                    ],
+                ],
+                'temperature' => 0.3, // Lower temperature for more consistent security analysis
+                'max_tokens' => 1000,
+                'response_format' => ['type' => 'json_object'], // Force JSON response
+            ];
+
+            // Log the request
+            \Log::debug('OpenAI CSP Violation Analysis Request', [
+                'model' => $requestData['model'],
+                'temperature' => $requestData['temperature'],
+                'max_tokens' => $requestData['max_tokens'],
+                'system_prompt_length' => strlen($promptArray['system']),
+                'user_prompt_length' => strlen($promptArray['user']),
+                'estimated_tokens' => (int)((strlen($promptArray['system']) + strlen($promptArray['user'])) / 4),
+            ]);
+
+            $response = $client->chat()->create($requestData);
+
+            $content = trim($response->choices[0]->message->content);
+            $parsed = json_decode($content, true);
+
+            // Log the response
+            \Log::debug('OpenAI CSP Violation Analysis Response', [
+                'response_length' => strlen($content),
+                'tokens_used' => $response->usage->totalTokens ?? null,
+                'prompt_tokens' => $response->usage->promptTokens ?? null,
+                'completion_tokens' => $response->usage->completionTokens ?? null,
+                'trust_assessment' => $parsed['trust_assessment'] ?? null,
+                'risk_level' => $parsed['risk_level'] ?? null,
+            ]);
+
+            if (!$parsed) {
+                throw new \Exception('Failed to parse OpenAI response as JSON');
+            }
+
+            // Add usage information for cost tracking
+            $parsed['usage'] = [
+                'prompt_tokens' => $response->usage->promptTokens,
+                'completion_tokens' => $response->usage->completionTokens,
+                'total_tokens' => $response->usage->totalTokens,
+            ];
+
+            return $parsed;
+
+        } catch (\Exception $e) {
+            \Log::error('OpenAI CSP Violation Analysis Error', [
+                'error' => $e->getMessage(),
+            ]);
+
+            throw new \Exception('Failed to analyze CSP violation: ' . $e->getMessage());
+        }
+    }
+
+    /**
      * Test the OpenAI connection
      */
     public function testConnection(): bool
@@ -133,7 +330,7 @@ class OpenAiService
             $client = OpenAI::client($this->apiKey);
 
             $response = $client->chat()->create([
-                'model' => 'gpt-3.5-turbo',
+                'model' => $this->model,
                 'messages' => [
                     ['role' => 'user', 'content' => 'Test connection. Reply with "OK".'],
                 ],

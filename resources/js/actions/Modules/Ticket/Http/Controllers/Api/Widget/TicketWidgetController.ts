@@ -161,6 +161,87 @@ statisticsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> 
 
 statistics.form = statisticsForm
 
-const TicketWidgetController = { recent, statistics }
+/**
+* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::myTickets
+* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:180
+* @route '/api/widgets/tickets/my-tickets'
+*/
+export const myTickets = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: myTickets.url(options),
+    method: 'get',
+})
+
+myTickets.definition = {
+    methods: ["get","head"],
+    url: '/api/widgets/tickets/my-tickets',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::myTickets
+* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:180
+* @route '/api/widgets/tickets/my-tickets'
+*/
+myTickets.url = (options?: RouteQueryOptions) => {
+    return myTickets.definition.url + queryParams(options)
+}
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::myTickets
+* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:180
+* @route '/api/widgets/tickets/my-tickets'
+*/
+myTickets.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: myTickets.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::myTickets
+* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:180
+* @route '/api/widgets/tickets/my-tickets'
+*/
+myTickets.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: myTickets.url(options),
+    method: 'head',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::myTickets
+* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:180
+* @route '/api/widgets/tickets/my-tickets'
+*/
+const myTicketsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: myTickets.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::myTickets
+* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:180
+* @route '/api/widgets/tickets/my-tickets'
+*/
+myTicketsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: myTickets.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::myTickets
+* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:180
+* @route '/api/widgets/tickets/my-tickets'
+*/
+myTicketsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: myTickets.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+myTickets.form = myTicketsForm
+
+const TicketWidgetController = { recent, statistics, myTickets }
 
 export default TicketWidgetController

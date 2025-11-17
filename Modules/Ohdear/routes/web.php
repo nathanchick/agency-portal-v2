@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Ohdear\Http\Controllers\OhdearController;
+use Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController;
 
 Route::middleware(['auth', 'verified'])->prefix('ohdear')->name('ohdear.')->group(function () {
     Route::post('websites/{websiteId}/setup', [OhdearController::class, 'setup'])->name('setup');
@@ -14,4 +15,12 @@ Route::middleware(['auth', 'verified'])->prefix('ohdear')->name('ohdear.')->grou
     Route::get('websites/{websiteId}/lighthouse/report/{monitorId}/{reportId}', [OhdearController::class, 'lighthouseReportDetails'])->name('lighthouse-report-details');
     Route::get('websites/{websiteId}/sitemap', [OhdearController::class, 'sitemap'])->name('sitemap');
     Route::put('websites/{websiteId}/sitemap-url', [OhdearController::class, 'updateSitemapUrl'])->name('update-sitemap-url');
+});
+
+// Customer Site Health Routes
+Route::middleware(['auth', 'verified'])->prefix('customer/health')->name('customer.health.')->group(function () {
+    Route::get('{website}/uptime', [CustomerOhdearController::class, 'uptime'])->name('uptime');
+    Route::get('{website}/broken-links', [CustomerOhdearController::class, 'brokenLinks'])->name('broken-links');
+    Route::get('{website}/lighthouse', [CustomerOhdearController::class, 'lighthouse'])->name('lighthouse');
+    Route::get('{website}/sitemap', [CustomerOhdearController::class, 'sitemap'])->name('sitemap');
 });

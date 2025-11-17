@@ -15,6 +15,11 @@ import { WelcomeWidget } from './generic/WelcomeWidget'
 import { QuickLinksWidget } from './generic/QuickLinksWidget'
 import { CreatedDocumentsWidget } from './documents/CreatedDocumentsWidget'
 import { AssignedDocumentsWidget } from './documents/AssignedDocumentsWidget'
+import { BillingOverviewWidget } from './billing/BillingOverviewWidget'
+import { OutstandingInvoicesWidget } from './billing/OutstandingInvoicesWidget'
+import { OverdueInvoicesWidget } from './billing/OverdueInvoicesWidget'
+import { MyBillingWidget } from './billing/MyBillingWidget'
+import { RecentDeploymentsWidget } from './deployments/RecentDeploymentsWidget'
 
 /**
  * Props interface that all widget components must implement
@@ -79,6 +84,15 @@ export const widgetRegistry: Record<string, ComponentType<WidgetProps>> = {
     // Document Module Widgets
     'Document.created_documents': CreatedDocumentsWidget,
     'Document.assigned_documents': AssignedDocumentsWidget,
+
+    // Billing Module Widgets
+    'Billing.billing_overview': BillingOverviewWidget,
+    'Billing.outstanding_invoices': OutstandingInvoicesWidget,
+    'Billing.overdue_invoices': OverdueInvoicesWidget,
+    'Billing.my_billing': MyBillingWidget,
+
+    // Deployment Module Widgets
+    'Deployment.recent_deployments': RecentDeploymentsWidget,
 
     // Generic Widgets (DashboardWidgets Module)
     'DashboardWidgets.welcome': WelcomeWidget,

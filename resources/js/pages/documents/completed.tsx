@@ -151,8 +151,8 @@ export default function CompletedDocuments({documentRequests, documents, custome
                 <Head title="Completed Documents"/>
                 <AppSidebarHeader
                     breadcrumbs={[
-                        {label: 'Dashboard', href: '/dashboard'},
-                        {label: 'Documents - Completed'},
+                        {title: 'Dashboard', href: '/dashboard'},
+                        {title: 'Documents - Completed', href: route('documents.completed')},
                     ]}
                 />
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

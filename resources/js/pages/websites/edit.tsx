@@ -62,7 +62,11 @@ export default function EditWebsite({website, moduleSettings}: Props) {
         <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-                <AppSidebarHeader title="Edit Website" />
+                <AppSidebarHeader breadcrumbs={[
+                    { title: 'Dashboard', href: route('dashboard') },
+                    { title: 'Websites', href: route('websites.index') },
+                    { title: `Edit: ${website.url}`, href: route('websites.edit', website.id) }
+                ]} />
 
                 <div className="flex flex-1 flex-col gap-4 p-4">
                     <div className="grid gap-4">

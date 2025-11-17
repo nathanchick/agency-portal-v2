@@ -186,8 +186,8 @@ export default function PendingDocuments({documentRequests, documents, customers
                 <Head title="Pending Documents"/>
                 <AppSidebarHeader
                     breadcrumbs={[
-                        {label: 'Dashboard', href: '/dashboard'},
-                        {label: 'Documents - Pending'},
+                        {title: 'Dashboard', href: '/dashboard'},
+                        {title: 'Documents - Pending', href: '/documents/pending'},
                     ]}
                 />
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

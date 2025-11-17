@@ -21,7 +21,7 @@ import {Checkbox} from '@/components/ui/checkbox';
 import {Separator} from '@/components/ui/separator';
 import {ArrowLeft, X} from 'lucide-react';
 import {route} from 'ziggy-js';
-import {FormEvent, useState} from 'react';
+import {FormEvent, useState, useMemo} from 'react';
 import {Media} from '@/types';
 import {FileUpload} from '@/components/tickets/FileUpload';
 import {AttachmentList} from '@/components/tickets/AttachmentList';
@@ -39,6 +39,11 @@ interface Customer {
 interface Category {
     id: string;
     name: string;
+    form?: {
+        id: string;
+        name: string;
+        content: string;
+    };
 }
 
 interface Label {
@@ -112,6 +117,29 @@ export default function ShowTicket({ticket, organisationUsers, categories, label
         set_status: '',
         attachments: [] as File[],
     });
+
+    // Create a mapping of field IDs to labels from category forms
+    const formFieldLabels = useMemo(() => {
+        const labelMap = new Map<string, string>();
+
+        ticket.categories.forEach(category => {
+            if (category.form?.content) {
+                try {
+                    const fields = JSON.parse(category.form.content);
+                    fields.forEach((field: any) => {
+                        if (field.id && field.label) {
+                            labelMap.set(field.id, field.label);
+                        }
+                    });
+                } catch (e) {
+                    // Ignore parsing errors
+                    console.error('Failed to parse form content:', e);
+                }
+            }
+        });
+
+        return labelMap;
+    }, [ticket.categories]);
 
     // Helper function to get initials from name
     const getInitials = (name: string): string => {
@@ -419,7 +447,9 @@ export default function ShowTicket({ticket, organisationUsers, categories, label
                                                 <div className="grid gap-2">
                                                     {Object.entries(ticket.metadata).map(([key, value]) => (
                                                         <div key={key} className="grid grid-cols-3 gap-4 text-sm">
-                                                            <span className="font-medium text-muted-foreground">{key}:</span>
+                                                            <span className="font-medium text-muted-foreground">
+                                                                {formFieldLabels.get(key) || key}:
+                                                            </span>
                                                             <span className="col-span-2">{String(value)}</span>
                                                         </div>
                                                     ))}

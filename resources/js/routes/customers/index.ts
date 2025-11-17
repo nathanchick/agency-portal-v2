@@ -6,7 +6,7 @@ import projects from './projects'
 import websites from './websites'
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::index
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:18
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:21
 * @route '/customers'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -21,7 +21,7 @@ index.definition = {
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::index
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:18
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:21
 * @route '/customers'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -30,7 +30,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::index
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:18
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:21
 * @route '/customers'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -40,7 +40,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::index
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:18
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:21
 * @route '/customers'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -50,7 +50,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::index
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:18
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:21
 * @route '/customers'
 */
 const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -60,7 +60,7 @@ const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::index
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:18
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:21
 * @route '/customers'
 */
 indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -70,7 +70,7 @@ indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::index
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:18
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:21
 * @route '/customers'
 */
 indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -87,7 +87,7 @@ index.form = indexForm
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::create
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:50
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:53
 * @route '/customers/create'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -102,7 +102,7 @@ create.definition = {
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::create
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:50
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:53
 * @route '/customers/create'
 */
 create.url = (options?: RouteQueryOptions) => {
@@ -111,7 +111,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::create
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:50
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:53
 * @route '/customers/create'
 */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -121,7 +121,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::create
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:50
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:53
 * @route '/customers/create'
 */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -131,7 +131,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::create
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:50
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:53
 * @route '/customers/create'
 */
 const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -141,7 +141,7 @@ const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::create
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:50
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:53
 * @route '/customers/create'
 */
 createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -151,7 +151,7 @@ createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::create
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:50
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:53
 * @route '/customers/create'
 */
 createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -168,7 +168,7 @@ create.form = createForm
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::store
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:55
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:58
 * @route '/customers'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -183,7 +183,7 @@ store.definition = {
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::store
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:55
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:58
 * @route '/customers'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -192,7 +192,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::store
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:55
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:58
 * @route '/customers'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -202,7 +202,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::store
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:55
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:58
 * @route '/customers'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -212,7 +212,7 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::store
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:55
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:58
 * @route '/customers'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -323,7 +323,7 @@ show.form = showForm
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::edit
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:81
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:84
 * @route '/customers/{customer}/edit'
 */
 export const edit = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -338,7 +338,7 @@ edit.definition = {
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::edit
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:81
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:84
 * @route '/customers/{customer}/edit'
 */
 edit.url = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -371,7 +371,7 @@ edit.url = (args: { customer: string | { id: string } } | [customer: string | { 
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::edit
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:81
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:84
 * @route '/customers/{customer}/edit'
 */
 edit.get = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -381,7 +381,7 @@ edit.get = (args: { customer: string | { id: string } } | [customer: string | { 
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::edit
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:81
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:84
 * @route '/customers/{customer}/edit'
 */
 edit.head = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -391,7 +391,7 @@ edit.head = (args: { customer: string | { id: string } } | [customer: string | {
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::edit
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:81
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:84
 * @route '/customers/{customer}/edit'
 */
 const editForm = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -401,7 +401,7 @@ const editForm = (args: { customer: string | { id: string } } | [customer: strin
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::edit
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:81
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:84
 * @route '/customers/{customer}/edit'
 */
 editForm.get = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -411,7 +411,7 @@ editForm.get = (args: { customer: string | { id: string } } | [customer: string 
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::edit
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:81
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:84
 * @route '/customers/{customer}/edit'
 */
 editForm.head = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -428,7 +428,7 @@ edit.form = editForm
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::update
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:155
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:195
 * @route '/customers/{customer}'
 */
 export const update = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -443,7 +443,7 @@ update.definition = {
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::update
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:155
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:195
 * @route '/customers/{customer}'
 */
 update.url = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -476,7 +476,7 @@ update.url = (args: { customer: string | { id: string } } | [customer: string | 
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::update
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:155
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:195
 * @route '/customers/{customer}'
 */
 update.put = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -486,7 +486,7 @@ update.put = (args: { customer: string | { id: string } } | [customer: string | 
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::update
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:155
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:195
 * @route '/customers/{customer}'
 */
 update.patch = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -496,7 +496,7 @@ update.patch = (args: { customer: string | { id: string } } | [customer: string 
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::update
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:155
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:195
 * @route '/customers/{customer}'
 */
 const updateForm = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -511,7 +511,7 @@ const updateForm = (args: { customer: string | { id: string } } | [customer: str
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::update
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:155
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:195
 * @route '/customers/{customer}'
 */
 updateForm.put = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -526,7 +526,7 @@ updateForm.put = (args: { customer: string | { id: string } } | [customer: strin
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::update
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:155
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:195
 * @route '/customers/{customer}'
 */
 updateForm.patch = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -543,7 +543,7 @@ update.form = updateForm
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::destroy
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:202
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:242
 * @route '/customers/{customer}'
 */
 export const destroy = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -558,7 +558,7 @@ destroy.definition = {
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::destroy
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:202
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:242
 * @route '/customers/{customer}'
 */
 destroy.url = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
@@ -591,7 +591,7 @@ destroy.url = (args: { customer: string | { id: string } } | [customer: string |
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::destroy
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:202
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:242
 * @route '/customers/{customer}'
 */
 destroy.delete = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -601,7 +601,7 @@ destroy.delete = (args: { customer: string | { id: string } } | [customer: strin
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::destroy
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:202
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:242
 * @route '/customers/{customer}'
 */
 const destroyForm = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -616,7 +616,7 @@ const destroyForm = (args: { customer: string | { id: string } } | [customer: st
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::destroy
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:202
+* @see Modules/Customer/app/Http/Controllers/CustomerController.php:242
 * @route '/customers/{customer}'
 */
 destroyForm.delete = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

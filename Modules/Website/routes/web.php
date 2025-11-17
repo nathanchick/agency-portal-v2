@@ -5,7 +5,7 @@ use Modules\Website\Http\Controllers\WebsiteController;
 use Modules\Website\Http\Controllers\Customer\CustomerWebsiteController;
 
 // Organisation user routes
-Route::middleware(['auth', 'verified'])->prefix('websites')->name('websites.')->group(function () {
+Route::middleware(['auth', 'verified', 'organisation'])->prefix('websites')->name('websites.')->group(function () {
     Route::get('/', [WebsiteController::class, 'index'])->name('index');
     Route::get('/{id}/edit', [WebsiteController::class, 'edit'])->name('edit');
     Route::put('/{id}', [WebsiteController::class, 'update'])->name('update');

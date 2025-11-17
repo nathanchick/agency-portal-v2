@@ -14,6 +14,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { FileText, Clock, TrendingDown, Users, ExternalLink } from "lucide-react"
+import { route } from 'ziggy-js'
 
 interface CustomerBilling {
     id: string
@@ -263,7 +264,7 @@ export default function BillingOverview({ customers, totals }: Props) {
                                                             size="sm"
                                                             asChild
                                                         >
-                                                            <Link href={`/customers/${customer.id}/billing/stats`}>
+                                                            <Link href={route('customers.billing.customer.stats', customer.id)}>
                                                                 View Details
                                                                 <ExternalLink className="ml-2 h-3 w-3" />
                                                             </Link>

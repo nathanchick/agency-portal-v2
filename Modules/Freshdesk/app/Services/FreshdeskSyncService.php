@@ -31,12 +31,26 @@ class FreshdeskSyncService
 
     private ?\Closure $outputCallback = null;
 
+    private array $rateLimitConfig;
+
+    private int $requestCount = 0;
+
     public function __construct(Organisation $organisation, string $freshdeskDomain, string $freshdeskApiKey)
     {
         $this->organisation = $organisation;
         $this->freshdeskDomain = $freshdeskDomain;
         $this->freshdeskApiKey = $freshdeskApiKey;
         $this->baseUrl = "https://{$freshdeskDomain}/api/v2";
+        $this->rateLimitConfig = config('freshdesk.rate_limiting', [
+            'delay_between_requests_ms' => 200,
+            'delay_between_pages_ms' => 1000,
+            'retry_attempts' => 3,
+            'retry_delay_ms' => 2000,
+            'exponential_backoff' => true,
+            'respect_rate_limit_headers' => true,
+            'min_remaining_requests' => 50,
+            'pause_duration_seconds' => 60,
+        ]);
     }
 
     /**
@@ -63,9 +77,14 @@ class FreshdeskSyncService
     public function run(?Carbon $since = null): array
     {
         $since = $since ?? Carbon::now()->subHours(24);
+        $startTime = microtime(true);
+        $successCount = 0;
+        $failureCount = 0;
+        $failedCustomers = [];
 
         $this->output("Starting Freshdesk sync for organisation: {$this->organisation->name}");
         $this->output("Syncing data updated since: {$since->toDateTimeString()}");
+        $this->output("Rate limiting: {$this->rateLimitConfig['delay_between_requests_ms']}ms between requests, {$this->rateLimitConfig['delay_between_pages_ms']}ms between pages");
 
         // Get all customers with freshdesk_company_id
         $customers = Customer::where('organisation_id', $this->organisation->id)
@@ -83,6 +102,8 @@ class FreshdeskSyncService
             return $this->statistics;
         }
 
+        $this->output("Found {$customers->count()} customers to sync\n");
+
         foreach ($customers as $customer) {
             $companyId = $customer->settings()
                 ->where('module', 'Freshdesk')
@@ -90,12 +111,53 @@ class FreshdeskSyncService
                 ->first()?->value;
 
             if ($companyId) {
-                $this->output("\nSyncing Freshdesk company {$companyId} for customer: {$customer->name}");
-                $this->syncTickets($customer, $companyId, $since);
+                try {
+                    $this->output("\nSyncing Freshdesk company {$companyId} for customer: {$customer->name}");
+                    $this->syncTickets($customer, $companyId, $since);
+                    $successCount++;
+                } catch (\Exception $e) {
+                    $failureCount++;
+                    $failedCustomers[] = [
+                        'name' => $customer->name,
+                        'company_id' => $companyId,
+                        'error' => $e->getMessage(),
+                    ];
+                    $this->output("Failed to sync customer {$customer->name}: {$e->getMessage()}", 'error');
+                    // Continue to next customer instead of failing entire sync
+                    continue;
+                }
             }
         }
 
-        return $this->statistics;
+        $duration = round(microtime(true) - $startTime, 2);
+
+        // Output summary
+        $this->output("\n" . str_repeat('=', 60));
+        $this->output("Freshdesk Sync Summary");
+        $this->output(str_repeat('=', 60));
+        $this->output("Duration: {$duration}s");
+        $this->output("Total API Requests: {$this->requestCount}");
+        $this->output("Customers Processed: {$successCount} successful, {$failureCount} failed");
+        $this->output("Tickets Synced: {$this->statistics['tickets']}");
+        $this->output("Messages Synced: {$this->statistics['messages']}");
+        $this->output("Users Synced: {$this->statistics['users']}");
+
+        if (!empty($failedCustomers)) {
+            $this->output("\nFailed Customers:");
+            foreach ($failedCustomers as $failed) {
+                $this->output("  - {$failed['name']} (Company ID: {$failed['company_id']}): {$failed['error']}", 'error');
+            }
+        }
+
+        $this->output(str_repeat('=', 60));
+
+        return array_merge($this->statistics, [
+            'duration_seconds' => $duration,
+            'api_requests' => $this->requestCount,
+            'successful_customers' => $successCount,
+            'failed_customers' => $failureCount,
+            'failed_customer_details' => $failedCustomers,
+        ]);
     }
 
     /**
@@ -105,9 +167,12 @@ class FreshdeskSyncService
     {
         $page = 1;
         $hasMore = true;
+        $pageTicketCount = 0;
 
         while ($hasMore && $page <= 300) { // Freshdesk max 300 pages
             try {
+                $this->output("  Fetching page {$page}...");
+
                 $response = $this->makeApiRequest('/tickets', [
                     'company_id' => $companyId,
                     'updated_since' => $since->toIso8601String(),
@@ -120,6 +185,9 @@ class FreshdeskSyncService
                     break;
                 }
 
+                $pageTicketCount = count($response);
+                $this->output("  Processing {$pageTicketCount} tickets from page {$page}...");
+
                 foreach ($response as $freshdeskTicket) {
                     $this->processTicket($freshdeskTicket, $customer);
                 }
@@ -127,6 +195,11 @@ class FreshdeskSyncService
                 // Check if there are more pages
                 $hasMore = count($response) === 100;
                 $page++;
+
+                // Add delay between pages to prevent rate limiting
+                if ($hasMore && $this->rateLimitConfig['delay_between_pages_ms'] > 0) {
+                    usleep($this->rateLimitConfig['delay_between_pages_ms'] * 1000);
+                }
             } catch (\Exception $e) {
                 $this->output("Failed to sync tickets for company {$companyId}: {$e->getMessage()}", 'error');
                 break;
@@ -522,25 +595,99 @@ class FreshdeskSyncService
     }
 
     /**
-     * Make a request to the Freshdesk API
+     * Make a request to the Freshdesk API with rate limiting and retry logic
      */
     private function makeApiRequest(string $endpoint, array $params = []): array
     {
+        $this->requestCount++;
+        $retryDelay = $this->rateLimitConfig['retry_delay_ms'];
+
         $response = Http::withBasicAuth($this->freshdeskApiKey, 'X')
             ->withHeaders([
                 'Content-Type' => 'application/json',
             ])
+            ->retry(
+                $this->rateLimitConfig['retry_attempts'],
+                function ($exception, $request) use (&$retryDelay) {
+                    // Exponential backoff
+                    if ($this->rateLimitConfig['exponential_backoff']) {
+                        $currentDelay = $retryDelay;
+                        $retryDelay *= 2; // Double delay for next retry
+                        return $currentDelay;
+                    }
+                    return $retryDelay;
+                },
+                function ($exception, $request) {
+                    // Only retry on rate limit (429) or server errors (5xx)
+                    if ($exception instanceof \Illuminate\Http\Client\RequestException) {
+                        $response = $exception->response;
+                        return $response && ($response->status() === 429 || $response->status() >= 500);
+                    }
+                    return false;
+                }
+            )
             ->get($this->baseUrl.$endpoint, $params);
+
+        // Check rate limit headers if enabled
+        if ($this->rateLimitConfig['respect_rate_limit_headers']) {
+            $this->handleRateLimitHeaders($response->headers());
+        }
 
         if (! $response->successful()) {
             if ($response->status() === 429) {
-                throw new \Exception('Freshdesk API rate limit exceeded');
+                $retryAfter = $response->header('Retry-After') ?? $this->rateLimitConfig['pause_duration_seconds'];
+                $this->output("Rate limit exceeded. Waiting {$retryAfter} seconds before continuing...", 'warn');
+                sleep((int) $retryAfter);
+
+                // Retry once more after waiting
+                return $this->makeApiRequest($endpoint, $params);
             }
 
             throw new \Exception("Freshdesk API request failed ({$response->status()}): {$response->body()}");
         }
 
+        // Add delay between requests to prevent rate limiting
+        $delayMs = $this->rateLimitConfig['delay_between_requests_ms'];
+        if ($delayMs > 0) {
+            usleep($delayMs * 1000); // Convert ms to microseconds
+        }
+
         return $response->json() ?? [];
+    }
+
+    /**
+     * Handle rate limit headers and pause if necessary
+     */
+    private function handleRateLimitHeaders(array $headers): void
+    {
+        // Freshdesk uses X-RateLimit-* headers
+        $remaining = null;
+        $reset = null;
+
+        foreach ($headers as $key => $value) {
+            $key = strtolower($key);
+            if ($key === 'x-ratelimit-remaining') {
+                $remaining = (int) (is_array($value) ? $value[0] : $value);
+            } elseif ($key === 'x-ratelimit-reset') {
+                $reset = (int) (is_array($value) ? $value[0] : $value);
+            }
+        }
+
+        // If we're running low on requests, pause
+        if ($remaining !== null && $remaining < $this->rateLimitConfig['min_remaining_requests']) {
+            $pauseDuration = $this->rateLimitConfig['pause_duration_seconds'];
+
+            if ($reset !== null) {
+                // Calculate time until reset
+                $pauseDuration = max(1, $reset - time());
+            }
+
+            $this->output(
+                "Approaching rate limit ({$remaining} requests remaining). Pausing for {$pauseDuration} seconds...",
+                'warn'
+            );
+            sleep($pauseDuration);
+        }
     }
 
     /**

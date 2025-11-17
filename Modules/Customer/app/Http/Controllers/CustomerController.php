@@ -9,6 +9,9 @@ use App\Services\ModuleSettingsService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Modules\Customer\Models\Customer;
+use Modules\GitHub\Services\GitHubApiService;
+use Modules\GitHub\Services\GitHubRepositorySyncService;
+use Modules\GitHub\Services\GitHubTokenService;
 use Modules\Organisation\Models\Organisation;
 
 class CustomerController extends Controller
@@ -78,7 +81,7 @@ class CustomerController extends Controller
         return redirect()->route('customers.edit', $customer)->with('success', 'Customer created successfully');
     }
 
-    public function edit(Customer $customer, ModuleSettingsService $settingsService)
+    public function edit(Request $request, Customer $customer, ModuleSettingsService $settingsService, GitHubApiService $githubApiService, GitHubRepositorySyncService $githubSyncService, GitHubTokenService $githubTokenService)
     {
         $organisationId = $this->getCurrentOrganisationId();
 
@@ -90,7 +93,7 @@ class CustomerController extends Controller
         // Load users with their customer-specific role from pivot table
         $customer->load(['users' => function ($query) {
             $query->withPivot('role_id');
-        }, 'projects', 'websites.project']);
+        }, 'projects.githubRepository', 'websites.project']);
 
         // Map users to include role name from the pivot table
         $usersWithRoles = $customer->users->map(function ($user) {
@@ -136,6 +139,42 @@ class CustomerController extends Controller
         // Get module settings for this customer
         $moduleSettings = $settingsService->getCustomerSettings($customer);
 
+        // Get GitHub repositories if connected
+        $githubRepositories = [];
+        $organisation = Organisation::find($organisationId);
+        if ($githubTokenService->isTokenValid($organisation)) {
+            try {
+                // Force refresh if requested
+                $forceRefresh = $request->boolean('refresh_github', false);
+
+                // Fetch from API
+                $apiRepos = $githubApiService->listRepositories($organisation, $forceRefresh);
+
+                // Sync to database
+                foreach ($apiRepos as $apiRepo) {
+                    $githubSyncService->createOrUpdateRepository($organisation, $apiRepo);
+                }
+
+                // Get stored repositories from database
+                $githubRepositories = \Modules\GitHub\Models\GitHubRepository::where('organisation_id', $organisationId)
+                    ->orderBy('full_name')
+                    ->get(['id', 'name', 'full_name', 'owner', 'description', 'html_url', 'is_private'])
+                    ->toArray();
+
+                \Illuminate\Support\Facades\Log::info('GitHub repositories loaded', [
+                    'organisation_id' => $organisationId,
+                    'count' => count($githubRepositories),
+                    'force_refresh' => $forceRefresh,
+                ]);
+
+            } catch (\Exception $e) {
+                // Silently fail if GitHub API is unavailable
+                \Illuminate\Support\Facades\Log::warning('Failed to fetch GitHub repositories', [
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
         return Inertia::render('customers/edit', [
             'customer' => [
                 'id' => $customer->id,
@@ -149,6 +188,7 @@ class CustomerController extends Controller
             'availableUsers' => $availableUsers,
             'roles' => $roles,
             'moduleSettings' => $moduleSettings,
+            'githubRepositories' => $githubRepositories,
         ]);
     }
 
@@ -410,6 +450,7 @@ class CustomerController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'notes' => 'nullable|string',
+            'github_repository_id' => 'nullable|uuid|exists:github_repositories,id',
         ]);
 
         \Modules\Customer\Models\Project::create([
@@ -417,6 +458,7 @@ class CustomerController extends Controller
             'customer_id' => $customer->id,
             'name' => $validated['name'],
             'notes' => $validated['notes'] ?? null,
+            'github_repository_id' => $validated['github_repository_id'] ?? null,
         ]);
 
         return back()->with('success', 'Project created successfully');
@@ -434,6 +476,7 @@ class CustomerController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'notes' => 'nullable|string',
+            'github_repository_id' => 'nullable|uuid|exists:github_repositories,id',
         ]);
 
         $project = \Modules\Customer\Models\Project::where('customer_id', $customer->id)
