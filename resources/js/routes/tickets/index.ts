@@ -310,7 +310,7 @@ store.form = storeForm
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
-export const show = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const show = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -325,7 +325,7 @@ show.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
-show.url = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+show.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { ticket: args }
     }
@@ -358,7 +358,7 @@ show.url = (args: { ticket: string | number | { id: string | number } } | [ticke
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
-show.get = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+show.get = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -368,7 +368,7 @@ show.get = (args: { ticket: string | number | { id: string | number } } | [ticke
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
-show.head = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+show.head = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(args, options),
     method: 'head',
 })
@@ -378,7 +378,7 @@ show.head = (args: { ticket: string | number | { id: string | number } } | [tick
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
-const showForm = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const showForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -388,7 +388,7 @@ const showForm = (args: { ticket: string | number | { id: string | number } } | 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
-showForm.get = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.get = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -398,7 +398,7 @@ showForm.get = (args: { ticket: string | number | { id: string | number } } | [t
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
 * @route '/tickets/{ticket}'
 */
-showForm.head = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.head = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -415,7 +415,7 @@ show.form = showForm
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
 * @route '/tickets/{ticket}/status'
 */
-export const updateStatus = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const updateStatus = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: updateStatus.url(args, options),
     method: 'patch',
 })
@@ -430,7 +430,7 @@ updateStatus.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
 * @route '/tickets/{ticket}/status'
 */
-updateStatus.url = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+updateStatus.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { ticket: args }
     }
@@ -463,7 +463,7 @@ updateStatus.url = (args: { ticket: string | number | { id: string | number } } 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
 * @route '/tickets/{ticket}/status'
 */
-updateStatus.patch = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+updateStatus.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: updateStatus.url(args, options),
     method: 'patch',
 })
@@ -473,7 +473,7 @@ updateStatus.patch = (args: { ticket: string | number | { id: string | number } 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
 * @route '/tickets/{ticket}/status'
 */
-const updateStatusForm = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateStatusForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updateStatus.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -488,7 +488,7 @@ const updateStatusForm = (args: { ticket: string | number | { id: string | numbe
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
 * @route '/tickets/{ticket}/status'
 */
-updateStatusForm.patch = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateStatusForm.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updateStatus.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -505,7 +505,7 @@ updateStatus.form = updateStatusForm
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:699
 * @route '/tickets/{ticket}/priority'
 */
-export const updatePriority = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const updatePriority = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: updatePriority.url(args, options),
     method: 'patch',
 })
@@ -520,7 +520,7 @@ updatePriority.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:699
 * @route '/tickets/{ticket}/priority'
 */
-updatePriority.url = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+updatePriority.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { ticket: args }
     }
@@ -553,7 +553,7 @@ updatePriority.url = (args: { ticket: string | number | { id: string | number } 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:699
 * @route '/tickets/{ticket}/priority'
 */
-updatePriority.patch = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+updatePriority.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: updatePriority.url(args, options),
     method: 'patch',
 })
@@ -563,7 +563,7 @@ updatePriority.patch = (args: { ticket: string | number | { id: string | number 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:699
 * @route '/tickets/{ticket}/priority'
 */
-const updatePriorityForm = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updatePriorityForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updatePriority.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -578,7 +578,7 @@ const updatePriorityForm = (args: { ticket: string | number | { id: string | num
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:699
 * @route '/tickets/{ticket}/priority'
 */
-updatePriorityForm.patch = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updatePriorityForm.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updatePriority.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -595,7 +595,7 @@ updatePriority.form = updatePriorityForm
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
 * @route '/tickets/{ticket}/assignment'
 */
-export const updateAssignment = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const updateAssignment = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: updateAssignment.url(args, options),
     method: 'patch',
 })
@@ -610,7 +610,7 @@ updateAssignment.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
 * @route '/tickets/{ticket}/assignment'
 */
-updateAssignment.url = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+updateAssignment.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { ticket: args }
     }
@@ -643,7 +643,7 @@ updateAssignment.url = (args: { ticket: string | number | { id: string | number 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
 * @route '/tickets/{ticket}/assignment'
 */
-updateAssignment.patch = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+updateAssignment.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: updateAssignment.url(args, options),
     method: 'patch',
 })
@@ -653,7 +653,7 @@ updateAssignment.patch = (args: { ticket: string | number | { id: string | numbe
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
 * @route '/tickets/{ticket}/assignment'
 */
-const updateAssignmentForm = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateAssignmentForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updateAssignment.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -668,7 +668,7 @@ const updateAssignmentForm = (args: { ticket: string | number | { id: string | n
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
 * @route '/tickets/{ticket}/assignment'
 */
-updateAssignmentForm.patch = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateAssignmentForm.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updateAssignment.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -685,7 +685,7 @@ updateAssignment.form = updateAssignmentForm
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:739
 * @route '/tickets/{ticket}/category'
 */
-export const updateCategory = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const updateCategory = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: updateCategory.url(args, options),
     method: 'patch',
 })
@@ -700,7 +700,7 @@ updateCategory.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:739
 * @route '/tickets/{ticket}/category'
 */
-updateCategory.url = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+updateCategory.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { ticket: args }
     }
@@ -733,7 +733,7 @@ updateCategory.url = (args: { ticket: string | number | { id: string | number } 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:739
 * @route '/tickets/{ticket}/category'
 */
-updateCategory.patch = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+updateCategory.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: updateCategory.url(args, options),
     method: 'patch',
 })
@@ -743,7 +743,7 @@ updateCategory.patch = (args: { ticket: string | number | { id: string | number 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:739
 * @route '/tickets/{ticket}/category'
 */
-const updateCategoryForm = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateCategoryForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updateCategory.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -758,7 +758,7 @@ const updateCategoryForm = (args: { ticket: string | number | { id: string | num
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:739
 * @route '/tickets/{ticket}/category'
 */
-updateCategoryForm.patch = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateCategoryForm.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updateCategory.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -775,7 +775,7 @@ updateCategory.form = updateCategoryForm
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
 * @route '/tickets/{ticket}/labels'
 */
-export const addLabel = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const addLabel = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: addLabel.url(args, options),
     method: 'post',
 })
@@ -790,7 +790,7 @@ addLabel.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
 * @route '/tickets/{ticket}/labels'
 */
-addLabel.url = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+addLabel.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { ticket: args }
     }
@@ -823,7 +823,7 @@ addLabel.url = (args: { ticket: string | number | { id: string | number } } | [t
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
 * @route '/tickets/{ticket}/labels'
 */
-addLabel.post = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+addLabel.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: addLabel.url(args, options),
     method: 'post',
 })
@@ -833,7 +833,7 @@ addLabel.post = (args: { ticket: string | number | { id: string | number } } | [
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
 * @route '/tickets/{ticket}/labels'
 */
-const addLabelForm = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const addLabelForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: addLabel.url(args, options),
     method: 'post',
 })
@@ -843,7 +843,7 @@ const addLabelForm = (args: { ticket: string | number | { id: string | number } 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
 * @route '/tickets/{ticket}/labels'
 */
-addLabelForm.post = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+addLabelForm.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: addLabel.url(args, options),
     method: 'post',
 })
@@ -855,7 +855,7 @@ addLabel.form = addLabelForm
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
 * @route '/tickets/{ticket}/labels/{label}'
 */
-export const removeLabel = (args: { ticket: string | number | { id: string | number }, label: string | number | { id: string | number } } | [ticket: string | number | { id: string | number }, label: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const removeLabel = (args: { ticket: string | { id: string }, label: string | { id: string } } | [ticket: string | { id: string }, label: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: removeLabel.url(args, options),
     method: 'delete',
 })
@@ -870,7 +870,7 @@ removeLabel.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
 * @route '/tickets/{ticket}/labels/{label}'
 */
-removeLabel.url = (args: { ticket: string | number | { id: string | number }, label: string | number | { id: string | number } } | [ticket: string | number | { id: string | number }, label: string | number | { id: string | number } ], options?: RouteQueryOptions) => {
+removeLabel.url = (args: { ticket: string | { id: string }, label: string | { id: string } } | [ticket: string | { id: string }, label: string | { id: string } ], options?: RouteQueryOptions) => {
     if (Array.isArray(args)) {
         args = {
             ticket: args[0],
@@ -900,7 +900,7 @@ removeLabel.url = (args: { ticket: string | number | { id: string | number }, la
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
 * @route '/tickets/{ticket}/labels/{label}'
 */
-removeLabel.delete = (args: { ticket: string | number | { id: string | number }, label: string | number | { id: string | number } } | [ticket: string | number | { id: string | number }, label: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+removeLabel.delete = (args: { ticket: string | { id: string }, label: string | { id: string } } | [ticket: string | { id: string }, label: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: removeLabel.url(args, options),
     method: 'delete',
 })
@@ -910,7 +910,7 @@ removeLabel.delete = (args: { ticket: string | number | { id: string | number },
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
 * @route '/tickets/{ticket}/labels/{label}'
 */
-const removeLabelForm = (args: { ticket: string | number | { id: string | number }, label: string | number | { id: string | number } } | [ticket: string | number | { id: string | number }, label: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const removeLabelForm = (args: { ticket: string | { id: string }, label: string | { id: string } } | [ticket: string | { id: string }, label: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: removeLabel.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -925,7 +925,7 @@ const removeLabelForm = (args: { ticket: string | number | { id: string | number
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
 * @route '/tickets/{ticket}/labels/{label}'
 */
-removeLabelForm.delete = (args: { ticket: string | number | { id: string | number }, label: string | number | { id: string | number } } | [ticket: string | number | { id: string | number }, label: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+removeLabelForm.delete = (args: { ticket: string | { id: string }, label: string | { id: string } } | [ticket: string | { id: string }, label: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: removeLabel.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -942,7 +942,7 @@ removeLabel.form = removeLabelForm
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:808
 * @route '/tickets/{ticket}/messages'
 */
-export const addMessage = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const addMessage = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: addMessage.url(args, options),
     method: 'post',
 })
@@ -957,7 +957,7 @@ addMessage.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:808
 * @route '/tickets/{ticket}/messages'
 */
-addMessage.url = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+addMessage.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { ticket: args }
     }
@@ -990,7 +990,7 @@ addMessage.url = (args: { ticket: string | number | { id: string | number } } | 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:808
 * @route '/tickets/{ticket}/messages'
 */
-addMessage.post = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+addMessage.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: addMessage.url(args, options),
     method: 'post',
 })
@@ -1000,7 +1000,7 @@ addMessage.post = (args: { ticket: string | number | { id: string | number } } |
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:808
 * @route '/tickets/{ticket}/messages'
 */
-const addMessageForm = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const addMessageForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: addMessage.url(args, options),
     method: 'post',
 })
@@ -1010,7 +1010,7 @@ const addMessageForm = (args: { ticket: string | number | { id: string | number 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:808
 * @route '/tickets/{ticket}/messages'
 */
-addMessageForm.post = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+addMessageForm.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: addMessage.url(args, options),
     method: 'post',
 })

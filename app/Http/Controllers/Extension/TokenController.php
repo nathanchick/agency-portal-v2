@@ -80,7 +80,17 @@ class TokenController extends Controller
             ], 401);
         }
 
-        $extensionToken->load('user.currentOrganisation');
+        $extensionToken->load('user.organisations');
+
+        // Get user's first organisation (users must have at least one organisation)
+        $organisation = $extensionToken->user->organisations->first();
+
+        if (!$organisation) {
+            return response()->json([
+                'valid' => false,
+                'message' => 'User has no organisation.',
+            ], 401);
+        }
 
         return response()->json([
             'valid' => true,
@@ -89,8 +99,8 @@ class TokenController extends Controller
                 'name' => $extensionToken->user->name,
                 'email' => $extensionToken->user->email,
                 'organisation' => [
-                    'id' => $extensionToken->user->currentOrganisation->id,
-                    'name' => $extensionToken->user->currentOrganisation->name,
+                    'id' => $organisation->id,
+                    'name' => $organisation->name,
                 ],
             ],
         ]);

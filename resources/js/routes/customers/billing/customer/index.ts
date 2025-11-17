@@ -4,7 +4,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 * @see Modules/Billing/app/Http/Controllers/BillingController.php:121
 * @route '/customers/billing/{customer}/stats'
 */
-export const stats = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const stats = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: stats.url(args, options),
     method: 'get',
 })
@@ -19,7 +19,7 @@ stats.definition = {
 * @see Modules/Billing/app/Http/Controllers/BillingController.php:121
 * @route '/customers/billing/{customer}/stats'
 */
-stats.url = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+stats.url = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { customer: args }
     }
@@ -52,7 +52,7 @@ stats.url = (args: { customer: string | number | { id: string | number } } | [cu
 * @see Modules/Billing/app/Http/Controllers/BillingController.php:121
 * @route '/customers/billing/{customer}/stats'
 */
-stats.get = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+stats.get = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: stats.url(args, options),
     method: 'get',
 })
@@ -62,7 +62,7 @@ stats.get = (args: { customer: string | number | { id: string | number } } | [cu
 * @see Modules/Billing/app/Http/Controllers/BillingController.php:121
 * @route '/customers/billing/{customer}/stats'
 */
-stats.head = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+stats.head = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: stats.url(args, options),
     method: 'head',
 })
@@ -72,7 +72,7 @@ stats.head = (args: { customer: string | number | { id: string | number } } | [c
 * @see Modules/Billing/app/Http/Controllers/BillingController.php:121
 * @route '/customers/billing/{customer}/stats'
 */
-const statsForm = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const statsForm = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: stats.url(args, options),
     method: 'get',
 })
@@ -82,7 +82,7 @@ const statsForm = (args: { customer: string | number | { id: string | number } }
 * @see Modules/Billing/app/Http/Controllers/BillingController.php:121
 * @route '/customers/billing/{customer}/stats'
 */
-statsForm.get = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+statsForm.get = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: stats.url(args, options),
     method: 'get',
 })
@@ -92,7 +92,7 @@ statsForm.get = (args: { customer: string | number | { id: string | number } } |
 * @see Modules/Billing/app/Http/Controllers/BillingController.php:121
 * @route '/customers/billing/{customer}/stats'
 */
-statsForm.head = (args: { customer: string | number | { id: string | number } } | [customer: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+statsForm.head = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: stats.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
