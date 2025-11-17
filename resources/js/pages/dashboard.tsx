@@ -263,9 +263,16 @@ export default function Page() {
     }
 
     const handleSave = async () => {
+        // Optimistic UI update: save current state for potential rollback
+        const previousWidgets = [...widgets]
+        const previousEditingState = isEditing
+
         try {
             setIsSaving(true)
             setError(null)
+
+            // Optimistically exit edit mode
+            setIsEditing(false)
 
             const response = await fetch(route('dashboard.widgets.save'), {
                 method: 'POST',
@@ -285,9 +292,7 @@ export default function Page() {
 
             toast.success("Dashboard layout saved successfully")
 
-            setIsEditing(false)
-
-            // Update with saved widgets
+            // Update with saved widgets from server (with real IDs)
             if (data.widgets) {
                 setWidgets(data.widgets)
             }
@@ -295,6 +300,10 @@ export default function Page() {
             const errorMessage = err instanceof Error ? err.message : 'Failed to save layout'
             setError(errorMessage)
             toast.error(errorMessage)
+
+            // Revert to previous state on error (rollback)
+            setWidgets(previousWidgets)
+            setIsEditing(previousEditingState)
         } finally {
             setIsSaving(false)
         }
