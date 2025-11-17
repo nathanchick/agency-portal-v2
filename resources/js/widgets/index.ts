@@ -9,9 +9,12 @@ import { ComponentType } from 'react'
 import { TestWidget } from './test/TestWidget'
 import { RecentTicketsWidget } from './tickets/RecentTicketsWidget'
 import { TicketStatsWidget } from './tickets/TicketStatsWidget'
+import { MyTicketsWidget } from './tickets/MyTicketsWidget'
 import { WeeklySummaryWidget } from './timesheet/WeeklySummaryWidget'
 import { WelcomeWidget } from './generic/WelcomeWidget'
 import { QuickLinksWidget } from './generic/QuickLinksWidget'
+import { CreatedDocumentsWidget } from './documents/CreatedDocumentsWidget'
+import { AssignedDocumentsWidget } from './documents/AssignedDocumentsWidget'
 
 /**
  * Props interface that all widget components must implement
@@ -68,9 +71,14 @@ export const widgetRegistry: Record<string, ComponentType<WidgetProps>> = {
     // Ticket Module Widgets
     'Ticket.recent_tickets': RecentTicketsWidget,
     'Ticket.ticket_statistics': TicketStatsWidget,
+    'Ticket.my_tickets': MyTicketsWidget,
 
     // Timesheet Module Widgets
     'Timesheet.weekly_summary': WeeklySummaryWidget,
+
+    // Document Module Widgets
+    'Document.created_documents': CreatedDocumentsWidget,
+    'Document.assigned_documents': AssignedDocumentsWidget,
 
     // Generic Widgets (DashboardWidgets Module)
     'DashboardWidgets.welcome': WelcomeWidget,

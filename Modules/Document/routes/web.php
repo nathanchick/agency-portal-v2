@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Document\Http\Controllers\Api\Widget\DocumentWidgetController;
 use Modules\Document\Http\Controllers\CustomerDocumentController;
 use Modules\Document\Http\Controllers\DocumentController;
 use Modules\Document\Http\Controllers\DocumentTypeController;
@@ -37,4 +38,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/customer/documents/{id}/view-sign', [CustomerDocumentController::class, 'viewSign'])->name('customer.documents.view-sign');
     Route::post('/customer/documents/{id}/approve', [CustomerDocumentController::class, 'approve'])->name('customer.documents.approve');
     Route::post('/customer/documents/{id}/decline', [CustomerDocumentController::class, 'decline'])->name('customer.documents.decline');
+});
+
+/**
+ * Widget API Routes
+ * Use web middleware for session authentication
+ */
+Route::middleware(['auth', 'verified'])->prefix('api/widgets/documents')->name('api.widgets.documents.')->group(function () {
+    // Organisation widget - documents created by user
+    Route::get('created', [DocumentWidgetController::class, 'created'])
+        ->name('created')
+        ->middleware('organisation');
+
+    // Customer widget - documents assigned to user
+    Route::get('assigned', [DocumentWidgetController::class, 'assigned'])
+        ->name('assigned');
 });
