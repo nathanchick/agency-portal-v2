@@ -27,7 +27,13 @@ export function OutstandingInvoicesWidget({ settings, isEditing }: WidgetProps) 
                 limit: String(settings?.limit || 10),
                 sort_by: settings?.sort_by || 'amount_desc',
             })
-            const response = await fetch(route('api.widgets.billing.outstanding') + '?' + params)
+            const response = await fetch(route('api.widgets.billing.outstanding') + '?' + params, {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                credentials: 'same-origin',
+            })
             if (!response.ok) {
                 throw new Error('Failed to fetch outstanding invoices data')
             }

@@ -1,4 +1,5 @@
 import TimesheetController from './TimesheetController'
+import Api from './Api'
 import TimeEntryController from './TimeEntryController'
 import ServiceController from './ServiceController'
 import ServiceBudgetPeriodController from './ServiceBudgetPeriodController'
@@ -7,10 +8,10 @@ import ReportController from './ReportController'
 import SavedReportController from './SavedReportController'
 import ScheduledReportController from './ScheduledReportController'
 import Customer from './Customer'
-import Api from './Api'
 
 const Controllers = {
     TimesheetController: Object.assign(TimesheetController, TimesheetController),
+    Api: Object.assign(Api, Api),
     TimeEntryController: Object.assign(TimeEntryController, TimeEntryController),
     ServiceController: Object.assign(ServiceController, ServiceController),
     ServiceBudgetPeriodController: Object.assign(ServiceBudgetPeriodController, ServiceBudgetPeriodController),
@@ -19,7 +20,6 @@ const Controllers = {
     SavedReportController: Object.assign(SavedReportController, SavedReportController),
     ScheduledReportController: Object.assign(ScheduledReportController, ScheduledReportController),
     Customer: Object.assign(Customer, Customer),
-    Api: Object.assign(Api, Api),
 }
 
 export default Controllers

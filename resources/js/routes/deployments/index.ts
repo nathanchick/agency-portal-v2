@@ -222,7 +222,7 @@ store.form = storeForm
 * @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:145
 * @route '/deployments/{deployment}'
 */
-export const destroy = (args: { deployment: string | { id: string } } | [deployment: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { deployment: string | number | { id: string | number } } | [deployment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -237,7 +237,7 @@ destroy.definition = {
 * @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:145
 * @route '/deployments/{deployment}'
 */
-destroy.url = (args: { deployment: string | { id: string } } | [deployment: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+destroy.url = (args: { deployment: string | number | { id: string | number } } | [deployment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { deployment: args }
     }
@@ -270,7 +270,7 @@ destroy.url = (args: { deployment: string | { id: string } } | [deployment: stri
 * @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:145
 * @route '/deployments/{deployment}'
 */
-destroy.delete = (args: { deployment: string | { id: string } } | [deployment: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { deployment: string | number | { id: string | number } } | [deployment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -280,7 +280,7 @@ destroy.delete = (args: { deployment: string | { id: string } } | [deployment: s
 * @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:145
 * @route '/deployments/{deployment}'
 */
-const destroyForm = (args: { deployment: string | { id: string } } | [deployment: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { deployment: string | number | { id: string | number } } | [deployment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -295,7 +295,7 @@ const destroyForm = (args: { deployment: string | { id: string } } | [deployment
 * @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:145
 * @route '/deployments/{deployment}'
 */
-destroyForm.delete = (args: { deployment: string | { id: string } } | [deployment: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { deployment: string | number | { id: string | number } } | [deployment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

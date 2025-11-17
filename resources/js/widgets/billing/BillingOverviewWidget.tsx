@@ -23,7 +23,13 @@ export function BillingOverviewWidget({ settings, isEditing }: WidgetProps) {
     const fetchData = async () => {
         try {
             setLoading(true)
-            const response = await fetch(route('api.widgets.billing.overview'))
+            const response = await fetch(route('api.widgets.billing.overview'), {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                credentials: 'same-origin',
+            })
             if (!response.ok) {
                 throw new Error('Failed to fetch billing overview data')
             }

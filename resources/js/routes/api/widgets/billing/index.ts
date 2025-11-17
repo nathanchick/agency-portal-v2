@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overview
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:30
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:31
 * @route '/api/widgets/billing/overview'
 */
 export const overview = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ overview.definition = {
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overview
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:30
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:31
 * @route '/api/widgets/billing/overview'
 */
 overview.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ overview.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overview
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:30
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:31
 * @route '/api/widgets/billing/overview'
 */
 overview.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ overview.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overview
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:30
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:31
 * @route '/api/widgets/billing/overview'
 */
 overview.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ overview.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overview
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:30
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:31
 * @route '/api/widgets/billing/overview'
 */
 const overviewForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -55,7 +55,7 @@ const overviewForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overview
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:30
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:31
 * @route '/api/widgets/billing/overview'
 */
 overviewForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -65,7 +65,7 @@ overviewForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overview
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:30
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:31
 * @route '/api/widgets/billing/overview'
 */
 overviewForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -82,7 +82,7 @@ overview.form = overviewForm
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::outstanding
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:85
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:94
 * @route '/api/widgets/billing/outstanding'
 */
 export const outstanding = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -97,7 +97,7 @@ outstanding.definition = {
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::outstanding
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:85
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:94
 * @route '/api/widgets/billing/outstanding'
 */
 outstanding.url = (options?: RouteQueryOptions) => {
@@ -106,7 +106,7 @@ outstanding.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::outstanding
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:85
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:94
 * @route '/api/widgets/billing/outstanding'
 */
 outstanding.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -116,7 +116,7 @@ outstanding.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::outstanding
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:85
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:94
 * @route '/api/widgets/billing/outstanding'
 */
 outstanding.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -126,7 +126,7 @@ outstanding.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::outstanding
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:85
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:94
 * @route '/api/widgets/billing/outstanding'
 */
 const outstandingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -136,7 +136,7 @@ const outstandingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::outstanding
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:85
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:94
 * @route '/api/widgets/billing/outstanding'
 */
 outstandingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -146,7 +146,7 @@ outstandingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> 
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::outstanding
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:85
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:94
 * @route '/api/widgets/billing/outstanding'
 */
 outstandingForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -163,7 +163,7 @@ outstanding.form = outstandingForm
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overdue
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:144
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:162
 * @route '/api/widgets/billing/overdue'
 */
 export const overdue = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -178,7 +178,7 @@ overdue.definition = {
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overdue
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:144
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:162
 * @route '/api/widgets/billing/overdue'
 */
 overdue.url = (options?: RouteQueryOptions) => {
@@ -187,7 +187,7 @@ overdue.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overdue
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:144
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:162
 * @route '/api/widgets/billing/overdue'
 */
 overdue.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -197,7 +197,7 @@ overdue.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overdue
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:144
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:162
 * @route '/api/widgets/billing/overdue'
 */
 overdue.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -207,7 +207,7 @@ overdue.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overdue
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:144
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:162
 * @route '/api/widgets/billing/overdue'
 */
 const overdueForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -217,7 +217,7 @@ const overdueForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overdue
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:144
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:162
 * @route '/api/widgets/billing/overdue'
 */
 overdueForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -227,7 +227,7 @@ overdueForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overdue
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:144
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:162
 * @route '/api/widgets/billing/overdue'
 */
 overdueForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -244,7 +244,7 @@ overdue.form = overdueForm
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::myBilling
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:203
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:230
 * @route '/api/widgets/billing/my-billing'
 */
 export const myBilling = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -259,7 +259,7 @@ myBilling.definition = {
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::myBilling
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:203
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:230
 * @route '/api/widgets/billing/my-billing'
 */
 myBilling.url = (options?: RouteQueryOptions) => {
@@ -268,7 +268,7 @@ myBilling.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::myBilling
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:203
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:230
 * @route '/api/widgets/billing/my-billing'
 */
 myBilling.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -278,7 +278,7 @@ myBilling.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::myBilling
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:203
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:230
 * @route '/api/widgets/billing/my-billing'
 */
 myBilling.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -288,7 +288,7 @@ myBilling.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::myBilling
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:203
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:230
 * @route '/api/widgets/billing/my-billing'
 */
 const myBillingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -298,7 +298,7 @@ const myBillingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> 
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::myBilling
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:203
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:230
 * @route '/api/widgets/billing/my-billing'
 */
 myBillingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -308,7 +308,7 @@ myBillingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::myBilling
-* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:203
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:230
 * @route '/api/widgets/billing/my-billing'
 */
 myBillingForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

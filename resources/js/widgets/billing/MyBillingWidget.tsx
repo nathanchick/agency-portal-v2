@@ -37,7 +37,13 @@ export function MyBillingWidget({ settings, isEditing }: WidgetProps) {
                 show_recent: String(settings?.show_recent_invoices !== false),
                 recent_count: String(settings?.recent_invoice_count || 5),
             })
-            const response = await fetch(route('api.widgets.billing.my-billing') + '?' + params)
+            const response = await fetch(route('api.widgets.billing.my-billing') + '?' + params, {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                credentials: 'same-origin',
+            })
             if (!response.ok) {
                 throw new Error('Failed to fetch billing data')
             }

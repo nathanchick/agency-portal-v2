@@ -3,6 +3,7 @@
 namespace Modules\Billing\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\HasCurrentCustomer;
 use App\Http\Traits\HasCurrentOrganisation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ use Modules\Customer\Models\Customer;
  */
 class WidgetController extends Controller
 {
-    use HasCurrentOrganisation;
+    use HasCurrentOrganisation, HasCurrentCustomer;
 
     public function __construct(
         private BillingService $billingService
@@ -236,15 +237,15 @@ class WidgetController extends Controller
         $showRecent = $validated['show_recent'] ?? true;
         $recentCount = $validated['recent_count'] ?? 5;
 
-        // Get the current customer from the session
-        $user = $request->user();
-        if (! $user->last_customer_id) {
+        // Get the current customer securely through trait
+        $customer = $this->getCurrentCustomer();
+
+        if (!$customer) {
             return response()->json([
                 'error' => 'Not a customer user',
+                'data' => null,
             ], 403);
         }
-
-        $customer = Customer::findOrFail($user->last_customer_id);
 
         try {
             $stats = $this->billingService->getStatistics($customer);

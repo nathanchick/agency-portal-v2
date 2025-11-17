@@ -39,6 +39,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/read-all', [\App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');
         Route::delete('/{id}', [\App\Http\Controllers\NotificationController::class, 'destroy'])->name('destroy');
     });
+
+    // Extension token management
+    Route::get('/extension-token', [\App\Http\Controllers\Extension\TokenController::class, 'create'])
+        ->name('extension-token');
+    Route::post('/extension-token', [\App\Http\Controllers\Extension\TokenController::class, 'generate'])
+        ->name('extension-token.generate');
+    Route::delete('/extension-token/{token}', [\App\Http\Controllers\Extension\TokenController::class, 'revoke'])
+        ->name('extension-token.revoke');
 });
 
 // Organisation routes (customer management, projects, websites)

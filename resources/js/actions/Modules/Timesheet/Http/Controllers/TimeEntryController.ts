@@ -222,7 +222,7 @@ store.form = storeForm
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:311
 * @route '/timesheet/entries/{timeEntry}/edit'
 */
-export const edit = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const edit = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -237,7 +237,7 @@ edit.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:311
 * @route '/timesheet/entries/{timeEntry}/edit'
 */
-edit.url = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+edit.url = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { timeEntry: args }
     }
@@ -270,7 +270,7 @@ edit.url = (args: { timeEntry: string | { id: string } } | [timeEntry: string | 
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:311
 * @route '/timesheet/entries/{timeEntry}/edit'
 */
-edit.get = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+edit.get = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -280,7 +280,7 @@ edit.get = (args: { timeEntry: string | { id: string } } | [timeEntry: string | 
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:311
 * @route '/timesheet/entries/{timeEntry}/edit'
 */
-edit.head = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+edit.head = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: edit.url(args, options),
     method: 'head',
 })
@@ -290,7 +290,7 @@ edit.head = (args: { timeEntry: string | { id: string } } | [timeEntry: string |
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:311
 * @route '/timesheet/entries/{timeEntry}/edit'
 */
-const editForm = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const editForm = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -300,7 +300,7 @@ const editForm = (args: { timeEntry: string | { id: string } } | [timeEntry: str
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:311
 * @route '/timesheet/entries/{timeEntry}/edit'
 */
-editForm.get = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.get = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -310,7 +310,7 @@ editForm.get = (args: { timeEntry: string | { id: string } } | [timeEntry: strin
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:311
 * @route '/timesheet/entries/{timeEntry}/edit'
 */
-editForm.head = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.head = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -327,7 +327,7 @@ edit.form = editForm
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:352
 * @route '/timesheet/entries/{timeEntry}'
 */
-export const update = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -342,7 +342,7 @@ update.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:352
 * @route '/timesheet/entries/{timeEntry}'
 */
-update.url = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+update.url = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { timeEntry: args }
     }
@@ -375,7 +375,7 @@ update.url = (args: { timeEntry: string | { id: string } } | [timeEntry: string 
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:352
 * @route '/timesheet/entries/{timeEntry}'
 */
-update.put = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -385,7 +385,7 @@ update.put = (args: { timeEntry: string | { id: string } } | [timeEntry: string 
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:352
 * @route '/timesheet/entries/{timeEntry}'
 */
-const updateForm = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateForm = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -400,7 +400,7 @@ const updateForm = (args: { timeEntry: string | { id: string } } | [timeEntry: s
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:352
 * @route '/timesheet/entries/{timeEntry}'
 */
-updateForm.put = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.put = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -417,7 +417,7 @@ update.form = updateForm
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:389
 * @route '/timesheet/entries/{timeEntry}'
 */
-export const destroy = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -432,7 +432,7 @@ destroy.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:389
 * @route '/timesheet/entries/{timeEntry}'
 */
-destroy.url = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+destroy.url = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { timeEntry: args }
     }
@@ -465,7 +465,7 @@ destroy.url = (args: { timeEntry: string | { id: string } } | [timeEntry: string
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:389
 * @route '/timesheet/entries/{timeEntry}'
 */
-destroy.delete = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -475,7 +475,7 @@ destroy.delete = (args: { timeEntry: string | { id: string } } | [timeEntry: str
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:389
 * @route '/timesheet/entries/{timeEntry}'
 */
-const destroyForm = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -490,7 +490,7 @@ const destroyForm = (args: { timeEntry: string | { id: string } } | [timeEntry: 
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:389
 * @route '/timesheet/entries/{timeEntry}'
 */
-destroyForm.delete = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -563,7 +563,7 @@ startTimer.form = startTimerForm
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:271
 * @route '/timesheet/timer/{timeEntry}/stop'
 */
-export const stopTimer = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const stopTimer = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: stopTimer.url(args, options),
     method: 'post',
 })
@@ -578,7 +578,7 @@ stopTimer.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:271
 * @route '/timesheet/timer/{timeEntry}/stop'
 */
-stopTimer.url = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+stopTimer.url = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { timeEntry: args }
     }
@@ -611,7 +611,7 @@ stopTimer.url = (args: { timeEntry: string | { id: string } } | [timeEntry: stri
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:271
 * @route '/timesheet/timer/{timeEntry}/stop'
 */
-stopTimer.post = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+stopTimer.post = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: stopTimer.url(args, options),
     method: 'post',
 })
@@ -621,7 +621,7 @@ stopTimer.post = (args: { timeEntry: string | { id: string } } | [timeEntry: str
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:271
 * @route '/timesheet/timer/{timeEntry}/stop'
 */
-const stopTimerForm = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const stopTimerForm = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: stopTimer.url(args, options),
     method: 'post',
 })
@@ -631,7 +631,7 @@ const stopTimerForm = (args: { timeEntry: string | { id: string } } | [timeEntry
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:271
 * @route '/timesheet/timer/{timeEntry}/stop'
 */
-stopTimerForm.post = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+stopTimerForm.post = (args: { timeEntry: string | number | { id: string | number } } | [timeEntry: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: stopTimer.url(args, options),
     method: 'post',
 })

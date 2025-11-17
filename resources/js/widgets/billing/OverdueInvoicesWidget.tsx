@@ -27,7 +27,13 @@ export function OverdueInvoicesWidget({ settings, isEditing }: WidgetProps) {
                 limit: String(settings?.limit || 10),
                 min_days_overdue: String(settings?.min_days_overdue || 1),
             })
-            const response = await fetch(route('api.widgets.billing.overdue') + '?' + params)
+            const response = await fetch(route('api.widgets.billing.overdue') + '?' + params, {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                credentials: 'same-origin',
+            })
             if (!response.ok) {
                 throw new Error('Failed to fetch overdue invoices data')
             }

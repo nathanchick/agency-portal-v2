@@ -11,6 +11,7 @@ import organisation from './organisation'
 import postmark from './postmark'
 import sansec from './sansec'
 import timesheet from './timesheet'
+import extension from './extension'
 import webhook from './webhook'
 import website from './website'
 import xero from './xero'
@@ -29,6 +30,7 @@ const api = {
     postmark: Object.assign(postmark, postmark),
     sansec: Object.assign(sansec, sansec),
     timesheet: Object.assign(timesheet, timesheet),
+    extension: Object.assign(extension, extension),
     webhook: Object.assign(webhook, webhook),
     website: Object.assign(website, website),
     xero: Object.assign(xero, xero),
