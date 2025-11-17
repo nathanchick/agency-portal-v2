@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
-use Modules\Organisation\app\Models\Organisation;
+use Modules\Organisation\Models\Organisation;
 
 class ExtensionToken extends Model
 {
