@@ -38,12 +38,59 @@ return [
 
             'configurable' => true,
             'settings_schema' => [
-                'links_count' => [
-                    'type' => 'number',
-                    'label' => 'Number of links to show',
-                    'default' => 6,
-                    'min' => 3,
-                    'max' => 12,
+                'links' => [
+                    'type' => 'json',
+                    'label' => 'Quick Links',
+                    'description' => 'Customizable list of quick access links',
+                    'default' => [
+                        [
+                            'name' => 'Tickets',
+                            'route' => 'tickets.index',
+                            'icon' => 'Ticket',
+                            'openInNewTab' => false,
+                        ],
+                        [
+                            'name' => 'Customers',
+                            'route' => 'customers.index',
+                            'icon' => 'Users',
+                            'openInNewTab' => false,
+                        ],
+                        [
+                            'name' => 'Timesheet',
+                            'route' => 'timesheet.entries.index',
+                            'icon' => 'Clock',
+                            'openInNewTab' => false,
+                        ],
+                        [
+                            'name' => 'Documents',
+                            'route' => 'documents.pending',
+                            'icon' => 'FileText',
+                            'openInNewTab' => false,
+                        ],
+                        [
+                            'name' => 'Settings',
+                            'route' => 'settings.organisation',
+                            'icon' => 'Settings',
+                            'openInNewTab' => false,
+                        ],
+                        [
+                            'name' => 'Deployments',
+                            'route' => 'deployments.index',
+                            'icon' => 'Rocket',
+                            'openInNewTab' => false,
+                        ],
+                    ],
+                ],
+                'columns' => [
+                    'type' => 'select',
+                    'label' => 'Grid columns',
+                    'description' => 'Number of columns in the grid layout',
+                    'default' => 2,
+                    'options' => [
+                        1 => '1 Column',
+                        2 => '2 Columns',
+                        3 => '3 Columns',
+                    ],
                 ],
             ],
         ],
