@@ -15,6 +15,21 @@ use Tests\TestCase;
  *
  * Feature tests for the Dashboard Widget API endpoints.
  * Tests widget loading, saving, resetting, toggling, and permission filtering.
+ *
+ * ⚠️  DANGER: This test uses RefreshDatabase which DROPS ALL DATABASE TABLES! ⚠️
+ *
+ * SAFETY MEASURES IN PLACE:
+ * - TestCase::setUp() verifies APP_ENV=testing (will throw exception if not)
+ * - TestCase::setUp() verifies database name contains 'test' or 'testing'
+ * - TestCase::setUp() explicitly blocks 'portal', 'production', 'prod', 'live' databases
+ * - phpunit.xml configured with DB_DATABASE=portal_testing
+ *
+ * BEFORE RUNNING:
+ * 1. Ensure portal_testing database exists
+ * 2. Use command: ./vendor/bin/sail artisan test
+ * 3. NEVER override DB_DATABASE to production
+ *
+ * See TESTING_SAFETY.md for complete safety guidelines.
  */
 class DashboardWidgetTest extends TestCase
 {

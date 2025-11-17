@@ -18,11 +18,16 @@
         </include>
     </source>
     <php>
+        <!-- CRITICAL: These settings prevent production database corruption -->
         <env name="APP_ENV" value="testing"/>
         <env name="APP_MAINTENANCE_DRIVER" value="file"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="CACHE_STORE" value="array"/>
-        <env name="DB_DATABASE" value="testing"/>
+
+        <!-- DANGER: DB_DATABASE must NEVER be set to 'portal', 'production', 'prod', or 'live' -->
+        <!-- The TestCase class will throw an exception if tests try to run against production -->
+        <env name="DB_DATABASE" value="portal_testing"/>
+
         <env name="MAIL_MAILER" value="array"/>
         <env name="PULSE_ENABLED" value="false"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
