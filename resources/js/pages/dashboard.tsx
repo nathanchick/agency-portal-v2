@@ -39,6 +39,7 @@ import {
     closestCenter,
     KeyboardSensor,
     PointerSensor,
+    TouchSensor,
     useSensor,
     useSensors,
     DragEndEvent,
@@ -103,10 +104,17 @@ function SortableWidget({ widget, config, isEditing, children, onConfigure }: So
     }
 
     // Determine the column span based on widget width
+    // Mobile: Always single column (col-span-1)
+    // Tablet (md): Respect width up to 2 columns
+    // Desktop (lg): Respect full width up to 3 columns
     const getColSpanClass = () => {
         const spans = []
+        // Mobile: Always single column for better stacking
         spans.push('col-span-1')
+        // Tablet: 2 column layout, respect widget width
         if (widget.width >= 2) spans.push('md:col-span-2')
+        // Desktop: 3 column layout, respect full widget width
+        if (widget.width === 2) spans.push('lg:col-span-2')
         if (widget.width >= 3) spans.push('lg:col-span-3')
         return spans.join(' ')
     }
@@ -118,19 +126,20 @@ function SortableWidget({ widget, config, isEditing, children, onConfigure }: So
             className={`${getColSpanClass()} ${isDragging ? 'z-50' : ''}`}
         >
             <div className="relative h-full">
-                {/* Drag handle - only visible in edit mode */}
+                {/* Drag handle - only visible in edit mode, touch-friendly on mobile */}
                 {isEditing && (
                     <div
                         {...attributes}
                         {...listeners}
-                        className="absolute -top-2 -left-2 z-10 cursor-grab active:cursor-grabbing bg-primary text-primary-foreground rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow"
+                        className="absolute -top-2 -left-2 z-10 cursor-grab active:cursor-grabbing bg-primary text-primary-foreground rounded-full p-2 md:p-2 shadow-lg hover:shadow-xl transition-shadow touch-none"
+                        style={{ minWidth: '44px', minHeight: '44px' }}
                         title="Drag to reorder"
                     >
-                        <GripVertical className="h-4 w-4" />
+                        <GripVertical className="h-5 w-5 md:h-4 md:w-4" />
                     </div>
                 )}
 
-                {/* Settings button - only visible in edit mode and if widget is configurable */}
+                {/* Settings button - only visible in edit mode and if widget is configurable, touch-friendly */}
                 {isEditing && config?.configurable && onConfigure && (
                     <div
                         className="absolute -top-2 -right-2 z-10 pointer-events-auto"
@@ -139,10 +148,11 @@ function SortableWidget({ widget, config, isEditing, children, onConfigure }: So
                         <Button
                             size="icon"
                             variant="default"
-                            className="h-8 w-8 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                            className="h-10 w-10 md:h-8 md:w-8 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                            style={{ minWidth: '44px', minHeight: '44px' }}
                             onClick={() => onConfigure(widget)}
                         >
-                            <Settings2 className="h-4 w-4" />
+                            <Settings2 className="h-5 w-5 md:h-4 md:w-4" />
                         </Button>
                     </div>
                 )}
@@ -172,11 +182,17 @@ export default function Page() {
     const [isResetDialogOpen, setIsResetDialogOpen] = useState(false)
     const [isResetting, setIsResetting] = useState(false)
 
-    // Configure drag-and-drop sensors
+    // Configure drag-and-drop sensors for desktop, mobile, and keyboard
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
                 distance: 8, // Require 8px movement before drag starts
+            },
+        }),
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                delay: 200, // 200ms delay for touch to avoid conflicts with scrolling
+                tolerance: 8, // 8px movement tolerance
             },
         }),
         useSensor(KeyboardSensor, {
@@ -394,8 +410,8 @@ export default function Page() {
                             <NotificationBell count={count} onUpdate={refreshCount} />
                         </div>
                     </header>
-                    <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-                        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <div className="flex flex-1 flex-col gap-4 p-4 pt-0 max-w-full overflow-x-hidden">
+                        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                             <Skeleton className="h-48 w-full" />
                             <Skeleton className="h-48 w-full" />
                             <Skeleton className="h-48 w-full" />
@@ -433,7 +449,7 @@ export default function Page() {
                             <NotificationBell count={count} onUpdate={refreshCount} />
                         </div>
                     </header>
-                    <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                    <div className="flex flex-1 flex-col gap-4 p-4 pt-0 max-w-full overflow-x-hidden">
                         <Alert variant="destructive">
                             <AlertCircle className="h-4 w-4" />
                             <AlertTitle>Error</AlertTitle>
@@ -510,7 +526,7 @@ export default function Page() {
                         <NotificationBell count={count} onUpdate={refreshCount} />
                     </div>
                 </header>
-                <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                <div className="flex flex-1 flex-col gap-4 p-4 pt-0 max-w-full overflow-x-hidden">
                     {hasNoWidgets && !isEditing ? (
                         <Card>
                             <CardHeader className="text-center">
@@ -539,7 +555,7 @@ export default function Page() {
                                 items={visibleWidgets.map(w => w.id)}
                                 strategy={rectSortingStrategy}
                             >
-                                <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                                <div className="grid gap-3 md:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full">
                                     {visibleWidgets
                                         .sort((a, b) => a.position - b.position)
                                         .map((widget) => {
