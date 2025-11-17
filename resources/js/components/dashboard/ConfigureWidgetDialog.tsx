@@ -2,7 +2,7 @@
  * ConfigureWidgetDialog Component
  *
  * Dialog for configuring widget settings.
- * Dynamically generates form fields based on the widget's settings_schema.
+ * Uses WidgetSettingsForm for dynamic form field generation.
  */
 
 import { useState, useEffect } from 'react'
@@ -15,18 +15,15 @@ import {
     DialogTitle,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select'
-import { Switch } from '@/components/ui/switch'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Settings, AlertCircle } from 'lucide-react'
+import {
+    WidgetSettingsForm,
+    SettingsSchema,
+    SettingsValues,
+    SettingsErrors,
+    SettingSchema,
+} from './WidgetSettingsForm'
 
 interface UserWidget {
     id: number
@@ -48,20 +45,7 @@ interface WidgetConfig {
     default_visible: boolean
     roles: string[]
     configurable: boolean
-    settings_schema?: Record<string, SettingSchema>
-}
-
-interface SettingSchema {
-    type: 'text' | 'number' | 'select' | 'yes_no' | 'date_range' | 'multiselect' | 'color'
-    label: string
-    default?: any
-    min?: number
-    max?: number
-    step?: number
-    options?: Record<string, string>
-    required?: boolean
-    placeholder?: string
-    help?: string
+    settings_schema?: SettingsSchema
 }
 
 interface ConfigureWidgetDialogProps {
@@ -79,14 +63,14 @@ export function ConfigureWidgetDialog({
     widgetConfig,
     onSave,
 }: ConfigureWidgetDialogProps) {
-    const [formValues, setFormValues] = useState<Record<string, any>>({})
-    const [errors, setErrors] = useState<Record<string, string>>({})
+    const [formValues, setFormValues] = useState<SettingsValues>({})
+    const [errors, setErrors] = useState<SettingsErrors>({})
     const [isSaving, setIsSaving] = useState(false)
 
     // Initialize form values when dialog opens
     useEffect(() => {
         if (open && widget && widgetConfig?.settings_schema) {
-            const initialValues: Record<string, any> = {}
+            const initialValues: SettingsValues = {}
 
             // Populate with current settings or defaults
             Object.entries(widgetConfig.settings_schema).forEach(([key, schema]) => {
@@ -167,15 +151,14 @@ export function ConfigureWidgetDialog({
             ...prev,
             [key]: value,
         }))
+    }
 
-        // Clear error for this field if it exists
-        if (errors[key]) {
-            setErrors(prev => {
-                const newErrors = { ...prev }
-                delete newErrors[key]
-                return newErrors
-            })
-        }
+    const handleClearError = (key: string) => {
+        setErrors(prev => {
+            const newErrors = { ...prev }
+            delete newErrors[key]
+            return newErrors
+        })
     }
 
     const handleSave = async () => {
@@ -200,164 +183,6 @@ export function ConfigureWidgetDialog({
     const handleCancel = () => {
         setErrors({})
         onClose()
-    }
-
-    // Render a form field based on its type
-    const renderField = (key: string, schema: SettingSchema) => {
-        const value = formValues[key]
-        const error = errors[key]
-
-        switch (schema.type) {
-            case 'text':
-                return (
-                    <div key={key} className="space-y-2">
-                        <Label htmlFor={key}>
-                            {schema.label}
-                            {schema.required && <span className="text-destructive ml-1">*</span>}
-                        </Label>
-                        <Input
-                            id={key}
-                            type="text"
-                            value={value || ''}
-                            onChange={(e) => handleFieldChange(key, e.target.value)}
-                            placeholder={schema.placeholder}
-                            className={error ? 'border-destructive' : ''}
-                        />
-                        {schema.help && (
-                            <p className="text-xs text-muted-foreground">{schema.help}</p>
-                        )}
-                        {error && (
-                            <p className="text-xs text-destructive">{error}</p>
-                        )}
-                    </div>
-                )
-
-            case 'number':
-                return (
-                    <div key={key} className="space-y-2">
-                        <Label htmlFor={key}>
-                            {schema.label}
-                            {schema.required && <span className="text-destructive ml-1">*</span>}
-                        </Label>
-                        <Input
-                            id={key}
-                            type="number"
-                            value={value ?? ''}
-                            onChange={(e) => handleFieldChange(key, e.target.value)}
-                            min={schema.min}
-                            max={schema.max}
-                            step={schema.step || 1}
-                            placeholder={schema.placeholder}
-                            className={error ? 'border-destructive' : ''}
-                        />
-                        {schema.help && (
-                            <p className="text-xs text-muted-foreground">{schema.help}</p>
-                        )}
-                        {error && (
-                            <p className="text-xs text-destructive">{error}</p>
-                        )}
-                    </div>
-                )
-
-            case 'select':
-                return (
-                    <div key={key} className="space-y-2">
-                        <Label htmlFor={key}>
-                            {schema.label}
-                            {schema.required && <span className="text-destructive ml-1">*</span>}
-                        </Label>
-                        <Select
-                            value={value || ''}
-                            onValueChange={(newValue) => handleFieldChange(key, newValue)}
-                        >
-                            <SelectTrigger className={error ? 'border-destructive' : ''}>
-                                <SelectValue placeholder={schema.placeholder || `Select ${schema.label}`} />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {schema.options && Object.entries(schema.options).map(([optKey, optLabel]) => (
-                                    <SelectItem key={optKey} value={optKey}>
-                                        {optLabel}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                        {schema.help && (
-                            <p className="text-xs text-muted-foreground">{schema.help}</p>
-                        )}
-                        {error && (
-                            <p className="text-xs text-destructive">{error}</p>
-                        )}
-                    </div>
-                )
-
-            case 'yes_no':
-                return (
-                    <div key={key} className="space-y-2">
-                        <div className="flex items-center justify-between">
-                            <div className="space-y-0.5">
-                                <Label htmlFor={key}>
-                                    {schema.label}
-                                    {schema.required && <span className="text-destructive ml-1">*</span>}
-                                </Label>
-                                {schema.help && (
-                                    <p className="text-xs text-muted-foreground">{schema.help}</p>
-                                )}
-                            </div>
-                            <Switch
-                                id={key}
-                                checked={!!value}
-                                onCheckedChange={(checked) => handleFieldChange(key, checked)}
-                            />
-                        </div>
-                        {error && (
-                            <p className="text-xs text-destructive">{error}</p>
-                        )}
-                    </div>
-                )
-
-            case 'date_range':
-                // For date_range, we'll use a select with presets for now
-                // In a more complete implementation, you might use a date picker component
-                return (
-                    <div key={key} className="space-y-2">
-                        <Label htmlFor={key}>
-                            {schema.label}
-                            {schema.required && <span className="text-destructive ml-1">*</span>}
-                        </Label>
-                        <Select
-                            value={value || ''}
-                            onValueChange={(newValue) => handleFieldChange(key, newValue)}
-                        >
-                            <SelectTrigger className={error ? 'border-destructive' : ''}>
-                                <SelectValue placeholder={schema.placeholder || 'Select date range'} />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {schema.options && Object.entries(schema.options).map(([optKey, optLabel]) => (
-                                    <SelectItem key={optKey} value={optKey}>
-                                        {optLabel}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                        {schema.help && (
-                            <p className="text-xs text-muted-foreground">{schema.help}</p>
-                        )}
-                        {error && (
-                            <p className="text-xs text-destructive">{error}</p>
-                        )}
-                    </div>
-                )
-
-            default:
-                return (
-                    <Alert key={key} variant="destructive">
-                        <AlertCircle className="h-4 w-4" />
-                        <AlertDescription>
-                            Unsupported field type: {schema.type}
-                        </AlertDescription>
-                    </Alert>
-                )
-        }
     }
 
     if (!widget || !widgetConfig) {
@@ -396,10 +221,14 @@ export function ConfigureWidgetDialog({
                             </AlertDescription>
                         </Alert>
                     ) : (
-                        <div className="space-y-6 py-4">
-                            {Object.entries(widgetConfig.settings_schema!).map(([key, schema]) =>
-                                renderField(key, schema)
-                            )}
+                        <div className="py-4">
+                            <WidgetSettingsForm
+                                schema={widgetConfig.settings_schema!}
+                                values={formValues}
+                                onChange={handleFieldChange}
+                                errors={errors}
+                                onClearError={handleClearError}
+                            />
                         </div>
                     )}
 
