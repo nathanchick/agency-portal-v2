@@ -10,6 +10,7 @@ import { TestWidget } from './test/TestWidget'
 import { RecentTicketsWidget } from './tickets/RecentTicketsWidget'
 import { TicketStatsWidget } from './tickets/TicketStatsWidget'
 import { WeeklySummaryWidget } from './timesheet/WeeklySummaryWidget'
+import { WelcomeWidget } from './generic/WelcomeWidget'
 
 /**
  * Props interface that all widget components must implement
@@ -56,6 +57,9 @@ export const widgetRegistry: Record<string, ComponentType<WidgetProps>> = {
 
     // Timesheet Module Widgets
     'weekly_summary': WeeklySummaryWidget,
+
+    // Generic Widgets (DashboardWidgets Module)
+    'welcome': WelcomeWidget,
 }
 
 /**
