@@ -34,7 +34,7 @@ class TokenController extends Controller
     /**
      * Generate a new extension token
      */
-    public function generate(Request $request): JsonResponse
+    public function generate(Request $request)
     {
         $request->validate([
             'name' => ['nullable', 'string', 'max:255'],
@@ -46,9 +46,9 @@ class TokenController extends Controller
             ->count();
 
         if ($recentTokens >= 5) {
-            return response()->json([
-                'error' => 'Too many tokens generated. Please try again later.',
-            ], 429);
+            return back()->withErrors([
+                'generate' => 'Too many tokens generated. Please try again later.',
+            ]);
         }
 
         $tokenData = ExtensionToken::generate(
@@ -56,11 +56,9 @@ class TokenController extends Controller
             $request->input('name', 'Chrome Extension')
         );
 
-        return response()->json([
-            'success' => true,
+        return back()->with('success', [
             'token' => $tokenData['token'],
             'expires_at' => $tokenData['model']->expires_at->toIso8601String(),
-            'message' => 'Extension token generated successfully. Copy it now - you won\'t be able to see it again.',
         ]);
     }
 
@@ -101,7 +99,7 @@ class TokenController extends Controller
     /**
      * Revoke an extension token
      */
-    public function revoke(Request $request, string $tokenId): JsonResponse
+    public function revoke(Request $request, string $tokenId)
     {
         $token = ExtensionToken::where('id', $tokenId)
             ->where('user_id', $request->user()->id)
@@ -109,9 +107,6 @@ class TokenController extends Controller
 
         $token->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Token revoked successfully.',
-        ]);
+        return back()->with('message', 'Token revoked successfully.');
     }
 }
