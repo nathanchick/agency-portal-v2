@@ -52,14 +52,14 @@ export const widgetRegistry: Record<string, ComponentType<WidgetProps>> = {
     'test.widget': TestWidget,
 
     // Ticket Module Widgets
-    'recent_tickets': RecentTicketsWidget,
-    'ticket_statistics': TicketStatsWidget,
+    'Ticket.recent_tickets': RecentTicketsWidget,
+    'Ticket.ticket_statistics': TicketStatsWidget,
 
     // Timesheet Module Widgets
-    'weekly_summary': WeeklySummaryWidget,
+    'Timesheet.weekly_summary': WeeklySummaryWidget,
 
     // Generic Widgets (DashboardWidgets Module)
-    'welcome': WelcomeWidget,
+    'DashboardWidgets.welcome': WelcomeWidget,
 }
 
 /**
