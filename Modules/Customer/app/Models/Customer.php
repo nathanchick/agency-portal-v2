@@ -6,9 +6,11 @@ use App\Models\Concerns\BelongsToTenant;
 use App\Models\User;
 use App\Traits\DispatchesWebhooks;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Customer\Database\Factories\CustomerFactory;
 use Modules\Customer\Models\CustomerSetting;
 use Modules\Document\Models\DocumentRequest;
 use Modules\Organisation\Models\Organisation;
@@ -18,6 +20,7 @@ class Customer extends Model
 {
     use BelongsToTenant;
     use DispatchesWebhooks;
+    use HasFactory;
     use HasUuids;
 
     protected $fillable = [
@@ -76,5 +79,13 @@ class Customer extends Model
             ->where('module', 'Xero')
             ->where('key', 'xero_contact_id')
             ->first()?->value;
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): CustomerFactory
+    {
+        return CustomerFactory::new();
     }
 }

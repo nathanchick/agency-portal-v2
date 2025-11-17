@@ -4,17 +4,20 @@ namespace Modules\Organisation\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Customer\Models\Customer;
 use Modules\Document\Models\Document;
 use Modules\Document\Models\DocumentRequest;
+use Modules\Organisation\Database\Factories\OrganisationFactory;
 use Modules\Organisation\Models\OrganisationSetting;
 use Spatie\Multitenancy\Contracts\IsTenant;
 use Spatie\Multitenancy\Models\Concerns\ImplementsTenant;
 
 class Organisation extends Model implements IsTenant
 {
+    use HasFactory;
     use HasUuids;
     use ImplementsTenant;
 
@@ -61,5 +64,13 @@ class Organisation extends Model implements IsTenant
     public function settings(): HasMany
     {
         return $this->hasMany(OrganisationSetting::class);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): OrganisationFactory
+    {
+        return OrganisationFactory::new();
     }
 }
