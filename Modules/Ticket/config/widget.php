@@ -59,6 +59,39 @@ return [
                 ],
             ],
         ],
+
+        'ticket_statistics' => [
+            // Display
+            'name' => 'Ticket Statistics',
+            'description' => 'Overview of ticket metrics and trends',
+            'icon' => 'BarChart3',
+
+            // Permissions
+            'roles' => ['Admin', 'Manager'],  // Only Admin and Manager can see
+
+            // Layout
+            'default_width' => 2,  // Medium width for charts
+            'default_visible' => true,
+            'default_position' => 1,
+
+            // Frontend
+            'component' => 'TicketStatsWidget',
+
+            // Configuration
+            'configurable' => true,
+            'settings_schema' => [
+                'date_range' => [
+                    'type' => 'select',
+                    'label' => 'Date range',
+                    'options' => [
+                        '7' => 'Last 7 Days',
+                        '30' => 'Last 30 Days',
+                        '90' => 'Last 90 Days',
+                    ],
+                    'default' => '30',
+                ],
+            ],
+        ],
     ],
 
     /**

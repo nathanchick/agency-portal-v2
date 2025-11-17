@@ -127,22 +127,44 @@ class TicketWidgetController extends Controller
         $baseQuery = Ticket::where('organisation_id', $organisationId)
             ->where('created_at', '>=', $startDate);
 
+        // Get total count
+        $total = (clone $baseQuery)->count();
+
+        // Get counts by status
+        $openCount = (clone $baseQuery)->where('is_resolved', false)->count();
+        $closedCount = (clone $baseQuery)->where('is_resolved', true)->count();
+
+        // Calculate in_progress and pending (if applicable)
+        // Assuming status field exists and has these values
+        $inProgressCount = (clone $baseQuery)
+            ->where('is_resolved', false)
+            ->where('status', 'in_progress')
+            ->count();
+        $pendingCount = (clone $baseQuery)
+            ->where('is_resolved', false)
+            ->where('status', 'pending')
+            ->count();
+
         // Calculate statistics
-        $statistics = [
-            'total' => (clone $baseQuery)->count(),
-            'open' => (clone $baseQuery)->where('is_resolved', false)->count(),
-            'closed' => (clone $baseQuery)->where('is_resolved', true)->count(),
+        $stats = [
+            'total' => $total,
+            'by_status' => [
+                'open' => $openCount,
+                'closed' => $closedCount,
+                'in_progress' => $inProgressCount,
+                'pending' => $pendingCount,
+            ],
             'by_priority' => [
                 'low' => (clone $baseQuery)->where('priority', 'low')->count(),
                 'medium' => (clone $baseQuery)->where('priority', 'medium')->count(),
                 'high' => (clone $baseQuery)->where('priority', 'high')->count(),
                 'critical' => (clone $baseQuery)->where('priority', 'critical')->count(),
             ],
-            'date_range_days' => $dateRange,
         ];
 
         return response()->json([
-            'statistics' => $statistics,
+            'stats' => $stats,
+            'date_range' => "{$dateRange} days",
         ]);
     }
 }
