@@ -12,11 +12,12 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Copy, Trash2, Clock, CheckCircle2, AlertCircle, AlertTriangle } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { type BreadcrumbItem } from '@/types';
+import { create, generate, revoke } from '@/actions/App/Http/Controllers/Extension/TokenController';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Extension Token',
-        href: '/extension-token',
+        href: create().url,
     },
 ];
 
@@ -44,7 +45,7 @@ export default function ExtensionToken({ existingTokens }: Props) {
     setLoading(true);
 
     router.post(
-      route('extension-token.generate'),
+      generate().url,
       { name: tokenName },
       {
         preserveScroll: true,
@@ -75,7 +76,7 @@ export default function ExtensionToken({ existingTokens }: Props) {
 
   const confirmRevoke = () => {
     if (tokenToRevoke) {
-      router.delete(route('extension-token.revoke', tokenToRevoke.id), {
+      router.delete(revoke(tokenToRevoke.id).url, {
         preserveScroll: true,
         onSuccess: () => {
           setRevokeDialogOpen(false);
