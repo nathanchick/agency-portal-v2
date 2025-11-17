@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Extension\TokenController;
 use App\Http\Controllers\Settings\OrganisationController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
@@ -30,4 +31,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('settings/two-factor', [TwoFactorAuthenticationController::class, 'show'])
         ->name('two-factor.show');
+
+    // Extension token management
+    Route::get('extension-token', [TokenController::class, 'create'])->name('extension.token.create');
+    Route::post('extension-token', [TokenController::class, 'generate'])->name('extension.token.generate');
+    Route::delete('extension-token/{token}', [TokenController::class, 'revoke'])->name('extension.token.revoke');
 });

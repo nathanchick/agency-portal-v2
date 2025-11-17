@@ -23,6 +23,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
 
+        $middleware->validateCsrfTokens(except: [
+            'api/widgets/*',
+            'api/extension/*',
+        ]);
+
         $middleware->web(append: [
             HandleThemeAppearance::class,
             HandleInertiaRequests::class,
@@ -35,6 +40,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
             'organisation' => \App\Http\Middleware\RequireOrganisationUser::class,
             'api.token' => \App\Http\Middleware\AuthenticateApiToken::class,
+            'extension.token' => \App\Http\Middleware\AuthenticateExtensionToken::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
