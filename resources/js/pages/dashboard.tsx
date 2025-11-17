@@ -20,9 +20,26 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Edit, Save, X, AlertCircle, LayoutGrid } from "lucide-react"
+import { Edit, Save, X, AlertCircle, LayoutGrid, GripVertical } from "lucide-react"
 import { toast } from "sonner"
 import { getWidget } from "@/widgets"
+import {
+    DndContext,
+    closestCenter,
+    KeyboardSensor,
+    PointerSensor,
+    useSensor,
+    useSensors,
+    DragEndEvent,
+} from '@dnd-kit/core'
+import {
+    arrayMove,
+    SortableContext,
+    sortableKeyboardCoordinates,
+    useSortable,
+    rectSortingStrategy,
+} from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 interface UserWidget {
     id: number
@@ -52,6 +69,69 @@ interface DashboardPageProps {
     availableWidgets: WidgetConfig[]
 }
 
+/**
+ * SortableWidget - Wrapper component for drag-and-drop functionality
+ */
+interface SortableWidgetProps {
+    widget: UserWidget
+    config?: WidgetConfig
+    isEditing: boolean
+    children: React.ReactNode
+}
+
+function SortableWidget({ widget, config, isEditing, children }: SortableWidgetProps) {
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+        isDragging,
+    } = useSortable({ id: widget.id })
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0.5 : 1,
+    }
+
+    // Determine the column span based on widget width
+    const getColSpanClass = () => {
+        const spans = []
+        spans.push('col-span-1')
+        if (widget.width >= 2) spans.push('md:col-span-2')
+        if (widget.width >= 3) spans.push('lg:col-span-3')
+        return spans.join(' ')
+    }
+
+    return (
+        <div
+            ref={setNodeRef}
+            style={style}
+            className={`${getColSpanClass()} ${isDragging ? 'z-50' : ''}`}
+        >
+            <div className="relative h-full">
+                {/* Drag handle - only visible in edit mode */}
+                {isEditing && (
+                    <div
+                        {...attributes}
+                        {...listeners}
+                        className="absolute -top-2 -left-2 z-10 cursor-grab active:cursor-grabbing bg-primary text-primary-foreground rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow"
+                        title="Drag to reorder"
+                    >
+                        <GripVertical className="h-4 w-4" />
+                    </div>
+                )}
+
+                {/* Widget content */}
+                <div className={isEditing ? 'pointer-events-none' : ''}>
+                    {children}
+                </div>
+            </div>
+        </div>
+    )
+}
+
 export default function Page() {
     const { count, refreshCount } = useNotifications()
     const { props } = usePage<DashboardPageProps>()
@@ -62,6 +142,39 @@ export default function Page() {
     const [isSaving, setIsSaving] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
+
+    // Configure drag-and-drop sensors
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                distance: 8, // Require 8px movement before drag starts
+            },
+        }),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    )
+
+    // Handle drag end - update widget positions
+    const handleDragEnd = (event: DragEndEvent) => {
+        const { active, over } = event
+
+        if (over && active.id !== over.id) {
+            setWidgets((items) => {
+                const oldIndex = items.findIndex((item) => item.id === active.id)
+                const newIndex = items.findIndex((item) => item.id === over.id)
+
+                // Move the widget in the array
+                const newItems = arrayMove(items, oldIndex, newIndex)
+
+                // Update positions based on new order
+                return newItems.map((item, index) => ({
+                    ...item,
+                    position: index,
+                }))
+            })
+        }
+    }
 
     // Fetch widgets from API on mount (optional - using Inertia props by default)
     useEffect(() => {
@@ -298,37 +411,38 @@ export default function Page() {
                             </CardContent>
                         </Card>
                     ) : (
-                        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                            {visibleWidgets
-                                .sort((a, b) => a.position - b.position)
-                                .map((widget) => {
-                                    const config = availableWidgets.find(w => w.key === widget.widget_key)
+                        <DndContext
+                            sensors={sensors}
+                            collisionDetection={closestCenter}
+                            onDragEnd={handleDragEnd}
+                        >
+                            <SortableContext
+                                items={visibleWidgets.map(w => w.id)}
+                                strategy={rectSortingStrategy}
+                            >
+                                <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                                    {visibleWidgets
+                                        .sort((a, b) => a.position - b.position)
+                                        .map((widget) => {
+                                            const config = availableWidgets.find(w => w.key === widget.widget_key)
 
-                                    return (
-                                        <div
-                                            key={widget.id}
-                                            className={`
-                                                col-span-1
-                                                ${widget.width >= 2 ? 'md:col-span-2' : ''}
-                                                ${widget.width >= 3 ? 'lg:col-span-3' : ''}
-                                            `}
-                                        >
-                                            {(() => {
-                                                // Get the widget component from the registry
-                                                const WidgetComponent = getWidget(widget.widget_key)
+                                            // Get the widget component from the registry
+                                            const WidgetComponent = getWidget(widget.widget_key)
 
-                                                // If widget component exists, render it
-                                                if (WidgetComponent) {
-                                                    return (
-                                                        <WidgetComponent
-                                                            settings={widget.settings}
-                                                            isEditing={isEditing}
-                                                        />
-                                                    )
-                                                }
+                                            // Determine what to render
+                                            let widgetContent: React.ReactNode
 
+                                            if (WidgetComponent) {
+                                                // Widget component exists, render it
+                                                widgetContent = (
+                                                    <WidgetComponent
+                                                        settings={widget.settings}
+                                                        isEditing={isEditing}
+                                                    />
+                                                )
+                                            } else {
                                                 // Fallback: Widget not found in registry
-                                                return (
+                                                widgetContent = (
                                                     <Card>
                                                         <CardHeader>
                                                             <CardTitle className="text-lg">
@@ -355,20 +469,37 @@ export default function Page() {
                                                         </CardContent>
                                                     </Card>
                                                 )
-                                            })()}
-                                        </div>
-                                    )
-                                })}
-                        </div>
+                                            }
+
+                                            return (
+                                                <SortableWidget
+                                                    key={widget.id}
+                                                    widget={widget}
+                                                    config={config}
+                                                    isEditing={isEditing}
+                                                >
+                                                    {widgetContent}
+                                                </SortableWidget>
+                                            )
+                                        })}
+                                </div>
+                            </SortableContext>
+                        </DndContext>
                     )}
 
                     {isEditing && (
                         <Card className="border-dashed">
                             <CardContent className="pt-6">
                                 <div className="text-center text-sm text-muted-foreground">
-                                    <p className="mb-2">Editing Mode Active</p>
+                                    <p className="mb-2 flex items-center justify-center gap-2">
+                                        <GripVertical className="h-4 w-4" />
+                                        Editing Mode Active
+                                    </p>
                                     <p className="text-xs">
-                                        Drag and drop, widget settings, and add widget features will be implemented in subsequent tasks.
+                                        Drag the grip icon on each widget to reorder. Click "Save" to keep your changes.
+                                    </p>
+                                    <p className="text-xs mt-2">
+                                        Widget settings and add widget features will be implemented in subsequent tasks.
                                     </p>
                                 </div>
                             </CardContent>
