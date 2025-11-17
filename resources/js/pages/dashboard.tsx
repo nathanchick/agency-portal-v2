@@ -22,7 +22,15 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Edit, Save, X, AlertCircle, LayoutGrid, GripVertical, Plus, Settings2 } from "lucide-react"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
+import { Edit, Save, X, AlertCircle, LayoutGrid, GripVertical, Plus, Settings2, RotateCcw } from "lucide-react"
 import { toast } from "sonner"
 import { getWidget } from "@/widgets"
 import {
@@ -160,6 +168,8 @@ export default function Page() {
     const [isAddWidgetDialogOpen, setIsAddWidgetDialogOpen] = useState(false)
     const [configureWidget, setConfigureWidget] = useState<UserWidget | null>(null)
     const [isConfigureDialogOpen, setIsConfigureDialogOpen] = useState(false)
+    const [isResetDialogOpen, setIsResetDialogOpen] = useState(false)
+    const [isResetting, setIsResetting] = useState(false)
 
     // Configure drag-and-drop sensors
     const sensors = useSensors(
@@ -306,6 +316,47 @@ export default function Page() {
             setIsEditing(previousEditingState)
         } finally {
             setIsSaving(false)
+        }
+    }
+
+    const handleResetToDefaults = async () => {
+        try {
+            setIsResetting(true)
+            setError(null)
+
+            const response = await fetch(route('dashboard.widgets.reset'), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+                },
+            })
+
+            if (!response.ok) {
+                const data = await response.json()
+                throw new Error(data.message || 'Failed to reset dashboard')
+            }
+
+            const data = await response.json()
+
+            // Update state with default widgets
+            if (data.widgets) {
+                setWidgets(data.widgets)
+            }
+
+            // Exit edit mode
+            setIsEditing(false)
+
+            // Close the confirmation dialog
+            setIsResetDialogOpen(false)
+
+            toast.success("Dashboard reset to defaults successfully")
+        } catch (err) {
+            const errorMessage = err instanceof Error ? err.message : 'Failed to reset dashboard'
+            setError(errorMessage)
+            toast.error(errorMessage)
+        } finally {
+            setIsResetting(false)
         }
     }
 
@@ -560,14 +611,24 @@ export default function Page() {
                                     <p className="text-xs mb-4">
                                         Drag the grip icon on each widget to reorder. Click "Add Widget" to add more widgets to your dashboard.
                                     </p>
-                                    <Button
-                                        onClick={() => setIsAddWidgetDialogOpen(true)}
-                                        variant="outline"
-                                        className="gap-2"
-                                    >
-                                        <Plus className="h-4 w-4" />
-                                        Add Widget
-                                    </Button>
+                                    <div className="flex items-center justify-center gap-2">
+                                        <Button
+                                            onClick={() => setIsAddWidgetDialogOpen(true)}
+                                            variant="outline"
+                                            className="gap-2"
+                                        >
+                                            <Plus className="h-4 w-4" />
+                                            Add Widget
+                                        </Button>
+                                        <Button
+                                            onClick={() => setIsResetDialogOpen(true)}
+                                            variant="outline"
+                                            className="gap-2"
+                                        >
+                                            <RotateCcw className="h-4 w-4" />
+                                            Reset to Defaults
+                                        </Button>
+                                    </div>
                                 </div>
                             </CardContent>
                         </Card>
@@ -593,6 +654,38 @@ export default function Page() {
                         widgetConfig={configureWidget ? availableWidgets.find(w => w.key === configureWidget.widget_key) || null : null}
                         onSave={handleSaveWidgetSettings}
                     />
+
+                    {/* Reset to Defaults Confirmation Dialog */}
+                    <Dialog open={isResetDialogOpen} onOpenChange={setIsResetDialogOpen}>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>Reset Dashboard to Defaults?</DialogTitle>
+                                <DialogDescription>
+                                    This will remove all your customizations and restore the default dashboard layout.
+                                    All widgets will be reset to their default settings and positions.
+                                    This action cannot be undone.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <DialogFooter>
+                                <Button
+                                    variant="outline"
+                                    onClick={() => setIsResetDialogOpen(false)}
+                                    disabled={isResetting}
+                                >
+                                    Cancel
+                                </Button>
+                                <Button
+                                    variant="destructive"
+                                    onClick={handleResetToDefaults}
+                                    disabled={isResetting}
+                                    className="gap-2"
+                                >
+                                    <RotateCcw className="h-4 w-4" />
+                                    {isResetting ? 'Resetting...' : 'Reset to Defaults'}
+                                </Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
                 </div>
             </SidebarInset>
         </SidebarProvider>
