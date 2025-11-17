@@ -34,9 +34,9 @@ import {
     CardTitle,
 } from '@/components/ui/card'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Skeleton } from '@/components/ui/skeleton'
 import { AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { WidgetSkeleton, WidgetSkeletonVariant } from '@/components/dashboard/WidgetSkeleton'
 
 export interface BaseWidgetProps {
     /**
@@ -69,6 +69,19 @@ export interface BaseWidgetProps {
      * When true, shows skeleton loading state instead of children
      */
     loading?: boolean
+
+    /**
+     * The skeleton variant to use when loading
+     * Different variants match different widget content layouts
+     * @default 'default'
+     */
+    skeletonVariant?: WidgetSkeletonVariant
+
+    /**
+     * Number of skeleton items to render (for list, stats, card, table variants)
+     * @default 3
+     */
+    skeletonCount?: number
 
     /**
      * Error message to display if data fetching failed
@@ -111,6 +124,8 @@ export function BaseWidget({
     empty,
     showEmpty = false,
     className,
+    skeletonVariant = 'default',
+    skeletonCount = 3,
 }: BaseWidgetProps) {
     return (
         <Card className={cn('flex flex-col', className)}>
@@ -124,7 +139,9 @@ export function BaseWidget({
 
             <CardContent className="flex-1">
                 {/* Loading State */}
-                {loading && <LoadingSkeleton />}
+                {loading && (
+                    <WidgetSkeleton variant={skeletonVariant} count={skeletonCount} />
+                )}
 
                 {/* Error State */}
                 {!loading && error && <ErrorState error={error} />}
@@ -134,8 +151,12 @@ export function BaseWidget({
                     <EmptyState>{empty}</EmptyState>
                 )}
 
-                {/* Normal Content */}
-                {!loading && !error && !showEmpty && children}
+                {/* Normal Content with smooth fade-in */}
+                {!loading && !error && !showEmpty && (
+                    <div className="animate-in fade-in-0 duration-300">
+                        {children}
+                    </div>
+                )}
             </CardContent>
 
             {/* Footer with actions */}
@@ -144,24 +165,6 @@ export function BaseWidget({
     )
 }
 
-/**
- * Loading Skeleton Component
- *
- * Displays a skeleton placeholder while the widget is loading data.
- */
-function LoadingSkeleton() {
-    return (
-        <div className="space-y-3">
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-4 w-5/6" />
-            <div className="pt-2 space-y-2">
-                <Skeleton className="h-8 w-full" />
-                <Skeleton className="h-8 w-full" />
-            </div>
-        </div>
-    )
-}
 
 /**
  * Error State Component
@@ -196,8 +199,3 @@ function EmptyState({ children }: { children?: ReactNode }) {
     )
 }
 
-/**
- * Convenience export for creating custom loading skeletons
- * if the default one doesn't fit your widget's needs
- */
-export { LoadingSkeleton }
