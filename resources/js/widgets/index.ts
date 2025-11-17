@@ -11,6 +11,7 @@ import { RecentTicketsWidget } from './tickets/RecentTicketsWidget'
 import { TicketStatsWidget } from './tickets/TicketStatsWidget'
 import { WeeklySummaryWidget } from './timesheet/WeeklySummaryWidget'
 import { WelcomeWidget } from './generic/WelcomeWidget'
+import { QuickLinksWidget } from './generic/QuickLinksWidget'
 
 /**
  * Props interface that all widget components must implement
@@ -60,6 +61,7 @@ export const widgetRegistry: Record<string, ComponentType<WidgetProps>> = {
 
     // Generic Widgets (DashboardWidgets Module)
     'DashboardWidgets.welcome': WelcomeWidget,
+    'DashboardWidgets.quick_links': QuickLinksWidget,
 }
 
 /**
