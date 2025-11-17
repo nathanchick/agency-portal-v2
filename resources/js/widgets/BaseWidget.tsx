@@ -6,11 +6,13 @@
  * - Header (title, description, icon)
  * - Content area (with loading, error, and empty states)
  * - Footer (for action buttons)
+ * - Refresh functionality (manual button, auto-refresh, last updated timestamp)
  *
  * All widgets should use this component as a wrapper to ensure consistent
  * styling and behavior across the dashboard.
  *
  * @example
+ * Basic usage without refresh:
  * ```tsx
  * <BaseWidget
  *   title="Recent Tickets"
@@ -18,6 +20,28 @@
  *   icon={<Ticket className="h-5 w-5" />}
  *   loading={isLoading}
  *   error={error}
+ * >
+ *   <div>Widget content goes here</div>
+ * </BaseWidget>
+ * ```
+ *
+ * @example
+ * With refresh functionality:
+ * ```tsx
+ * const { isRefreshing, lastUpdated, refresh } = useWidgetRefresh({
+ *   onRefresh: fetchData,
+ *   refreshInterval: 60, // Auto-refresh every 60 seconds
+ *   enabled: !isEditing,
+ * })
+ *
+ * <BaseWidget
+ *   title="Recent Tickets"
+ *   icon={<Ticket className="h-5 w-5" />}
+ *   loading={isLoading}
+ *   error={error}
+ *   onRefresh={refresh}
+ *   isRefreshing={isRefreshing}
+ *   lastUpdated={lastUpdated}
  * >
  *   <div>Widget content goes here</div>
  * </BaseWidget>
@@ -34,9 +58,11 @@ import {
     CardTitle,
 } from '@/components/ui/card'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { AlertCircle } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { AlertCircle, RefreshCw } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { WidgetSkeleton, WidgetSkeletonVariant } from '@/components/dashboard/WidgetSkeleton'
+import { formatDistanceToNow } from 'date-fns'
 
 export interface BaseWidgetProps {
     /**
@@ -105,6 +131,30 @@ export interface BaseWidgetProps {
      * Additional CSS classes for the Card wrapper
      */
     className?: string
+
+    /**
+     * Callback function to refresh widget data
+     * When provided, shows a manual refresh button in the widget header
+     */
+    onRefresh?: () => void | Promise<void>
+
+    /**
+     * Whether the widget is currently refreshing
+     * Shows loading state on the refresh button when true
+     */
+    isRefreshing?: boolean
+
+    /**
+     * Timestamp of when the data was last updated
+     * Displays a "Last updated X ago" message in the widget header
+     */
+    lastUpdated?: Date | null
+
+    /**
+     * Whether to show the last updated timestamp
+     * @default true when lastUpdated is provided
+     */
+    showLastUpdated?: boolean
 }
 
 /**
@@ -126,15 +176,44 @@ export function BaseWidget({
     className,
     skeletonVariant = 'default',
     skeletonCount = 3,
+    onRefresh,
+    isRefreshing = false,
+    lastUpdated = null,
+    showLastUpdated = true,
 }: BaseWidgetProps) {
     return (
         <Card className={cn('flex flex-col', className)}>
             <CardHeader>
-                <div className="flex items-center gap-2">
-                    {icon && <div className="text-primary">{icon}</div>}
-                    <CardTitle>{title}</CardTitle>
+                <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                            {icon && <div className="text-primary">{icon}</div>}
+                            <CardTitle>{title}</CardTitle>
+                        </div>
+                        {description && <CardDescription>{description}</CardDescription>}
+                        {showLastUpdated && lastUpdated && (
+                            <p className="text-xs text-muted-foreground mt-1">
+                                Last updated {formatDistanceToNow(lastUpdated, { addSuffix: true })}
+                            </p>
+                        )}
+                    </div>
+                    {onRefresh && (
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={onRefresh}
+                            disabled={isRefreshing || loading}
+                            className="flex-shrink-0"
+                        >
+                            <RefreshCw
+                                className={cn(
+                                    'h-4 w-4',
+                                    isRefreshing && 'animate-spin'
+                                )}
+                            />
+                        </Button>
+                    )}
                 </div>
-                {description && <CardDescription>{description}</CardDescription>}
             </CardHeader>
 
             <CardContent className="flex-1">

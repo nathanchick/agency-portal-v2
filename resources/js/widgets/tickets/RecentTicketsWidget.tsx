@@ -12,7 +12,7 @@
  * - Priority and status badges
  */
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { BaseWidget } from '../BaseWidget'
 import { WidgetProps } from '../index'
 import { Badge } from '@/components/ui/badge'
@@ -20,6 +20,7 @@ import { Ticket, ExternalLink } from 'lucide-react'
 import { route } from 'ziggy-js'
 import { router } from '@inertiajs/react'
 import { formatDistanceToNow } from 'date-fns'
+import { useWidgetRefresh } from '@/hooks/useWidgetRefresh'
 
 /**
  * Ticket data structure
@@ -51,6 +52,7 @@ interface RecentTicketsResponse {
 interface RecentTicketsSettings {
     limit?: number
     status?: 'all' | 'open' | 'closed'
+    refresh_interval?: number
 }
 
 /**
@@ -90,6 +92,7 @@ const getStatusColor = (status: string): string => {
  *
  * Fetches and displays recent tickets based on configured settings.
  * Automatically refreshes data when settings change.
+ * Supports manual refresh and optional auto-refresh.
  */
 export function RecentTicketsWidget({ settings, isEditing }: WidgetProps) {
     const [tickets, setTickets] = useState<TicketData[]>([])
@@ -100,59 +103,74 @@ export function RecentTicketsWidget({ settings, isEditing }: WidgetProps) {
     const widgetSettings: RecentTicketsSettings = {
         limit: settings?.limit ?? 10,
         status: settings?.status ?? 'open',
+        refresh_interval: settings?.refresh_interval ?? 0,
     }
 
     /**
      * Fetch recent tickets from API
      * Uses configured limit and status filter
      */
-    useEffect(() => {
-        const fetchTickets = async () => {
-            // Don't fetch data in edit mode to prevent unnecessary API calls
-            if (isEditing) {
-                setLoading(false)
-                return
-            }
-
-            try {
-                setLoading(true)
-                setError(null)
-
-                // Build query parameters
-                const params = new URLSearchParams({
-                    limit: widgetSettings.limit?.toString() ?? '10',
-                    status: widgetSettings.status ?? 'open',
-                })
-
-                // Fetch from API
-                const response = await fetch(
-                    route('api.widgets.tickets.recent') + '?' + params.toString(),
-                    {
-                        headers: {
-                            'Accept': 'application/json',
-                            'X-Requested-With': 'XMLHttpRequest',
-                        },
-                        credentials: 'same-origin',
-                    }
-                )
-
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch tickets: ${response.statusText}`)
-                }
-
-                const data: RecentTicketsResponse = await response.json()
-                setTickets(data.tickets)
-            } catch (err) {
-                const errorMessage = err instanceof Error ? err.message : 'Failed to load tickets'
-                setError(errorMessage)
-                console.error('Error fetching recent tickets:', err)
-            } finally {
-                setLoading(false)
-            }
+    const fetchTickets = useCallback(async () => {
+        // Don't fetch data in edit mode to prevent unnecessary API calls
+        if (isEditing) {
+            setLoading(false)
+            return
         }
 
-        fetchTickets()
+        try {
+            setLoading(true)
+            setError(null)
+
+            // Build query parameters
+            const params = new URLSearchParams({
+                limit: widgetSettings.limit?.toString() ?? '10',
+                status: widgetSettings.status ?? 'open',
+            })
+
+            // Fetch from API
+            const response = await fetch(
+                route('api.widgets.tickets.recent') + '?' + params.toString(),
+                {
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    credentials: 'same-origin',
+                }
+            )
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch tickets: ${response.statusText}`)
+            }
+
+            const data: RecentTicketsResponse = await response.json()
+            setTickets(data.tickets)
+        } catch (err) {
+            const errorMessage = err instanceof Error ? err.message : 'Failed to load tickets'
+            setError(errorMessage)
+            console.error('Error fetching recent tickets:', err)
+        } finally {
+            setLoading(false)
+        }
     }, [widgetSettings.limit, widgetSettings.status, isEditing])
+
+    /**
+     * Set up widget refresh functionality
+     * Handles manual refresh, auto-refresh, and last updated tracking
+     */
+    const { isRefreshing, lastUpdated, refresh } = useWidgetRefresh({
+        onRefresh: fetchTickets,
+        refreshInterval: widgetSettings.refresh_interval,
+        enabled: !isEditing,
+        pauseWhenHidden: true,
+    })
+
+    /**
+     * Initial data fetch and refetch when settings change
+     */
+    useEffect(() => {
+        fetchTickets()
+    }, [fetchTickets])
 
     /**
      * Navigate to ticket detail page
@@ -182,6 +200,9 @@ export function RecentTicketsWidget({ settings, isEditing }: WidgetProps) {
             }
             skeletonVariant="list"
             skeletonCount={widgetSettings.limit ?? 10}
+            onRefresh={refresh}
+            isRefreshing={isRefreshing}
+            lastUpdated={lastUpdated}
         >
             {isEditing ? (
                 // Show placeholder in edit mode

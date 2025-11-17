@@ -20,6 +20,19 @@ export interface WidgetProps {
     /**
      * Widget-specific settings from the backend configuration
      * These are defined in the module's widget.php config file
+     *
+     * Common settings include:
+     * - refresh_interval: Number of seconds between auto-refreshes (0 = disabled)
+     * - limit: Number of items to display
+     * - status: Filter by status
+     * - date_range: Date range for data
+     *
+     * @example
+     * {
+     *   limit: 10,
+     *   status: 'open',
+     *   refresh_interval: 60
+     * }
      */
     settings?: Record<string, any>
 
