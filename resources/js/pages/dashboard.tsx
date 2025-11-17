@@ -33,6 +33,7 @@ import {
 import { Edit, Save, X, AlertCircle, LayoutGrid, GripVertical, Plus, Settings2, RotateCcw } from "lucide-react"
 import { toast } from "sonner"
 import { getWidget } from "@/widgets"
+import { WidgetErrorBoundary } from "@/components/dashboard/WidgetErrorBoundary"
 import {
     DndContext,
     closestCenter,
@@ -270,6 +271,12 @@ export default function Page() {
         )
 
         toast.success('Widget settings updated')
+    }
+
+    const handleRemoveWidget = (widgetId: number) => {
+        // Remove widget from state
+        setWidgets(prevWidgets => prevWidgets.filter(w => w.id !== widgetId))
+        toast.success('Widget removed from dashboard')
     }
 
     const handleSave = async () => {
@@ -591,7 +598,13 @@ export default function Page() {
                                                     isEditing={isEditing}
                                                     onConfigure={handleConfigureWidget}
                                                 >
-                                                    {widgetContent}
+                                                    <WidgetErrorBoundary
+                                                        widgetKey={widget.widget_key}
+                                                        widgetName={config?.name}
+                                                        onRemove={() => handleRemoveWidget(widget.id)}
+                                                    >
+                                                        {widgetContent}
+                                                    </WidgetErrorBoundary>
                                                 </SortableWidget>
                                             )
                                         })}
