@@ -222,7 +222,7 @@ store.form = storeForm
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
-export const edit = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const edit = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -237,7 +237,7 @@ edit.definition = {
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
-edit.url = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+edit.url = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { automationRule: args }
     }
@@ -270,7 +270,7 @@ edit.url = (args: { automationRule: string | { id: string } } | [automationRule:
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
-edit.get = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+edit.get = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -280,7 +280,7 @@ edit.get = (args: { automationRule: string | { id: string } } | [automationRule:
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
-edit.head = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+edit.head = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: edit.url(args, options),
     method: 'head',
 })
@@ -290,7 +290,7 @@ edit.head = (args: { automationRule: string | { id: string } } | [automationRule
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
-const editForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const editForm = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -300,7 +300,7 @@ const editForm = (args: { automationRule: string | { id: string } } | [automatio
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
-editForm.get = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.get = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -310,7 +310,7 @@ editForm.get = (args: { automationRule: string | { id: string } } | [automationR
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
 * @route '/tickets/automation-rules/{automationRule}/edit'
 */
-editForm.head = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.head = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -327,7 +327,7 @@ edit.form = editForm
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
 * @route '/tickets/automation-rules/{automationRule}'
 */
-export const update = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -342,7 +342,7 @@ update.definition = {
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
 * @route '/tickets/automation-rules/{automationRule}'
 */
-update.url = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+update.url = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { automationRule: args }
     }
@@ -375,7 +375,7 @@ update.url = (args: { automationRule: string | { id: string } } | [automationRul
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
 * @route '/tickets/automation-rules/{automationRule}'
 */
-update.put = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -385,7 +385,7 @@ update.put = (args: { automationRule: string | { id: string } } | [automationRul
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
 * @route '/tickets/automation-rules/{automationRule}'
 */
-const updateForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateForm = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -400,7 +400,7 @@ const updateForm = (args: { automationRule: string | { id: string } } | [automat
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
 * @route '/tickets/automation-rules/{automationRule}'
 */
-updateForm.put = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.put = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -417,7 +417,7 @@ update.form = updateForm
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:265
 * @route '/tickets/automation-rules/{automationRule}'
 */
-export const destroy = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -432,7 +432,7 @@ destroy.definition = {
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:265
 * @route '/tickets/automation-rules/{automationRule}'
 */
-destroy.url = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+destroy.url = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { automationRule: args }
     }
@@ -465,7 +465,7 @@ destroy.url = (args: { automationRule: string | { id: string } } | [automationRu
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:265
 * @route '/tickets/automation-rules/{automationRule}'
 */
-destroy.delete = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -475,7 +475,7 @@ destroy.delete = (args: { automationRule: string | { id: string } } | [automatio
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:265
 * @route '/tickets/automation-rules/{automationRule}'
 */
-const destroyForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -490,7 +490,7 @@ const destroyForm = (args: { automationRule: string | { id: string } } | [automa
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:265
 * @route '/tickets/automation-rules/{automationRule}'
 */
-destroyForm.delete = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -507,7 +507,7 @@ destroy.form = destroyForm
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
 * @route '/tickets/automation-rules/{automationRule}/toggle'
 */
-export const toggle = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const toggle = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: toggle.url(args, options),
     method: 'patch',
 })
@@ -522,7 +522,7 @@ toggle.definition = {
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
 * @route '/tickets/automation-rules/{automationRule}/toggle'
 */
-toggle.url = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+toggle.url = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { automationRule: args }
     }
@@ -555,7 +555,7 @@ toggle.url = (args: { automationRule: string | { id: string } } | [automationRul
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
 * @route '/tickets/automation-rules/{automationRule}/toggle'
 */
-toggle.patch = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+toggle.patch = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: toggle.url(args, options),
     method: 'patch',
 })
@@ -565,7 +565,7 @@ toggle.patch = (args: { automationRule: string | { id: string } } | [automationR
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
 * @route '/tickets/automation-rules/{automationRule}/toggle'
 */
-const toggleForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const toggleForm = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: toggle.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -580,7 +580,7 @@ const toggleForm = (args: { automationRule: string | { id: string } } | [automat
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
 * @route '/tickets/automation-rules/{automationRule}/toggle'
 */
-toggleForm.patch = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+toggleForm.patch = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: toggle.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -597,7 +597,7 @@ toggle.form = toggleForm
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
 * @route '/tickets/automation-rules/{automationRule}/priority'
 */
-export const priority = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const priority = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: priority.url(args, options),
     method: 'patch',
 })
@@ -612,7 +612,7 @@ priority.definition = {
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
 * @route '/tickets/automation-rules/{automationRule}/priority'
 */
-priority.url = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+priority.url = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { automationRule: args }
     }
@@ -645,7 +645,7 @@ priority.url = (args: { automationRule: string | { id: string } } | [automationR
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
 * @route '/tickets/automation-rules/{automationRule}/priority'
 */
-priority.patch = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+priority.patch = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: priority.url(args, options),
     method: 'patch',
 })
@@ -655,7 +655,7 @@ priority.patch = (args: { automationRule: string | { id: string } } | [automatio
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
 * @route '/tickets/automation-rules/{automationRule}/priority'
 */
-const priorityForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const priorityForm = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: priority.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -670,7 +670,7 @@ const priorityForm = (args: { automationRule: string | { id: string } } | [autom
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
 * @route '/tickets/automation-rules/{automationRule}/priority'
 */
-priorityForm.patch = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+priorityForm.patch = (args: { automationRule: string | number | { id: string | number } } | [automationRule: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: priority.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',

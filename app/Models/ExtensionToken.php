@@ -13,6 +13,7 @@ class ExtensionToken extends Model
 
     protected $fillable = [
         'user_id',
+        'organisation_id',
         'token_hash',
         'name',
         'last_used_at',
@@ -37,15 +38,24 @@ class ExtensionToken extends Model
     }
 
     /**
+     * Organisation relationship
+     */
+    public function organisation(): BelongsTo
+    {
+        return $this->belongsTo(Organisation::class);
+    }
+
+    /**
      * Generate a new token
      */
-    public static function generate(User $user, string $name = 'Chrome Extension'): array
+    public static function generate(User $user, string $organisationId, string $name = 'Chrome Extension'): array
     {
         $plainToken = Str::random(64);
         $tokenHash = hash('sha256', $plainToken);
 
         $token = self::create([
             'user_id' => $user->id,
+            'organisation_id' => $organisationId,
             'token_hash' => $tokenHash,
             'name' => $name,
             'expires_at' => now()->addDays(90),

@@ -4,7 +4,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:269
 * @route '/timesheet/services/{service}/users/attach'
 */
-export const attach = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const attach = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: attach.url(args, options),
     method: 'post',
 })
@@ -19,7 +19,7 @@ attach.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:269
 * @route '/timesheet/services/{service}/users/attach'
 */
-attach.url = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+attach.url = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { service: args }
     }
@@ -52,7 +52,7 @@ attach.url = (args: { service: string | { id: string } } | [service: string | { 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:269
 * @route '/timesheet/services/{service}/users/attach'
 */
-attach.post = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+attach.post = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: attach.url(args, options),
     method: 'post',
 })
@@ -62,7 +62,7 @@ attach.post = (args: { service: string | { id: string } } | [service: string | {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:269
 * @route '/timesheet/services/{service}/users/attach'
 */
-const attachForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const attachForm = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: attach.url(args, options),
     method: 'post',
 })
@@ -72,7 +72,7 @@ const attachForm = (args: { service: string | { id: string } } | [service: strin
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:269
 * @route '/timesheet/services/{service}/users/attach'
 */
-attachForm.post = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+attachForm.post = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: attach.url(args, options),
     method: 'post',
 })
@@ -84,7 +84,7 @@ attach.form = attachForm
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:293
 * @route '/timesheet/services/{service}/users/{user}'
 */
-export const detach = (args: { service: string | { id: string }, user: string | { id: string } } | [service: string | { id: string }, user: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const detach = (args: { service: string | number | { id: string | number }, user: string | number | { id: string | number } } | [service: string | number | { id: string | number }, user: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: detach.url(args, options),
     method: 'delete',
 })
@@ -99,7 +99,7 @@ detach.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:293
 * @route '/timesheet/services/{service}/users/{user}'
 */
-detach.url = (args: { service: string | { id: string }, user: string | { id: string } } | [service: string | { id: string }, user: string | { id: string } ], options?: RouteQueryOptions) => {
+detach.url = (args: { service: string | number | { id: string | number }, user: string | number | { id: string | number } } | [service: string | number | { id: string | number }, user: string | number | { id: string | number } ], options?: RouteQueryOptions) => {
     if (Array.isArray(args)) {
         args = {
             service: args[0],
@@ -129,7 +129,7 @@ detach.url = (args: { service: string | { id: string }, user: string | { id: str
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:293
 * @route '/timesheet/services/{service}/users/{user}'
 */
-detach.delete = (args: { service: string | { id: string }, user: string | { id: string } } | [service: string | { id: string }, user: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+detach.delete = (args: { service: string | number | { id: string | number }, user: string | number | { id: string | number } } | [service: string | number | { id: string | number }, user: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: detach.url(args, options),
     method: 'delete',
 })
@@ -139,7 +139,7 @@ detach.delete = (args: { service: string | { id: string }, user: string | { id: 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:293
 * @route '/timesheet/services/{service}/users/{user}'
 */
-const detachForm = (args: { service: string | { id: string }, user: string | { id: string } } | [service: string | { id: string }, user: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const detachForm = (args: { service: string | number | { id: string | number }, user: string | number | { id: string | number } } | [service: string | number | { id: string | number }, user: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: detach.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -154,7 +154,7 @@ const detachForm = (args: { service: string | { id: string }, user: string | { i
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:293
 * @route '/timesheet/services/{service}/users/{user}'
 */
-detachForm.delete = (args: { service: string | { id: string }, user: string | { id: string } } | [service: string | { id: string }, user: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+detachForm.delete = (args: { service: string | number | { id: string | number }, user: string | number | { id: string | number } } | [service: string | number | { id: string | number }, user: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: detach.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

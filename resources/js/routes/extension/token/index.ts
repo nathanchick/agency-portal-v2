@@ -82,7 +82,7 @@ create.form = createForm
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::generate
-* @see app/Http/Controllers/Extension/TokenController.php:37
+* @see app/Http/Controllers/Extension/TokenController.php:51
 * @route '/extension-token'
 */
 export const generate = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -97,7 +97,7 @@ generate.definition = {
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::generate
-* @see app/Http/Controllers/Extension/TokenController.php:37
+* @see app/Http/Controllers/Extension/TokenController.php:51
 * @route '/extension-token'
 */
 generate.url = (options?: RouteQueryOptions) => {
@@ -106,7 +106,7 @@ generate.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::generate
-* @see app/Http/Controllers/Extension/TokenController.php:37
+* @see app/Http/Controllers/Extension/TokenController.php:51
 * @route '/extension-token'
 */
 generate.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -116,7 +116,7 @@ generate.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::generate
-* @see app/Http/Controllers/Extension/TokenController.php:37
+* @see app/Http/Controllers/Extension/TokenController.php:51
 * @route '/extension-token'
 */
 const generateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -126,7 +126,7 @@ const generateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> 
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::generate
-* @see app/Http/Controllers/Extension/TokenController.php:37
+* @see app/Http/Controllers/Extension/TokenController.php:51
 * @route '/extension-token'
 */
 generateForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -138,7 +138,7 @@ generate.form = generateForm
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::revoke
-* @see app/Http/Controllers/Extension/TokenController.php:112
+* @see app/Http/Controllers/Extension/TokenController.php:134
 * @route '/extension-token/{token}'
 */
 export const revoke = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -153,7 +153,7 @@ revoke.definition = {
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::revoke
-* @see app/Http/Controllers/Extension/TokenController.php:112
+* @see app/Http/Controllers/Extension/TokenController.php:134
 * @route '/extension-token/{token}'
 */
 revoke.url = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -180,7 +180,7 @@ revoke.url = (args: { token: string | number } | [token: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::revoke
-* @see app/Http/Controllers/Extension/TokenController.php:112
+* @see app/Http/Controllers/Extension/TokenController.php:134
 * @route '/extension-token/{token}'
 */
 revoke.delete = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -190,7 +190,7 @@ revoke.delete = (args: { token: string | number } | [token: string | number ] | 
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::revoke
-* @see app/Http/Controllers/Extension/TokenController.php:112
+* @see app/Http/Controllers/Extension/TokenController.php:134
 * @route '/extension-token/{token}'
 */
 const revokeForm = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -205,7 +205,7 @@ const revokeForm = (args: { token: string | number } | [token: string | number ]
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::revoke
-* @see app/Http/Controllers/Extension/TokenController.php:112
+* @see app/Http/Controllers/Extension/TokenController.php:134
 * @route '/extension-token/{token}'
 */
 revokeForm.delete = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

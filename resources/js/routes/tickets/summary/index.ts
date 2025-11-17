@@ -4,7 +4,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:949
 * @route '/tickets/{ticket}/summary/regenerate'
 */
-export const regenerate = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const regenerate = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: regenerate.url(args, options),
     method: 'post',
 })
@@ -19,7 +19,7 @@ regenerate.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:949
 * @route '/tickets/{ticket}/summary/regenerate'
 */
-regenerate.url = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+regenerate.url = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { ticket: args }
     }
@@ -52,7 +52,7 @@ regenerate.url = (args: { ticket: string | { id: string } } | [ticket: string | 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:949
 * @route '/tickets/{ticket}/summary/regenerate'
 */
-regenerate.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+regenerate.post = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: regenerate.url(args, options),
     method: 'post',
 })
@@ -62,7 +62,7 @@ regenerate.post = (args: { ticket: string | { id: string } } | [ticket: string |
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:949
 * @route '/tickets/{ticket}/summary/regenerate'
 */
-const regenerateForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const regenerateForm = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: regenerate.url(args, options),
     method: 'post',
 })
@@ -72,7 +72,7 @@ const regenerateForm = (args: { ticket: string | { id: string } } | [ticket: str
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:949
 * @route '/tickets/{ticket}/summary/regenerate'
 */
-regenerateForm.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+regenerateForm.post = (args: { ticket: string | number | { id: string | number } } | [ticket: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: regenerate.url(args, options),
     method: 'post',
 })

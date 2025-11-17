@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Extension\TokenController::validate
-* @see app/Http/Controllers/Extension/TokenController.php:68
+* @see app/Http/Controllers/Extension/TokenController.php:93
 * @route '/api/extension/auth/validate'
 */
 export const validate = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ validate.definition = {
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::validate
-* @see app/Http/Controllers/Extension/TokenController.php:68
+* @see app/Http/Controllers/Extension/TokenController.php:93
 * @route '/api/extension/auth/validate'
 */
 validate.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ validate.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::validate
-* @see app/Http/Controllers/Extension/TokenController.php:68
+* @see app/Http/Controllers/Extension/TokenController.php:93
 * @route '/api/extension/auth/validate'
 */
 validate.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -35,7 +35,7 @@ validate.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::validate
-* @see app/Http/Controllers/Extension/TokenController.php:68
+* @see app/Http/Controllers/Extension/TokenController.php:93
 * @route '/api/extension/auth/validate'
 */
 const validateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -45,7 +45,7 @@ const validateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> 
 
 /**
 * @see \App\Http\Controllers\Extension\TokenController::validate
-* @see app/Http/Controllers/Extension/TokenController.php:68
+* @see app/Http/Controllers/Extension/TokenController.php:93
 * @route '/api/extension/auth/validate'
 */
 validateForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

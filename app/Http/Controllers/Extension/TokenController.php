@@ -16,14 +16,28 @@ class TokenController extends Controller
      */
     public function create(): Response
     {
+        $user = auth()->user();
+
+        // Get user's organisations
+        $organisations = $user->organisations()->get()->map(fn($org) => [
+            'id' => $org->id,
+            'name' => $org->name,
+        ]);
+
         return Inertia::render('Extension/Token', [
-            'existingTokens' => ExtensionToken::where('user_id', auth()->id())
+            'organisations' => $organisations,
+            'existingTokens' => ExtensionToken::where('user_id', $user->id)
+                ->with('organisation')
                 ->valid()
                 ->orderBy('created_at', 'desc')
                 ->get()
                 ->map(fn($token) => [
                     'id' => $token->id,
                     'name' => $token->name,
+                    'organisation' => $token->organisation ? [
+                        'id' => $token->organisation->id,
+                        'name' => $token->organisation->name,
+                    ] : null,
                     'created_at' => $token->created_at->toIso8601String(),
                     'last_used_at' => $token->last_used_at?->toIso8601String(),
                     'expires_at' => $token->expires_at->toIso8601String(),
@@ -38,10 +52,20 @@ class TokenController extends Controller
     {
         $request->validate([
             'name' => ['nullable', 'string', 'max:255'],
+            'organisation_id' => ['required', 'uuid', 'exists:organisations,id'],
         ]);
 
+        $user = $request->user();
+
+        // Verify user has access to this organisation
+        if (!$user->organisations()->where('organisations.id', $request->organisation_id)->exists()) {
+            return back()->withErrors([
+                'organisation_id' => 'You do not have access to this organisation.',
+            ]);
+        }
+
         // Rate limiting: max 5 tokens per hour
-        $recentTokens = ExtensionToken::where('user_id', $request->user()->id)
+        $recentTokens = ExtensionToken::where('user_id', $user->id)
             ->where('created_at', '>', now()->subHour())
             ->count();
 
@@ -52,7 +76,8 @@ class TokenController extends Controller
         }
 
         $tokenData = ExtensionToken::generate(
-            $request->user(),
+            $user,
+            $request->organisation_id,
             $request->input('name', 'Chrome Extension')
         );
 
@@ -80,15 +105,12 @@ class TokenController extends Controller
             ], 401);
         }
 
-        $extensionToken->load('user.organisations');
+        $extensionToken->load(['user', 'organisation']);
 
-        // Get user's first organisation (users must have at least one organisation)
-        $organisation = $extensionToken->user->organisations->first();
-
-        if (!$organisation) {
+        if (!$extensionToken->organisation) {
             return response()->json([
                 'valid' => false,
-                'message' => 'User has no organisation.',
+                'message' => 'Token has no associated organisation.',
             ], 401);
         }
 
@@ -99,8 +121,8 @@ class TokenController extends Controller
                 'name' => $extensionToken->user->name,
                 'email' => $extensionToken->user->email,
                 'organisation' => [
-                    'id' => $organisation->id,
-                    'name' => $organisation->name,
+                    'id' => $extensionToken->organisation->id,
+                    'name' => $extensionToken->organisation->name,
                 ],
             ],
         ]);

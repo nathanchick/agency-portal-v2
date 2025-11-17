@@ -4,7 +4,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:18
 * @route '/timesheet/services/{service}/budget-periods'
 */
-export const index = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const index = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: index.url(args, options),
     method: 'get',
 })
@@ -19,7 +19,7 @@ index.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:18
 * @route '/timesheet/services/{service}/budget-periods'
 */
-index.url = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+index.url = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { service: args }
     }
@@ -52,7 +52,7 @@ index.url = (args: { service: string | { id: string } } | [service: string | { i
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:18
 * @route '/timesheet/services/{service}/budget-periods'
 */
-index.get = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+index.get = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: index.url(args, options),
     method: 'get',
 })
@@ -62,7 +62,7 @@ index.get = (args: { service: string | { id: string } } | [service: string | { i
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:18
 * @route '/timesheet/services/{service}/budget-periods'
 */
-index.head = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+index.head = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(args, options),
     method: 'head',
 })
@@ -72,7 +72,7 @@ index.head = (args: { service: string | { id: string } } | [service: string | { 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:18
 * @route '/timesheet/services/{service}/budget-periods'
 */
-const indexForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const indexForm = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: index.url(args, options),
     method: 'get',
 })
@@ -82,7 +82,7 @@ const indexForm = (args: { service: string | { id: string } } | [service: string
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:18
 * @route '/timesheet/services/{service}/budget-periods'
 */
-indexForm.get = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+indexForm.get = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: index.url(args, options),
     method: 'get',
 })
@@ -92,7 +92,7 @@ indexForm.get = (args: { service: string | { id: string } } | [service: string |
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:18
 * @route '/timesheet/services/{service}/budget-periods'
 */
-indexForm.head = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+indexForm.head = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: index.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -109,7 +109,7 @@ index.form = indexForm
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:147
 * @route '/timesheet/services/{service}/budget-periods/ledger'
 */
-export const ledger = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const ledger = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: ledger.url(args, options),
     method: 'get',
 })
@@ -124,7 +124,7 @@ ledger.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:147
 * @route '/timesheet/services/{service}/budget-periods/ledger'
 */
-ledger.url = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+ledger.url = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { service: args }
     }
@@ -157,7 +157,7 @@ ledger.url = (args: { service: string | { id: string } } | [service: string | { 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:147
 * @route '/timesheet/services/{service}/budget-periods/ledger'
 */
-ledger.get = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+ledger.get = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: ledger.url(args, options),
     method: 'get',
 })
@@ -167,7 +167,7 @@ ledger.get = (args: { service: string | { id: string } } | [service: string | { 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:147
 * @route '/timesheet/services/{service}/budget-periods/ledger'
 */
-ledger.head = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+ledger.head = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: ledger.url(args, options),
     method: 'head',
 })
@@ -177,7 +177,7 @@ ledger.head = (args: { service: string | { id: string } } | [service: string | {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:147
 * @route '/timesheet/services/{service}/budget-periods/ledger'
 */
-const ledgerForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const ledgerForm = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: ledger.url(args, options),
     method: 'get',
 })
@@ -187,7 +187,7 @@ const ledgerForm = (args: { service: string | { id: string } } | [service: strin
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:147
 * @route '/timesheet/services/{service}/budget-periods/ledger'
 */
-ledgerForm.get = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+ledgerForm.get = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: ledger.url(args, options),
     method: 'get',
 })
@@ -197,7 +197,7 @@ ledgerForm.get = (args: { service: string | { id: string } } | [service: string 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:147
 * @route '/timesheet/services/{service}/budget-periods/ledger'
 */
-ledgerForm.head = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+ledgerForm.head = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: ledger.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -214,7 +214,7 @@ ledger.form = ledgerForm
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:43
 * @route '/timesheet/services/{service}/budget-periods/{period}'
 */
-export const show = (args: { service: string | { id: string }, period: string | { id: string } } | [service: string | { id: string }, period: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const show = (args: { service: string | number | { id: string | number }, period: string | number | { id: string | number } } | [service: string | number | { id: string | number }, period: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -229,7 +229,7 @@ show.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:43
 * @route '/timesheet/services/{service}/budget-periods/{period}'
 */
-show.url = (args: { service: string | { id: string }, period: string | { id: string } } | [service: string | { id: string }, period: string | { id: string } ], options?: RouteQueryOptions) => {
+show.url = (args: { service: string | number | { id: string | number }, period: string | number | { id: string | number } } | [service: string | number | { id: string | number }, period: string | number | { id: string | number } ], options?: RouteQueryOptions) => {
     if (Array.isArray(args)) {
         args = {
             service: args[0],
@@ -259,7 +259,7 @@ show.url = (args: { service: string | { id: string }, period: string | { id: str
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:43
 * @route '/timesheet/services/{service}/budget-periods/{period}'
 */
-show.get = (args: { service: string | { id: string }, period: string | { id: string } } | [service: string | { id: string }, period: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+show.get = (args: { service: string | number | { id: string | number }, period: string | number | { id: string | number } } | [service: string | number | { id: string | number }, period: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -269,7 +269,7 @@ show.get = (args: { service: string | { id: string }, period: string | { id: str
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:43
 * @route '/timesheet/services/{service}/budget-periods/{period}'
 */
-show.head = (args: { service: string | { id: string }, period: string | { id: string } } | [service: string | { id: string }, period: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+show.head = (args: { service: string | number | { id: string | number }, period: string | number | { id: string | number } } | [service: string | number | { id: string | number }, period: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(args, options),
     method: 'head',
 })
@@ -279,7 +279,7 @@ show.head = (args: { service: string | { id: string }, period: string | { id: st
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:43
 * @route '/timesheet/services/{service}/budget-periods/{period}'
 */
-const showForm = (args: { service: string | { id: string }, period: string | { id: string } } | [service: string | { id: string }, period: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const showForm = (args: { service: string | number | { id: string | number }, period: string | number | { id: string | number } } | [service: string | number | { id: string | number }, period: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -289,7 +289,7 @@ const showForm = (args: { service: string | { id: string }, period: string | { i
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:43
 * @route '/timesheet/services/{service}/budget-periods/{period}'
 */
-showForm.get = (args: { service: string | { id: string }, period: string | { id: string } } | [service: string | { id: string }, period: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.get = (args: { service: string | number | { id: string | number }, period: string | number | { id: string | number } } | [service: string | number | { id: string | number }, period: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -299,7 +299,7 @@ showForm.get = (args: { service: string | { id: string }, period: string | { id:
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:43
 * @route '/timesheet/services/{service}/budget-periods/{period}'
 */
-showForm.head = (args: { service: string | { id: string }, period: string | { id: string } } | [service: string | { id: string }, period: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.head = (args: { service: string | number | { id: string | number }, period: string | number | { id: string | number } } | [service: string | number | { id: string | number }, period: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -316,7 +316,7 @@ show.form = showForm
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:78
 * @route '/timesheet/services/{service}/budget-periods/{period}/reconcile'
 */
-export const reconcile = (args: { service: string | { id: string }, period: string | { id: string } } | [service: string | { id: string }, period: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const reconcile = (args: { service: string | number | { id: string | number }, period: string | number | { id: string | number } } | [service: string | number | { id: string | number }, period: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: reconcile.url(args, options),
     method: 'post',
 })
@@ -331,7 +331,7 @@ reconcile.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:78
 * @route '/timesheet/services/{service}/budget-periods/{period}/reconcile'
 */
-reconcile.url = (args: { service: string | { id: string }, period: string | { id: string } } | [service: string | { id: string }, period: string | { id: string } ], options?: RouteQueryOptions) => {
+reconcile.url = (args: { service: string | number | { id: string | number }, period: string | number | { id: string | number } } | [service: string | number | { id: string | number }, period: string | number | { id: string | number } ], options?: RouteQueryOptions) => {
     if (Array.isArray(args)) {
         args = {
             service: args[0],
@@ -361,7 +361,7 @@ reconcile.url = (args: { service: string | { id: string }, period: string | { id
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:78
 * @route '/timesheet/services/{service}/budget-periods/{period}/reconcile'
 */
-reconcile.post = (args: { service: string | { id: string }, period: string | { id: string } } | [service: string | { id: string }, period: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+reconcile.post = (args: { service: string | number | { id: string | number }, period: string | number | { id: string | number } } | [service: string | number | { id: string | number }, period: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: reconcile.url(args, options),
     method: 'post',
 })
@@ -371,7 +371,7 @@ reconcile.post = (args: { service: string | { id: string }, period: string | { i
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:78
 * @route '/timesheet/services/{service}/budget-periods/{period}/reconcile'
 */
-const reconcileForm = (args: { service: string | { id: string }, period: string | { id: string } } | [service: string | { id: string }, period: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const reconcileForm = (args: { service: string | number | { id: string | number }, period: string | number | { id: string | number } } | [service: string | number | { id: string | number }, period: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: reconcile.url(args, options),
     method: 'post',
 })
@@ -381,7 +381,7 @@ const reconcileForm = (args: { service: string | { id: string }, period: string 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceBudgetPeriodController.php:78
 * @route '/timesheet/services/{service}/budget-periods/{period}/reconcile'
 */
-reconcileForm.post = (args: { service: string | { id: string }, period: string | { id: string } } | [service: string | { id: string }, period: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+reconcileForm.post = (args: { service: string | number | { id: string | number }, period: string | number | { id: string | number } } | [service: string | number | { id: string | number }, period: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: reconcile.url(args, options),
     method: 'post',
 })

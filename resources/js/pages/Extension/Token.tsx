@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Copy, Trash2, Clock, CheckCircle2, AlertCircle, AlertTriangle } from 'lucide-react';
@@ -21,20 +22,28 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
+interface Organisation {
+  id: string;
+  name: string;
+}
+
 interface ExtensionToken {
   id: string;
   name: string;
+  organisation: Organisation | null;
   created_at: string;
   last_used_at: string | null;
   expires_at: string;
 }
 
 interface Props {
+  organisations: Organisation[];
   existingTokens: ExtensionToken[];
 }
 
-export default function ExtensionToken({ existingTokens }: Props) {
+export default function ExtensionToken({ organisations, existingTokens }: Props) {
   const [tokenName, setTokenName] = useState('Chrome Extension');
+  const [selectedOrganisationId, setSelectedOrganisationId] = useState(organisations[0]?.id || '');
   const [generatedToken, setGeneratedToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -46,7 +55,10 @@ export default function ExtensionToken({ existingTokens }: Props) {
 
     router.post(
       generate().url,
-      { name: tokenName },
+      {
+        name: tokenName,
+        organisation_id: selectedOrganisationId,
+      },
       {
         preserveScroll: true,
         onSuccess: (page: any) => {
@@ -162,6 +174,25 @@ export default function ExtensionToken({ existingTokens }: Props) {
               ) : (
                 <>
                   <div className="space-y-2">
+                    <Label htmlFor="organisation">Organisation</Label>
+                    <Select value={selectedOrganisationId} onValueChange={setSelectedOrganisationId}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select organisation" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {organisations.map((org) => (
+                          <SelectItem key={org.id} value={org.id}>
+                            {org.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <p className="text-sm text-muted-foreground">
+                      The extension will use this organisation's data.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
                     <Label htmlFor="token-name">Token Name (Optional)</Label>
                     <Input
                       id="token-name"
@@ -213,6 +244,11 @@ export default function ExtensionToken({ existingTokens }: Props) {
                     >
                       <div className="flex-1">
                         <h4 className="font-medium">{token.name}</h4>
+                        {token.organisation && (
+                          <p className="text-sm text-muted-foreground mt-1">
+                            Organisation: {token.organisation.name}
+                          </p>
+                        )}
                         <div className="mt-1 flex flex-wrap gap-4 text-sm text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <Clock className="h-3 w-3" />

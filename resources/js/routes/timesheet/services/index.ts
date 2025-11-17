@@ -226,7 +226,7 @@ store.form = storeForm
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:197
 * @route '/timesheet/services/{service}'
 */
-export const show = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const show = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -241,7 +241,7 @@ show.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:197
 * @route '/timesheet/services/{service}'
 */
-show.url = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+show.url = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { service: args }
     }
@@ -274,7 +274,7 @@ show.url = (args: { service: string | { id: string } } | [service: string | { id
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:197
 * @route '/timesheet/services/{service}'
 */
-show.get = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+show.get = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -284,7 +284,7 @@ show.get = (args: { service: string | { id: string } } | [service: string | { id
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:197
 * @route '/timesheet/services/{service}'
 */
-show.head = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+show.head = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(args, options),
     method: 'head',
 })
@@ -294,7 +294,7 @@ show.head = (args: { service: string | { id: string } } | [service: string | { i
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:197
 * @route '/timesheet/services/{service}'
 */
-const showForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const showForm = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -304,7 +304,7 @@ const showForm = (args: { service: string | { id: string } } | [service: string 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:197
 * @route '/timesheet/services/{service}'
 */
-showForm.get = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.get = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -314,7 +314,7 @@ showForm.get = (args: { service: string | { id: string } } | [service: string | 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:197
 * @route '/timesheet/services/{service}'
 */
-showForm.head = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.head = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -331,7 +331,7 @@ show.form = showForm
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:122
 * @route '/timesheet/services/{service}/edit'
 */
-export const edit = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const edit = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -346,7 +346,7 @@ edit.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:122
 * @route '/timesheet/services/{service}/edit'
 */
-edit.url = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+edit.url = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { service: args }
     }
@@ -379,7 +379,7 @@ edit.url = (args: { service: string | { id: string } } | [service: string | { id
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:122
 * @route '/timesheet/services/{service}/edit'
 */
-edit.get = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+edit.get = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -389,7 +389,7 @@ edit.get = (args: { service: string | { id: string } } | [service: string | { id
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:122
 * @route '/timesheet/services/{service}/edit'
 */
-edit.head = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+edit.head = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: edit.url(args, options),
     method: 'head',
 })
@@ -399,7 +399,7 @@ edit.head = (args: { service: string | { id: string } } | [service: string | { i
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:122
 * @route '/timesheet/services/{service}/edit'
 */
-const editForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const editForm = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -409,7 +409,7 @@ const editForm = (args: { service: string | { id: string } } | [service: string 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:122
 * @route '/timesheet/services/{service}/edit'
 */
-editForm.get = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.get = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -419,7 +419,7 @@ editForm.get = (args: { service: string | { id: string } } | [service: string | 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:122
 * @route '/timesheet/services/{service}/edit'
 */
-editForm.head = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.head = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -436,7 +436,7 @@ edit.form = editForm
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:155
 * @route '/timesheet/services/{service}'
 */
-export const update = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -451,7 +451,7 @@ update.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:155
 * @route '/timesheet/services/{service}'
 */
-update.url = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+update.url = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { service: args }
     }
@@ -484,7 +484,7 @@ update.url = (args: { service: string | { id: string } } | [service: string | { 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:155
 * @route '/timesheet/services/{service}'
 */
-update.put = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -494,7 +494,7 @@ update.put = (args: { service: string | { id: string } } | [service: string | { 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:155
 * @route '/timesheet/services/{service}'
 */
-const updateForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateForm = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -509,7 +509,7 @@ const updateForm = (args: { service: string | { id: string } } | [service: strin
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:155
 * @route '/timesheet/services/{service}'
 */
-updateForm.put = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.put = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -526,7 +526,7 @@ update.form = updateForm
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:185
 * @route '/timesheet/services/{service}'
 */
-export const destroy = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -541,7 +541,7 @@ destroy.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:185
 * @route '/timesheet/services/{service}'
 */
-destroy.url = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+destroy.url = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { service: args }
     }
@@ -574,7 +574,7 @@ destroy.url = (args: { service: string | { id: string } } | [service: string | {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:185
 * @route '/timesheet/services/{service}'
 */
-destroy.delete = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -584,7 +584,7 @@ destroy.delete = (args: { service: string | { id: string } } | [service: string 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:185
 * @route '/timesheet/services/{service}'
 */
-const destroyForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -599,7 +599,7 @@ const destroyForm = (args: { service: string | { id: string } } | [service: stri
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:185
 * @route '/timesheet/services/{service}'
 */
-destroyForm.delete = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

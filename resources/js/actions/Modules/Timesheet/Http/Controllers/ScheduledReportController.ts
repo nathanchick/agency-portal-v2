@@ -141,7 +141,7 @@ store.form = storeForm
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:90
 * @route '/timesheet/reports/scheduled/{scheduledReport}'
 */
-export const update = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -156,7 +156,7 @@ update.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:90
 * @route '/timesheet/reports/scheduled/{scheduledReport}'
 */
-update.url = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+update.url = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { scheduledReport: args }
     }
@@ -189,7 +189,7 @@ update.url = (args: { scheduledReport: string | { id: string } } | [scheduledRep
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:90
 * @route '/timesheet/reports/scheduled/{scheduledReport}'
 */
-update.put = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -199,7 +199,7 @@ update.put = (args: { scheduledReport: string | { id: string } } | [scheduledRep
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:90
 * @route '/timesheet/reports/scheduled/{scheduledReport}'
 */
-const updateForm = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateForm = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -214,7 +214,7 @@ const updateForm = (args: { scheduledReport: string | { id: string } } | [schedu
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:90
 * @route '/timesheet/reports/scheduled/{scheduledReport}'
 */
-updateForm.put = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.put = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -231,7 +231,7 @@ update.form = updateForm
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:132
 * @route '/timesheet/reports/scheduled/{scheduledReport}'
 */
-export const destroy = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -246,7 +246,7 @@ destroy.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:132
 * @route '/timesheet/reports/scheduled/{scheduledReport}'
 */
-destroy.url = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+destroy.url = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { scheduledReport: args }
     }
@@ -279,7 +279,7 @@ destroy.url = (args: { scheduledReport: string | { id: string } } | [scheduledRe
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:132
 * @route '/timesheet/reports/scheduled/{scheduledReport}'
 */
-destroy.delete = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -289,7 +289,7 @@ destroy.delete = (args: { scheduledReport: string | { id: string } } | [schedule
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:132
 * @route '/timesheet/reports/scheduled/{scheduledReport}'
 */
-const destroyForm = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -304,7 +304,7 @@ const destroyForm = (args: { scheduledReport: string | { id: string } } | [sched
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:132
 * @route '/timesheet/reports/scheduled/{scheduledReport}'
 */
-destroyForm.delete = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -321,7 +321,7 @@ destroy.form = destroyForm
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:150
 * @route '/timesheet/reports/scheduled/{scheduledReport}/toggle'
 */
-export const toggle = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const toggle = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: toggle.url(args, options),
     method: 'post',
 })
@@ -336,7 +336,7 @@ toggle.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:150
 * @route '/timesheet/reports/scheduled/{scheduledReport}/toggle'
 */
-toggle.url = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+toggle.url = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { scheduledReport: args }
     }
@@ -369,7 +369,7 @@ toggle.url = (args: { scheduledReport: string | { id: string } } | [scheduledRep
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:150
 * @route '/timesheet/reports/scheduled/{scheduledReport}/toggle'
 */
-toggle.post = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+toggle.post = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: toggle.url(args, options),
     method: 'post',
 })
@@ -379,7 +379,7 @@ toggle.post = (args: { scheduledReport: string | { id: string } } | [scheduledRe
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:150
 * @route '/timesheet/reports/scheduled/{scheduledReport}/toggle'
 */
-const toggleForm = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const toggleForm = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: toggle.url(args, options),
     method: 'post',
 })
@@ -389,7 +389,7 @@ const toggleForm = (args: { scheduledReport: string | { id: string } } | [schedu
 * @see Modules/Timesheet/app/Http/Controllers/ScheduledReportController.php:150
 * @route '/timesheet/reports/scheduled/{scheduledReport}/toggle'
 */
-toggleForm.post = (args: { scheduledReport: string | { id: string } } | [scheduledReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+toggleForm.post = (args: { scheduledReport: string | number | { id: string | number } } | [scheduledReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: toggle.url(args, options),
     method: 'post',
 })

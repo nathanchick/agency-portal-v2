@@ -4,7 +4,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1004
 * @route '/media/{media}/download'
 */
-export const download = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const download = (args: { media: string | number | { id: string | number } } | [media: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: download.url(args, options),
     method: 'get',
 })
@@ -19,7 +19,7 @@ download.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1004
 * @route '/media/{media}/download'
 */
-download.url = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+download.url = (args: { media: string | number | { id: string | number } } | [media: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { media: args }
     }
@@ -52,7 +52,7 @@ download.url = (args: { media: number | { id: number } } | [media: number | { id
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1004
 * @route '/media/{media}/download'
 */
-download.get = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+download.get = (args: { media: string | number | { id: string | number } } | [media: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: download.url(args, options),
     method: 'get',
 })
@@ -62,7 +62,7 @@ download.get = (args: { media: number | { id: number } } | [media: number | { id
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1004
 * @route '/media/{media}/download'
 */
-download.head = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+download.head = (args: { media: string | number | { id: string | number } } | [media: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: download.url(args, options),
     method: 'head',
 })
@@ -72,7 +72,7 @@ download.head = (args: { media: number | { id: number } } | [media: number | { i
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1004
 * @route '/media/{media}/download'
 */
-const downloadForm = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const downloadForm = (args: { media: string | number | { id: string | number } } | [media: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: download.url(args, options),
     method: 'get',
 })
@@ -82,7 +82,7 @@ const downloadForm = (args: { media: number | { id: number } } | [media: number 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1004
 * @route '/media/{media}/download'
 */
-downloadForm.get = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+downloadForm.get = (args: { media: string | number | { id: string | number } } | [media: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: download.url(args, options),
     method: 'get',
 })
@@ -92,7 +92,7 @@ downloadForm.get = (args: { media: number | { id: number } } | [media: number | 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1004
 * @route '/media/{media}/download'
 */
-downloadForm.head = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+downloadForm.head = (args: { media: string | number | { id: string | number } } | [media: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: download.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -109,7 +109,7 @@ download.form = downloadForm
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1039
 * @route '/media/{media}'
 */
-export const deleteMethod = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const deleteMethod = (args: { media: string | number | { id: string | number } } | [media: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: deleteMethod.url(args, options),
     method: 'delete',
 })
@@ -124,7 +124,7 @@ deleteMethod.definition = {
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1039
 * @route '/media/{media}'
 */
-deleteMethod.url = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+deleteMethod.url = (args: { media: string | number | { id: string | number } } | [media: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { media: args }
     }
@@ -157,7 +157,7 @@ deleteMethod.url = (args: { media: number | { id: number } } | [media: number | 
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1039
 * @route '/media/{media}'
 */
-deleteMethod.delete = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+deleteMethod.delete = (args: { media: string | number | { id: string | number } } | [media: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: deleteMethod.url(args, options),
     method: 'delete',
 })
@@ -167,7 +167,7 @@ deleteMethod.delete = (args: { media: number | { id: number } } | [media: number
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1039
 * @route '/media/{media}'
 */
-const deleteMethodForm = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const deleteMethodForm = (args: { media: string | number | { id: string | number } } | [media: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: deleteMethod.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -182,7 +182,7 @@ const deleteMethodForm = (args: { media: number | { id: number } } | [media: num
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1039
 * @route '/media/{media}'
 */
-deleteMethodForm.delete = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+deleteMethodForm.delete = (args: { media: string | number | { id: string | number } } | [media: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: deleteMethod.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

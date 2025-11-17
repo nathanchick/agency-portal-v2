@@ -240,7 +240,7 @@ show.form = showForm
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:196
 * @route '/api/v1/webhooks/{webhook}'
 */
-export const update = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { webhook: string | number | { id: string | number } } | [webhook: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -255,7 +255,7 @@ update.definition = {
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:196
 * @route '/api/v1/webhooks/{webhook}'
 */
-update.url = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+update.url = (args: { webhook: string | number | { id: string | number } } | [webhook: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { webhook: args }
     }
@@ -288,7 +288,7 @@ update.url = (args: { webhook: string | { id: string } } | [webhook: string | { 
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:196
 * @route '/api/v1/webhooks/{webhook}'
 */
-update.put = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { webhook: string | number | { id: string | number } } | [webhook: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -298,7 +298,7 @@ update.put = (args: { webhook: string | { id: string } } | [webhook: string | { 
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:196
 * @route '/api/v1/webhooks/{webhook}'
 */
-update.patch = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+update.patch = (args: { webhook: string | number | { id: string | number } } | [webhook: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: update.url(args, options),
     method: 'patch',
 })
@@ -308,7 +308,7 @@ update.patch = (args: { webhook: string | { id: string } } | [webhook: string | 
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:196
 * @route '/api/v1/webhooks/{webhook}'
 */
-const updateForm = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateForm = (args: { webhook: string | number | { id: string | number } } | [webhook: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -323,7 +323,7 @@ const updateForm = (args: { webhook: string | { id: string } } | [webhook: strin
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:196
 * @route '/api/v1/webhooks/{webhook}'
 */
-updateForm.put = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.put = (args: { webhook: string | number | { id: string | number } } | [webhook: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -338,7 +338,7 @@ updateForm.put = (args: { webhook: string | { id: string } } | [webhook: string 
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:196
 * @route '/api/v1/webhooks/{webhook}'
 */
-updateForm.patch = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.patch = (args: { webhook: string | number | { id: string | number } } | [webhook: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -355,7 +355,7 @@ update.form = updateForm
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:224
 * @route '/api/v1/webhooks/{webhook}'
 */
-export const destroy = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { webhook: string | number | { id: string | number } } | [webhook: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -370,7 +370,7 @@ destroy.definition = {
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:224
 * @route '/api/v1/webhooks/{webhook}'
 */
-destroy.url = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
+destroy.url = (args: { webhook: string | number | { id: string | number } } | [webhook: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { webhook: args }
     }
@@ -403,7 +403,7 @@ destroy.url = (args: { webhook: string | { id: string } } | [webhook: string | {
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:224
 * @route '/api/v1/webhooks/{webhook}'
 */
-destroy.delete = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { webhook: string | number | { id: string | number } } | [webhook: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -413,7 +413,7 @@ destroy.delete = (args: { webhook: string | { id: string } } | [webhook: string 
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:224
 * @route '/api/v1/webhooks/{webhook}'
 */
-const destroyForm = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { webhook: string | number | { id: string | number } } | [webhook: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -428,7 +428,7 @@ const destroyForm = (args: { webhook: string | { id: string } } | [webhook: stri
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:224
 * @route '/api/v1/webhooks/{webhook}'
 */
-destroyForm.delete = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { webhook: string | number | { id: string | number } } | [webhook: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
