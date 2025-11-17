@@ -5,6 +5,7 @@ import { AppSidebar } from "@/components/app-sidebar"
 import { NotificationBell } from "@/components/notification-bell"
 import { useNotifications } from "@/hooks/useNotifications"
 import { AddWidgetDialog } from "@/components/dashboard/AddWidgetDialog"
+import { ConfigureWidgetDialog } from "@/components/dashboard/ConfigureWidgetDialog"
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -21,7 +22,7 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Edit, Save, X, AlertCircle, LayoutGrid, GripVertical, Plus } from "lucide-react"
+import { Edit, Save, X, AlertCircle, LayoutGrid, GripVertical, Plus, Settings2 } from "lucide-react"
 import { toast } from "sonner"
 import { getWidget } from "@/widgets"
 import {
@@ -65,11 +66,6 @@ interface WidgetConfig {
     settings_schema?: Record<string, any>
 }
 
-interface DashboardPageProps {
-    widgets: UserWidget[]
-    availableWidgets: WidgetConfig[]
-}
-
 /**
  * SortableWidget - Wrapper component for drag-and-drop functionality
  */
@@ -78,9 +74,10 @@ interface SortableWidgetProps {
     config?: WidgetConfig
     isEditing: boolean
     children: React.ReactNode
+    onConfigure?: (widget: UserWidget) => void
 }
 
-function SortableWidget({ widget, config, isEditing, children }: SortableWidgetProps) {
+function SortableWidget({ widget, config, isEditing, children, onConfigure }: SortableWidgetProps) {
     const {
         attributes,
         listeners,
@@ -124,6 +121,23 @@ function SortableWidget({ widget, config, isEditing, children }: SortableWidgetP
                     </div>
                 )}
 
+                {/* Settings button - only visible in edit mode and if widget is configurable */}
+                {isEditing && config?.configurable && onConfigure && (
+                    <div
+                        className="absolute -top-2 -right-2 z-10 pointer-events-auto"
+                        title="Configure widget"
+                    >
+                        <Button
+                            size="icon"
+                            variant="default"
+                            className="h-8 w-8 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                            onClick={() => onConfigure(widget)}
+                        >
+                            <Settings2 className="h-4 w-4" />
+                        </Button>
+                    </div>
+                )}
+
                 {/* Widget content */}
                 <div className={isEditing ? 'pointer-events-none' : ''}>
                     {children}
@@ -135,15 +149,17 @@ function SortableWidget({ widget, config, isEditing, children }: SortableWidgetP
 
 export default function Page() {
     const { count, refreshCount } = useNotifications()
-    const { props } = usePage<DashboardPageProps>()
+    const { props } = usePage()
 
-    const [widgets, setWidgets] = useState<UserWidget[]>(props.widgets || [])
-    const [availableWidgets, setAvailableWidgets] = useState<WidgetConfig[]>(props.availableWidgets || [])
+    const [widgets, setWidgets] = useState<UserWidget[]>((props as any).widgets || [])
+    const [availableWidgets, setAvailableWidgets] = useState<WidgetConfig[]>((props as any).availableWidgets || [])
     const [isEditing, setIsEditing] = useState(false)
     const [isSaving, setIsSaving] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [isAddWidgetDialogOpen, setIsAddWidgetDialogOpen] = useState(false)
+    const [configureWidget, setConfigureWidget] = useState<UserWidget | null>(null)
+    const [isConfigureDialogOpen, setIsConfigureDialogOpen] = useState(false)
 
     // Configure drag-and-drop sensors
     const sensors = useSensors(
@@ -208,7 +224,7 @@ export default function Page() {
 
     const handleCancel = () => {
         // Reset to original widgets from props
-        setWidgets(props.widgets || [])
+        setWidgets((props as any).widgets || [])
         setIsEditing(false)
         setIsAddWidgetDialogOpen(false)
     }
@@ -226,6 +242,24 @@ export default function Page() {
 
         setWidgets([...widgets, newWidget])
         toast.success(`Added ${widgetConfig.name} to your dashboard`)
+    }
+
+    const handleConfigureWidget = (widget: UserWidget) => {
+        setConfigureWidget(widget)
+        setIsConfigureDialogOpen(true)
+    }
+
+    const handleSaveWidgetSettings = async (widgetId: number, settings: Record<string, any>) => {
+        // Update the widget's settings in state
+        setWidgets(prevWidgets =>
+            prevWidgets.map(w =>
+                w.id === widgetId
+                    ? { ...w, settings }
+                    : w
+            )
+        )
+
+        toast.success('Widget settings updated')
     }
 
     const handleSave = async () => {
@@ -495,6 +529,7 @@ export default function Page() {
                                                     widget={widget}
                                                     config={config}
                                                     isEditing={isEditing}
+                                                    onConfigure={handleConfigureWidget}
                                                 >
                                                     {widgetContent}
                                                 </SortableWidget>
@@ -536,6 +571,18 @@ export default function Page() {
                         availableWidgets={availableWidgets}
                         currentWidgets={widgets}
                         onAdd={handleAddWidget}
+                    />
+
+                    {/* Configure Widget Dialog */}
+                    <ConfigureWidgetDialog
+                        open={isConfigureDialogOpen}
+                        onClose={() => {
+                            setIsConfigureDialogOpen(false)
+                            setConfigureWidget(null)
+                        }}
+                        widget={configureWidget}
+                        widgetConfig={configureWidget ? availableWidgets.find(w => w.key === configureWidget.widget_key) || null : null}
+                        onSave={handleSaveWidgetSettings}
                     />
                 </div>
             </SidebarInset>

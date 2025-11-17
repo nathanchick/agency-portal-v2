@@ -102,7 +102,7 @@ export function AddWidgetDialog({
     }
 
     // Get Lucide icon component by name
-    const getIcon = (iconName?: string): JSX.Element => {
+    const getIcon = (iconName?: string): React.ReactElement => {
         if (!iconName) return <LayoutGrid className="h-5 w-5" />
 
         const IconComponent = (LucideIcons as any)[iconName]
