@@ -22,6 +22,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Edit, Save, X, AlertCircle, LayoutGrid } from "lucide-react"
 import { toast } from "sonner"
+import { getWidget } from "@/widgets"
 
 interface UserWidget {
     id: number
@@ -312,33 +313,49 @@ export default function Page() {
                                                 ${widget.width >= 3 ? 'lg:col-span-3' : ''}
                                             `}
                                         >
-                                            <Card>
-                                                <CardHeader>
-                                                    <CardTitle className="text-lg">
-                                                        {config?.name || widget.widget_key}
-                                                    </CardTitle>
-                                                    {config?.description && (
-                                                        <CardDescription>
-                                                            {config.description}
-                                                        </CardDescription>
-                                                    )}
-                                                </CardHeader>
-                                                <CardContent>
-                                                    {isEditing ? (
-                                                        <div className="text-sm text-muted-foreground py-8 text-center">
-                                                            Preview disabled in edit mode
-                                                        </div>
-                                                    ) : (
-                                                        <div className="text-sm text-muted-foreground py-8 text-center">
-                                                            Widget content will be displayed here
-                                                            <br />
-                                                            <span className="text-xs">
-                                                                Component: {config?.component || 'Unknown'}
-                                                            </span>
-                                                        </div>
-                                                    )}
-                                                </CardContent>
-                                            </Card>
+                                            {(() => {
+                                                // Get the widget component from the registry
+                                                const WidgetComponent = getWidget(widget.widget_key)
+
+                                                // If widget component exists, render it
+                                                if (WidgetComponent) {
+                                                    return (
+                                                        <WidgetComponent
+                                                            settings={widget.settings}
+                                                            isEditing={isEditing}
+                                                        />
+                                                    )
+                                                }
+
+                                                // Fallback: Widget not found in registry
+                                                return (
+                                                    <Card>
+                                                        <CardHeader>
+                                                            <CardTitle className="text-lg">
+                                                                {config?.name || widget.widget_key}
+                                                            </CardTitle>
+                                                            {config?.description && (
+                                                                <CardDescription>
+                                                                    {config.description}
+                                                                </CardDescription>
+                                                            )}
+                                                        </CardHeader>
+                                                        <CardContent>
+                                                            <Alert variant="destructive">
+                                                                <AlertCircle className="h-4 w-4" />
+                                                                <AlertTitle>Widget Not Found</AlertTitle>
+                                                                <AlertDescription>
+                                                                    The widget component "{widget.widget_key}" is not registered.
+                                                                    <br />
+                                                                    <span className="text-xs mt-2 block">
+                                                                        Expected component: {config?.component || 'Unknown'}
+                                                                    </span>
+                                                                </AlertDescription>
+                                                            </Alert>
+                                                        </CardContent>
+                                                    </Card>
+                                                )
+                                            })()}
                                         </div>
                                     )
                                 })}
