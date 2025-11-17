@@ -1,0 +1,12 @@
+# Extension specific
+*.pem
+*.crx
+*.zip
+
+# Development
+.DS_Store
+node_modules/
+dist/
+
+# Config overrides (local development)
+lib/config.local.js

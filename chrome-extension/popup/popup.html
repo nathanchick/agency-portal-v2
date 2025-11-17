@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Time Tracker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- Login View (shown when not authenticated) -->
+  <div id="login-view" class="view hidden">
+    <div class="logo">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <circle cx="12" cy="12" r="10" stroke-width="2"/>
+        <polyline points="12 6 12 12 16 14" stroke-width="2"/>
+      </svg>
+    </div>
+    <h2>Login Required</h2>
+    <p class="subtitle">Connect to your portal account to track time.</p>
+
+    <div class="auth-form">
+      <div class="form-group">
+        <label for="token-input">Extension Token</label>
+        <input type="password" id="token-input" placeholder="Paste your extension token here" autocomplete="off">
+        <span class="help-text">Get your token from the portal</span>
+      </div>
+      <button id="save-token-btn" class="btn btn-primary" disabled>
+        <span class="btn-text">Save Token</span>
+        <span class="btn-loader hidden">⏳</span>
+      </button>
+      <button id="login-btn" class="btn btn-secondary">
+        Open Portal to Get Token
+      </button>
+    </div>
+  </div>
+
+  <!-- Main View (shown when authenticated) -->
+  <div id="main-view" class="view hidden">
+    <!-- Header -->
+    <header class="header">
+      <div class="user-info">
+        <div class="user-avatar">👤</div>
+        <div class="user-details">
+          <span id="user-name" class="user-name">Loading...</span>
+          <span id="user-org" class="user-org">...</span>
+        </div>
+      </div>
+      <button id="settings-btn" class="btn-icon" title="Settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="3" stroke-width="2"/>
+          <path d="M12 1v6m0 6v6m4.22-12.78l-4.24 4.24m0 0l-4.24 4.24m12.72-2.46l-6 0m-6 0l-6 0" stroke-width="2"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Status Messages -->
+    <div id="status-message" class="status-message hidden"></div>
+
+    <!-- Time Entry Form -->
+    <form id="entry-form" class="entry-form">
+      <div class="form-group">
+        <label for="service">Service *</label>
+        <select id="service" required>
+          <option value="">Select a service...</option>
+        </select>
+        <span class="error-message" id="service-error"></span>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="duration">Duration (hours) *</label>
+          <input type="text" id="duration" placeholder="2.5 or 2:30" required autocomplete="off">
+          <span class="error-message" id="duration-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date *</label>
+          <input type="date" id="date" required>
+          <span class="error-message" id="date-error"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" rows="3" placeholder="What did you work on?"></textarea>
+        <span class="error-message" id="description-error"></span>
+      </div>
+
+      <button type="submit" id="submit-btn" class="btn btn-primary btn-block">
+        <span id="submit-text">Log Time</span>
+        <span id="submit-loader" class="btn-loader hidden">⏳</span>
+      </button>
+    </form>
+
+    <!-- Recent Entries -->
+    <section id="recent-entries" class="recent-entries">
+      <h3 class="section-title">Recent Entries</h3>
+      <div id="entries-list" class="entries-list">
+        <div class="loading-skeleton">
+          <div class="skeleton-entry"></div>
+          <div class="skeleton-entry"></div>
+          <div class="skeleton-entry"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Offline Indicator -->
+    <div id="offline-indicator" class="offline-indicator hidden">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <line x1="1" y1="1" x2="23" y2="23" stroke-width="2"/>
+        <path d="M16.72 11.06A10 10 0 0 1 19 15M8 20h8M12 20v-4" stroke-width="2"/>
+      </svg>
+      <span>Offline - entries will be queued</span>
+      <span id="queue-count" class="queue-count hidden"></span>
+    </div>
+  </div>
+
+  <!-- Loading View (initial load) -->
+  <div id="loading-view" class="view">
+    <div class="loading-spinner">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <circle cx="12" cy="12" r="10" stroke-width="2" stroke-dasharray="60" stroke-dashoffset="30"/>
+      </svg>
+      <p>Loading...</p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../lib/config.js"></script>
+  <script src="../lib/storage.js"></script>
+  <script src="../lib/api-client.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

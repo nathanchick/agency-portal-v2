@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Time Tracker - Settings</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: #6b7280;
+      margin-bottom: 32px;
+    }
+    .setting-group {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #f9fafb;
+      border-radius: 8px;
+    }
+    .setting-group h2 {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .setting-row:last-child {
+      border-bottom: none;
+    }
+    .setting-label {
+      font-weight: 500;
+    }
+    .setting-value {
+      color: #6b7280;
+      font-size: 14px;
+    }
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .btn-danger {
+      background: #ef4444;
+      color: white;
+    }
+    .btn-danger:hover {
+      background: #dc2626;
+    }
+    .status {
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      display: none;
+    }
+    .status.success {
+      background: #d1fae5;
+      color: #065f46;
+    }
+  </style>
+</head>
+<body>
+  <h1>Settings</h1>
+  <p class="subtitle">Manage your extension preferences and data</p>
+
+  <div id="status" class="status"></div>
+
+  <div class="setting-group">
+    <h2>Account</h2>
+    <div class="setting-row">
+      <div>
+        <div class="setting-label">Extension Version</div>
+        <div class="setting-value" id="version">1.0.0</div>
+      </div>
+    </div>
+    <div class="setting-row">
+      <div>
+        <div class="setting-label">API Endpoint</div>
+        <div class="setting-value" id="api-url">Loading...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="setting-group">
+    <h2>Data Management</h2>
+    <div class="setting-row">
+      <div>
+        <div class="setting-label">Clear Cache</div>
+        <div class="setting-value">Remove all cached data (services, entries)</div>
+      </div>
+      <button class="btn" onclick="clearCache()">Clear</button>
+    </div>
+    <div class="setting-row">
+      <div>
+        <div class="setting-label">Clear All Data</div>
+        <div class="setting-value">Remove all extension data including token</div>
+      </div>
+      <button class="btn btn-danger" onclick="clearAllData()">Clear All</button>
+    </div>
+  </div>
+
+  <div class="setting-group">
+    <h2>Support</h2>
+    <div class="setting-row">
+      <div>
+        <div class="setting-label">Documentation</div>
+        <div class="setting-value">View extension documentation and guides</div>
+      </div>
+      <button class="btn" onclick="openDocs()">Open</button>
+    </div>
+  </div>
+
+  <script src="../lib/config.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
