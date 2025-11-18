@@ -46,51 +46,129 @@
         </div>
       </div>
       <button id="settings-btn" class="btn-icon" title="Settings">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="3" stroke-width="2"/>
-          <path d="M12 1v6m0 6v6m4.22-12.78l-4.24 4.24m0 0l-4.24 4.24m12.72-2.46l-6 0m-6 0l-6 0" stroke-width="2"/>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v6m0 6v10m8.66-13.76l-5.2 3m-2.92 1.68l-5.2 3M20.66 19.36l-5.2-3m-2.92-1.68l-5.2-3"/>
         </svg>
       </button>
     </header>
 
+    <!-- Settings Menu (hidden by default) -->
+    <div id="settings-menu" class="settings-menu hidden">
+      <div class="settings-menu-item">
+        <span>Theme</span>
+      </div>
+      <div class="theme-options">
+        <button class="theme-option" data-theme="light">Light</button>
+        <button class="theme-option" data-theme="dark">Dark</button>
+        <button class="theme-option active" data-theme="system">System</button>
+      </div>
+      <div class="section-divider"></div>
+      <div class="settings-menu-item" id="logout-btn">
+        <span>Logout</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>
+        </svg>
+      </div>
+    </div>
+
     <!-- Status Messages -->
     <div id="status-message" class="status-message hidden"></div>
 
-    <!-- Time Entry Form -->
-    <form id="entry-form" class="entry-form">
-      <div class="form-group">
-        <label for="service">Service *</label>
-        <select id="service" required>
-          <option value="">Select a service...</option>
-        </select>
-        <span class="error-message" id="service-error"></span>
+    <!-- Running Timer Bar (shown when timer is running) -->
+    <div id="timer-running-bar" class="timer-running-bar hidden">
+      <div class="timer-indicator">
+        <span class="timer-pulse"></span>
+        <div class="timer-details">
+          <div class="timer-service" id="timer-service-name">Loading...</div>
+          <div class="timer-meta" id="timer-meta">...</div>
+        </div>
       </div>
+      <div class="timer-display">
+        <div class="timer-time" id="timer-elapsed">00:00:00</div>
+        <button id="stop-timer-btn" class="btn-stop-timer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="6" y="6" width="12" height="12" rx="2"/>
+          </svg>
+          Stop
+        </button>
+      </div>
+    </div>
 
-      <div class="form-row">
+    <!-- Start Timer Section (primary action) -->
+    <section id="start-timer-section">
+      <h3 class="section-title">Start Timer</h3>
+      <form id="start-timer-form">
         <div class="form-group">
-          <label for="duration">Duration (hours) *</label>
-          <input type="text" id="duration" placeholder="2.5 or 2:30" required autocomplete="off">
-          <span class="error-message" id="duration-error"></span>
+          <label for="timer-service">Service *</label>
+          <select id="timer-service" required>
+            <option value="">Select a service...</option>
+          </select>
         </div>
 
         <div class="form-group">
-          <label for="date">Date *</label>
-          <input type="date" id="date" required>
-          <span class="error-message" id="date-error"></span>
+          <label for="timer-description">Description (Optional)</label>
+          <textarea id="timer-description" rows="2" placeholder="What are you working on?"></textarea>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" rows="3" placeholder="What did you work on?"></textarea>
-        <span class="error-message" id="description-error"></span>
-      </div>
+        <button type="submit" id="start-timer-btn" class="btn btn-primary btn-block">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+          <span id="start-timer-text">Start Timer</span>
+          <span id="start-timer-loader" class="btn-loader hidden">⏳</span>
+        </button>
+      </form>
+    </section>
 
-      <button type="submit" id="submit-btn" class="btn btn-primary btn-block">
-        <span id="submit-text">Log Time</span>
-        <span id="submit-loader" class="btn-loader hidden">⏳</span>
+    <div class="section-divider"></div>
+
+    <!-- Manual Time Entry Section (collapsible, secondary) -->
+    <section id="manual-entry-section">
+      <button id="manual-entry-toggle" class="manual-entry-toggle">
+        <span>Add time manually</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
       </button>
-    </form>
+
+      <div id="manual-entry-content" class="manual-entry-content hidden">
+        <form id="entry-form">
+          <div class="form-group">
+            <label for="service">Service *</label>
+            <select id="service" required>
+              <option value="">Select a service...</option>
+            </select>
+            <span class="error-message" id="service-error"></span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="duration">Duration (hours) *</label>
+              <input type="text" id="duration" placeholder="2.5 or 2:30" required autocomplete="off">
+              <span class="error-message" id="duration-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="date">Date *</label>
+              <input type="date" id="date" required>
+              <span class="error-message" id="date-error"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" rows="2" placeholder="What did you work on?"></textarea>
+            <span class="error-message" id="description-error"></span>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn btn-primary btn-block">
+            <span id="submit-text">Log Time</span>
+            <span id="submit-loader" class="btn-loader hidden">⏳</span>
+          </button>
+        </form>
+      </div>
+    </section>
 
     <!-- Recent Entries -->
     <section id="recent-entries" class="recent-entries">
