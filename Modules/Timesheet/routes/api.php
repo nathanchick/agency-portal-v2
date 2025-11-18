@@ -15,4 +15,9 @@ Route::middleware(['extension.token', 'throttle:60,1'])->prefix('extension')->na
     Route::get('/services', [TimesheetExtensionController::class, 'services'])->name('services');
     Route::get('/recent-entries', [TimesheetExtensionController::class, 'recentEntries'])->name('recent-entries');
     Route::post('/time-entries', [TimesheetExtensionController::class, 'createEntry'])->name('time-entries.create');
+
+    // Timer endpoints
+    Route::get('/timer/current', [TimesheetExtensionController::class, 'currentTimer'])->name('timer.current');
+    Route::post('/timer/start', [TimesheetExtensionController::class, 'startTimer'])->name('timer.start');
+    Route::post('/timer/{timer}/stop', [TimesheetExtensionController::class, 'stopTimer'])->name('timer.stop');
 });

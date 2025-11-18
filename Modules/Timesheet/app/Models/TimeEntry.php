@@ -166,4 +166,29 @@ class TimeEntry extends Model
         $this->timer_running = true;
         $this->save();
     }
+
+    /**
+     * Get elapsed time in seconds
+     */
+    public function getElapsedSeconds(): int
+    {
+        if (!$this->timer_running || !$this->start_time) {
+            return 0;
+        }
+
+        return $this->start_time->diffInSeconds(now());
+    }
+
+    /**
+     * Get elapsed time formatted as HH:MM:SS
+     */
+    public function getElapsedFormatted(): string
+    {
+        $seconds = $this->getElapsedSeconds();
+        $hours = floor($seconds / 3600);
+        $minutes = floor(($seconds % 3600) / 60);
+        $secs = $seconds % 60;
+
+        return sprintf('%02d:%02d:%02d', $hours, $minutes, $secs);
+    }
 }
