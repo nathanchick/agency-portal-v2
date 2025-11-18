@@ -1,23 +1,57 @@
 /**
  * Portal Time Tracker Extension Styles
- * Based on portal design system
+ * Matches portal design system with theme support
  */
 
 :root {
-  --color-primary: #3b82f6;
-  --color-primary-dark: #2563eb;
-  --color-success: #10b981;
-  --color-error: #ef4444;
-  --color-warning: #f59e0b;
-  --color-bg: #ffffff;
-  --color-bg-secondary: #f9fafb;
-  --color-border: #e5e7eb;
-  --color-text: #111827;
-  --color-text-secondary: #6b7280;
-  --color-text-muted: #9ca3af;
-  --border-radius: 6px;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  /* Light theme (default) - matches portal */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.87 0 0);
+  --success: oklch(0.646 0.175 142.5);
+  --success-foreground: oklch(0.985 0 0);
+
+  /* Spacing and sizing */
+  --radius: 0.5rem;
+  --radius-sm: 0.375rem;
+  --radius-lg: 0.75rem;
+}
+
+.dark {
+  /* Dark theme - matches portal dark mode */
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.338 0 0);
+  --success: oklch(0.497 0.135 142.5);
+  --success-foreground: oklch(0.985 0 0);
 }
 
 * {
@@ -27,16 +61,16 @@
 }
 
 body {
-  width: 380px;
+  width: 420px;
   min-height: 500px;
-  max-height: 600px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  max-height: 700px;
+  font-family: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   font-size: 14px;
   line-height: 1.5;
-  color: var(--color-text);
-  background: var(--color-bg);
+  color: var(--foreground);
+  background: var(--background);
   overflow-y: auto;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 /* ==================== UTILITIES ==================== */
@@ -60,7 +94,7 @@ body {
 }
 
 .loading-spinner svg {
-  color: var(--color-primary);
+  color: var(--primary);
   animation: spin 1s linear infinite;
 }
 
@@ -70,7 +104,7 @@ body {
 
 .loading-spinner p {
   margin-top: 12px;
-  color: var(--color-text-secondary);
+  color: var(--muted-foreground);
 }
 
 /* ==================== LOGIN VIEW ==================== */
@@ -81,17 +115,18 @@ body {
 
 .logo {
   margin: 40px 0 20px;
-  color: var(--color-primary);
+  color: var(--primary);
 }
 
 #login-view h2 {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 8px;
+  color: var(--foreground);
 }
 
 .subtitle {
-  color: var(--color-text-secondary);
+  color: var(--muted-foreground);
   margin-bottom: 32px;
 }
 
@@ -107,7 +142,7 @@ body {
   justify-content: space-between;
   padding-bottom: 16px;
   margin-bottom: 16px;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--border);
 }
 
 .user-info {
@@ -122,7 +157,7 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--color-bg-secondary);
+  background: var(--muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -142,14 +177,111 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--foreground);
 }
 
 .user-org {
   font-size: 12px;
-  color: var(--color-text-secondary);
+  color: var(--muted-foreground);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* ==================== RUNNING TIMER BAR ==================== */
+
+.timer-running-bar {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.timer-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.timer-pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--success);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.timer-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.timer-service {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.timer-meta {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.timer-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.timer-time {
+  font-size: 20px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--foreground);
+  min-width: 90px;
+  text-align: right;
+}
+
+.btn-stop-timer {
+  background: var(--destructive);
+  color: var(--destructive-foreground);
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.2s;
+}
+
+.btn-stop-timer:hover {
+  opacity: 0.9;
+}
+
+.btn-stop-timer svg {
+  width: 14px;
+  height: 14px;
 }
 
 /* ==================== BUTTONS ==================== */
@@ -161,7 +293,7 @@ body {
   gap: 6px;
   padding: 10px 16px;
   border: 1px solid transparent;
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -175,22 +307,22 @@ body {
 }
 
 .btn-primary {
-  background: var(--color-primary);
-  color: white;
+  background: var(--primary);
+  color: var(--primary-foreground);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--color-primary-dark);
+  opacity: 0.9;
 }
 
 .btn-secondary {
-  background: var(--color-bg-secondary);
-  color: var(--color-text);
-  border-color: var(--color-border);
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  border-color: var(--border);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: #f3f4f6;
+  background: var(--accent);
 }
 
 .btn-block {
@@ -202,14 +334,14 @@ body {
   border: none;
   padding: 6px;
   cursor: pointer;
-  color: var(--color-text-secondary);
-  border-radius: var(--border-radius);
+  color: var(--muted-foreground);
+  border-radius: var(--radius);
   transition: all 0.2s;
 }
 
 .btn-icon:hover {
-  background: var(--color-bg-secondary);
-  color: var(--color-text);
+  background: var(--muted);
+  color: var(--foreground);
 }
 
 .btn-loader {
@@ -233,6 +365,7 @@ label {
   margin-bottom: 6px;
   font-weight: 500;
   font-size: 13px;
+  color: var(--foreground);
 }
 
 input[type="text"],
@@ -242,10 +375,12 @@ select,
 textarea {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius);
+  border: 1px solid var(--input);
+  border-radius: var(--radius);
   font-size: 14px;
   font-family: inherit;
+  background: var(--background);
+  color: var(--foreground);
   transition: all 0.2s;
 }
 
@@ -253,8 +388,8 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px oklch(from var(--ring) l c h / 0.1);
 }
 
 textarea {
@@ -266,48 +401,104 @@ textarea {
   display: block;
   margin-top: 4px;
   font-size: 12px;
-  color: var(--color-text-muted);
+  color: var(--muted-foreground);
 }
 
 .error-message {
   display: block;
   margin-top: 4px;
   font-size: 12px;
-  color: var(--color-error);
+  color: var(--destructive);
 }
 
 .error-message:empty {
   display: none;
 }
 
+/* ==================== SECTIONS ==================== */
+
+.section {
+  margin-top: 20px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--foreground);
+}
+
+.section-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* Collapsible manual entry section */
+.manual-entry-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.manual-entry-toggle:hover {
+  background: var(--accent);
+}
+
+.manual-entry-toggle svg {
+  transition: transform 0.2s;
+}
+
+.manual-entry-toggle.expanded svg {
+  transform: rotate(90deg);
+}
+
+.manual-entry-content {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
 /* ==================== STATUS MESSAGES ==================== */
 
 .status-message {
   padding: 12px 16px;
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   margin-bottom: 16px;
   font-size: 13px;
   display: flex;
   align-items: center;
   gap: 8px;
+  border: 1px solid transparent;
 }
 
 .status-message.success {
-  background: #d1fae5;
-  color: #065f46;
-  border: 1px solid #6ee7b7;
+  background: oklch(from var(--success) l c h / 0.1);
+  color: var(--success);
+  border-color: oklch(from var(--success) l c h / 0.2);
 }
 
 .status-message.error {
-  background: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fca5a5;
+  background: oklch(from var(--destructive) l c h / 0.1);
+  color: var(--destructive);
+  border-color: oklch(from var(--destructive) l c h / 0.2);
 }
 
 .status-message.warning {
-  background: #fef3c7;
-  color: #92400e;
-  border: 1px solid #fcd34d;
+  background: oklch(0.96 0.05 85 / 1);
+  color: oklch(0.45 0.12 85 / 1);
+  border-color: oklch(0.85 0.08 85 / 1);
 }
 
 /* ==================== RECENT ENTRIES ==================== */
@@ -315,13 +506,7 @@ textarea {
 .recent-entries {
   margin-top: 24px;
   padding-top: 16px;
-  border-top: 1px solid var(--color-border);
-}
-
-.section-title {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 12px;
+  border-top: 1px solid var(--border);
 }
 
 .entries-list {
@@ -332,9 +517,9 @@ textarea {
 
 .entry-card {
   padding: 12px;
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   font-size: 13px;
 }
 
@@ -347,11 +532,11 @@ textarea {
 
 .entry-service {
   font-weight: 500;
-  color: var(--color-text);
+  color: var(--foreground);
 }
 
 .entry-duration {
-  color: var(--color-primary);
+  color: var(--primary);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -359,13 +544,13 @@ textarea {
 .entry-meta {
   display: flex;
   gap: 8px;
-  color: var(--color-text-muted);
+  color: var(--muted-foreground);
   font-size: 12px;
   margin-bottom: 6px;
 }
 
 .entry-description {
-  color: var(--color-text-secondary);
+  color: var(--muted-foreground);
   font-size: 12px;
   line-height: 1.4;
   display: -webkit-box;
@@ -377,7 +562,7 @@ textarea {
 .empty-state {
   text-align: center;
   padding: 32px 16px;
-  color: var(--color-text-muted);
+  color: var(--muted-foreground);
   font-size: 13px;
 }
 
@@ -391,19 +576,14 @@ textarea {
 
 .skeleton-entry {
   height: 80px;
-  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
-  background-size: 200% 100%;
-  animation: loading 1.5s ease-in-out infinite;
-  border-radius: var(--border-radius);
+  background: var(--muted);
+  border-radius: var(--radius);
+  animation: skeleton-loading 1.5s ease-in-out infinite;
 }
 
-@keyframes loading {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+@keyframes skeleton-loading {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 /* ==================== OFFLINE INDICATOR ==================== */
@@ -413,20 +593,78 @@ textarea {
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--color-warning);
-  color: white;
+  background: oklch(0.65 0.15 85);
+  color: oklch(0.98 0 0);
   padding: 8px 16px;
   font-size: 12px;
   display: flex;
   align-items: center;
   gap: 6px;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -2px 8px oklch(0 0 0 / 0.1);
 }
 
 .queue-count {
   margin-left: auto;
-  background: rgba(255, 255, 255, 0.3);
+  background: oklch(0 0 0 / 0.2);
   padding: 2px 8px;
   border-radius: 12px;
   font-weight: 600;
+}
+
+/* ==================== THEME TOGGLE (Settings) ==================== */
+
+.settings-menu {
+  position: absolute;
+  top: 48px;
+  right: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px;
+  box-shadow: 0 4px 12px oklch(0 0 0 / 0.15);
+  min-width: 200px;
+  z-index: 100;
+}
+
+.settings-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.2s;
+  color: var(--foreground);
+  font-size: 14px;
+}
+
+.settings-menu-item:hover {
+  background: var(--muted);
+}
+
+.theme-options {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.theme-option {
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--muted-foreground);
+  transition: all 0.2s;
+}
+
+.theme-option:hover {
+  background: var(--muted);
+}
+
+.theme-option.active {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-color: var(--primary);
 }
