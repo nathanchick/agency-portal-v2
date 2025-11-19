@@ -87,4 +87,20 @@ class User extends Authenticatable implements CanUseTickets
 
         return $currentOrganisation ? $currentOrganisation->id : null;
     }
+
+    /**
+     * Get current organisation ID (accessor for API contexts)
+     */
+    public function getCurrentOrganisationIdAttribute(): ?string
+    {
+        return Organisation::current()?->id;
+    }
+
+    /**
+     * Get current organisation relationship
+     */
+    public function currentOrganisation()
+    {
+        return Organisation::current();
+    }
 }

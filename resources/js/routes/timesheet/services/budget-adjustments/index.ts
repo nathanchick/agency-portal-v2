@@ -4,7 +4,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:331
 * @route '/timesheet/services/{service}/budget-adjustments'
 */
-export const store = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const store = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(args, options),
     method: 'post',
 })
@@ -19,7 +19,7 @@ store.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:331
 * @route '/timesheet/services/{service}/budget-adjustments'
 */
-store.url = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+store.url = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { service: args }
     }
@@ -52,7 +52,7 @@ store.url = (args: { service: string | number | { id: string | number } } | [ser
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:331
 * @route '/timesheet/services/{service}/budget-adjustments'
 */
-store.post = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+store.post = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(args, options),
     method: 'post',
 })
@@ -62,7 +62,7 @@ store.post = (args: { service: string | number | { id: string | number } } | [se
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:331
 * @route '/timesheet/services/{service}/budget-adjustments'
 */
-const storeForm = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const storeForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: store.url(args, options),
     method: 'post',
 })
@@ -72,7 +72,7 @@ const storeForm = (args: { service: string | number | { id: string | number } } 
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:331
 * @route '/timesheet/services/{service}/budget-adjustments'
 */
-storeForm.post = (args: { service: string | number | { id: string | number } } | [service: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+storeForm.post = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: store.url(args, options),
     method: 'post',
 })
@@ -84,7 +84,7 @@ store.form = storeForm
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
 * @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
 */
-export const destroy = (args: { service: string | number | { id: string | number }, budgetChange: string | number | { id: string | number } } | [service: string | number | { id: string | number }, budgetChange: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { service: string | { id: string }, budgetChange: string | { id: string } } | [service: string | { id: string }, budgetChange: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -99,7 +99,7 @@ destroy.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
 * @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
 */
-destroy.url = (args: { service: string | number | { id: string | number }, budgetChange: string | number | { id: string | number } } | [service: string | number | { id: string | number }, budgetChange: string | number | { id: string | number } ], options?: RouteQueryOptions) => {
+destroy.url = (args: { service: string | { id: string }, budgetChange: string | { id: string } } | [service: string | { id: string }, budgetChange: string | { id: string } ], options?: RouteQueryOptions) => {
     if (Array.isArray(args)) {
         args = {
             service: args[0],
@@ -129,7 +129,7 @@ destroy.url = (args: { service: string | number | { id: string | number }, budge
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
 * @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
 */
-destroy.delete = (args: { service: string | number | { id: string | number }, budgetChange: string | number | { id: string | number } } | [service: string | number | { id: string | number }, budgetChange: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { service: string | { id: string }, budgetChange: string | { id: string } } | [service: string | { id: string }, budgetChange: string | { id: string } ], options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -139,7 +139,7 @@ destroy.delete = (args: { service: string | number | { id: string | number }, bu
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
 * @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
 */
-const destroyForm = (args: { service: string | number | { id: string | number }, budgetChange: string | number | { id: string | number } } | [service: string | number | { id: string | number }, budgetChange: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { service: string | { id: string }, budgetChange: string | { id: string } } | [service: string | { id: string }, budgetChange: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -154,7 +154,7 @@ const destroyForm = (args: { service: string | number | { id: string | number },
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
 * @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
 */
-destroyForm.delete = (args: { service: string | number | { id: string | number }, budgetChange: string | number | { id: string | number } } | [service: string | number | { id: string | number }, budgetChange: string | number | { id: string | number } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { service: string | { id: string }, budgetChange: string | { id: string } } | [service: string | { id: string }, budgetChange: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

@@ -1,0 +1,28 @@
+{
+    "name": "nwidart/clickup",
+    "description": "ClickUp integration module for Laravel Portal",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ClickUp\\": "app/",
+            "Modules\\ClickUp\\Database\\Factories\\": "database/factories/",
+            "Modules\\ClickUp\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\ClickUp\\Tests\\": "tests/"
+        }
+    }
+}

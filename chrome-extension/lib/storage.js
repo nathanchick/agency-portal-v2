@@ -11,18 +11,40 @@ const StorageManager = {
     CACHE_SERVICES: 'cache_services',
     CACHE_USER: 'cache_user',
     CACHE_RECENT_ENTRIES: 'cache_recent_entries',
+    CACHE_ORGANISATIONS: 'cache_organisations',
+    CACHE_GITHUB_REPOS: 'cache_github_repos',
+    CURRENT_ORGANISATION_ID: 'current_organisation_id',
     QUEUE_ENTRIES: 'queue_entries',
     PREFERENCES: 'preferences',
+  },
+
+  /**
+   * Check if Chrome storage API is available
+   */
+  isAvailable() {
+    return typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local;
   },
 
   /**
    * Get a value from storage
    */
   async get(key) {
-    return new Promise((resolve) => {
-      chrome.storage.local.get([key], (result) => {
-        resolve(result[key] || null);
-      });
+    if (!this.isAvailable()) {
+      console.error('Chrome storage API not available - this should not happen in an extension context');
+      throw new Error('Chrome storage API not available');
+    }
+    return new Promise((resolve, reject) => {
+      try {
+        chrome.storage.local.get([key], (result) => {
+          if (chrome.runtime.lastError) {
+            reject(new Error(chrome.runtime.lastError.message));
+          } else {
+            resolve(result[key] || null);
+          }
+        });
+      } catch (error) {
+        reject(error);
+      }
     });
   },
 
@@ -30,10 +52,22 @@ const StorageManager = {
    * Set a value in storage
    */
   async set(key, value) {
-    return new Promise((resolve) => {
-      chrome.storage.local.set({ [key]: value }, () => {
-        resolve();
-      });
+    if (!this.isAvailable()) {
+      console.error('Chrome storage API not available - this should not happen in an extension context');
+      throw new Error('Chrome storage API not available');
+    }
+    return new Promise((resolve, reject) => {
+      try {
+        chrome.storage.local.set({ [key]: value }, () => {
+          if (chrome.runtime.lastError) {
+            reject(new Error(chrome.runtime.lastError.message));
+          } else {
+            resolve();
+          }
+        });
+      } catch (error) {
+        reject(error);
+      }
     });
   },
 
@@ -41,10 +75,22 @@ const StorageManager = {
    * Remove a key from storage
    */
   async remove(key) {
-    return new Promise((resolve) => {
-      chrome.storage.local.remove([key], () => {
-        resolve();
-      });
+    if (!this.isAvailable()) {
+      console.error('Chrome storage API not available - this should not happen in an extension context');
+      throw new Error('Chrome storage API not available');
+    }
+    return new Promise((resolve, reject) => {
+      try {
+        chrome.storage.local.remove([key], () => {
+          if (chrome.runtime.lastError) {
+            reject(new Error(chrome.runtime.lastError.message));
+          } else {
+            resolve();
+          }
+        });
+      } catch (error) {
+        reject(error);
+      }
     });
   },
 
@@ -52,10 +98,22 @@ const StorageManager = {
    * Clear all storage
    */
   async clear() {
-    return new Promise((resolve) => {
-      chrome.storage.local.clear(() => {
-        resolve();
-      });
+    if (!this.isAvailable()) {
+      console.error('Chrome storage API not available - this should not happen in an extension context');
+      throw new Error('Chrome storage API not available');
+    }
+    return new Promise((resolve, reject) => {
+      try {
+        chrome.storage.local.clear(() => {
+          if (chrome.runtime.lastError) {
+            reject(new Error(chrome.runtime.lastError.message));
+          } else {
+            resolve();
+          }
+        });
+      } catch (error) {
+        reject(error);
+      }
     });
   },
 
@@ -181,6 +239,72 @@ const StorageManager = {
   },
 
   /**
+   * Cache organisations list
+   */
+  async cacheOrganisations(organisations, ttl = CONFIG.CACHE_TTL.SERVICES) {
+    const cacheEntry = this.createCacheEntry(organisations, ttl);
+    await this.set(this.KEYS.CACHE_ORGANISATIONS, cacheEntry);
+  },
+
+  /**
+   * Get cached organisations
+   */
+  async getCachedOrganisations() {
+    const cacheEntry = await this.get(this.KEYS.CACHE_ORGANISATIONS);
+    if (this.isCacheValid(cacheEntry)) {
+      return cacheEntry.data;
+    }
+    return null;
+  },
+
+  /**
+   * Clear organisations cache
+   */
+  async clearOrganisationsCache() {
+    await this.remove(this.KEYS.CACHE_ORGANISATIONS);
+  },
+
+  /**
+   * Cache GitHub repositories list
+   */
+  async cacheGitHubRepos(repos, ttl = CONFIG.CACHE_TTL.SERVICES) {
+    const cacheEntry = this.createCacheEntry(repos, ttl);
+    await this.set(this.KEYS.CACHE_GITHUB_REPOS, cacheEntry);
+  },
+
+  /**
+   * Get cached GitHub repositories
+   */
+  async getCachedGitHubRepos() {
+    const cacheEntry = await this.get(this.KEYS.CACHE_GITHUB_REPOS);
+    if (this.isCacheValid(cacheEntry)) {
+      return cacheEntry.data;
+    }
+    return null;
+  },
+
+  /**
+   * Clear GitHub repos cache
+   */
+  async clearGitHubReposCache() {
+    await this.remove(this.KEYS.CACHE_GITHUB_REPOS);
+  },
+
+  /**
+   * Set current organisation ID
+   */
+  async setCurrentOrganisationId(organisationId) {
+    await this.set(this.KEYS.CURRENT_ORGANISATION_ID, organisationId);
+  },
+
+  /**
+   * Get current organisation ID
+   */
+  async getCurrentOrganisationId() {
+    return await this.get(this.KEYS.CURRENT_ORGANISATION_ID);
+  },
+
+  /**
    * Clear all caches
    */
   async clearAllCaches() {
@@ -188,6 +312,8 @@ const StorageManager = {
       this.clearServicesCache(),
       this.clearUserCache(),
       this.clearRecentEntriesCache(),
+      this.clearOrganisationsCache(),
+      this.clearGitHubReposCache(),
     ]);
   },
 
@@ -273,6 +399,9 @@ const StorageManager = {
    * Get storage usage statistics
    */
   async getStorageUsage() {
+    if (!this.isAvailable()) {
+      return { bytes: 0, mb: '0.00', warning: false };
+    }
     return new Promise((resolve) => {
       chrome.storage.local.getBytesInUse(null, (bytes) => {
         const mb = (bytes / (1024 * 1024)).toFixed(2);
@@ -289,6 +418,9 @@ const StorageManager = {
    * Export all storage data (for debugging)
    */
   async exportAll() {
+    if (!this.isAvailable()) {
+      return {};
+    }
     return new Promise((resolve) => {
       chrome.storage.local.get(null, (items) => {
         resolve(items);

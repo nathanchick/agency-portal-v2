@@ -303,7 +303,7 @@ store.form = storeForm
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:310
 * @route '/documents/{documentRequest}/edit'
 */
-export const edit = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const edit = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -318,7 +318,7 @@ edit.definition = {
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:310
 * @route '/documents/{documentRequest}/edit'
 */
-edit.url = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+edit.url = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { documentRequest: args }
     }
@@ -351,7 +351,7 @@ edit.url = (args: { documentRequest: string | number | { id: string | number } }
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:310
 * @route '/documents/{documentRequest}/edit'
 */
-edit.get = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+edit.get = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -361,7 +361,7 @@ edit.get = (args: { documentRequest: string | number | { id: string | number } }
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:310
 * @route '/documents/{documentRequest}/edit'
 */
-edit.head = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+edit.head = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: edit.url(args, options),
     method: 'head',
 })
@@ -371,7 +371,7 @@ edit.head = (args: { documentRequest: string | number | { id: string | number } 
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:310
 * @route '/documents/{documentRequest}/edit'
 */
-const editForm = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const editForm = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -381,7 +381,7 @@ const editForm = (args: { documentRequest: string | number | { id: string | numb
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:310
 * @route '/documents/{documentRequest}/edit'
 */
-editForm.get = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.get = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -391,7 +391,7 @@ editForm.get = (args: { documentRequest: string | number | { id: string | number
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:310
 * @route '/documents/{documentRequest}/edit'
 */
-editForm.head = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.head = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -408,7 +408,7 @@ edit.form = editForm
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:247
 * @route '/documents/{documentRequest}'
 */
-export const update = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -423,7 +423,7 @@ update.definition = {
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:247
 * @route '/documents/{documentRequest}'
 */
-update.url = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+update.url = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { documentRequest: args }
     }
@@ -456,7 +456,7 @@ update.url = (args: { documentRequest: string | number | { id: string | number }
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:247
 * @route '/documents/{documentRequest}'
 */
-update.put = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -466,7 +466,7 @@ update.put = (args: { documentRequest: string | number | { id: string | number }
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:247
 * @route '/documents/{documentRequest}'
 */
-const updateForm = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateForm = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -481,7 +481,7 @@ const updateForm = (args: { documentRequest: string | number | { id: string | nu
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:247
 * @route '/documents/{documentRequest}'
 */
-updateForm.put = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.put = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -498,7 +498,7 @@ update.form = updateForm
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:272
 * @route '/documents/{documentRequest}/void'
 */
-export const voidMethod = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const voidMethod = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: voidMethod.url(args, options),
     method: 'post',
 })
@@ -513,7 +513,7 @@ voidMethod.definition = {
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:272
 * @route '/documents/{documentRequest}/void'
 */
-voidMethod.url = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+voidMethod.url = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { documentRequest: args }
     }
@@ -546,7 +546,7 @@ voidMethod.url = (args: { documentRequest: string | number | { id: string | numb
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:272
 * @route '/documents/{documentRequest}/void'
 */
-voidMethod.post = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+voidMethod.post = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: voidMethod.url(args, options),
     method: 'post',
 })
@@ -556,7 +556,7 @@ voidMethod.post = (args: { documentRequest: string | number | { id: string | num
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:272
 * @route '/documents/{documentRequest}/void'
 */
-const voidMethodForm = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const voidMethodForm = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: voidMethod.url(args, options),
     method: 'post',
 })
@@ -566,7 +566,7 @@ const voidMethodForm = (args: { documentRequest: string | number | { id: string 
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:272
 * @route '/documents/{documentRequest}/void'
 */
-voidMethodForm.post = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+voidMethodForm.post = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: voidMethod.url(args, options),
     method: 'post',
 })
@@ -578,7 +578,7 @@ voidMethod.form = voidMethodForm
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:289
 * @route '/documents/{documentRequest}/resend'
 */
-export const resend = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const resend = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: resend.url(args, options),
     method: 'post',
 })
@@ -593,7 +593,7 @@ resend.definition = {
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:289
 * @route '/documents/{documentRequest}/resend'
 */
-resend.url = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+resend.url = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { documentRequest: args }
     }
@@ -626,7 +626,7 @@ resend.url = (args: { documentRequest: string | number | { id: string | number }
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:289
 * @route '/documents/{documentRequest}/resend'
 */
-resend.post = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+resend.post = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: resend.url(args, options),
     method: 'post',
 })
@@ -636,7 +636,7 @@ resend.post = (args: { documentRequest: string | number | { id: string | number 
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:289
 * @route '/documents/{documentRequest}/resend'
 */
-const resendForm = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const resendForm = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: resend.url(args, options),
     method: 'post',
 })
@@ -646,7 +646,7 @@ const resendForm = (args: { documentRequest: string | number | { id: string | nu
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:289
 * @route '/documents/{documentRequest}/resend'
 */
-resendForm.post = (args: { documentRequest: string | number | { id: string | number } } | [documentRequest: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+resendForm.post = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: resend.url(args, options),
     method: 'post',
 })

@@ -87,6 +87,7 @@ class Service extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'timesheet_service_user')
+            ->withPivot(['use_default_rates', 'hourly_rate'])
             ->withTimestamps();
     }
 

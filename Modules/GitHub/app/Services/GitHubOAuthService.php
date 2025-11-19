@@ -38,7 +38,7 @@ class GitHubOAuthService
         $provider = $this->getProvider($organisation);
 
         if (! $provider) {
-            throw new GitHubTokenException('GitHub credentials not configured. Please add your GitHub Client ID and Secret in organisation settings.');
+            throw new GitHubTokenException('GitHub credentials not configured. Please add GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET to your .env file.');
         }
 
         $authorizationUrl = $provider->getAuthorizationUrl([
@@ -169,26 +169,19 @@ class GitHubOAuthService
     /**
      * Get the GitHub OAuth provider for an organisation.
      *
-     * Creates a new provider instance using the organisation's stored
-     * client ID and secret from organisation settings.
+     * Creates a new provider instance using the application's GitHub
+     * client ID and secret from .env configuration.
      *
      * @param Organisation $organisation
      * @return GenericProvider|null Returns null if credentials not configured
      */
     private function getProvider(Organisation $organisation): ?GenericProvider
     {
-        $clientId = $organisation->settings()
-            ->where('module', 'GitHub')
-            ->where('key', 'GITHUB_CLIENT_ID')
-            ->first()?->value;
-
-        $clientSecret = $organisation->settings()
-            ->where('module', 'GitHub')
-            ->where('key', 'GITHUB_CLIENT_SECRET')
-            ->first()?->value;
+        $clientId = config('github.client_id');
+        $clientSecret = config('github.client_secret');
 
         if (! $clientId || ! $clientSecret) {
-            Log::warning('GitHub OAuth: Missing credentials for organisation', [
+            Log::warning('GitHub OAuth: Missing credentials in configuration', [
                 'organisation_id' => $organisation->id,
             ]);
 

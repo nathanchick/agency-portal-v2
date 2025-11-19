@@ -41,6 +41,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'organisation' => \App\Http\Middleware\RequireOrganisationUser::class,
             'api.token' => \App\Http\Middleware\AuthenticateApiToken::class,
             'extension.token' => \App\Http\Middleware\AuthenticateExtensionToken::class,
+            'extension.token.org' => \App\Http\Middleware\AuthenticateExtensionTokenWithOrganisation::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

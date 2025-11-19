@@ -141,7 +141,7 @@ store.form = storeForm
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:53
 * @route '/timesheet/reports/saved/{savedReport}'
 */
-export const update = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -156,7 +156,7 @@ update.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:53
 * @route '/timesheet/reports/saved/{savedReport}'
 */
-update.url = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+update.url = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { savedReport: args }
     }
@@ -189,7 +189,7 @@ update.url = (args: { savedReport: string | number | { id: string | number } } |
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:53
 * @route '/timesheet/reports/saved/{savedReport}'
 */
-update.put = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -199,7 +199,7 @@ update.put = (args: { savedReport: string | number | { id: string | number } } |
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:53
 * @route '/timesheet/reports/saved/{savedReport}'
 */
-const updateForm = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateForm = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -214,7 +214,7 @@ const updateForm = (args: { savedReport: string | number | { id: string | number
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:53
 * @route '/timesheet/reports/saved/{savedReport}'
 */
-updateForm.put = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.put = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -231,7 +231,7 @@ update.form = updateForm
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:78
 * @route '/timesheet/reports/saved/{savedReport}'
 */
-export const destroy = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -246,7 +246,7 @@ destroy.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:78
 * @route '/timesheet/reports/saved/{savedReport}'
 */
-destroy.url = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { savedReport: args }
     }
@@ -279,7 +279,7 @@ destroy.url = (args: { savedReport: string | number | { id: string | number } } 
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:78
 * @route '/timesheet/reports/saved/{savedReport}'
 */
-destroy.delete = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -289,7 +289,7 @@ destroy.delete = (args: { savedReport: string | number | { id: string | number }
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:78
 * @route '/timesheet/reports/saved/{savedReport}'
 */
-const destroyForm = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -304,7 +304,7 @@ const destroyForm = (args: { savedReport: string | number | { id: string | numbe
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:78
 * @route '/timesheet/reports/saved/{savedReport}'
 */
-destroyForm.delete = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -321,7 +321,7 @@ destroy.form = destroyForm
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:96
 * @route '/timesheet/reports/saved/{savedReport}/load'
 */
-export const load = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const load = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: load.url(args, options),
     method: 'get',
 })
@@ -336,7 +336,7 @@ load.definition = {
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:96
 * @route '/timesheet/reports/saved/{savedReport}/load'
 */
-load.url = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+load.url = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { savedReport: args }
     }
@@ -369,7 +369,7 @@ load.url = (args: { savedReport: string | number | { id: string | number } } | [
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:96
 * @route '/timesheet/reports/saved/{savedReport}/load'
 */
-load.get = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+load.get = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: load.url(args, options),
     method: 'get',
 })
@@ -379,7 +379,7 @@ load.get = (args: { savedReport: string | number | { id: string | number } } | [
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:96
 * @route '/timesheet/reports/saved/{savedReport}/load'
 */
-load.head = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+load.head = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: load.url(args, options),
     method: 'head',
 })
@@ -389,7 +389,7 @@ load.head = (args: { savedReport: string | number | { id: string | number } } | 
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:96
 * @route '/timesheet/reports/saved/{savedReport}/load'
 */
-const loadForm = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const loadForm = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: load.url(args, options),
     method: 'get',
 })
@@ -399,7 +399,7 @@ const loadForm = (args: { savedReport: string | number | { id: string | number }
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:96
 * @route '/timesheet/reports/saved/{savedReport}/load'
 */
-loadForm.get = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+loadForm.get = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: load.url(args, options),
     method: 'get',
 })
@@ -409,7 +409,7 @@ loadForm.get = (args: { savedReport: string | number | { id: string | number } }
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:96
 * @route '/timesheet/reports/saved/{savedReport}/load'
 */
-loadForm.head = (args: { savedReport: string | number | { id: string | number } } | [savedReport: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+loadForm.head = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: load.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',

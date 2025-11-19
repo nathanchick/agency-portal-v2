@@ -39,10 +39,18 @@ chrome.alarms.create('sync-queue', {
   periodInMinutes: 5,
 });
 
+// Set up periodic timer check alarm (every 30 seconds to update icon)
+chrome.alarms.create('check-timer', {
+  periodInMinutes: 0.5, // 30 seconds
+});
+
 // Listen for alarm events
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'sync-queue') {
     syncQueuedEntries();
+  }
+  if (alarm.name === 'check-timer') {
+    checkTimerAndUpdateIcon();
   }
 });
 
@@ -107,7 +115,149 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ online: navigator.onLine });
     return false;
   }
+
+  // Handle icon change (red when timer running, default when not)
+  if (request.action === 'set-icon') {
+    setIcon(request.icon);
+    sendResponse({ success: true });
+    return false;
+  }
+
+  // Handle timer start from external sources (GitHub, ClickUp, etc.)
+  if (request.type === 'START_TIMER_FROM_ISSUE') {
+    handleTimerFromIssue(request).then((result) => {
+      sendResponse(result);
+    });
+    return true; // Will respond asynchronously
+  }
+
+  // Attempt to open the popup
+  if (request.type === 'OPEN_POPUP') {
+    chrome.action.openPopup().catch((error) => {
+      // openPopup() may fail in some contexts, that's okay
+      console.log('Could not open popup automatically:', error.message);
+    });
+    sendResponse({ success: true });
+    return false;
+  }
 });
+
+// Handle timer start from issue tracking systems
+async function handleTimerFromIssue(request) {
+  try {
+    const { source, issue } = request;
+
+    // Build external reference object in the format expected by the DB
+    const externalReference = {
+      id: issue.number,
+      group_id: issue.repo,
+      permalink: issue.url,
+      service: source === 'github' ? 'github.com' : source,
+      service_icon_url: getServiceIconUrl(source)
+    };
+
+    // Store the pending timer information
+    await chrome.storage.local.set({
+      pending_timer: {
+        source: source,
+        title: issue.title,
+        url: issue.url,
+        reference: source === 'github' ? `#${issue.number}` : issue.number,
+        repo: issue.repo,
+        external_reference: externalReference,
+        timestamp: Date.now()
+      }
+    });
+
+    console.log('Stored pending timer:', issue, 'External reference:', externalReference);
+
+    // Update badge to indicate there's a pending action
+    chrome.action.setBadgeText({ text: '!' });
+    chrome.action.setBadgeBackgroundColor({ color: '#10b981' });
+
+    return { success: true };
+  } catch (error) {
+    console.error('Error handling timer from issue:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+// Get service icon URL based on source
+function getServiceIconUrl(source) {
+  const iconUrls = {
+    'github': 'https://proxy.harvestfiles.com/production_harvestapp_public/uploads/platform_icons/github.com.png?1598293589',
+    'clickup': 'https://proxy.harvestfiles.com/production_harvestapp_public/uploads/platform_icons/clickup.com.png',
+    'trello': 'https://proxy.harvestfiles.com/production_harvestapp_public/uploads/platform_icons/trello.com.png'
+  };
+
+  return iconUrls[source] || '';
+}
+
+// Check if timer is running and update icon
+async function checkTimerAndUpdateIcon() {
+  try {
+    const result = await chrome.storage.local.get(['extension_token']);
+    const token = result.extension_token;
+
+    if (!token) {
+      // No token, set default icon
+      setIcon('default');
+      return;
+    }
+
+    // Fetch current timer status from API
+    const response = await fetch(`${CONFIG.API_BASE_URL}/extension/timer/current`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      setIcon('default');
+      return;
+    }
+
+    const data = await response.json();
+
+    // Update icon based on timer status
+    if (data.running && data.timer) {
+      setIcon('red');
+    } else {
+      setIcon('default');
+    }
+  } catch (error) {
+    console.error('Error checking timer:', error);
+    // Don't change icon on error to avoid flickering
+  }
+}
+
+// Helper function to set icon
+function setIcon(iconType) {
+  try {
+    if (iconType === 'red') {
+      chrome.action.setIcon({
+        path: {
+          16: chrome.runtime.getURL('assets/icons/icon16_red.png'),
+          48: chrome.runtime.getURL('assets/icons/icon48_red.png'),
+          128: chrome.runtime.getURL('assets/icons/icon128_red.png')
+        }
+      });
+    } else {
+      chrome.action.setIcon({
+        path: {
+          16: chrome.runtime.getURL('assets/icons/icon16.png'),
+          48: chrome.runtime.getURL('assets/icons/icon48.png'),
+          128: chrome.runtime.getURL('assets/icons/icon128.png')
+        }
+      });
+    }
+  } catch (error) {
+    console.error('Error setting icon:', error);
+  }
+}
 
 // Badge management - show queue count
 async function updateBadge() {
@@ -135,5 +285,8 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 // Initial badge update
 updateBadge();
+
+// Initial timer check and icon update
+checkTimerAndUpdateIcon();
 
 console.log('Service worker initialized');

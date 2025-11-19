@@ -39,22 +39,34 @@
     <!-- Header -->
     <header class="header">
       <div class="user-info">
-        <div class="user-avatar">👤</div>
+        <div id="org-avatar" class="user-avatar">
+          <span class="avatar-fallback">👤</span>
+        </div>
         <div class="user-details">
           <span id="user-name" class="user-name">Loading...</span>
           <span id="user-org" class="user-org">...</span>
         </div>
       </div>
-      <button id="settings-btn" class="btn-icon" title="Settings">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M12 1v6m0 6v10m8.66-13.76l-5.2 3m-2.92 1.68l-5.2 3M20.66 19.36l-5.2-3m-2.92-1.68l-5.2-3"/>
-        </svg>
-      </button>
+      <div class="header-actions">
+        <button id="settings-btn" class="btn-icon" title="Settings">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </button>
+      </div>
     </header>
 
     <!-- Settings Menu (hidden by default) -->
     <div id="settings-menu" class="settings-menu hidden">
+      <div class="settings-menu-item">
+        <span>Organisation: </span>
+      </div>
+        <select id="organisation-switcher" class="organisation-switcher" title="Switch organisation">
+          <option value="">Loading...</option>
+        </select>
+
+      <div class="section-divider"></div>
       <div class="settings-menu-item">
         <span>Theme</span>
       </div>
@@ -97,12 +109,28 @@
 
     <!-- Start Timer Section (primary action) -->
     <section id="start-timer-section">
-      <h3 class="section-title">Start Timer</h3>
+      <div class="section-header">
+        <h3 class="section-title">Start Timer</h3>
+        <button id="refresh-services-btn" class="btn-icon" title="Refresh services">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+        </button>
+      </div>
       <form id="start-timer-form">
         <div class="form-group">
           <label for="timer-service">Service *</label>
           <select id="timer-service" required>
             <option value="">Select a service...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="timer-task">Task *</label>
+          <select id="timer-task" required disabled>
+            <option value="">Select a service first...</option>
           </select>
         </div>
 

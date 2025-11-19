@@ -44,7 +44,7 @@ class CustomerReportService
         ];
 
         foreach ($timeEntries as $entry) {
-            $externalRef = $entry->external_reference ? json_decode($entry->external_reference, true) : null;
+            $externalRef = $entry->external_reference ?? null;
 
             $csvData[] = [
                 $entry->date->format('Y-m-d'),

@@ -25,7 +25,12 @@ class TimesheetExtensionController extends Controller
             ->whereHas('users', function ($query) use ($user) {
                 $query->where('users.id', $user->id);
             })
-            ->with(['customer:id,name', 'project:id,name'])
+            ->with([
+                'customer:id,name',
+                'project:id,name,github_repository_id',
+                'project.githubRepository:id,full_name,html_url',
+                'tasks' => fn ($query) => $query->where('is_active', true)->orderBy('name'),
+            ])
             ->orderBy('name')
             ->get()
             ->map(function ($service) {
@@ -35,6 +40,12 @@ class TimesheetExtensionController extends Controller
                     'customer_name' => $service->customer?->name ?? 'No Customer',
                     'project_name' => $service->project?->name,
                     'billing_type' => $service->billing_type,
+                    'github_repo' => $service->project?->githubRepository?->full_name,
+                    'tasks' => $service->tasks->map(fn ($task) => [
+                        'id' => $task->id,
+                        'name' => $task->name,
+                        'billable' => $task->billable,
+                    ]),
                 ];
             });
 
@@ -54,7 +65,7 @@ class TimesheetExtensionController extends Controller
         $entries = TimeEntry::query()
             ->where('user_id', $user->id)
             ->where('organisation_id', $user->current_organisation_id)
-            ->with(['service:id,name', 'customer:id,name'])
+            ->with(['service:id,name', 'customer:id,name', 'task:id,name'])
             ->orderBy('date', 'desc')
             ->orderBy('created_at', 'desc')
             ->limit($limit)
@@ -62,7 +73,10 @@ class TimesheetExtensionController extends Controller
             ->map(function ($entry) {
                 return [
                     'id' => $entry->id,
+                    'service_id' => $entry->service_id,
                     'service_name' => $entry->service?->name ?? 'Unknown Service',
+                    'task_id' => $entry->task_id,
+                    'task_name' => $entry->task?->name,
                     'customer_name' => $entry->customer?->name,
                     'duration_hours' => $entry->duration_hours,
                     'date' => $entry->date->format('Y-m-d'),
@@ -196,7 +210,14 @@ class TimesheetExtensionController extends Controller
     {
         $validated = $request->validate([
             'service_id' => ['required', 'uuid', 'exists:timesheet_services,id'],
+            'task_id' => ['required', 'uuid', 'exists:timesheet_tasks,id'],
             'description' => ['nullable', 'string', 'max:1000'],
+            'external_reference' => ['nullable', 'array'],
+            'external_reference.id' => ['nullable', 'string'],
+            'external_reference.group_id' => ['nullable', 'string'],
+            'external_reference.permalink' => ['nullable', 'string', 'url'],
+            'external_reference.service' => ['nullable', 'string'],
+            'external_reference.service_icon_url' => ['nullable', 'string', 'url'],
         ]);
 
         $user = $request->user();
@@ -210,16 +231,19 @@ class TimesheetExtensionController extends Controller
                 $entry->stopTimer();
             });
 
-        // Get the service to populate customer_id, project_id, and task
-        $service = Service::with('tasks')->findOrFail($validated['service_id']);
+        // Get the service to populate customer_id, project_id
+        $service = Service::findOrFail($validated['service_id']);
 
-        // Get the first active task for this service, or fail
-        $task = $service->tasks()->where('status', 'Active')->first();
+        // Validate that the task belongs to this service and is active
+        $task = $service->tasks()
+            ->where('timesheet_tasks.id', $validated['task_id'])
+            ->where('is_active', true)
+            ->first();
 
         if (!$task) {
             return response()->json([
                 'success' => false,
-                'message' => 'No active task found for this service.',
+                'message' => 'Invalid task or task not active for this service.',
             ], 400);
         }
 
@@ -238,6 +262,7 @@ class TimesheetExtensionController extends Controller
             'source' => 'extension',
             'timer_running' => false, // Will be set to true by startTimer()
             'duration_hours' => 0,
+            'external_reference' => $validated['external_reference'] ?? null,
         ]);
 
         $entry->startTimer();

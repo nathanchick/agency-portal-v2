@@ -51,30 +51,58 @@ chrome-extension/
 4. Copy the token and paste it into the extension
 5. Click "Save Token"
 
-### Logging Time
+### Using the Timer (Recommended)
 
 1. Click the extension icon
 2. Select a service from the dropdown
-3. Enter duration (e.g., "2.5" for 2.5 hours or "2:30" for 2 hours 30 minutes)
-4. Add a description (optional)
-5. Select a date (defaults to today)
-6. Click "Log Time"
+3. Add a description (optional)
+4. Click "Start Timer"
+5. Work on your task while the timer runs
+6. Click "Stop" when finished - time is automatically logged
+
+### Manual Time Entry
+
+1. Click the extension icon
+2. Click "Add time manually" to expand the form
+3. Select a service from the dropdown
+4. Enter duration (e.g., "2.5" for 2.5 hours or "2:30" for 2 hours 30 minutes)
+5. Add a description (optional)
+6. Select a date (defaults to today)
+7. Click "Log Time"
 
 ## Features
 
-- ✅ Quick time entry from browser toolbar
+- ✅ **Timer functionality** - Start/stop timers with live elapsed time tracking
+- ✅ **Timer-first design** - Encourages real-time tracking over manual entry
+- ✅ **Theme support** - Light, dark, and system theme options
+- ✅ Quick manual time entry from browser toolbar
 - ✅ Service selection dropdown
 - ✅ Recent entries display
 - ✅ Offline support (entries queued and synced when online)
 - ✅ Secure token-based authentication
 - ⏳ GitHub integration (coming soon)
-- ⏳ Timer functionality (coming soon)
 
 ## Troubleshooting
 
 ### Extension won't load
 - Make sure you selected the correct directory containing `manifest.json`
 - Check the Chrome Extensions page for error messages
+- **IMPORTANT**: Do NOT open `popup.html` directly in a browser - it must be loaded as a Chrome extension
+
+### Chrome Storage API not available error
+This means the extension is not loaded properly:
+1. Go to `chrome://extensions/`
+2. Make sure "Developer mode" is enabled (top right)
+3. Click "Load unpacked"
+4. Navigate to `/Volumes/CaseSensitive/Sites/Deploy/portal/portal-v2/chrome-extension`
+5. Select the folder and click "Select"
+6. The extension icon should appear in your Chrome toolbar
+7. Click the extension icon to open the popup
+
+### Token not persisting / asking for login on refresh
+- This happens when the extension is opened directly as an HTML file instead of through the Chrome extension
+- Follow the "Chrome Storage API not available" steps above to load it properly
+- Once loaded correctly, tokens will persist between sessions
 
 ### Can't authenticate
 - Verify your portal domain is correct in `manifest.json` under `host_permissions`

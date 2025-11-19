@@ -8,12 +8,20 @@ return [
     | OAuth Configuration
     |--------------------------------------------------------------------------
     |
-    | Redirect URI for OAuth callbacks. The client credentials (Client ID
-    | and Client Secret) are stored per-organisation in organisation_settings.
+    | GitHub OAuth credentials are now configured via .env file:
+    | - GITHUB_CLIENT_ID
+    | - GITHUB_CLIENT_SECRET
+    | - GITHUB_API_URL
     |
     */
 
     'redirect_uri' => env('APP_URL').'/github/oauth/callback',
+
+    'client_id' => env('GITHUB_CLIENT_ID'),
+
+    'client_secret' => env('GITHUB_CLIENT_SECRET'),
+
+    'api_url' => env('GITHUB_API_URL', 'https://api.github.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -45,24 +53,6 @@ return [
             'label' => 'Enabled',
             'type' => 'yes_no',
             'description' => 'Enable GitHub integration for this organisation',
-        ],
-        'GITHUB_CLIENT_ID' => [
-            'label' => 'GitHub Client ID',
-            'type' => 'text',
-            'description' => 'Your GitHub OAuth App Client ID (from GitHub Settings > Developer settings > OAuth Apps)',
-            'required' => true,
-        ],
-        'GITHUB_CLIENT_SECRET' => [
-            'label' => 'GitHub Client Secret',
-            'type' => 'encrypted',
-            'description' => 'Your GitHub OAuth App Client Secret (from GitHub Developer settings)',
-            'required' => true,
-        ],
-        'GITHUB_API_URL' => [
-            'label' => 'GitHub API URL',
-            'type' => 'text',
-            'description' => 'GitHub API base URL (default for GitHub.com, change for GitHub Enterprise)',
-            'default' => 'https://api.github.com',
         ],
     ],
 ];

@@ -30,6 +30,7 @@ class HarvestImportService
         'clients' => 0,
         'projects' => 0,
         'task_assignments' => 0,
+        'user_assignments' => 0,
         'time_entries' => 0,
     ];
 
@@ -348,13 +349,16 @@ class HarvestImportService
 
                 // Import task assignments for this project
                 $this->importTaskAssignments($harvestProject['id'], $service->id);
+
+                // Import user assignments for this project
+                $this->importUserAssignments($harvestProject['id'], $service->id);
             }
 
             $hasMore = $response['page'] < $response['total_pages'];
             $page++;
         }
 
-        $this->output("Imported {$this->statistics['projects']} projects with {$this->statistics['task_assignments']} task assignments");
+        $this->output("Imported {$this->statistics['projects']} projects with {$this->statistics['task_assignments']} task assignments and {$this->statistics['user_assignments']} user assignments");
     }
 
     /**
@@ -396,6 +400,56 @@ class HarvestImportService
             if (! empty($taskIds)) {
                 $service = Service::find($serviceId);
                 $service->tasks()->syncWithoutDetaching($taskIds);
+            }
+
+            $hasMore = $response['page'] < $response['total_pages'];
+            $page++;
+        }
+    }
+
+    /**
+     * Import user assignments from Harvest for a specific project
+     */
+    private function importUserAssignments(int $harvestProjectId, string $serviceId): void
+    {
+        $page = 1;
+        $hasMore = true;
+
+        while ($hasMore) {
+            $response = $this->makeHarvestRequest("/projects/{$harvestProjectId}/user_assignments", [
+                'page' => $page,
+                'per_page' => 100,
+            ]);
+
+            foreach ($response['user_assignments'] as $assignment) {
+                // Only sync active assignments
+                if (! $assignment['is_active']) {
+                    continue;
+                }
+
+                // Look up user by Harvest user ID
+                $userId = IntegrationMapping::lookup(
+                    'harvest',
+                    (string) $assignment['user']['id'],
+                    'User',
+                    $this->organisation->id
+                );
+
+                if (! $userId) {
+                    $this->output("User not found for Harvest user ID {$assignment['user']['id']}, skipping user assignment", 'warn');
+                    continue;
+                }
+
+                // Sync to pivot table with hourly rate and use_default_rates
+                $service = Service::find($serviceId);
+                $service->users()->syncWithoutDetaching([
+                    $userId => [
+                        'use_default_rates' => $assignment['use_default_rates'],
+                        'hourly_rate' => $assignment['hourly_rate'],
+                    ],
+                ]);
+
+                $this->statistics['user_assignments']++;
             }
 
             $hasMore = $response['page'] < $response['total_pages'];

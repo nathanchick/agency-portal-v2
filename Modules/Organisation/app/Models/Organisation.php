@@ -67,6 +67,22 @@ class Organisation extends Model implements IsTenant
     }
 
     /**
+     * Get the ClickUp OAuth token for this organisation.
+     */
+    public function clickUpOAuthToken()
+    {
+        return $this->hasOne(\Modules\ClickUp\Models\ClickUpOAuthToken::class);
+    }
+
+    /**
+     * Get the GitHub OAuth token for this organisation.
+     */
+    public function gitHubOAuthToken()
+    {
+        return $this->hasOne(\Modules\GitHub\Models\GitHubOAuthToken::class);
+    }
+
+    /**
      * Create a new factory instance for the model.
      */
     protected static function newFactory(): OrganisationFactory

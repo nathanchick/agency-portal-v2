@@ -13,7 +13,7 @@ const CONFIG = {
 
   // Cache TTLs (in milliseconds)
   CACHE_TTL: {
-    SERVICES: 6 * 60 * 60 * 1000,    // 6 hours
+    SERVICES: 15 * 60 * 1000,         // 15 minutes
     USER: 1 * 60 * 60 * 1000,         // 1 hour
     RECENT_ENTRIES: 5 * 60 * 1000,    // 5 minutes
   },

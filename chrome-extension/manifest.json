@@ -24,11 +24,37 @@
   "background": {
     "service_worker": "background/service-worker.js"
   },
-  "content_scripts": [],
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*/*/issues/*"],
+      "js": ["content-scripts/github.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://app.clickup.com/*"],
+      "js": ["content-scripts/clickup.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://trello.com/*"],
+      "js": ["content-scripts/trello.js"],
+      "run_at": "document_end"
+    }
+  ],
   "options_page": "options/options.html",
   "icons": {
     "16": "assets/icons/icon16.png",
     "48": "assets/icons/icon48.png",
     "128": "assets/icons/icon128.png"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/icons/icon16_red.png",
+        "assets/icons/icon48_red.png",
+        "assets/icons/icon128_red.png"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }

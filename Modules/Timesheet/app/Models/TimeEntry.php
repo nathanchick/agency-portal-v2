@@ -49,6 +49,7 @@ class TimeEntry extends Model
         'approved' => 'boolean',
         'approved_at' => 'datetime',
         'timer_running' => 'boolean',
+        'external_reference' => 'array',
     ];
 
     public function organisation(): BelongsTo

@@ -1,0 +1,15 @@
+{
+    "name": "ClickUp",
+    "alias": "clickup",
+    "description": "ClickUp integration for project management and task tracking",
+    "keywords": [
+        "clickup",
+        "project-management",
+        "task-tracking"
+    ],
+    "priority": 0,
+    "providers": [
+        "Modules\\ClickUp\\Providers\\ClickUpServiceProvider"
+    ],
+    "files": []
+}

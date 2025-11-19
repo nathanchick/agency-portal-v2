@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
 /**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::create
-* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:82
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:96
 * @route '/api/extension/time-entries'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ create.definition = {
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::create
-* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:82
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:96
 * @route '/api/extension/time-entries'
 */
 create.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::create
-* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:82
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:96
 * @route '/api/extension/time-entries'
 */
 create.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -35,7 +35,7 @@ create.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::create
-* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:82
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:96
 * @route '/api/extension/time-entries'
 */
 const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -45,7 +45,7 @@ const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> =>
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::create
-* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:82
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:96
 * @route '/api/extension/time-entries'
 */
 createForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

@@ -153,6 +153,12 @@ body {
   min-width: 0;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .user-avatar {
   width: 36px;
   height: 36px;
@@ -163,6 +169,21 @@ body {
   justify-content: center;
   font-size: 18px;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .user-details {
@@ -186,6 +207,38 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Organisation Switcher */
+.organisation-switcher {
+  min-width: 140px;
+  max-width: 180px;
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.organisation-switcher:hover {
+  border-color: var(--ring);
+  background: var(--accent);
+}
+
+.organisation-switcher:focus {
+  outline: none;
+  border-color: var(--ring);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.organisation-switcher option {
+  background: var(--background);
+  color: var(--foreground);
+  padding: 8px;
 }
 
 /* ==================== RUNNING TIMER BAR ==================== */
@@ -421,11 +474,58 @@ textarea {
   margin-top: 20px;
 }
 
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
 .section-title {
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin: 0;
   color: var(--foreground);
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+  transition: color 0.2s ease;
+  border-radius: var(--radius);
+}
+
+.btn-icon:hover {
+  color: var(--foreground);
+  background: var(--accent);
+}
+
+.btn-icon:active {
+  transform: scale(0.95);
+}
+
+.btn-icon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-icon.spinning svg {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .section-divider {
@@ -533,6 +633,37 @@ textarea {
 .entry-service {
   font-weight: 500;
   color: var(--foreground);
+  flex: 1;
+}
+
+.entry-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-restart-timer {
+  padding: 4px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.btn-restart-timer:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.btn-restart-timer:active {
+  transform: scale(0.95);
 }
 
 .entry-duration {

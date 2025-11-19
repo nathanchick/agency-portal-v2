@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Extension\ExtensionOrganisationController;
 use App\Http\Controllers\Extension\TokenController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 // Extension token validation endpoint (no auth required - validates itself)
 Route::post('/extension/auth/validate', [TokenController::class, 'validate'])->name('extension.auth.validate');
+
+// Extension organisation list (requires basic token auth, no org context needed)
+Route::middleware(['extension.token'])->prefix('extension')->name('extension.')->group(function () {
+    Route::get('/organisations', [ExtensionOrganisationController::class, 'list'])->name('organisations');
+});

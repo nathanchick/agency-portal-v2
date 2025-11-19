@@ -17,6 +17,8 @@ class ApiClient {
    */
   async _getHeaders() {
     const token = await StorageManager.getToken();
+    const organisationId = await StorageManager.getCurrentOrganisationId();
+
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -24,6 +26,10 @@ class ApiClient {
 
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    if (organisationId) {
+      headers['X-Organisation-Id'] = organisationId;
     }
 
     return headers;
@@ -155,6 +161,17 @@ class ApiClient {
     });
   }
 
+  // ==================== ORGANISATION METHODS ====================
+
+  /**
+   * Get user's organisations
+   */
+  async getOrganisations() {
+    return this.request('/extension/organisations', {
+      method: 'GET',
+    });
+  }
+
   // ==================== SERVICE METHODS ====================
 
   /**
@@ -210,6 +227,47 @@ class ApiClient {
     }
 
     return results;
+  }
+
+  // ==================== TIMER METHODS ====================
+
+  /**
+   * Get current running timer for user
+   */
+  async getCurrentTimer() {
+    return this.request('/extension/timer/current', {
+      method: 'GET',
+    });
+  }
+
+  /**
+   * Start a new timer
+   */
+  async startTimer(serviceId, taskId, description = null, externalReference = null) {
+    const payload = {
+      service_id: serviceId,
+      task_id: taskId,
+      description: description,
+    };
+
+    // Add external reference if provided
+    if (externalReference) {
+      payload.external_reference = externalReference;
+    }
+
+    return this.request('/extension/timer/start', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  }
+
+  /**
+   * Stop a running timer
+   */
+  async stopTimer(timerId) {
+    return this.request(`/extension/timer/${timerId}/stop`, {
+      method: 'POST',
+    });
   }
 
   // ==================== UTILITY METHODS ====================
