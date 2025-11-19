@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Timesheet\Http\Controllers\TimeEntryController::start
 * @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:225
@@ -32,28 +32,6 @@ start.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: start.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\TimeEntryController::start
-* @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:225
-* @route '/timesheet/timer/start'
-*/
-const startForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: start.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\TimeEntryController::start
-* @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:225
-* @route '/timesheet/timer/start'
-*/
-startForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: start.url(options),
-    method: 'post',
-})
-
-start.form = startForm
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\TimeEntryController::stop
@@ -112,28 +90,6 @@ stop.post = (args: { timeEntry: string | { id: string } } | [timeEntry: string |
     url: stop.url(args, options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\TimeEntryController::stop
-* @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:271
-* @route '/timesheet/timer/{timeEntry}/stop'
-*/
-const stopForm = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: stop.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\TimeEntryController::stop
-* @see Modules/Timesheet/app/Http/Controllers/TimeEntryController.php:271
-* @route '/timesheet/timer/{timeEntry}/stop'
-*/
-stopForm.post = (args: { timeEntry: string | { id: string } } | [timeEntry: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: stop.url(args, options),
-    method: 'post',
-})
-
-stop.form = stopForm
 
 const timer = {
     start: Object.assign(start, start),

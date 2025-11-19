@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
 import filters from './filters'
 import forms from './forms'
 import automationRules from './automation-rules'
@@ -51,43 +51,6 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\TicketController::index
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:31
-* @route '/tickets'
-*/
-const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::index
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:31
-* @route '/tickets'
-*/
-indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::index
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:31
-* @route '/tickets'
-*/
-indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\TicketController::config
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:172
 * @route '/tickets/config'
@@ -130,43 +93,6 @@ config.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: config.url(options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::config
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:172
-* @route '/tickets/config'
-*/
-const configForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: config.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::config
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:172
-* @route '/tickets/config'
-*/
-configForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: config.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::config
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:172
-* @route '/tickets/config'
-*/
-configForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: config.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-config.form = configForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::create
@@ -213,43 +139,6 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\TicketController::create
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:471
-* @route '/tickets/create'
-*/
-const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::create
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:471
-* @route '/tickets/create'
-*/
-createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::create
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:471
-* @route '/tickets/create'
-*/
-createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-create.form = createForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\TicketController::store
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:500
 * @route '/tickets'
@@ -282,28 +171,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::store
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:500
-* @route '/tickets'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::store
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:500
-* @route '/tickets'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::show
@@ -374,43 +241,6 @@ show.head = (args: { ticket: string | { id: string } } | [ticket: string | { id:
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\TicketController::show
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
-* @route '/tickets/{ticket}'
-*/
-const showForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::show
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
-* @route '/tickets/{ticket}'
-*/
-showForm.get = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::show
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:551
-* @route '/tickets/{ticket}'
-*/
-showForm.head = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateStatus
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
 * @route '/tickets/{ticket}/status'
@@ -467,38 +297,6 @@ updateStatus.patch = (args: { ticket: string | { id: string } } | [ticket: strin
     url: updateStatus.url(args, options),
     method: 'patch',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::updateStatus
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
-* @route '/tickets/{ticket}/status'
-*/
-const updateStatusForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateStatus.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::updateStatus
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:674
-* @route '/tickets/{ticket}/status'
-*/
-updateStatusForm.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateStatus.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-updateStatus.form = updateStatusForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updatePriority
@@ -559,38 +357,6 @@ updatePriority.patch = (args: { ticket: string | { id: string } } | [ticket: str
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\TicketController::updatePriority
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:699
-* @route '/tickets/{ticket}/priority'
-*/
-const updatePriorityForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updatePriority.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::updatePriority
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:699
-* @route '/tickets/{ticket}/priority'
-*/
-updatePriorityForm.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updatePriority.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-updatePriority.form = updatePriorityForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateAssignment
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
 * @route '/tickets/{ticket}/assignment'
@@ -647,38 +413,6 @@ updateAssignment.patch = (args: { ticket: string | { id: string } } | [ticket: s
     url: updateAssignment.url(args, options),
     method: 'patch',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::updateAssignment
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
-* @route '/tickets/{ticket}/assignment'
-*/
-const updateAssignmentForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateAssignment.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::updateAssignment
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:719
-* @route '/tickets/{ticket}/assignment'
-*/
-updateAssignmentForm.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateAssignment.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-updateAssignment.form = updateAssignmentForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::updateCategory
@@ -739,38 +473,6 @@ updateCategory.patch = (args: { ticket: string | { id: string } } | [ticket: str
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\TicketController::updateCategory
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:739
-* @route '/tickets/{ticket}/category'
-*/
-const updateCategoryForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateCategory.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::updateCategory
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:739
-* @route '/tickets/{ticket}/category'
-*/
-updateCategoryForm.patch = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateCategory.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-updateCategory.form = updateCategoryForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\TicketController::addLabel
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
 * @route '/tickets/{ticket}/labels'
@@ -829,28 +531,6 @@ addLabel.post = (args: { ticket: string | { id: string } } | [ticket: string | {
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\TicketController::addLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
-* @route '/tickets/{ticket}/labels'
-*/
-const addLabelForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: addLabel.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::addLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:760
-* @route '/tickets/{ticket}/labels'
-*/
-addLabelForm.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: addLabel.url(args, options),
-    method: 'post',
-})
-
-addLabel.form = addLabelForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\TicketController::removeLabel
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
 * @route '/tickets/{ticket}/labels/{label}'
@@ -904,38 +584,6 @@ removeLabel.delete = (args: { ticket: string | { id: string }, label: string | {
     url: removeLabel.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::removeLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
-* @route '/tickets/{ticket}/labels/{label}'
-*/
-const removeLabelForm = (args: { ticket: string | { id: string }, label: string | { id: string } } | [ticket: string | { id: string }, label: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: removeLabel.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::removeLabel
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:788
-* @route '/tickets/{ticket}/labels/{label}'
-*/
-removeLabelForm.delete = (args: { ticket: string | { id: string }, label: string | { id: string } } | [ticket: string | { id: string }, label: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: removeLabel.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-removeLabel.form = removeLabelForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::addMessage
@@ -994,28 +642,6 @@ addMessage.post = (args: { ticket: string | { id: string } } | [ticket: string |
     url: addMessage.url(args, options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::addMessage
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:808
-* @route '/tickets/{ticket}/messages'
-*/
-const addMessageForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: addMessage.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::addMessage
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:808
-* @route '/tickets/{ticket}/messages'
-*/
-addMessageForm.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: addMessage.url(args, options),
-    method: 'post',
-})
-
-addMessage.form = addMessageForm
 
 const tickets = {
     index: Object.assign(index, index),

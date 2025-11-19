@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
@@ -46,42 +46,6 @@ index87030a6d51e278e383690f38c04b0670.head = (options?: RouteQueryOptions): Rout
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
-* @route '/api/v1/websites'
-*/
-const index87030a6d51e278e383690f38c04b0670Form = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index87030a6d51e278e383690f38c04b0670.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
-* @route '/api/v1/websites'
-*/
-index87030a6d51e278e383690f38c04b0670Form.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index87030a6d51e278e383690f38c04b0670.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
-* @route '/api/v1/websites'
-*/
-index87030a6d51e278e383690f38c04b0670Form.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index87030a6d51e278e383690f38c04b0670.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index87030a6d51e278e383690f38c04b0670.form = index87030a6d51e278e383690f38c04b0670Form
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
 * @route '/websites'
 */
 const index0d6d11c6003bae51aabe78809ed722ab = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -123,43 +87,6 @@ index0d6d11c6003bae51aabe78809ed722ab.head = (options?: RouteQueryOptions): Rout
     method: 'head',
 })
 
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
-* @route '/websites'
-*/
-const index0d6d11c6003bae51aabe78809ed722abForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index0d6d11c6003bae51aabe78809ed722ab.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
-* @route '/websites'
-*/
-index0d6d11c6003bae51aabe78809ed722abForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index0d6d11c6003bae51aabe78809ed722ab.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
-* @route '/websites'
-*/
-index0d6d11c6003bae51aabe78809ed722abForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index0d6d11c6003bae51aabe78809ed722ab.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index0d6d11c6003bae51aabe78809ed722ab.form = index0d6d11c6003bae51aabe78809ed722abForm
-
 export const index = {
     '/api/v1/websites': index87030a6d51e278e383690f38c04b0670,
     '/websites': index0d6d11c6003bae51aabe78809ed722ab,
@@ -198,28 +125,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::store
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::store
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::show
@@ -282,43 +187,6 @@ show.head = (args: { website: string | number } | [website: string | number ] | 
     url: show.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::show
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites/{website}'
-*/
-const showForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::show
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites/{website}'
-*/
-showForm.get = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::show
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites/{website}'
-*/
-showForm.head = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
@@ -385,52 +253,6 @@ updatef36216e1b3ef283ab2953682f239e84e.patch = (args: { website: string | number
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
-* @route '/api/v1/websites/{website}'
-*/
-const updatef36216e1b3ef283ab2953682f239e84eForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updatef36216e1b3ef283ab2953682f239e84e.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
-* @route '/api/v1/websites/{website}'
-*/
-updatef36216e1b3ef283ab2953682f239e84eForm.put = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updatef36216e1b3ef283ab2953682f239e84e.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
-* @route '/api/v1/websites/{website}'
-*/
-updatef36216e1b3ef283ab2953682f239e84eForm.patch = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updatef36216e1b3ef283ab2953682f239e84e.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-updatef36216e1b3ef283ab2953682f239e84e.form = updatef36216e1b3ef283ab2953682f239e84eForm
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/websites/{id}'
 */
 const updateb68aea2c530ec496d47a00dc7e7b5049 = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -479,38 +301,6 @@ updateb68aea2c530ec496d47a00dc7e7b5049.put = (args: { id: string | number } | [i
     url: updateb68aea2c530ec496d47a00dc7e7b5049.url(args, options),
     method: 'put',
 })
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
-* @route '/websites/{id}'
-*/
-const updateb68aea2c530ec496d47a00dc7e7b5049Form = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateb68aea2c530ec496d47a00dc7e7b5049.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
-* @route '/websites/{id}'
-*/
-updateb68aea2c530ec496d47a00dc7e7b5049Form.put = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateb68aea2c530ec496d47a00dc7e7b5049.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-updateb68aea2c530ec496d47a00dc7e7b5049.form = updateb68aea2c530ec496d47a00dc7e7b5049Form
 
 export const update = {
     '/api/v1/websites/{website}': updatef36216e1b3ef283ab2953682f239e84e,
@@ -568,38 +358,6 @@ destroy.delete = (args: { website: string | number } | [website: string | number
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::destroy
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites/{website}'
-*/
-const destroyForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::destroy
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites/{website}'
-*/
-destroyForm.delete = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::edit
@@ -664,43 +422,6 @@ edit.head = (args: { id: string | number } | [id: string | number ] | string | n
 })
 
 /**
-* @see \Modules\Website\Http\Controllers\WebsiteController::edit
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:150
-* @route '/websites/{id}/edit'
-*/
-const editForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::edit
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:150
-* @route '/websites/{id}/edit'
-*/
-editForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::edit
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:150
-* @route '/websites/{id}/edit'
-*/
-editForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-edit.form = editForm
-
-/**
 * @see \Modules\Website\Http\Controllers\WebsiteController::updateModuleSettings
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:212
 * @route '/websites/{id}/modules'
@@ -751,38 +472,6 @@ updateModuleSettings.patch = (args: { id: string | number } | [id: string | numb
     url: updateModuleSettings.url(args, options),
     method: 'patch',
 })
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::updateModuleSettings
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:212
-* @route '/websites/{id}/modules'
-*/
-const updateModuleSettingsForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateModuleSettings.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::updateModuleSettings
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:212
-* @route '/websites/{id}/modules'
-*/
-updateModuleSettingsForm.patch = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateModuleSettings.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-updateModuleSettings.form = updateModuleSettingsForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performance
@@ -847,43 +536,6 @@ performance.head = (args: { id: string | number } | [id: string | number ] | str
 })
 
 /**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performance
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:43
-* @route '/websites/{id}/performance'
-*/
-const performanceForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performance.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performance
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:43
-* @route '/websites/{id}/performance'
-*/
-performanceForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performance.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performance
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:43
-* @route '/websites/{id}/performance'
-*/
-performanceForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performance.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-performance.form = performanceForm
-
-/**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceUptime
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:51
 * @route '/websites/{id}/performance/uptime'
@@ -944,43 +596,6 @@ performanceUptime.head = (args: { id: string | number } | [id: string | number ]
     url: performanceUptime.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performanceUptime
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:51
-* @route '/websites/{id}/performance/uptime'
-*/
-const performanceUptimeForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performanceUptime.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performanceUptime
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:51
-* @route '/websites/{id}/performance/uptime'
-*/
-performanceUptimeForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performanceUptime.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performanceUptime
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:51
-* @route '/websites/{id}/performance/uptime'
-*/
-performanceUptimeForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performanceUptime.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-performanceUptime.form = performanceUptimeForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceBrokenLinks
@@ -1045,43 +660,6 @@ performanceBrokenLinks.head = (args: { id: string | number } | [id: string | num
 })
 
 /**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performanceBrokenLinks
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:71
-* @route '/websites/{id}/performance/broken-links'
-*/
-const performanceBrokenLinksForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performanceBrokenLinks.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performanceBrokenLinks
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:71
-* @route '/websites/{id}/performance/broken-links'
-*/
-performanceBrokenLinksForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performanceBrokenLinks.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performanceBrokenLinks
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:71
-* @route '/websites/{id}/performance/broken-links'
-*/
-performanceBrokenLinksForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performanceBrokenLinks.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-performanceBrokenLinks.form = performanceBrokenLinksForm
-
-/**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceLighthouse
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:91
 * @route '/websites/{id}/performance/lighthouse'
@@ -1142,43 +720,6 @@ performanceLighthouse.head = (args: { id: string | number } | [id: string | numb
     url: performanceLighthouse.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performanceLighthouse
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:91
-* @route '/websites/{id}/performance/lighthouse'
-*/
-const performanceLighthouseForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performanceLighthouse.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performanceLighthouse
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:91
-* @route '/websites/{id}/performance/lighthouse'
-*/
-performanceLighthouseForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performanceLighthouse.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performanceLighthouse
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:91
-* @route '/websites/{id}/performance/lighthouse'
-*/
-performanceLighthouseForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performanceLighthouse.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-performanceLighthouse.form = performanceLighthouseForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::performanceSitemap
@@ -1243,43 +784,6 @@ performanceSitemap.head = (args: { id: string | number } | [id: string | number 
 })
 
 /**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performanceSitemap
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:111
-* @route '/websites/{id}/performance/sitemap'
-*/
-const performanceSitemapForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performanceSitemap.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performanceSitemap
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:111
-* @route '/websites/{id}/performance/sitemap'
-*/
-performanceSitemapForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performanceSitemap.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::performanceSitemap
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:111
-* @route '/websites/{id}/performance/sitemap'
-*/
-performanceSitemapForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: performanceSitemap.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-performanceSitemap.form = performanceSitemapForm
-
-/**
 * @see \Modules\Website\Http\Controllers\WebsiteController::security
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:131
 * @route '/websites/{id}/security'
@@ -1340,43 +844,6 @@ security.head = (args: { id: string | number } | [id: string | number ] | string
     url: security.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::security
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:131
-* @route '/websites/{id}/security'
-*/
-const securityForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: security.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::security
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:131
-* @route '/websites/{id}/security'
-*/
-securityForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: security.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::security
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:131
-* @route '/websites/{id}/security'
-*/
-securityForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: security.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-security.form = securityForm
 
 const WebsiteController = { index, store, show, update, destroy, edit, updateModuleSettings, performance, performanceUptime, performanceBrokenLinks, performanceLighthouse, performanceSitemap, security }
 

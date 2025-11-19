@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::save
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:634
@@ -32,28 +32,6 @@ save.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: save.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::save
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:634
-* @route '/tickets/filters/save'
-*/
-const saveForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: save.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::save
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:634
-* @route '/tickets/filters/save'
-*/
-saveForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: save.url(options),
-    method: 'post',
-})
-
-save.form = saveForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::destroy
@@ -112,38 +90,6 @@ destroy.delete = (args: { filter: string | { id: string } } | [filter: string | 
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::destroy
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:657
-* @route '/tickets/filters/{filter}'
-*/
-const destroyForm = (args: { filter: string | { id: string } } | [filter: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::destroy
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:657
-* @route '/tickets/filters/{filter}'
-*/
-destroyForm.delete = (args: { filter: string | { id: string } } | [filter: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 const filters = {
     save: Object.assign(save, save),

@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Settings\OrganisationController::edit
 * @see app/Http/Controllers/Settings/OrganisationController.php:21
@@ -44,43 +44,6 @@ edit.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Settings\OrganisationController::edit
-* @see app/Http/Controllers/Settings/OrganisationController.php:21
-* @route '/settings/organisation'
-*/
-const editForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Settings\OrganisationController::edit
-* @see app/Http/Controllers/Settings/OrganisationController.php:21
-* @route '/settings/organisation'
-*/
-editForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Settings\OrganisationController::edit
-* @see app/Http/Controllers/Settings/OrganisationController.php:21
-* @route '/settings/organisation'
-*/
-editForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-edit.form = editForm
-
-/**
 * @see \App\Http\Controllers\Settings\OrganisationController::update
 * @see app/Http/Controllers/Settings/OrganisationController.php:68
 * @route '/settings/organisation'
@@ -115,38 +78,6 @@ update.patch = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
 })
 
 /**
-* @see \App\Http\Controllers\Settings\OrganisationController::update
-* @see app/Http/Controllers/Settings/OrganisationController.php:68
-* @route '/settings/organisation'
-*/
-const updateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Settings\OrganisationController::update
-* @see app/Http/Controllers/Settings/OrganisationController.php:68
-* @route '/settings/organisation'
-*/
-updateForm.patch = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
 * @see \App\Http\Controllers\Settings\OrganisationController::updateModuleSettings
 * @see app/Http/Controllers/Settings/OrganisationController.php:108
 * @route '/settings/organisation/modules'
@@ -179,38 +110,6 @@ updateModuleSettings.patch = (options?: RouteQueryOptions): RouteDefinition<'pat
     url: updateModuleSettings.url(options),
     method: 'patch',
 })
-
-/**
-* @see \App\Http\Controllers\Settings\OrganisationController::updateModuleSettings
-* @see app/Http/Controllers/Settings/OrganisationController.php:108
-* @route '/settings/organisation/modules'
-*/
-const updateModuleSettingsForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateModuleSettings.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Settings\OrganisationController::updateModuleSettings
-* @see app/Http/Controllers/Settings/OrganisationController.php:108
-* @route '/settings/organisation/modules'
-*/
-updateModuleSettingsForm.patch = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateModuleSettings.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-updateModuleSettings.form = updateModuleSettingsForm
 
 const OrganisationController = { edit, update, updateModuleSettings }
 

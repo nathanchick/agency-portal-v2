@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../../../wayfinder'
 /**
 * @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::recent
 * @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:28
@@ -42,43 +42,6 @@ recent.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: recent.url(options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::recent
-* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:28
-* @route '/api/widgets/tickets/recent'
-*/
-const recentForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: recent.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::recent
-* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:28
-* @route '/api/widgets/tickets/recent'
-*/
-recentForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: recent.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::recent
-* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:28
-* @route '/api/widgets/tickets/recent'
-*/
-recentForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: recent.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-recent.form = recentForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::statistics
@@ -125,43 +88,6 @@ statistics.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::statistics
-* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:105
-* @route '/api/widgets/tickets/statistics'
-*/
-const statisticsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: statistics.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::statistics
-* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:105
-* @route '/api/widgets/tickets/statistics'
-*/
-statisticsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: statistics.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::statistics
-* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:105
-* @route '/api/widgets/tickets/statistics'
-*/
-statisticsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: statistics.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-statistics.form = statisticsForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::myTickets
 * @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:180
 * @route '/api/widgets/tickets/my-tickets'
@@ -204,43 +130,6 @@ myTickets.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: myTickets.url(options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::myTickets
-* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:180
-* @route '/api/widgets/tickets/my-tickets'
-*/
-const myTicketsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: myTickets.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::myTickets
-* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:180
-* @route '/api/widgets/tickets/my-tickets'
-*/
-myTicketsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: myTickets.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\Api\Widget\TicketWidgetController::myTickets
-* @see Modules/Ticket/app/Http/Controllers/Api/Widget/TicketWidgetController.php:180
-* @route '/api/widgets/tickets/my-tickets'
-*/
-myTicketsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: myTickets.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-myTickets.form = myTicketsForm
 
 const TicketWidgetController = { recent, statistics, myTickets }
 

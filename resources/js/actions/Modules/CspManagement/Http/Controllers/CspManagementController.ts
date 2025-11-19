@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\CspManagement\Http\Controllers\CspManagementController::index
 * @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:13
@@ -44,43 +44,6 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::index
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:13
-* @route '/api/v1/cspmanagements'
-*/
-const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::index
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:13
-* @route '/api/v1/cspmanagements'
-*/
-indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::index
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:13
-* @route '/api/v1/cspmanagements'
-*/
-indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
-
-/**
 * @see \Modules\CspManagement\Http\Controllers\CspManagementController::store
 * @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:29
 * @route '/api/v1/cspmanagements'
@@ -113,28 +76,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::store
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:29
-* @route '/api/v1/cspmanagements'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::store
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:29
-* @route '/api/v1/cspmanagements'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\CspManagement\Http\Controllers\CspManagementController::show
@@ -199,43 +140,6 @@ show.head = (args: { cspmanagement: string | number } | [cspmanagement: string |
 })
 
 /**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::show
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:34
-* @route '/api/v1/cspmanagements/{cspmanagement}'
-*/
-const showForm = (args: { cspmanagement: string | number } | [cspmanagement: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::show
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:34
-* @route '/api/v1/cspmanagements/{cspmanagement}'
-*/
-showForm.get = (args: { cspmanagement: string | number } | [cspmanagement: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::show
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:34
-* @route '/api/v1/cspmanagements/{cspmanagement}'
-*/
-showForm.head = (args: { cspmanagement: string | number } | [cspmanagement: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
-
-/**
 * @see \Modules\CspManagement\Http\Controllers\CspManagementController::update
 * @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:50
 * @route '/api/v1/cspmanagements/{cspmanagement}'
@@ -298,53 +202,6 @@ update.patch = (args: { cspmanagement: string | number } | [cspmanagement: strin
 })
 
 /**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::update
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:50
-* @route '/api/v1/cspmanagements/{cspmanagement}'
-*/
-const updateForm = (args: { cspmanagement: string | number } | [cspmanagement: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::update
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:50
-* @route '/api/v1/cspmanagements/{cspmanagement}'
-*/
-updateForm.put = (args: { cspmanagement: string | number } | [cspmanagement: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::update
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:50
-* @route '/api/v1/cspmanagements/{cspmanagement}'
-*/
-updateForm.patch = (args: { cspmanagement: string | number } | [cspmanagement: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
 * @see \Modules\CspManagement\Http\Controllers\CspManagementController::destroy
 * @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:55
 * @route '/api/v1/cspmanagements/{cspmanagement}'
@@ -395,38 +252,6 @@ destroy.delete = (args: { cspmanagement: string | number } | [cspmanagement: str
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::destroy
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:55
-* @route '/api/v1/cspmanagements/{cspmanagement}'
-*/
-const destroyForm = (args: { cspmanagement: string | number } | [cspmanagement: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\CspManagementController::destroy
-* @see Modules/CspManagement/app/Http/Controllers/CspManagementController.php:55
-* @route '/api/v1/cspmanagements/{cspmanagement}'
-*/
-destroyForm.delete = (args: { cspmanagement: string | number } | [cspmanagement: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 const CspManagementController = { index, store, show, update, destroy }
 

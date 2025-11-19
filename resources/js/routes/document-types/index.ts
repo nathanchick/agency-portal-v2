@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
 * @see \Modules\Document\Http\Controllers\DocumentTypeController::index
 * @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:19
@@ -42,43 +42,6 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::index
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:19
-* @route '/document-types'
-*/
-const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::index
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:19
-* @route '/document-types'
-*/
-indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::index
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:19
-* @route '/document-types'
-*/
-indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentTypeController::create
@@ -125,43 +88,6 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::create
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:35
-* @route '/document-types/create'
-*/
-const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::create
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:35
-* @route '/document-types/create'
-*/
-createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::create
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:35
-* @route '/document-types/create'
-*/
-createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-create.form = createForm
-
-/**
 * @see \Modules\Document\Http\Controllers\DocumentTypeController::store
 * @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:43
 * @route '/document-types'
@@ -194,28 +120,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::store
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:43
-* @route '/document-types'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::store
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:43
-* @route '/document-types'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentTypeController::show
@@ -280,43 +184,6 @@ show.head = (args: { document_type: string | number } | [document_type: string |
 })
 
 /**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::show
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:0
-* @route '/document-types/{document_type}'
-*/
-const showForm = (args: { document_type: string | number } | [document_type: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::show
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:0
-* @route '/document-types/{document_type}'
-*/
-showForm.get = (args: { document_type: string | number } | [document_type: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::show
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:0
-* @route '/document-types/{document_type}'
-*/
-showForm.head = (args: { document_type: string | number } | [document_type: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
-
-/**
 * @see \Modules\Document\Http\Controllers\DocumentTypeController::edit
 * @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:80
 * @route '/document-types/{document_type}/edit'
@@ -377,43 +244,6 @@ edit.head = (args: { document_type: string | number } | [document_type: string |
     url: edit.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::edit
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:80
-* @route '/document-types/{document_type}/edit'
-*/
-const editForm = (args: { document_type: string | number } | [document_type: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::edit
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:80
-* @route '/document-types/{document_type}/edit'
-*/
-editForm.get = (args: { document_type: string | number } | [document_type: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::edit
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:80
-* @route '/document-types/{document_type}/edit'
-*/
-editForm.head = (args: { document_type: string | number } | [document_type: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-edit.form = editForm
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentTypeController::update
@@ -478,53 +308,6 @@ update.patch = (args: { document_type: string | number } | [document_type: strin
 })
 
 /**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::update
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:102
-* @route '/document-types/{document_type}'
-*/
-const updateForm = (args: { document_type: string | number } | [document_type: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::update
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:102
-* @route '/document-types/{document_type}'
-*/
-updateForm.put = (args: { document_type: string | number } | [document_type: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::update
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:102
-* @route '/document-types/{document_type}'
-*/
-updateForm.patch = (args: { document_type: string | number } | [document_type: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
 * @see \Modules\Document\Http\Controllers\DocumentTypeController::destroy
 * @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:154
 * @route '/document-types/{document_type}'
@@ -575,38 +358,6 @@ destroy.delete = (args: { document_type: string | number } | [document_type: str
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::destroy
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:154
-* @route '/document-types/{document_type}'
-*/
-const destroyForm = (args: { document_type: string | number } | [document_type: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::destroy
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:154
-* @route '/document-types/{document_type}'
-*/
-destroyForm.delete = (args: { document_type: string | number } | [document_type: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentTypeController::download
@@ -671,43 +422,6 @@ download.head = (args: { document: string | number } | [document: string | numbe
 })
 
 /**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::download
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:201
-* @route '/document-types/{document}/download'
-*/
-const downloadForm = (args: { document: string | number } | [document: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: download.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::download
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:201
-* @route '/document-types/{document}/download'
-*/
-downloadForm.get = (args: { document: string | number } | [document: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: download.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::download
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:201
-* @route '/document-types/{document}/download'
-*/
-downloadForm.head = (args: { document: string | number } | [document: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: download.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-download.form = downloadForm
-
-/**
 * @see \Modules\Document\Http\Controllers\DocumentTypeController::preview
 * @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:227
 * @route '/document-types/{document}/preview'
@@ -768,43 +482,6 @@ preview.head = (args: { document: string | number } | [document: string | number
     url: preview.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::preview
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:227
-* @route '/document-types/{document}/preview'
-*/
-const previewForm = (args: { document: string | number } | [document: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: preview.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::preview
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:227
-* @route '/document-types/{document}/preview'
-*/
-previewForm.get = (args: { document: string | number } | [document: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: preview.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentTypeController::preview
-* @see Modules/Document/app/Http/Controllers/DocumentTypeController.php:227
-* @route '/document-types/{document}/preview'
-*/
-previewForm.head = (args: { document: string | number } | [document: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: preview.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-preview.form = previewForm
 
 const documentTypes = {
     index: Object.assign(index, index),

@@ -1,5 +1,4 @@
 import Billing from './Billing'
-import Clickup from './Clickup'
 import CspManagement from './CspManagement'
 import Customer from './Customer'
 import DashboardWidgets from './DashboardWidgets'
@@ -20,7 +19,6 @@ import Xero from './Xero'
 
 const Modules = {
     Billing: Object.assign(Billing, Billing),
-    Clickup: Object.assign(Clickup, Clickup),
     CspManagement: Object.assign(CspManagement, CspManagement),
     Customer: Object.assign(Customer, Customer),
     DashboardWidgets: Object.assign(DashboardWidgets, DashboardWidgets),

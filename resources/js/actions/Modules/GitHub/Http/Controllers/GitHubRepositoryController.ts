@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::index
 * @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:41
@@ -42,43 +42,6 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(options),
     method: 'head',
 })
-
-/**
-* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::index
-* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:41
-* @route '/api/v1/github/repositories'
-*/
-const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::index
-* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:41
-* @route '/api/v1/github/repositories'
-*/
-indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::index
-* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:41
-* @route '/api/v1/github/repositories'
-*/
-indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
 
 /**
 * @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::link
@@ -133,28 +96,6 @@ link.post = (args: { githubRepoId: string | number } | [githubRepoId: string | n
 })
 
 /**
-* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::link
-* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:103
-* @route '/api/v1/github/repositories/{githubRepoId}/link'
-*/
-const linkForm = (args: { githubRepoId: string | number } | [githubRepoId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: link.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::link
-* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:103
-* @route '/api/v1/github/repositories/{githubRepoId}/link'
-*/
-linkForm.post = (args: { githubRepoId: string | number } | [githubRepoId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: link.url(args, options),
-    method: 'post',
-})
-
-link.form = linkForm
-
-/**
 * @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::unlink
 * @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:199
 * @route '/api/v1/github/repositories/{repositoryId}/unlink'
@@ -207,38 +148,6 @@ unlink.delete = (args: { repositoryId: string | number } | [repositoryId: string
 })
 
 /**
-* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::unlink
-* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:199
-* @route '/api/v1/github/repositories/{repositoryId}/unlink'
-*/
-const unlinkForm = (args: { repositoryId: string | number } | [repositoryId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: unlink.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::unlink
-* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:199
-* @route '/api/v1/github/repositories/{repositoryId}/unlink'
-*/
-unlinkForm.delete = (args: { repositoryId: string | number } | [repositoryId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: unlink.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-unlink.form = unlinkForm
-
-/**
 * @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::sync
 * @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:244
 * @route '/api/v1/github/repositories/{repositoryId}/sync'
@@ -289,28 +198,6 @@ sync.post = (args: { repositoryId: string | number } | [repositoryId: string | n
     url: sync.url(args, options),
     method: 'post',
 })
-
-/**
-* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::sync
-* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:244
-* @route '/api/v1/github/repositories/{repositoryId}/sync'
-*/
-const syncForm = (args: { repositoryId: string | number } | [repositoryId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: sync.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::sync
-* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:244
-* @route '/api/v1/github/repositories/{repositoryId}/sync'
-*/
-syncForm.post = (args: { repositoryId: string | number } | [repositoryId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: sync.url(args, options),
-    method: 'post',
-})
-
-sync.form = syncForm
 
 /**
 * @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::projectRepository
@@ -373,43 +260,6 @@ projectRepository.head = (args: { projectId: string | number } | [projectId: str
     url: projectRepository.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::projectRepository
-* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:282
-* @route '/api/v1/projects/{projectId}/github-repository'
-*/
-const projectRepositoryForm = (args: { projectId: string | number } | [projectId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: projectRepository.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::projectRepository
-* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:282
-* @route '/api/v1/projects/{projectId}/github-repository'
-*/
-projectRepositoryForm.get = (args: { projectId: string | number } | [projectId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: projectRepository.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::projectRepository
-* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:282
-* @route '/api/v1/projects/{projectId}/github-repository'
-*/
-projectRepositoryForm.head = (args: { projectId: string | number } | [projectId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: projectRepository.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-projectRepository.form = projectRepositoryForm
 
 const GitHubRepositoryController = { index, link, unlink, sync, projectRepository }
 

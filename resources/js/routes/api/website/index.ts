@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::index
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
@@ -44,43 +44,6 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
-* @route '/api/v1/websites'
-*/
-const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
-* @route '/api/v1/websites'
-*/
-indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::index
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:19
-* @route '/api/v1/websites'
-*/
-indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
-
-/**
 * @see \Modules\Website\Http\Controllers\WebsiteController::store
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
 * @route '/api/v1/websites'
@@ -113,28 +76,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::store
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::store
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::show
@@ -199,43 +140,6 @@ show.head = (args: { website: string | number } | [website: string | number ] | 
 })
 
 /**
-* @see \Modules\Website\Http\Controllers\WebsiteController::show
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites/{website}'
-*/
-const showForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::show
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites/{website}'
-*/
-showForm.get = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::show
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites/{website}'
-*/
-showForm.head = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
-
-/**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
 * @route '/api/v1/websites/{website}'
@@ -298,53 +202,6 @@ update.patch = (args: { website: string | number } | [website: string | number ]
 })
 
 /**
-* @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
-* @route '/api/v1/websites/{website}'
-*/
-const updateForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
-* @route '/api/v1/websites/{website}'
-*/
-updateForm.put = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::update
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:185
-* @route '/api/v1/websites/{website}'
-*/
-updateForm.patch = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
 * @see \Modules\Website\Http\Controllers\WebsiteController::destroy
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
 * @route '/api/v1/websites/{website}'
@@ -395,38 +252,6 @@ destroy.delete = (args: { website: string | number } | [website: string | number
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::destroy
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites/{website}'
-*/
-const destroyForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Website\Http\Controllers\WebsiteController::destroy
-* @see Modules/Website/app/Http/Controllers/WebsiteController.php:0
-* @route '/api/v1/websites/{website}'
-*/
-destroyForm.delete = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 const website = {
     index: Object.assign(index, index),

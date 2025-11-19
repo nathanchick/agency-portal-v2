@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::create
 * @see Modules/Customer/app/Http/Controllers/CustomerController.php:351
@@ -56,28 +56,6 @@ create.post = (args: { customer: string | { id: string } } | [customer: string |
     url: create.url(args, options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Customer\Http\Controllers\CustomerController::create
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:351
-* @route '/customers/{customer}/users/create'
-*/
-const createForm = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: create.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Customer\Http\Controllers\CustomerController::create
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:351
-* @route '/customers/{customer}/users/create'
-*/
-createForm.post = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: create.url(args, options),
-    method: 'post',
-})
-
-create.form = createForm
 
 /**
 * @see \Modules\Customer\Http\Controllers\CustomerController::attach
@@ -138,28 +116,6 @@ attach.post = (args: { customer: string | { id: string } } | [customer: string |
 })
 
 /**
-* @see \Modules\Customer\Http\Controllers\CustomerController::attach
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:256
-* @route '/customers/{customer}/users'
-*/
-const attachForm = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: attach.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Customer\Http\Controllers\CustomerController::attach
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:256
-* @route '/customers/{customer}/users'
-*/
-attachForm.post = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: attach.url(args, options),
-    method: 'post',
-})
-
-attach.form = attachForm
-
-/**
 * @see \Modules\Customer\Http\Controllers\CustomerController::updateRole
 * @see Modules/Customer/app/Http/Controllers/CustomerController.php:316
 * @route '/customers/{customer}/users/{user}/role'
@@ -213,38 +169,6 @@ updateRole.put = (args: { customer: string | { id: string }, user: string | numb
 })
 
 /**
-* @see \Modules\Customer\Http\Controllers\CustomerController::updateRole
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:316
-* @route '/customers/{customer}/users/{user}/role'
-*/
-const updateRoleForm = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateRole.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Customer\Http\Controllers\CustomerController::updateRole
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:316
-* @route '/customers/{customer}/users/{user}/role'
-*/
-updateRoleForm.put = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updateRole.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-updateRole.form = updateRoleForm
-
-/**
 * @see \Modules\Customer\Http\Controllers\CustomerController::detach
 * @see Modules/Customer/app/Http/Controllers/CustomerController.php:302
 * @route '/customers/{customer}/users/{user}'
@@ -296,38 +220,6 @@ detach.delete = (args: { customer: string | { id: string }, user: string | numbe
     url: detach.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Customer\Http\Controllers\CustomerController::detach
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:302
-* @route '/customers/{customer}/users/{user}'
-*/
-const detachForm = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: detach.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Customer\Http\Controllers\CustomerController::detach
-* @see Modules/Customer/app/Http/Controllers/CustomerController.php:302
-* @route '/customers/{customer}/users/{user}'
-*/
-detachForm.delete = (args: { customer: string | { id: string }, user: string | number } | [customer: string | { id: string }, user: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: detach.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-detach.form = detachForm
 
 const users = {
     create: Object.assign(create, create),

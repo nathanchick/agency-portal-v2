@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\PostMark\Http\Controllers\PostMarkController::index
 * @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:13
@@ -42,43 +42,6 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(options),
     method: 'head',
 })
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::index
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:13
-* @route '/postmarks'
-*/
-const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::index
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:13
-* @route '/postmarks'
-*/
-indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::index
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:13
-* @route '/postmarks'
-*/
-indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
 
 /**
 * @see \Modules\PostMark\Http\Controllers\PostMarkController::create
@@ -125,43 +88,6 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::create
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:21
-* @route '/postmarks/create'
-*/
-const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::create
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:21
-* @route '/postmarks/create'
-*/
-createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::create
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:21
-* @route '/postmarks/create'
-*/
-createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-create.form = createForm
-
-/**
 * @see \Modules\PostMark\Http\Controllers\PostMarkController::store
 * @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:29
 * @route '/postmarks'
@@ -194,28 +120,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::store
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:29
-* @route '/postmarks'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::store
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:29
-* @route '/postmarks'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\PostMark\Http\Controllers\PostMarkController::show
@@ -280,43 +184,6 @@ show.head = (args: { postmark: string | number } | [postmark: string | number ] 
 })
 
 /**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::show
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:34
-* @route '/postmarks/{postmark}'
-*/
-const showForm = (args: { postmark: string | number } | [postmark: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::show
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:34
-* @route '/postmarks/{postmark}'
-*/
-showForm.get = (args: { postmark: string | number } | [postmark: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::show
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:34
-* @route '/postmarks/{postmark}'
-*/
-showForm.head = (args: { postmark: string | number } | [postmark: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
-
-/**
 * @see \Modules\PostMark\Http\Controllers\PostMarkController::edit
 * @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:42
 * @route '/postmarks/{postmark}/edit'
@@ -377,43 +244,6 @@ edit.head = (args: { postmark: string | number } | [postmark: string | number ] 
     url: edit.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::edit
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:42
-* @route '/postmarks/{postmark}/edit'
-*/
-const editForm = (args: { postmark: string | number } | [postmark: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::edit
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:42
-* @route '/postmarks/{postmark}/edit'
-*/
-editForm.get = (args: { postmark: string | number } | [postmark: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::edit
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:42
-* @route '/postmarks/{postmark}/edit'
-*/
-editForm.head = (args: { postmark: string | number } | [postmark: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-edit.form = editForm
 
 /**
 * @see \Modules\PostMark\Http\Controllers\PostMarkController::update
@@ -478,53 +308,6 @@ update.patch = (args: { postmark: string | number } | [postmark: string | number
 })
 
 /**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::update
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:50
-* @route '/postmarks/{postmark}'
-*/
-const updateForm = (args: { postmark: string | number } | [postmark: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::update
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:50
-* @route '/postmarks/{postmark}'
-*/
-updateForm.put = (args: { postmark: string | number } | [postmark: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::update
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:50
-* @route '/postmarks/{postmark}'
-*/
-updateForm.patch = (args: { postmark: string | number } | [postmark: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
 * @see \Modules\PostMark\Http\Controllers\PostMarkController::destroy
 * @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:55
 * @route '/postmarks/{postmark}'
@@ -575,38 +358,6 @@ destroy.delete = (args: { postmark: string | number } | [postmark: string | numb
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::destroy
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:55
-* @route '/postmarks/{postmark}'
-*/
-const destroyForm = (args: { postmark: string | number } | [postmark: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\PostMarkController::destroy
-* @see Modules/PostMark/app/Http/Controllers/PostMarkController.php:55
-* @route '/postmarks/{postmark}'
-*/
-destroyForm.delete = (args: { postmark: string | number } | [postmark: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 const PostMarkController = { index, create, store, show, edit, update, destroy }
 

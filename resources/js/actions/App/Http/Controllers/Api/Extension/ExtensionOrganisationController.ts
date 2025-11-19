@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Api\Extension\ExtensionOrganisationController::list
 * @see app/Http/Controllers/Api/Extension/ExtensionOrganisationController.php:15
@@ -42,43 +42,6 @@ list.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: list.url(options),
     method: 'head',
 })
-
-/**
-* @see \App\Http\Controllers\Api\Extension\ExtensionOrganisationController::list
-* @see app/Http/Controllers/Api/Extension/ExtensionOrganisationController.php:15
-* @route '/api/extension/organisations'
-*/
-const listForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: list.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Api\Extension\ExtensionOrganisationController::list
-* @see app/Http/Controllers/Api/Extension/ExtensionOrganisationController.php:15
-* @route '/api/extension/organisations'
-*/
-listForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: list.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Api\Extension\ExtensionOrganisationController::list
-* @see app/Http/Controllers/Api/Extension/ExtensionOrganisationController.php:15
-* @route '/api/extension/organisations'
-*/
-listForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: list.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-list.form = listForm
 
 const ExtensionOrganisationController = { list }
 

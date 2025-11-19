@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
 import oauth from './oauth'
 import invoices from './invoices'
 /**
@@ -46,43 +46,6 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\Xero\Http\Controllers\XeroController::index
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:13
-* @route '/xeros'
-*/
-const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::index
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:13
-* @route '/xeros'
-*/
-indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::index
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:13
-* @route '/xeros'
-*/
-indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
-
-/**
 * @see \Modules\Xero\Http\Controllers\XeroController::create
 * @see Modules/Xero/app/Http/Controllers/XeroController.php:21
 * @route '/xeros/create'
@@ -127,43 +90,6 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\Xero\Http\Controllers\XeroController::create
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:21
-* @route '/xeros/create'
-*/
-const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::create
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:21
-* @route '/xeros/create'
-*/
-createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::create
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:21
-* @route '/xeros/create'
-*/
-createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-create.form = createForm
-
-/**
 * @see \Modules\Xero\Http\Controllers\XeroController::store
 * @see Modules/Xero/app/Http/Controllers/XeroController.php:29
 * @route '/xeros'
@@ -196,28 +122,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::store
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:29
-* @route '/xeros'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::store
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:29
-* @route '/xeros'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\Xero\Http\Controllers\XeroController::show
@@ -282,43 +186,6 @@ show.head = (args: { xero: string | number } | [xero: string | number ] | string
 })
 
 /**
-* @see \Modules\Xero\Http\Controllers\XeroController::show
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:34
-* @route '/xeros/{xero}'
-*/
-const showForm = (args: { xero: string | number } | [xero: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::show
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:34
-* @route '/xeros/{xero}'
-*/
-showForm.get = (args: { xero: string | number } | [xero: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::show
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:34
-* @route '/xeros/{xero}'
-*/
-showForm.head = (args: { xero: string | number } | [xero: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
-
-/**
 * @see \Modules\Xero\Http\Controllers\XeroController::edit
 * @see Modules/Xero/app/Http/Controllers/XeroController.php:42
 * @route '/xeros/{xero}/edit'
@@ -379,43 +246,6 @@ edit.head = (args: { xero: string | number } | [xero: string | number ] | string
     url: edit.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::edit
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:42
-* @route '/xeros/{xero}/edit'
-*/
-const editForm = (args: { xero: string | number } | [xero: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::edit
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:42
-* @route '/xeros/{xero}/edit'
-*/
-editForm.get = (args: { xero: string | number } | [xero: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::edit
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:42
-* @route '/xeros/{xero}/edit'
-*/
-editForm.head = (args: { xero: string | number } | [xero: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-edit.form = editForm
 
 /**
 * @see \Modules\Xero\Http\Controllers\XeroController::update
@@ -480,53 +310,6 @@ update.patch = (args: { xero: string | number } | [xero: string | number ] | str
 })
 
 /**
-* @see \Modules\Xero\Http\Controllers\XeroController::update
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:50
-* @route '/xeros/{xero}'
-*/
-const updateForm = (args: { xero: string | number } | [xero: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::update
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:50
-* @route '/xeros/{xero}'
-*/
-updateForm.put = (args: { xero: string | number } | [xero: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::update
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:50
-* @route '/xeros/{xero}'
-*/
-updateForm.patch = (args: { xero: string | number } | [xero: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
 * @see \Modules\Xero\Http\Controllers\XeroController::destroy
 * @see Modules/Xero/app/Http/Controllers/XeroController.php:55
 * @route '/xeros/{xero}'
@@ -577,38 +360,6 @@ destroy.delete = (args: { xero: string | number } | [xero: string | number ] | s
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::destroy
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:55
-* @route '/xeros/{xero}'
-*/
-const destroyForm = (args: { xero: string | number } | [xero: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Xero\Http\Controllers\XeroController::destroy
-* @see Modules/Xero/app/Http/Controllers/XeroController.php:55
-* @route '/xeros/{xero}'
-*/
-destroyForm.delete = (args: { xero: string | number } | [xero: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 const xero = {
     oauth: Object.assign(oauth, oauth),

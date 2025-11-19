@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../wayfinder'
 /**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::create
 * @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:96
@@ -32,28 +32,6 @@ create.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: create.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::create
-* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:96
-* @route '/api/extension/time-entries'
-*/
-const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: create.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::create
-* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:96
-* @route '/api/extension/time-entries'
-*/
-createForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: create.url(options),
-    method: 'post',
-})
-
-create.form = createForm
 
 const timeEntries = {
     create: Object.assign(create, create),

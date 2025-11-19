@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../wayfinder'
 import audit4a8d1e from './audit'
 /**
 * @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::index
@@ -45,43 +45,6 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::index
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:25
-* @route '/customer/csp-violations'
-*/
-const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::index
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:25
-* @route '/customer/csp-violations'
-*/
-indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::index
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:25
-* @route '/customer/csp-violations'
-*/
-indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
-
-/**
 * @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::resolved
 * @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:86
 * @route '/customer/csp-violations/resolved'
@@ -126,43 +89,6 @@ resolved.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::resolved
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:86
-* @route '/customer/csp-violations/resolved'
-*/
-const resolvedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: resolved.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::resolved
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:86
-* @route '/customer/csp-violations/resolved'
-*/
-resolvedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: resolved.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::resolved
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:86
-* @route '/customer/csp-violations/resolved'
-*/
-resolvedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: resolved.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-resolved.form = resolvedForm
-
-/**
 * @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::audit
 * @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:361
 * @route '/customer/csp-violations/audit'
@@ -205,43 +131,6 @@ audit.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: audit.url(options),
     method: 'head',
 })
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::audit
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:361
-* @route '/customer/csp-violations/audit'
-*/
-const auditForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: audit.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::audit
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:361
-* @route '/customer/csp-violations/audit'
-*/
-auditForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: audit.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::audit
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:361
-* @route '/customer/csp-violations/audit'
-*/
-auditForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: audit.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-audit.form = auditForm
 
 /**
 * @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::policy
@@ -306,43 +195,6 @@ policy.head = (args: { website: string | number } | [website: string | number ] 
 })
 
 /**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::policy
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:491
-* @route '/customer/csp-violations/policy/{website}'
-*/
-const policyForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: policy.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::policy
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:491
-* @route '/customer/csp-violations/policy/{website}'
-*/
-policyForm.get = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: policy.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::policy
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:491
-* @route '/customer/csp-violations/policy/{website}'
-*/
-policyForm.head = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: policy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-policy.form = policyForm
-
-/**
 * @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::showHost
 * @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:139
 * @route '/customer/csp-violations/host/{host}/{directive}'
@@ -402,43 +254,6 @@ showHost.head = (args: { host: string | number, directive: string | number } | [
     url: showHost.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::showHost
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:139
-* @route '/customer/csp-violations/host/{host}/{directive}'
-*/
-const showHostForm = (args: { host: string | number, directive: string | number } | [host: string | number, directive: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: showHost.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::showHost
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:139
-* @route '/customer/csp-violations/host/{host}/{directive}'
-*/
-showHostForm.get = (args: { host: string | number, directive: string | number } | [host: string | number, directive: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: showHost.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::showHost
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:139
-* @route '/customer/csp-violations/host/{host}/{directive}'
-*/
-showHostForm.head = (args: { host: string | number, directive: string | number } | [host: string | number, directive: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: showHost.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-showHost.form = showHostForm
 
 /**
 * @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::show
@@ -503,43 +318,6 @@ show.head = (args: { id: string | number } | [id: string | number ] | string | n
 })
 
 /**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::show
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:174
-* @route '/customer/csp-violations/{id}'
-*/
-const showForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::show
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:174
-* @route '/customer/csp-violations/{id}'
-*/
-showForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::show
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:174
-* @route '/customer/csp-violations/{id}'
-*/
-showForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
-
-/**
 * @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::approve
 * @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:194
 * @route '/customer/csp-violations/approve'
@@ -572,28 +350,6 @@ approve.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: approve.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::approve
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:194
-* @route '/customer/csp-violations/approve'
-*/
-const approveForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: approve.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::approve
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:194
-* @route '/customer/csp-violations/approve'
-*/
-approveForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: approve.url(options),
-    method: 'post',
-})
-
-approve.form = approveForm
 
 /**
 * @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::reject
@@ -630,28 +386,6 @@ reject.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
 /**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::reject
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:243
-* @route '/customer/csp-violations/reject'
-*/
-const rejectForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: reject.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::reject
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:243
-* @route '/customer/csp-violations/reject'
-*/
-rejectForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: reject.url(options),
-    method: 'post',
-})
-
-reject.form = rejectForm
-
-/**
 * @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::ignore
 * @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:292
 * @route '/customer/csp-violations/ignore'
@@ -686,28 +420,6 @@ ignore.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
 /**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::ignore
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:292
-* @route '/customer/csp-violations/ignore'
-*/
-const ignoreForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: ignore.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::ignore
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:292
-* @route '/customer/csp-violations/ignore'
-*/
-ignoreForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: ignore.url(options),
-    method: 'post',
-})
-
-ignore.form = ignoreForm
-
-/**
 * @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::sync
 * @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:341
 * @route '/customer/csp-violations/sync'
@@ -740,28 +452,6 @@ sync.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: sync.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::sync
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:341
-* @route '/customer/csp-violations/sync'
-*/
-const syncForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: sync.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::sync
-* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:341
-* @route '/customer/csp-violations/sync'
-*/
-syncForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: sync.url(options),
-    method: 'post',
-})
-
-sync.form = syncForm
 
 const violations = {
     index: Object.assign(index, index),

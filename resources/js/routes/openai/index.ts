@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
 * @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
@@ -42,43 +42,6 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(options),
     method: 'head',
 })
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
-* @route '/openais'
-*/
-const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
-* @route '/openais'
-*/
-indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::index
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:23
-* @route '/openais'
-*/
-indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::create
@@ -125,43 +88,6 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::create
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:31
-* @route '/openais/create'
-*/
-const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::create
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:31
-* @route '/openais/create'
-*/
-createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::create
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:31
-* @route '/openais/create'
-*/
-createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-create.form = createForm
-
-/**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
 * @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
 * @route '/openais'
@@ -194,28 +120,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
-* @route '/openais'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::store
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:39
-* @route '/openais'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
@@ -280,43 +184,6 @@ show.head = (args: { openai: string | number } | [openai: string | number ] | st
 })
 
 /**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
-* @route '/openais/{openai}'
-*/
-const showForm = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
-* @route '/openais/{openai}'
-*/
-showForm.get = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::show
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:44
-* @route '/openais/{openai}'
-*/
-showForm.head = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
-
-/**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::edit
 * @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:52
 * @route '/openais/{openai}/edit'
@@ -377,43 +244,6 @@ edit.head = (args: { openai: string | number } | [openai: string | number ] | st
     url: edit.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::edit
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:52
-* @route '/openais/{openai}/edit'
-*/
-const editForm = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::edit
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:52
-* @route '/openais/{openai}/edit'
-*/
-editForm.get = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::edit
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:52
-* @route '/openais/{openai}/edit'
-*/
-editForm.head = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-edit.form = editForm
 
 /**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
@@ -478,53 +308,6 @@ update.patch = (args: { openai: string | number } | [openai: string | number ] |
 })
 
 /**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
-* @route '/openais/{openai}'
-*/
-const updateForm = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
-* @route '/openais/{openai}'
-*/
-updateForm.put = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::update
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:60
-* @route '/openais/{openai}'
-*/
-updateForm.patch = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
 * @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
 * @route '/openais/{openai}'
@@ -577,38 +360,6 @@ destroy.delete = (args: { openai: string | number } | [openai: string | number ]
 })
 
 /**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
-* @route '/openais/{openai}'
-*/
-const destroyForm = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::destroy
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:65
-* @route '/openais/{openai}'
-*/
-destroyForm.delete = (args: { openai: string | number } | [openai: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
-
-/**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
 * @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
 * @route '/openai/analyze-ticket'
@@ -643,28 +394,6 @@ analyzeTicket.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => (
 })
 
 /**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
-* @route '/openai/analyze-ticket'
-*/
-const analyzeTicketForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: analyzeTicket.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeTicket
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:70
-* @route '/openai/analyze-ticket'
-*/
-analyzeTicketForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: analyzeTicket.url(options),
-    method: 'post',
-})
-
-analyzeTicket.form = analyzeTicketForm
-
-/**
 * @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
 * @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
 * @route '/openai/analyze-csp-violation'
@@ -697,28 +426,6 @@ analyzeCspViolation.post = (options?: RouteQueryOptions): RouteDefinition<'post'
     url: analyzeCspViolation.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
-* @route '/openai/analyze-csp-violation'
-*/
-const analyzeCspViolationForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: analyzeCspViolation.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\OpenAi\Http\Controllers\OpenAiController::analyzeCspViolation
-* @see Modules/OpenAi/app/Http/Controllers/OpenAiController.php:201
-* @route '/openai/analyze-csp-violation'
-*/
-analyzeCspViolationForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: analyzeCspViolation.url(options),
-    method: 'post',
-})
-
-analyzeCspViolation.form = analyzeCspViolationForm
 
 const openai = {
     index: Object.assign(index, index),

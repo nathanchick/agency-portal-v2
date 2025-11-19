@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::store
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:269
@@ -32,28 +32,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::store
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:269
-* @route '/tickets/categories'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::store
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:269
-* @route '/tickets/categories'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::update
@@ -114,38 +92,6 @@ update.put = (args: { category: string | { id: string } } | [category: string | 
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\TicketController::update
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:295
-* @route '/tickets/categories/{category}'
-*/
-const updateForm = (args: { category: string | { id: string } } | [category: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::update
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:295
-* @route '/tickets/categories/{category}'
-*/
-updateForm.put = (args: { category: string | { id: string } } | [category: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\TicketController::destroy
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:324
 * @route '/tickets/categories/{category}'
@@ -202,38 +148,6 @@ destroy.delete = (args: { category: string | { id: string } } | [category: strin
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::destroy
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:324
-* @route '/tickets/categories/{category}'
-*/
-const destroyForm = (args: { category: string | { id: string } } | [category: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::destroy
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:324
-* @route '/tickets/categories/{category}'
-*/
-destroyForm.delete = (args: { category: string | { id: string } } | [category: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 const categories = {
     store: Object.assign(store, store),

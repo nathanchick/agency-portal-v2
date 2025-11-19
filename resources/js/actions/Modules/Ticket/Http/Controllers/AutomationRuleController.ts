@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::index
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:20
@@ -42,43 +42,6 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::index
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:20
-* @route '/tickets/automation-rules'
-*/
-const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::index
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:20
-* @route '/tickets/automation-rules'
-*/
-indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::index
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:20
-* @route '/tickets/automation-rules'
-*/
-indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::create
@@ -125,43 +88,6 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::create
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:74
-* @route '/tickets/automation-rules/create'
-*/
-const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::create
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:74
-* @route '/tickets/automation-rules/create'
-*/
-createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::create
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:74
-* @route '/tickets/automation-rules/create'
-*/
-createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-create.form = createForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::store
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:108
 * @route '/tickets/automation-rules'
@@ -194,28 +120,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::store
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:108
-* @route '/tickets/automation-rules'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::store
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:108
-* @route '/tickets/automation-rules'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::edit
@@ -286,43 +190,6 @@ edit.head = (args: { automationRule: string | { id: string } } | [automationRule
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::edit
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
-* @route '/tickets/automation-rules/{automationRule}/edit'
-*/
-const editForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::edit
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
-* @route '/tickets/automation-rules/{automationRule}/edit'
-*/
-editForm.get = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::edit
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:160
-* @route '/tickets/automation-rules/{automationRule}/edit'
-*/
-editForm.head = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-edit.form = editForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::update
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
 * @route '/tickets/automation-rules/{automationRule}'
@@ -379,38 +246,6 @@ update.put = (args: { automationRule: string | { id: string } } | [automationRul
     url: update.url(args, options),
     method: 'put',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::update
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
-* @route '/tickets/automation-rules/{automationRule}'
-*/
-const updateForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::update
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:209
-* @route '/tickets/automation-rules/{automationRule}'
-*/
-updateForm.put = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::destroy
@@ -471,38 +306,6 @@ destroy.delete = (args: { automationRule: string | { id: string } } | [automatio
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::destroy
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:265
-* @route '/tickets/automation-rules/{automationRule}'
-*/
-const destroyForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::destroy
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:265
-* @route '/tickets/automation-rules/{automationRule}'
-*/
-destroyForm.delete = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::toggle
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
 * @route '/tickets/automation-rules/{automationRule}/toggle'
@@ -561,38 +364,6 @@ toggle.patch = (args: { automationRule: string | { id: string } } | [automationR
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::toggle
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
-* @route '/tickets/automation-rules/{automationRule}/toggle'
-*/
-const toggleForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: toggle.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::toggle
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:278
-* @route '/tickets/automation-rules/{automationRule}/toggle'
-*/
-toggleForm.patch = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: toggle.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-toggle.form = toggleForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\AutomationRuleController::updatePriority
 * @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
 * @route '/tickets/automation-rules/{automationRule}/priority'
@@ -649,38 +420,6 @@ updatePriority.patch = (args: { automationRule: string | { id: string } } | [aut
     url: updatePriority.url(args, options),
     method: 'patch',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::updatePriority
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
-* @route '/tickets/automation-rules/{automationRule}/priority'
-*/
-const updatePriorityForm = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updatePriority.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\AutomationRuleController::updatePriority
-* @see Modules/Ticket/app/Http/Controllers/AutomationRuleController.php:292
-* @route '/tickets/automation-rules/{automationRule}/priority'
-*/
-updatePriorityForm.patch = (args: { automationRule: string | { id: string } } | [automationRule: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: updatePriority.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-updatePriority.form = updatePriorityForm
 
 const AutomationRuleController = { index, create, store, edit, update, destroy, toggle, updatePriority }
 

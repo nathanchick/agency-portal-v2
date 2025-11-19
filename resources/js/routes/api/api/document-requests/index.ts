@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::index
 * @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:26
@@ -62,43 +62,6 @@ index.head = (args: { organisation: string | number } | [organisation: string | 
 })
 
 /**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::index
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:26
-* @route '/api/organisations/{organisation}/document-requests'
-*/
-const indexForm = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::index
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:26
-* @route '/api/organisations/{organisation}/document-requests'
-*/
-indexForm.get = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::index
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:26
-* @route '/api/organisations/{organisation}/document-requests'
-*/
-indexForm.head = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
-
-/**
 * @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::store
 * @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:48
 * @route '/api/organisations/{organisation}/document-requests'
@@ -149,28 +112,6 @@ store.post = (args: { organisation: string | number } | [organisation: string | 
     url: store.url(args, options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::store
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:48
-* @route '/api/organisations/{organisation}/document-requests'
-*/
-const storeForm = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::store
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:48
-* @route '/api/organisations/{organisation}/document-requests'
-*/
-storeForm.post = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(args, options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::show
@@ -234,43 +175,6 @@ show.head = (args: { organisation: string | number, document_request: string | n
 })
 
 /**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::show
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:85
-* @route '/api/organisations/{organisation}/document-requests/{document_request}'
-*/
-const showForm = (args: { organisation: string | number, document_request: string | number } | [organisation: string | number, document_request: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::show
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:85
-* @route '/api/organisations/{organisation}/document-requests/{document_request}'
-*/
-showForm.get = (args: { organisation: string | number, document_request: string | number } | [organisation: string | number, document_request: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::show
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:85
-* @route '/api/organisations/{organisation}/document-requests/{document_request}'
-*/
-showForm.head = (args: { organisation: string | number, document_request: string | number } | [organisation: string | number, document_request: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
-
-/**
 * @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::update
 * @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:107
 * @route '/api/organisations/{organisation}/document-requests/{document_request}'
@@ -332,53 +236,6 @@ update.patch = (args: { organisation: string | number, document_request: string 
 })
 
 /**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::update
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:107
-* @route '/api/organisations/{organisation}/document-requests/{document_request}'
-*/
-const updateForm = (args: { organisation: string | number, document_request: string | number } | [organisation: string | number, document_request: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::update
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:107
-* @route '/api/organisations/{organisation}/document-requests/{document_request}'
-*/
-updateForm.put = (args: { organisation: string | number, document_request: string | number } | [organisation: string | number, document_request: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::update
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:107
-* @route '/api/organisations/{organisation}/document-requests/{document_request}'
-*/
-updateForm.patch = (args: { organisation: string | number, document_request: string | number } | [organisation: string | number, document_request: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
 * @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::destroy
 * @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:144
 * @route '/api/organisations/{organisation}/document-requests/{document_request}'
@@ -428,38 +285,6 @@ destroy.delete = (args: { organisation: string | number, document_request: strin
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::destroy
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:144
-* @route '/api/organisations/{organisation}/document-requests/{document_request}'
-*/
-const destroyForm = (args: { organisation: string | number, document_request: string | number } | [organisation: string | number, document_request: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\Api\DocumentRequestController::destroy
-* @see Modules/Document/app/Http/Controllers/Api/DocumentRequestController.php:144
-* @route '/api/organisations/{organisation}/document-requests/{document_request}'
-*/
-destroyForm.delete = (args: { organisation: string | number, document_request: string | number } | [organisation: string | number, document_request: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 const documentRequests = {
     index: Object.assign(index, index),

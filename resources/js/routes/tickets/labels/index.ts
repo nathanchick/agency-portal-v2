@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::store
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:202
@@ -32,28 +32,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::store
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:202
-* @route '/tickets/labels'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::store
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:202
-* @route '/tickets/labels'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::update
@@ -114,38 +92,6 @@ update.put = (args: { label: string | { id: string } } | [label: string | { id: 
 })
 
 /**
-* @see \Modules\Ticket\Http\Controllers\TicketController::update
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:226
-* @route '/tickets/labels/{label}'
-*/
-const updateForm = (args: { label: string | { id: string } } | [label: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::update
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:226
-* @route '/tickets/labels/{label}'
-*/
-updateForm.put = (args: { label: string | { id: string } } | [label: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
 * @see \Modules\Ticket\Http\Controllers\TicketController::destroy
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:253
 * @route '/tickets/labels/{label}'
@@ -202,38 +148,6 @@ destroy.delete = (args: { label: string | { id: string } } | [label: string | { 
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::destroy
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:253
-* @route '/tickets/labels/{label}'
-*/
-const destroyForm = (args: { label: string | { id: string } } | [label: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::destroy
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:253
-* @route '/tickets/labels/{label}'
-*/
-destroyForm.delete = (args: { label: string | { id: string } } | [label: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 const labels = {
     store: Object.assign(store, store),

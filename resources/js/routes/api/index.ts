@@ -1,5 +1,4 @@
 import widgets from './widgets'
-import clickup from './clickup'
 import cspmanagement from './cspmanagement'
 import api from './api'
 import deployments from './deployments'
@@ -19,7 +18,6 @@ import xero from './xero'
 
 const api = {
     widgets: Object.assign(widgets, widgets),
-    clickup: Object.assign(clickup, clickup),
     cspmanagement: Object.assign(cspmanagement, cspmanagement),
     api: Object.assign(api, api),
     deployments: Object.assign(deployments, deployments),

@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::pending
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:23
@@ -42,43 +42,6 @@ pending.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: pending.url(options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::pending
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:23
-* @route '/documents/pending'
-*/
-const pendingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: pending.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::pending
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:23
-* @route '/documents/pending'
-*/
-pendingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: pending.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::pending
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:23
-* @route '/documents/pending'
-*/
-pendingForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: pending.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-pending.form = pendingForm
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::completed
@@ -125,43 +88,6 @@ completed.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\Document\Http\Controllers\DocumentController::completed
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:73
-* @route '/documents/completed'
-*/
-const completedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: completed.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::completed
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:73
-* @route '/documents/completed'
-*/
-completedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: completed.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::completed
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:73
-* @route '/documents/completed'
-*/
-completedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: completed.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-completed.form = completedForm
-
-/**
 * @see \Modules\Document\Http\Controllers\DocumentController::create
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:123
 * @route '/documents/create'
@@ -206,43 +132,6 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\Document\Http\Controllers\DocumentController::create
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:123
-* @route '/documents/create'
-*/
-const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::create
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:123
-* @route '/documents/create'
-*/
-createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::create
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:123
-* @route '/documents/create'
-*/
-createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-create.form = createForm
-
-/**
 * @see \Modules\Document\Http\Controllers\DocumentController::store
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:173
 * @route '/documents'
@@ -275,28 +164,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::store
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:173
-* @route '/documents'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::store
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:173
-* @route '/documents'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::edit
@@ -367,43 +234,6 @@ edit.head = (args: { documentRequest: string | { id: string } } | [documentReque
 })
 
 /**
-* @see \Modules\Document\Http\Controllers\DocumentController::edit
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:310
-* @route '/documents/{documentRequest}/edit'
-*/
-const editForm = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::edit
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:310
-* @route '/documents/{documentRequest}/edit'
-*/
-editForm.get = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::edit
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:310
-* @route '/documents/{documentRequest}/edit'
-*/
-editForm.head = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-edit.form = editForm
-
-/**
 * @see \Modules\Document\Http\Controllers\DocumentController::update
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:247
 * @route '/documents/{documentRequest}'
@@ -460,38 +290,6 @@ update.put = (args: { documentRequest: string | { id: string } } | [documentRequ
     url: update.url(args, options),
     method: 'put',
 })
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::update
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:247
-* @route '/documents/{documentRequest}'
-*/
-const updateForm = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::update
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:247
-* @route '/documents/{documentRequest}'
-*/
-updateForm.put = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
 
 /**
 * @see \Modules\Document\Http\Controllers\DocumentController::voidMethod
@@ -552,28 +350,6 @@ voidMethod.post = (args: { documentRequest: string | { id: string } } | [documen
 })
 
 /**
-* @see \Modules\Document\Http\Controllers\DocumentController::voidMethod
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:272
-* @route '/documents/{documentRequest}/void'
-*/
-const voidMethodForm = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: voidMethod.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::voidMethod
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:272
-* @route '/documents/{documentRequest}/void'
-*/
-voidMethodForm.post = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: voidMethod.url(args, options),
-    method: 'post',
-})
-
-voidMethod.form = voidMethodForm
-
-/**
 * @see \Modules\Document\Http\Controllers\DocumentController::resend
 * @see Modules/Document/app/Http/Controllers/DocumentController.php:289
 * @route '/documents/{documentRequest}/resend'
@@ -630,28 +406,6 @@ resend.post = (args: { documentRequest: string | { id: string } } | [documentReq
     url: resend.url(args, options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::resend
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:289
-* @route '/documents/{documentRequest}/resend'
-*/
-const resendForm = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: resend.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Document\Http\Controllers\DocumentController::resend
-* @see Modules/Document/app/Http/Controllers/DocumentController.php:289
-* @route '/documents/{documentRequest}/resend'
-*/
-resendForm.post = (args: { documentRequest: string | { id: string } } | [documentRequest: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: resend.url(args, options),
-    method: 'post',
-})
-
-resend.form = resendForm
 
 const documents = {
     pending: Object.assign(pending, pending),

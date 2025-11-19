@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \Modules\Timesheet\Http\Controllers\ServiceController::store
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:331
@@ -58,28 +58,6 @@ store.post = (args: { service: string | { id: string } } | [service: string | { 
 })
 
 /**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::store
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:331
-* @route '/timesheet/services/{service}/budget-adjustments'
-*/
-const storeForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::store
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:331
-* @route '/timesheet/services/{service}/budget-adjustments'
-*/
-storeForm.post = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(args, options),
-    method: 'post',
-})
-
-store.form = storeForm
-
-/**
 * @see \Modules\Timesheet\Http\Controllers\ServiceController::destroy
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
 * @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
@@ -133,38 +111,6 @@ destroy.delete = (args: { service: string | { id: string }, budgetChange: string
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::destroy
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
-* @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
-*/
-const destroyForm = (args: { service: string | { id: string }, budgetChange: string | { id: string } } | [service: string | { id: string }, budgetChange: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::destroy
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:413
-* @route '/timesheet/services/{service}/budget-adjustments/{budgetChange}'
-*/
-destroyForm.delete = (args: { service: string | { id: string }, budgetChange: string | { id: string } } | [service: string | { id: string }, budgetChange: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 const budgetAdjustments = {
     store: Object.assign(store, store),

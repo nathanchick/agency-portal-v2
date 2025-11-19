@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
 /**
 * @see \Modules\Customer\Http\Controllers\Api\ProjectController::index
 * @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:27
@@ -62,43 +62,6 @@ index.head = (args: { organisation: string | number } | [organisation: string | 
 })
 
 /**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::index
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:27
-* @route '/api/organisations/{organisation}/projects'
-*/
-const indexForm = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::index
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:27
-* @route '/api/organisations/{organisation}/projects'
-*/
-indexForm.get = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::index
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:27
-* @route '/api/organisations/{organisation}/projects'
-*/
-indexForm.head = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
-
-/**
 * @see \Modules\Customer\Http\Controllers\Api\ProjectController::store
 * @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:49
 * @route '/api/organisations/{organisation}/projects'
@@ -149,28 +112,6 @@ store.post = (args: { organisation: string | number } | [organisation: string | 
     url: store.url(args, options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::store
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:49
-* @route '/api/organisations/{organisation}/projects'
-*/
-const storeForm = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::store
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:49
-* @route '/api/organisations/{organisation}/projects'
-*/
-storeForm.post = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(args, options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\Customer\Http\Controllers\Api\ProjectController::show
@@ -234,43 +175,6 @@ show.head = (args: { organisation: string | number, project: string | number } |
 })
 
 /**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::show
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:90
-* @route '/api/organisations/{organisation}/projects/{project}'
-*/
-const showForm = (args: { organisation: string | number, project: string | number } | [organisation: string | number, project: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::show
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:90
-* @route '/api/organisations/{organisation}/projects/{project}'
-*/
-showForm.get = (args: { organisation: string | number, project: string | number } | [organisation: string | number, project: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::show
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:90
-* @route '/api/organisations/{organisation}/projects/{project}'
-*/
-showForm.head = (args: { organisation: string | number, project: string | number } | [organisation: string | number, project: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
-
-/**
 * @see \Modules\Customer\Http\Controllers\Api\ProjectController::update
 * @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:112
 * @route '/api/organisations/{organisation}/projects/{project}'
@@ -332,53 +236,6 @@ update.patch = (args: { organisation: string | number, project: string | number 
 })
 
 /**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::update
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:112
-* @route '/api/organisations/{organisation}/projects/{project}'
-*/
-const updateForm = (args: { organisation: string | number, project: string | number } | [organisation: string | number, project: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::update
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:112
-* @route '/api/organisations/{organisation}/projects/{project}'
-*/
-updateForm.put = (args: { organisation: string | number, project: string | number } | [organisation: string | number, project: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::update
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:112
-* @route '/api/organisations/{organisation}/projects/{project}'
-*/
-updateForm.patch = (args: { organisation: string | number, project: string | number } | [organisation: string | number, project: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PATCH',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
 * @see \Modules\Customer\Http\Controllers\Api\ProjectController::destroy
 * @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:155
 * @route '/api/organisations/{organisation}/projects/{project}'
@@ -428,38 +285,6 @@ destroy.delete = (args: { organisation: string | number, project: string | numbe
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::destroy
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:155
-* @route '/api/organisations/{organisation}/projects/{project}'
-*/
-const destroyForm = (args: { organisation: string | number, project: string | number } | [organisation: string | number, project: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Customer\Http\Controllers\Api\ProjectController::destroy
-* @see Modules/Customer/app/Http/Controllers/Api/ProjectController.php:155
-* @route '/api/organisations/{organisation}/projects/{project}'
-*/
-destroyForm.delete = (args: { organisation: string | number, project: string | number } | [organisation: string | number, project: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 const ProjectController = { index, store, show, update, destroy }
 

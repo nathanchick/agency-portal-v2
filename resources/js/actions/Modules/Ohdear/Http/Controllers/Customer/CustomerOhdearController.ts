@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
 /**
 * @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::uptime
 * @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:15
@@ -60,43 +60,6 @@ uptime.head = (args: { website: string | number } | [website: string | number ] 
     url: uptime.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::uptime
-* @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:15
-* @route '/customer/health/{website}/uptime'
-*/
-const uptimeForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: uptime.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::uptime
-* @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:15
-* @route '/customer/health/{website}/uptime'
-*/
-uptimeForm.get = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: uptime.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::uptime
-* @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:15
-* @route '/customer/health/{website}/uptime'
-*/
-uptimeForm.head = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: uptime.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-uptime.form = uptimeForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::brokenLinks
@@ -161,43 +124,6 @@ brokenLinks.head = (args: { website: string | number } | [website: string | numb
 })
 
 /**
-* @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::brokenLinks
-* @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:40
-* @route '/customer/health/{website}/broken-links'
-*/
-const brokenLinksForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: brokenLinks.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::brokenLinks
-* @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:40
-* @route '/customer/health/{website}/broken-links'
-*/
-brokenLinksForm.get = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: brokenLinks.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::brokenLinks
-* @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:40
-* @route '/customer/health/{website}/broken-links'
-*/
-brokenLinksForm.head = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: brokenLinks.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-brokenLinks.form = brokenLinksForm
-
-/**
 * @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::lighthouse
 * @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:65
 * @route '/customer/health/{website}/lighthouse'
@@ -260,43 +186,6 @@ lighthouse.head = (args: { website: string | number } | [website: string | numbe
 })
 
 /**
-* @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::lighthouse
-* @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:65
-* @route '/customer/health/{website}/lighthouse'
-*/
-const lighthouseForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: lighthouse.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::lighthouse
-* @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:65
-* @route '/customer/health/{website}/lighthouse'
-*/
-lighthouseForm.get = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: lighthouse.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::lighthouse
-* @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:65
-* @route '/customer/health/{website}/lighthouse'
-*/
-lighthouseForm.head = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: lighthouse.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-lighthouse.form = lighthouseForm
-
-/**
 * @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::sitemap
 * @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:90
 * @route '/customer/health/{website}/sitemap'
@@ -357,43 +246,6 @@ sitemap.head = (args: { website: string | number } | [website: string | number ]
     url: sitemap.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::sitemap
-* @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:90
-* @route '/customer/health/{website}/sitemap'
-*/
-const sitemapForm = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: sitemap.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::sitemap
-* @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:90
-* @route '/customer/health/{website}/sitemap'
-*/
-sitemapForm.get = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: sitemap.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Ohdear\Http\Controllers\Customer\CustomerOhdearController::sitemap
-* @see Modules/Ohdear/app/Http/Controllers/Customer/CustomerOhdearController.php:90
-* @route '/customer/health/{website}/sitemap'
-*/
-sitemapForm.head = (args: { website: string | number } | [website: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: sitemap.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-sitemap.form = sitemapForm
 
 const CustomerOhdearController = { uptime, brokenLinks, lighthouse, sitemap }
 

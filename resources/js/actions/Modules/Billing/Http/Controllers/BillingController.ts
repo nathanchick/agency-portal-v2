@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\Billing\Http\Controllers\BillingController::overview
 * @see Modules/Billing/app/Http/Controllers/BillingController.php:31
@@ -42,43 +42,6 @@ overview.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: overview.url(options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Billing\Http\Controllers\BillingController::overview
-* @see Modules/Billing/app/Http/Controllers/BillingController.php:31
-* @route '/customers/billing'
-*/
-const overviewForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: overview.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Billing\Http\Controllers\BillingController::overview
-* @see Modules/Billing/app/Http/Controllers/BillingController.php:31
-* @route '/customers/billing'
-*/
-overviewForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: overview.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Billing\Http\Controllers\BillingController::overview
-* @see Modules/Billing/app/Http/Controllers/BillingController.php:31
-* @route '/customers/billing'
-*/
-overviewForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: overview.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-overview.form = overviewForm
 
 /**
 * @see \Modules\Billing\Http\Controllers\BillingController::customerStats
@@ -147,43 +110,6 @@ customerStats.head = (args: { customer: string | { id: string } } | [customer: s
     url: customerStats.url(args, options),
     method: 'head',
 })
-
-/**
-* @see \Modules\Billing\Http\Controllers\BillingController::customerStats
-* @see Modules/Billing/app/Http/Controllers/BillingController.php:121
-* @route '/customers/billing/{customer}/stats'
-*/
-const customerStatsForm = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: customerStats.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Billing\Http\Controllers\BillingController::customerStats
-* @see Modules/Billing/app/Http/Controllers/BillingController.php:121
-* @route '/customers/billing/{customer}/stats'
-*/
-customerStatsForm.get = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: customerStats.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Billing\Http\Controllers\BillingController::customerStats
-* @see Modules/Billing/app/Http/Controllers/BillingController.php:121
-* @route '/customers/billing/{customer}/stats'
-*/
-customerStatsForm.head = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: customerStats.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-customerStats.form = customerStatsForm
 
 const BillingController = { overview, customerStats }
 

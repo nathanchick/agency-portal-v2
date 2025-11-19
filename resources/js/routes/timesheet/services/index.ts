@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
 import tasks from './tasks'
 import users from './users'
 import budgetAdjustments from './budget-adjustments'
@@ -48,43 +48,6 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::index
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:21
-* @route '/timesheet/services'
-*/
-const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::index
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:21
-* @route '/timesheet/services'
-*/
-indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::index
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:21
-* @route '/timesheet/services'
-*/
-indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index.form = indexForm
-
-/**
 * @see \Modules\Timesheet\Http\Controllers\ServiceController::create
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:67
 * @route '/timesheet/services/create'
@@ -129,43 +92,6 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::create
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:67
-* @route '/timesheet/services/create'
-*/
-const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::create
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:67
-* @route '/timesheet/services/create'
-*/
-createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url(options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::create
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:67
-* @route '/timesheet/services/create'
-*/
-createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: create.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-create.form = createForm
-
-/**
 * @see \Modules\Timesheet\Http\Controllers\ServiceController::store
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:88
 * @route '/timesheet/services'
@@ -198,28 +124,6 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::store
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:88
-* @route '/timesheet/services'
-*/
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::store
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:88
-* @route '/timesheet/services'
-*/
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-})
-
-store.form = storeForm
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\ServiceController::show
@@ -290,43 +194,6 @@ show.head = (args: { service: string | { id: string } } | [service: string | { i
 })
 
 /**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::show
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:197
-* @route '/timesheet/services/{service}'
-*/
-const showForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::show
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:197
-* @route '/timesheet/services/{service}'
-*/
-showForm.get = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::show
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:197
-* @route '/timesheet/services/{service}'
-*/
-showForm.head = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show.form = showForm
-
-/**
 * @see \Modules\Timesheet\Http\Controllers\ServiceController::edit
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:122
 * @route '/timesheet/services/{service}/edit'
@@ -395,43 +262,6 @@ edit.head = (args: { service: string | { id: string } } | [service: string | { i
 })
 
 /**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::edit
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:122
-* @route '/timesheet/services/{service}/edit'
-*/
-const editForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::edit
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:122
-* @route '/timesheet/services/{service}/edit'
-*/
-editForm.get = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::edit
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:122
-* @route '/timesheet/services/{service}/edit'
-*/
-editForm.head = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: edit.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-edit.form = editForm
-
-/**
 * @see \Modules\Timesheet\Http\Controllers\ServiceController::update
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:155
 * @route '/timesheet/services/{service}'
@@ -490,38 +320,6 @@ update.put = (args: { service: string | { id: string } } | [service: string | { 
 })
 
 /**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::update
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:155
-* @route '/timesheet/services/{service}'
-*/
-const updateForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::update
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:155
-* @route '/timesheet/services/{service}'
-*/
-updateForm.put = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: update.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'PUT',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-update.form = updateForm
-
-/**
 * @see \Modules\Timesheet\Http\Controllers\ServiceController::destroy
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:185
 * @route '/timesheet/services/{service}'
@@ -578,38 +376,6 @@ destroy.delete = (args: { service: string | { id: string } } | [service: string 
     url: destroy.url(args, options),
     method: 'delete',
 })
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::destroy
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:185
-* @route '/timesheet/services/{service}'
-*/
-const destroyForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Timesheet\Http\Controllers\ServiceController::destroy
-* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:185
-* @route '/timesheet/services/{service}'
-*/
-destroyForm.delete = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: destroy.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'DELETE',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'post',
-})
-
-destroy.form = destroyForm
 
 const services = {
     index: Object.assign(index, index),

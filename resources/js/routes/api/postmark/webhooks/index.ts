@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \Modules\PostMark\Http\Controllers\WebhookController::inbound
 * @see Modules/PostMark/app/Http/Controllers/WebhookController.php:20
@@ -50,28 +50,6 @@ inbound.post = (args: { organisation: string | number } | [organisation: string 
     url: inbound.url(args, options),
     method: 'post',
 })
-
-/**
-* @see \Modules\PostMark\Http\Controllers\WebhookController::inbound
-* @see Modules/PostMark/app/Http/Controllers/WebhookController.php:20
-* @route '/api/webhooks/postmark/{organisation}/inbound'
-*/
-const inboundForm = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: inbound.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\PostMark\Http\Controllers\WebhookController::inbound
-* @see Modules/PostMark/app/Http/Controllers/WebhookController.php:20
-* @route '/api/webhooks/postmark/{organisation}/inbound'
-*/
-inboundForm.post = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: inbound.url(args, options),
-    method: 'post',
-})
-
-inbound.form = inboundForm
 
 const webhooks = {
     inbound: Object.assign(inbound, inbound),

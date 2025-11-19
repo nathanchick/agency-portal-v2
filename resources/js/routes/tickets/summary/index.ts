@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::regenerate
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:949
@@ -56,28 +56,6 @@ regenerate.post = (args: { ticket: string | { id: string } } | [ticket: string |
     url: regenerate.url(args, options),
     method: 'post',
 })
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::regenerate
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:949
-* @route '/tickets/{ticket}/summary/regenerate'
-*/
-const regenerateForm = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: regenerate.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \Modules\Ticket\Http\Controllers\TicketController::regenerate
-* @see Modules/Ticket/app/Http/Controllers/TicketController.php:949
-* @route '/tickets/{ticket}/summary/regenerate'
-*/
-regenerateForm.post = (args: { ticket: string | { id: string } } | [ticket: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: regenerate.url(args, options),
-    method: 'post',
-})
-
-regenerate.form = regenerateForm
 
 const summary = {
     regenerate: Object.assign(regenerate, regenerate),
