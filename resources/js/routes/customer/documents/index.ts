@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Document\Http\Controllers\CustomerDocumentController::myPending
 * @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:18
@@ -42,6 +42,43 @@ myPending.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: myPending.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:18
+* @route '/customer/documents/my-pending'
+*/
+const myPendingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: myPending.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:18
+* @route '/customer/documents/my-pending'
+*/
+myPendingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: myPending.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:18
+* @route '/customer/documents/my-pending'
+*/
+myPendingForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: myPending.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+myPending.form = myPendingForm
 
 /**
 * @see \Modules\Document\Http\Controllers\CustomerDocumentController::myCompleted
@@ -88,6 +125,43 @@ myCompleted.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:36
+* @route '/customer/documents/my-completed'
+*/
+const myCompletedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: myCompleted.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:36
+* @route '/customer/documents/my-completed'
+*/
+myCompletedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: myCompleted.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::myCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:36
+* @route '/customer/documents/my-completed'
+*/
+myCompletedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: myCompleted.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+myCompleted.form = myCompletedForm
+
+/**
 * @see \Modules\Document\Http\Controllers\CustomerDocumentController::allPending
 * @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:54
 * @route '/customer/documents/all-pending'
@@ -132,6 +206,43 @@ allPending.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:54
+* @route '/customer/documents/all-pending'
+*/
+const allPendingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: allPending.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:54
+* @route '/customer/documents/all-pending'
+*/
+allPendingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: allPending.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allPending
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:54
+* @route '/customer/documents/all-pending'
+*/
+allPendingForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: allPending.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+allPending.form = allPendingForm
+
+/**
 * @see \Modules\Document\Http\Controllers\CustomerDocumentController::allCompleted
 * @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:75
 * @route '/customer/documents/all-completed'
@@ -174,6 +285,43 @@ allCompleted.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: allCompleted.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:75
+* @route '/customer/documents/all-completed'
+*/
+const allCompletedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: allCompleted.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:75
+* @route '/customer/documents/all-completed'
+*/
+allCompletedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: allCompleted.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::allCompleted
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:75
+* @route '/customer/documents/all-completed'
+*/
+allCompletedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: allCompleted.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+allCompleted.form = allCompletedForm
 
 /**
 * @see \Modules\Document\Http\Controllers\CustomerDocumentController::viewSign
@@ -238,6 +386,43 @@ viewSign.head = (args: { id: string | number } | [id: string | number ] | string
 })
 
 /**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::viewSign
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:96
+* @route '/customer/documents/{id}/view-sign'
+*/
+const viewSignForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: viewSign.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::viewSign
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:96
+* @route '/customer/documents/{id}/view-sign'
+*/
+viewSignForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: viewSign.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::viewSign
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:96
+* @route '/customer/documents/{id}/view-sign'
+*/
+viewSignForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: viewSign.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+viewSign.form = viewSignForm
+
+/**
 * @see \Modules\Document\Http\Controllers\CustomerDocumentController::approve
 * @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:198
 * @route '/customer/documents/{id}/approve'
@@ -290,6 +475,28 @@ approve.post = (args: { id: string | number } | [id: string | number ] | string 
 })
 
 /**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::approve
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:198
+* @route '/customer/documents/{id}/approve'
+*/
+const approveForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: approve.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::approve
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:198
+* @route '/customer/documents/{id}/approve'
+*/
+approveForm.post = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: approve.url(args, options),
+    method: 'post',
+})
+
+approve.form = approveForm
+
+/**
 * @see \Modules\Document\Http\Controllers\CustomerDocumentController::decline
 * @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:265
 * @route '/customer/documents/{id}/decline'
@@ -340,6 +547,28 @@ decline.post = (args: { id: string | number } | [id: string | number ] | string 
     url: decline.url(args, options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::decline
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:265
+* @route '/customer/documents/{id}/decline'
+*/
+const declineForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: decline.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Document\Http\Controllers\CustomerDocumentController::decline
+* @see Modules/Document/app/Http/Controllers/CustomerDocumentController.php:265
+* @route '/customer/documents/{id}/decline'
+*/
+declineForm.post = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: decline.url(args, options),
+    method: 'post',
+})
+
+decline.form = declineForm
 
 const documents = {
     myPending: Object.assign(myPending, myPending),

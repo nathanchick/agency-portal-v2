@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
 /**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::index
 * @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:18
@@ -42,6 +42,43 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::index
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:18
+* @route '/customer/websites'
+*/
+const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::index
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:18
+* @route '/customer/websites'
+*/
+indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::index
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:18
+* @route '/customer/websites'
+*/
+indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index.form = indexForm
 
 /**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performance
@@ -106,6 +143,43 @@ performance.head = (args: { id: string | number } | [id: string | number ] | str
 })
 
 /**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performance
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:44
+* @route '/customer/websites/{id}/performance'
+*/
+const performanceForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performance.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performance
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:44
+* @route '/customer/websites/{id}/performance'
+*/
+performanceForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performance.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performance
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:44
+* @route '/customer/websites/{id}/performance'
+*/
+performanceForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performance.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+performance.form = performanceForm
+
+/**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceUptime
 * @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:52
 * @route '/customer/websites/{id}/performance/uptime'
@@ -166,6 +240,43 @@ performanceUptime.head = (args: { id: string | number } | [id: string | number ]
     url: performanceUptime.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceUptime
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:52
+* @route '/customer/websites/{id}/performance/uptime'
+*/
+const performanceUptimeForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performanceUptime.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceUptime
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:52
+* @route '/customer/websites/{id}/performance/uptime'
+*/
+performanceUptimeForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performanceUptime.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceUptime
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:52
+* @route '/customer/websites/{id}/performance/uptime'
+*/
+performanceUptimeForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performanceUptime.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+performanceUptime.form = performanceUptimeForm
 
 /**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceBrokenLinks
@@ -230,6 +341,43 @@ performanceBrokenLinks.head = (args: { id: string | number } | [id: string | num
 })
 
 /**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceBrokenLinks
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:77
+* @route '/customer/websites/{id}/performance/broken-links'
+*/
+const performanceBrokenLinksForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performanceBrokenLinks.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceBrokenLinks
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:77
+* @route '/customer/websites/{id}/performance/broken-links'
+*/
+performanceBrokenLinksForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performanceBrokenLinks.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceBrokenLinks
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:77
+* @route '/customer/websites/{id}/performance/broken-links'
+*/
+performanceBrokenLinksForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performanceBrokenLinks.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+performanceBrokenLinks.form = performanceBrokenLinksForm
+
+/**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceLighthouse
 * @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:102
 * @route '/customer/websites/{id}/performance/lighthouse'
@@ -290,6 +438,43 @@ performanceLighthouse.head = (args: { id: string | number } | [id: string | numb
     url: performanceLighthouse.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceLighthouse
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:102
+* @route '/customer/websites/{id}/performance/lighthouse'
+*/
+const performanceLighthouseForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performanceLighthouse.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceLighthouse
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:102
+* @route '/customer/websites/{id}/performance/lighthouse'
+*/
+performanceLighthouseForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performanceLighthouse.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceLighthouse
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:102
+* @route '/customer/websites/{id}/performance/lighthouse'
+*/
+performanceLighthouseForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performanceLighthouse.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+performanceLighthouse.form = performanceLighthouseForm
 
 /**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceSitemap
@@ -354,6 +539,43 @@ performanceSitemap.head = (args: { id: string | number } | [id: string | number 
 })
 
 /**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceSitemap
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:127
+* @route '/customer/websites/{id}/performance/sitemap'
+*/
+const performanceSitemapForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performanceSitemap.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceSitemap
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:127
+* @route '/customer/websites/{id}/performance/sitemap'
+*/
+performanceSitemapForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performanceSitemap.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::performanceSitemap
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:127
+* @route '/customer/websites/{id}/performance/sitemap'
+*/
+performanceSitemapForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: performanceSitemap.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+performanceSitemap.form = performanceSitemapForm
+
+/**
 * @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::security
 * @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:152
 * @route '/customer/websites/{id}/security'
@@ -414,6 +636,43 @@ security.head = (args: { id: string | number } | [id: string | number ] | string
     url: security.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::security
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:152
+* @route '/customer/websites/{id}/security'
+*/
+const securityForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: security.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::security
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:152
+* @route '/customer/websites/{id}/security'
+*/
+securityForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: security.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\Customer\CustomerWebsiteController::security
+* @see Modules/Website/app/Http/Controllers/Customer/CustomerWebsiteController.php:152
+* @route '/customer/websites/{id}/security'
+*/
+securityForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: security.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+security.form = securityForm
 
 const CustomerWebsiteController = { index, performance, performanceUptime, performanceBrokenLinks, performanceLighthouse, performanceSitemap, security }
 

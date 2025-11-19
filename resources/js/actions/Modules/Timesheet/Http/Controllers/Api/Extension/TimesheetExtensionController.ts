@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../../../wayfinder'
 /**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::user
 * @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:141
@@ -42,6 +42,43 @@ user.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: user.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::user
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:141
+* @route '/api/extension/user'
+*/
+const userForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: user.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::user
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:141
+* @route '/api/extension/user'
+*/
+userForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: user.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::user
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:141
+* @route '/api/extension/user'
+*/
+userForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: user.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+user.form = userForm
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::services
@@ -88,6 +125,43 @@ services.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::services
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:17
+* @route '/api/extension/services'
+*/
+const servicesForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: services.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::services
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:17
+* @route '/api/extension/services'
+*/
+servicesForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: services.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::services
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:17
+* @route '/api/extension/services'
+*/
+servicesForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: services.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+services.form = servicesForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::recentEntries
 * @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:60
 * @route '/api/extension/recent-entries'
@@ -132,6 +206,43 @@ recentEntries.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::recentEntries
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:60
+* @route '/api/extension/recent-entries'
+*/
+const recentEntriesForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: recentEntries.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::recentEntries
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:60
+* @route '/api/extension/recent-entries'
+*/
+recentEntriesForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: recentEntries.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::recentEntries
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:60
+* @route '/api/extension/recent-entries'
+*/
+recentEntriesForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: recentEntries.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+recentEntries.form = recentEntriesForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::createEntry
 * @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:96
 * @route '/api/extension/time-entries'
@@ -164,6 +275,28 @@ createEntry.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: createEntry.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::createEntry
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:96
+* @route '/api/extension/time-entries'
+*/
+const createEntryForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: createEntry.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::createEntry
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:96
+* @route '/api/extension/time-entries'
+*/
+createEntryForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: createEntry.url(options),
+    method: 'post',
+})
+
+createEntry.form = createEntryForm
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::currentTimer
@@ -210,6 +343,43 @@ currentTimer.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::currentTimer
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:170
+* @route '/api/extension/timer/current'
+*/
+const currentTimerForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: currentTimer.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::currentTimer
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:170
+* @route '/api/extension/timer/current'
+*/
+currentTimerForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: currentTimer.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::currentTimer
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:170
+* @route '/api/extension/timer/current'
+*/
+currentTimerForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: currentTimer.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+currentTimer.form = currentTimerForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::startTimer
 * @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:209
 * @route '/api/extension/timer/start'
@@ -242,6 +412,28 @@ startTimer.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: startTimer.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::startTimer
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:209
+* @route '/api/extension/timer/start'
+*/
+const startTimerForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: startTimer.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::startTimer
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:209
+* @route '/api/extension/timer/start'
+*/
+startTimerForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: startTimer.url(options),
+    method: 'post',
+})
+
+startTimer.form = startTimerForm
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::stopTimer
@@ -294,6 +486,28 @@ stopTimer.post = (args: { timer: string | number } | [timer: string | number ] |
     url: stopTimer.url(args, options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::stopTimer
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:293
+* @route '/api/extension/timer/{timer}/stop'
+*/
+const stopTimerForm = (args: { timer: string | number } | [timer: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: stopTimer.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::stopTimer
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:293
+* @route '/api/extension/timer/{timer}/stop'
+*/
+stopTimerForm.post = (args: { timer: string | number } | [timer: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: stopTimer.url(args, options),
+    method: 'post',
+})
+
+stopTimer.form = stopTimerForm
 
 const TimesheetExtensionController = { user, services, recentEntries, createEntry, currentTimer, startTimer, stopTimer }
 

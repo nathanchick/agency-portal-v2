@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../wayfinder'
 /**
 * @see \Modules\GitHub\Http\Controllers\GitHubOAuthController::connect
 * @see Modules/GitHub/app/Http/Controllers/GitHubOAuthController.php:38
@@ -42,6 +42,43 @@ connect.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: connect.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\GitHub\Http\Controllers\GitHubOAuthController::connect
+* @see Modules/GitHub/app/Http/Controllers/GitHubOAuthController.php:38
+* @route '/github/oauth/connect'
+*/
+const connectForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: connect.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\GitHub\Http\Controllers\GitHubOAuthController::connect
+* @see Modules/GitHub/app/Http/Controllers/GitHubOAuthController.php:38
+* @route '/github/oauth/connect'
+*/
+connectForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: connect.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\GitHub\Http\Controllers\GitHubOAuthController::connect
+* @see Modules/GitHub/app/Http/Controllers/GitHubOAuthController.php:38
+* @route '/github/oauth/connect'
+*/
+connectForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: connect.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+connect.form = connectForm
 
 /**
 * @see \Modules\GitHub\Http\Controllers\GitHubOAuthController::callback
@@ -88,6 +125,43 @@ callback.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\GitHub\Http\Controllers\GitHubOAuthController::callback
+* @see Modules/GitHub/app/Http/Controllers/GitHubOAuthController.php:75
+* @route '/github/oauth/callback'
+*/
+const callbackForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: callback.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\GitHub\Http\Controllers\GitHubOAuthController::callback
+* @see Modules/GitHub/app/Http/Controllers/GitHubOAuthController.php:75
+* @route '/github/oauth/callback'
+*/
+callbackForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: callback.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\GitHub\Http\Controllers\GitHubOAuthController::callback
+* @see Modules/GitHub/app/Http/Controllers/GitHubOAuthController.php:75
+* @route '/github/oauth/callback'
+*/
+callbackForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: callback.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+callback.form = callbackForm
+
+/**
 * @see \Modules\GitHub\Http\Controllers\GitHubOAuthController::disconnect
 * @see Modules/GitHub/app/Http/Controllers/GitHubOAuthController.php:141
 * @route '/github/oauth/disconnect'
@@ -120,6 +194,38 @@ disconnect.delete = (options?: RouteQueryOptions): RouteDefinition<'delete'> => 
     url: disconnect.url(options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\GitHub\Http\Controllers\GitHubOAuthController::disconnect
+* @see Modules/GitHub/app/Http/Controllers/GitHubOAuthController.php:141
+* @route '/github/oauth/disconnect'
+*/
+const disconnectForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: disconnect.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\GitHub\Http\Controllers\GitHubOAuthController::disconnect
+* @see Modules/GitHub/app/Http/Controllers/GitHubOAuthController.php:141
+* @route '/github/oauth/disconnect'
+*/
+disconnectForm.delete = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: disconnect.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+disconnect.form = disconnectForm
 
 const GitHubOAuthController = { connect, callback, disconnect }
 

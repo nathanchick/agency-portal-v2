@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\Timesheet\Http\Controllers\SavedReportController::index
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:15
@@ -44,6 +44,43 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\SavedReportController::index
+* @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:15
+* @route '/timesheet/reports/saved'
+*/
+const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\SavedReportController::index
+* @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:15
+* @route '/timesheet/reports/saved'
+*/
+indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\SavedReportController::index
+* @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:15
+* @route '/timesheet/reports/saved'
+*/
+indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index.form = indexForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\SavedReportController::store
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:30
 * @route '/timesheet/reports/saved'
@@ -76,6 +113,28 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\SavedReportController::store
+* @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:30
+* @route '/timesheet/reports/saved'
+*/
+const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\SavedReportController::store
+* @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:30
+* @route '/timesheet/reports/saved'
+*/
+storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+store.form = storeForm
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\SavedReportController::update
@@ -136,6 +195,38 @@ update.put = (args: { savedReport: string | { id: string } } | [savedReport: str
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\SavedReportController::update
+* @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:53
+* @route '/timesheet/reports/saved/{savedReport}'
+*/
+const updateForm = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\SavedReportController::update
+* @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:53
+* @route '/timesheet/reports/saved/{savedReport}'
+*/
+updateForm.put = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+update.form = updateForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\SavedReportController::destroy
 * @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:78
 * @route '/timesheet/reports/saved/{savedReport}'
@@ -192,6 +283,38 @@ destroy.delete = (args: { savedReport: string | { id: string } } | [savedReport:
     url: destroy.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\SavedReportController::destroy
+* @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:78
+* @route '/timesheet/reports/saved/{savedReport}'
+*/
+const destroyForm = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\SavedReportController::destroy
+* @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:78
+* @route '/timesheet/reports/saved/{savedReport}'
+*/
+destroyForm.delete = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy.form = destroyForm
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\SavedReportController::load
@@ -260,6 +383,43 @@ load.head = (args: { savedReport: string | { id: string } } | [savedReport: stri
     url: load.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\SavedReportController::load
+* @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:96
+* @route '/timesheet/reports/saved/{savedReport}/load'
+*/
+const loadForm = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: load.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\SavedReportController::load
+* @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:96
+* @route '/timesheet/reports/saved/{savedReport}/load'
+*/
+loadForm.get = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: load.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\SavedReportController::load
+* @see Modules/Timesheet/app/Http/Controllers/SavedReportController.php:96
+* @route '/timesheet/reports/saved/{savedReport}/load'
+*/
+loadForm.head = (args: { savedReport: string | { id: string } } | [savedReport: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: load.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+load.form = loadForm
 
 const SavedReportController = { index, store, update, destroy, load }
 

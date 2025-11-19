@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
 import report from './report'
 /**
 * @see \Modules\Timesheet\Http\Controllers\Customer\CustomerServiceController::show
@@ -63,6 +63,43 @@ show.head = (args: { service: string | number } | [service: string | number ] | 
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerServiceController::show
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerServiceController.php:15
+* @route '/customer/timesheet/services/{service}'
+*/
+const showForm = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerServiceController::show
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerServiceController.php:15
+* @route '/customer/timesheet/services/{service}'
+*/
+showForm.get = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerServiceController::show
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerServiceController.php:15
+* @route '/customer/timesheet/services/{service}'
+*/
+showForm.head = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+show.form = showForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\Customer\CustomerServiceController::ledger
 * @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerServiceController.php:55
 * @route '/customer/timesheet/services/{service}/ledger'
@@ -125,6 +162,43 @@ ledger.head = (args: { service: string | number } | [service: string | number ] 
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerServiceController::ledger
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerServiceController.php:55
+* @route '/customer/timesheet/services/{service}/ledger'
+*/
+const ledgerForm = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: ledger.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerServiceController::ledger
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerServiceController.php:55
+* @route '/customer/timesheet/services/{service}/ledger'
+*/
+ledgerForm.get = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: ledger.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerServiceController::ledger
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerServiceController.php:55
+* @route '/customer/timesheet/services/{service}/ledger'
+*/
+ledgerForm.head = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: ledger.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+ledger.form = ledgerForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::externalReference
 * @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:76
 * @route '/customer/timesheet/services/{service}/external-reference'
@@ -185,6 +259,43 @@ externalReference.head = (args: { service: string | number } | [service: string 
     url: externalReference.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::externalReference
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:76
+* @route '/customer/timesheet/services/{service}/external-reference'
+*/
+const externalReferenceForm = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: externalReference.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::externalReference
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:76
+* @route '/customer/timesheet/services/{service}/external-reference'
+*/
+externalReferenceForm.get = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: externalReference.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::externalReference
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:76
+* @route '/customer/timesheet/services/{service}/external-reference'
+*/
+externalReferenceForm.head = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: externalReference.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+externalReference.form = externalReferenceForm
 
 const services = {
     show: Object.assign(show, show),

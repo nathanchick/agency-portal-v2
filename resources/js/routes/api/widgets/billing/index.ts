@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overview
 * @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:31
@@ -42,6 +42,43 @@ overview.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: overview.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Billing\Http\Controllers\Api\WidgetController::overview
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:31
+* @route '/api/widgets/billing/overview'
+*/
+const overviewForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: overview.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Billing\Http\Controllers\Api\WidgetController::overview
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:31
+* @route '/api/widgets/billing/overview'
+*/
+overviewForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: overview.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Billing\Http\Controllers\Api\WidgetController::overview
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:31
+* @route '/api/widgets/billing/overview'
+*/
+overviewForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: overview.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+overview.form = overviewForm
 
 /**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::outstanding
@@ -88,6 +125,43 @@ outstanding.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Billing\Http\Controllers\Api\WidgetController::outstanding
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:94
+* @route '/api/widgets/billing/outstanding'
+*/
+const outstandingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: outstanding.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Billing\Http\Controllers\Api\WidgetController::outstanding
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:94
+* @route '/api/widgets/billing/outstanding'
+*/
+outstandingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: outstanding.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Billing\Http\Controllers\Api\WidgetController::outstanding
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:94
+* @route '/api/widgets/billing/outstanding'
+*/
+outstandingForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: outstanding.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+outstanding.form = outstandingForm
+
+/**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::overdue
 * @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:162
 * @route '/api/widgets/billing/overdue'
@@ -132,6 +206,43 @@ overdue.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Billing\Http\Controllers\Api\WidgetController::overdue
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:162
+* @route '/api/widgets/billing/overdue'
+*/
+const overdueForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: overdue.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Billing\Http\Controllers\Api\WidgetController::overdue
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:162
+* @route '/api/widgets/billing/overdue'
+*/
+overdueForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: overdue.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Billing\Http\Controllers\Api\WidgetController::overdue
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:162
+* @route '/api/widgets/billing/overdue'
+*/
+overdueForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: overdue.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+overdue.form = overdueForm
+
+/**
 * @see \Modules\Billing\Http\Controllers\Api\WidgetController::myBilling
 * @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:230
 * @route '/api/widgets/billing/my-billing'
@@ -174,6 +285,43 @@ myBilling.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: myBilling.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Billing\Http\Controllers\Api\WidgetController::myBilling
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:230
+* @route '/api/widgets/billing/my-billing'
+*/
+const myBillingForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: myBilling.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Billing\Http\Controllers\Api\WidgetController::myBilling
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:230
+* @route '/api/widgets/billing/my-billing'
+*/
+myBillingForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: myBilling.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Billing\Http\Controllers\Api\WidgetController::myBilling
+* @see Modules/Billing/app/Http/Controllers/Api/WidgetController.php:230
+* @route '/api/widgets/billing/my-billing'
+*/
+myBillingForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: myBilling.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+myBilling.form = myBillingForm
 
 const billing = {
     overview: Object.assign(overview, overview),

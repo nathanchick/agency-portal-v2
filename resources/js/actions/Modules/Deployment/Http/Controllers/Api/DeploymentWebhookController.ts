@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
 /**
 * @see \Modules\Deployment\Http\Controllers\Api\DeploymentWebhookController::webhook
 * @see Modules/Deployment/app/Http/Controllers/Api/DeploymentWebhookController.php:15
@@ -50,6 +50,28 @@ webhook.post = (args: { token: string | number } | [token: string | number ] | s
     url: webhook.url(args, options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Deployment\Http\Controllers\Api\DeploymentWebhookController::webhook
+* @see Modules/Deployment/app/Http/Controllers/Api/DeploymentWebhookController.php:15
+* @route '/api/deployments/webhook/{token}'
+*/
+const webhookForm = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: webhook.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Deployment\Http\Controllers\Api\DeploymentWebhookController::webhook
+* @see Modules/Deployment/app/Http/Controllers/Api/DeploymentWebhookController.php:15
+* @route '/api/deployments/webhook/{token}'
+*/
+webhookForm.post = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: webhook.url(args, options),
+    method: 'post',
+})
+
+webhook.form = webhookForm
 
 const DeploymentWebhookController = { webhook }
 

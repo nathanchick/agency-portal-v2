@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::index
 * @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
@@ -44,6 +44,43 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::index
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears'
+*/
+const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::index
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears'
+*/
+indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::index
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears'
+*/
+indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index.form = indexForm
+
+/**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::store
 * @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears'
@@ -76,6 +113,28 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::store
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears'
+*/
+const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::store
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears'
+*/
+storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+store.form = storeForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::show
@@ -140,6 +199,43 @@ show.head = (args: { ohdear: string | number } | [ohdear: string | number ] | st
 })
 
 /**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::show
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears/{ohdear}'
+*/
+const showForm = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::show
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears/{ohdear}'
+*/
+showForm.get = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::show
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears/{ohdear}'
+*/
+showForm.head = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+show.form = showForm
+
+/**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::update
 * @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
@@ -202,6 +298,53 @@ update.patch = (args: { ohdear: string | number } | [ohdear: string | number ] |
 })
 
 /**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::update
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears/{ohdear}'
+*/
+const updateForm = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::update
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears/{ohdear}'
+*/
+updateForm.put = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::update
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears/{ohdear}'
+*/
+updateForm.patch = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+update.form = updateForm
+
+/**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::destroy
 * @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
 * @route '/api/v1/ohdears/{ohdear}'
@@ -252,6 +395,38 @@ destroy.delete = (args: { ohdear: string | number } | [ohdear: string | number ]
     url: destroy.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::destroy
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears/{ohdear}'
+*/
+const destroyForm = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::destroy
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:0
+* @route '/api/v1/ohdears/{ohdear}'
+*/
+destroyForm.delete = (args: { ohdear: string | number } | [ohdear: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy.form = destroyForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::setup
@@ -306,6 +481,28 @@ setup.post = (args: { websiteId: string | number } | [websiteId: string | number
 })
 
 /**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::setup
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:24
+* @route '/ohdear/websites/{websiteId}/setup'
+*/
+const setupForm = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: setup.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::setup
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:24
+* @route '/ohdear/websites/{websiteId}/setup'
+*/
+setupForm.post = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: setup.url(args, options),
+    method: 'post',
+})
+
+setup.form = setupForm
+
+/**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::addUrl
 * @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:250
 * @route '/ohdear/websites/{websiteId}/urls'
@@ -358,6 +555,28 @@ addUrl.post = (args: { websiteId: string | number } | [websiteId: string | numbe
 })
 
 /**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::addUrl
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:250
+* @route '/ohdear/websites/{websiteId}/urls'
+*/
+const addUrlForm = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: addUrl.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::addUrl
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:250
+* @route '/ohdear/websites/{websiteId}/urls'
+*/
+addUrlForm.post = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: addUrl.url(args, options),
+    method: 'post',
+})
+
+addUrl.form = addUrlForm
+
+/**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::deleteUrl
 * @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:296
 * @route '/ohdear/websites/{websiteId}/urls/{ohdearWebsiteId}'
@@ -407,6 +626,38 @@ deleteUrl.delete = (args: { websiteId: string | number, ohdearWebsiteId: string 
     url: deleteUrl.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::deleteUrl
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:296
+* @route '/ohdear/websites/{websiteId}/urls/{ohdearWebsiteId}'
+*/
+const deleteUrlForm = (args: { websiteId: string | number, ohdearWebsiteId: string | number } | [websiteId: string | number, ohdearWebsiteId: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: deleteUrl.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::deleteUrl
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:296
+* @route '/ohdear/websites/{websiteId}/urls/{ohdearWebsiteId}'
+*/
+deleteUrlForm.delete = (args: { websiteId: string | number, ohdearWebsiteId: string | number } | [websiteId: string | number, ohdearWebsiteId: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: deleteUrl.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+deleteUrl.form = deleteUrlForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::uptime
@@ -471,6 +722,43 @@ uptime.head = (args: { websiteId: string | number } | [websiteId: string | numbe
 })
 
 /**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::uptime
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:57
+* @route '/ohdear/websites/{websiteId}/uptime'
+*/
+const uptimeForm = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: uptime.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::uptime
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:57
+* @route '/ohdear/websites/{websiteId}/uptime'
+*/
+uptimeForm.get = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: uptime.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::uptime
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:57
+* @route '/ohdear/websites/{websiteId}/uptime'
+*/
+uptimeForm.head = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: uptime.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+uptime.form = uptimeForm
+
+/**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::brokenLinks
 * @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:100
 * @route '/ohdear/websites/{websiteId}/broken-links'
@@ -531,6 +819,43 @@ brokenLinks.head = (args: { websiteId: string | number } | [websiteId: string | 
     url: brokenLinks.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::brokenLinks
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:100
+* @route '/ohdear/websites/{websiteId}/broken-links'
+*/
+const brokenLinksForm = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: brokenLinks.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::brokenLinks
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:100
+* @route '/ohdear/websites/{websiteId}/broken-links'
+*/
+brokenLinksForm.get = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: brokenLinks.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::brokenLinks
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:100
+* @route '/ohdear/websites/{websiteId}/broken-links'
+*/
+brokenLinksForm.head = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: brokenLinks.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+brokenLinks.form = brokenLinksForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouse
@@ -595,6 +920,43 @@ lighthouse.head = (args: { websiteId: string | number } | [websiteId: string | n
 })
 
 /**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouse
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:123
+* @route '/ohdear/websites/{websiteId}/lighthouse'
+*/
+const lighthouseForm = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: lighthouse.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouse
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:123
+* @route '/ohdear/websites/{websiteId}/lighthouse'
+*/
+lighthouseForm.get = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: lighthouse.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouse
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:123
+* @route '/ohdear/websites/{websiteId}/lighthouse'
+*/
+lighthouseForm.head = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: lighthouse.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+lighthouse.form = lighthouseForm
+
+/**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouseHistory
 * @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:163
 * @route '/ohdear/websites/{websiteId}/lighthouse/history/{monitorId}'
@@ -654,6 +1016,43 @@ lighthouseHistory.head = (args: { websiteId: string | number, monitorId: string 
     url: lighthouseHistory.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouseHistory
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:163
+* @route '/ohdear/websites/{websiteId}/lighthouse/history/{monitorId}'
+*/
+const lighthouseHistoryForm = (args: { websiteId: string | number, monitorId: string | number } | [websiteId: string | number, monitorId: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: lighthouseHistory.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouseHistory
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:163
+* @route '/ohdear/websites/{websiteId}/lighthouse/history/{monitorId}'
+*/
+lighthouseHistoryForm.get = (args: { websiteId: string | number, monitorId: string | number } | [websiteId: string | number, monitorId: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: lighthouseHistory.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouseHistory
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:163
+* @route '/ohdear/websites/{websiteId}/lighthouse/history/{monitorId}'
+*/
+lighthouseHistoryForm.head = (args: { websiteId: string | number, monitorId: string | number } | [websiteId: string | number, monitorId: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: lighthouseHistory.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+lighthouseHistory.form = lighthouseHistoryForm
 
 /**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouseReportDetails
@@ -720,6 +1119,43 @@ lighthouseReportDetails.head = (args: { websiteId: string | number, monitorId: s
 })
 
 /**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouseReportDetails
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:194
+* @route '/ohdear/websites/{websiteId}/lighthouse/report/{monitorId}/{reportId}'
+*/
+const lighthouseReportDetailsForm = (args: { websiteId: string | number, monitorId: string | number, reportId: string | number } | [websiteId: string | number, monitorId: string | number, reportId: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: lighthouseReportDetails.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouseReportDetails
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:194
+* @route '/ohdear/websites/{websiteId}/lighthouse/report/{monitorId}/{reportId}'
+*/
+lighthouseReportDetailsForm.get = (args: { websiteId: string | number, monitorId: string | number, reportId: string | number } | [websiteId: string | number, monitorId: string | number, reportId: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: lighthouseReportDetails.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::lighthouseReportDetails
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:194
+* @route '/ohdear/websites/{websiteId}/lighthouse/report/{monitorId}/{reportId}'
+*/
+lighthouseReportDetailsForm.head = (args: { websiteId: string | number, monitorId: string | number, reportId: string | number } | [websiteId: string | number, monitorId: string | number, reportId: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: lighthouseReportDetails.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+lighthouseReportDetails.form = lighthouseReportDetailsForm
+
+/**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::sitemap
 * @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:227
 * @route '/ohdear/websites/{websiteId}/sitemap'
@@ -782,6 +1218,43 @@ sitemap.head = (args: { websiteId: string | number } | [websiteId: string | numb
 })
 
 /**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::sitemap
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:227
+* @route '/ohdear/websites/{websiteId}/sitemap'
+*/
+const sitemapForm = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: sitemap.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::sitemap
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:227
+* @route '/ohdear/websites/{websiteId}/sitemap'
+*/
+sitemapForm.get = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: sitemap.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::sitemap
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:227
+* @route '/ohdear/websites/{websiteId}/sitemap'
+*/
+sitemapForm.head = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: sitemap.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+sitemap.form = sitemapForm
+
+/**
 * @see \Modules\Ohdear\Http\Controllers\OhdearController::updateSitemapUrl
 * @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:330
 * @route '/ohdear/websites/{websiteId}/sitemap-url'
@@ -832,6 +1305,38 @@ updateSitemapUrl.put = (args: { websiteId: string | number } | [websiteId: strin
     url: updateSitemapUrl.url(args, options),
     method: 'put',
 })
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::updateSitemapUrl
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:330
+* @route '/ohdear/websites/{websiteId}/sitemap-url'
+*/
+const updateSitemapUrlForm = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateSitemapUrl.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Ohdear\Http\Controllers\OhdearController::updateSitemapUrl
+* @see Modules/Ohdear/app/Http/Controllers/OhdearController.php:330
+* @route '/ohdear/websites/{websiteId}/sitemap-url'
+*/
+updateSitemapUrlForm.put = (args: { websiteId: string | number } | [websiteId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: updateSitemapUrl.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+updateSitemapUrl.form = updateSitemapUrlForm
 
 const OhdearController = { index, store, show, update, destroy, setup, addUrl, deleteUrl, uptime, brokenLinks, lighthouse, lighthouseHistory, lighthouseReportDetails, sitemap, updateSitemapUrl }
 

@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../../../wayfinder'
 /**
 * @see \Modules\Deployment\Http\Controllers\Api\Widget\DeploymentWidgetController::recentCustomerDeployments
 * @see Modules/Deployment/app/Http/Controllers/Api/Widget/DeploymentWidgetController.php:28
@@ -42,6 +42,43 @@ recentCustomerDeployments.head = (options?: RouteQueryOptions): RouteDefinition<
     url: recentCustomerDeployments.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Deployment\Http\Controllers\Api\Widget\DeploymentWidgetController::recentCustomerDeployments
+* @see Modules/Deployment/app/Http/Controllers/Api/Widget/DeploymentWidgetController.php:28
+* @route '/api/widgets/deployments/recent-customer'
+*/
+const recentCustomerDeploymentsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: recentCustomerDeployments.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Deployment\Http\Controllers\Api\Widget\DeploymentWidgetController::recentCustomerDeployments
+* @see Modules/Deployment/app/Http/Controllers/Api/Widget/DeploymentWidgetController.php:28
+* @route '/api/widgets/deployments/recent-customer'
+*/
+recentCustomerDeploymentsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: recentCustomerDeployments.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Deployment\Http\Controllers\Api\Widget\DeploymentWidgetController::recentCustomerDeployments
+* @see Modules/Deployment/app/Http/Controllers/Api/Widget/DeploymentWidgetController.php:28
+* @route '/api/widgets/deployments/recent-customer'
+*/
+recentCustomerDeploymentsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: recentCustomerDeployments.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+recentCustomerDeployments.form = recentCustomerDeploymentsForm
 
 const DeploymentWidgetController = { recentCustomerDeployments }
 

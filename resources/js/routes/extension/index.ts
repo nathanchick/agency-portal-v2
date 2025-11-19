@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 import auth from './auth'
 import token from './token'
 /**
@@ -44,6 +44,43 @@ organisations.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
     url: organisations.url(options),
     method: 'head',
 })
+
+/**
+* @see \App\Http\Controllers\Api\Extension\ExtensionOrganisationController::organisations
+* @see app/Http/Controllers/Api/Extension/ExtensionOrganisationController.php:15
+* @route '/api/extension/organisations'
+*/
+const organisationsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: organisations.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\Api\Extension\ExtensionOrganisationController::organisations
+* @see app/Http/Controllers/Api/Extension/ExtensionOrganisationController.php:15
+* @route '/api/extension/organisations'
+*/
+organisationsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: organisations.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\Api\Extension\ExtensionOrganisationController::organisations
+* @see app/Http/Controllers/Api/Extension/ExtensionOrganisationController.php:15
+* @route '/api/extension/organisations'
+*/
+organisationsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: organisations.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+organisations.form = organisationsForm
 
 const extension = {
     auth: Object.assign(auth, auth),

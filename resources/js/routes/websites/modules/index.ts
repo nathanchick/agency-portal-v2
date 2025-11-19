@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Website\Http\Controllers\WebsiteController::update
 * @see Modules/Website/app/Http/Controllers/WebsiteController.php:212
@@ -50,6 +50,38 @@ update.patch = (args: { id: string | number } | [id: string | number ] | string 
     url: update.url(args, options),
     method: 'patch',
 })
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::update
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:212
+* @route '/websites/{id}/modules'
+*/
+const updateForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Website\Http\Controllers\WebsiteController::update
+* @see Modules/Website/app/Http/Controllers/WebsiteController.php:212
+* @route '/websites/{id}/modules'
+*/
+updateForm.patch = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+update.form = updateForm
 
 const modules = {
     update: Object.assign(update, update),

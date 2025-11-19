@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
 * @see \Modules\Ticket\Http\Controllers\TicketController::download
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1004
@@ -68,6 +68,43 @@ download.head = (args: { media: number | { id: number } } | [media: number | { i
 })
 
 /**
+* @see \Modules\Ticket\Http\Controllers\TicketController::download
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:1004
+* @route '/media/{media}/download'
+*/
+const downloadForm = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: download.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\TicketController::download
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:1004
+* @route '/media/{media}/download'
+*/
+downloadForm.get = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: download.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\TicketController::download
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:1004
+* @route '/media/{media}/download'
+*/
+downloadForm.head = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: download.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+download.form = downloadForm
+
+/**
 * @see \Modules\Ticket\Http\Controllers\TicketController::deleteMethod
 * @see Modules/Ticket/app/Http/Controllers/TicketController.php:1039
 * @route '/media/{media}'
@@ -124,6 +161,38 @@ deleteMethod.delete = (args: { media: number | { id: number } } | [media: number
     url: deleteMethod.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Ticket\Http\Controllers\TicketController::deleteMethod
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:1039
+* @route '/media/{media}'
+*/
+const deleteMethodForm = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: deleteMethod.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\TicketController::deleteMethod
+* @see Modules/Ticket/app/Http/Controllers/TicketController.php:1039
+* @route '/media/{media}'
+*/
+deleteMethodForm.delete = (args: { media: number | { id: number } } | [media: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: deleteMethod.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+deleteMethod.form = deleteMethodForm
 
 const media = {
     download: Object.assign(download, download),

@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \Modules\Billing\Http\Controllers\BillingController::stats
 * @see Modules/Billing/app/Http/Controllers/BillingController.php:121
@@ -66,6 +66,43 @@ stats.head = (args: { customer: string | { id: string } } | [customer: string | 
     url: stats.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Billing\Http\Controllers\BillingController::stats
+* @see Modules/Billing/app/Http/Controllers/BillingController.php:121
+* @route '/customers/billing/{customer}/stats'
+*/
+const statsForm = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: stats.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Billing\Http\Controllers\BillingController::stats
+* @see Modules/Billing/app/Http/Controllers/BillingController.php:121
+* @route '/customers/billing/{customer}/stats'
+*/
+statsForm.get = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: stats.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Billing\Http\Controllers\BillingController::stats
+* @see Modules/Billing/app/Http/Controllers/BillingController.php:121
+* @route '/customers/billing/{customer}/stats'
+*/
+statsForm.head = (args: { customer: string | { id: string } } | [customer: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: stats.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+stats.form = statsForm
 
 const customer = {
     stats: Object.assign(stats, stats),

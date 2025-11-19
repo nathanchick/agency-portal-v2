@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::index
 * @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:13
@@ -46,6 +46,42 @@ index4d685da6f41d9553ad7286a665b7e26d.head = (options?: RouteQueryOptions): Rout
 /**
 * @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::index
 * @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:13
+* @route '/api/v1/freshdesks'
+*/
+const index4d685da6f41d9553ad7286a665b7e26dForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index4d685da6f41d9553ad7286a665b7e26d.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::index
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:13
+* @route '/api/v1/freshdesks'
+*/
+index4d685da6f41d9553ad7286a665b7e26dForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index4d685da6f41d9553ad7286a665b7e26d.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::index
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:13
+* @route '/api/v1/freshdesks'
+*/
+index4d685da6f41d9553ad7286a665b7e26dForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index4d685da6f41d9553ad7286a665b7e26d.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index4d685da6f41d9553ad7286a665b7e26d.form = index4d685da6f41d9553ad7286a665b7e26dForm
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::index
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:13
 * @route '/freshdesks'
 */
 const indexd8ce8aac60ffff090a4ca2e3c29e5ab6 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -86,6 +122,43 @@ indexd8ce8aac60ffff090a4ca2e3c29e5ab6.head = (options?: RouteQueryOptions): Rout
     url: indexd8ce8aac60ffff090a4ca2e3c29e5ab6.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::index
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:13
+* @route '/freshdesks'
+*/
+const indexd8ce8aac60ffff090a4ca2e3c29e5ab6Form = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: indexd8ce8aac60ffff090a4ca2e3c29e5ab6.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::index
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:13
+* @route '/freshdesks'
+*/
+indexd8ce8aac60ffff090a4ca2e3c29e5ab6Form.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: indexd8ce8aac60ffff090a4ca2e3c29e5ab6.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::index
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:13
+* @route '/freshdesks'
+*/
+indexd8ce8aac60ffff090a4ca2e3c29e5ab6Form.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: indexd8ce8aac60ffff090a4ca2e3c29e5ab6.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+indexd8ce8aac60ffff090a4ca2e3c29e5ab6.form = indexd8ce8aac60ffff090a4ca2e3c29e5ab6Form
 
 export const index = {
     '/api/v1/freshdesks': index4d685da6f41d9553ad7286a665b7e26d,
@@ -129,6 +202,27 @@ store4d685da6f41d9553ad7286a665b7e26d.post = (options?: RouteQueryOptions): Rout
 /**
 * @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::store
 * @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:29
+* @route '/api/v1/freshdesks'
+*/
+const store4d685da6f41d9553ad7286a665b7e26dForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store4d685da6f41d9553ad7286a665b7e26d.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::store
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:29
+* @route '/api/v1/freshdesks'
+*/
+store4d685da6f41d9553ad7286a665b7e26dForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store4d685da6f41d9553ad7286a665b7e26d.url(options),
+    method: 'post',
+})
+
+store4d685da6f41d9553ad7286a665b7e26d.form = store4d685da6f41d9553ad7286a665b7e26dForm
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::store
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:29
 * @route '/freshdesks'
 */
 const stored8ce8aac60ffff090a4ca2e3c29e5ab6 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -159,6 +253,28 @@ stored8ce8aac60ffff090a4ca2e3c29e5ab6.post = (options?: RouteQueryOptions): Rout
     url: stored8ce8aac60ffff090a4ca2e3c29e5ab6.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::store
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:29
+* @route '/freshdesks'
+*/
+const stored8ce8aac60ffff090a4ca2e3c29e5ab6Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: stored8ce8aac60ffff090a4ca2e3c29e5ab6.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::store
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:29
+* @route '/freshdesks'
+*/
+stored8ce8aac60ffff090a4ca2e3c29e5ab6Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: stored8ce8aac60ffff090a4ca2e3c29e5ab6.url(options),
+    method: 'post',
+})
+
+stored8ce8aac60ffff090a4ca2e3c29e5ab6.form = stored8ce8aac60ffff090a4ca2e3c29e5ab6Form
 
 export const store = {
     '/api/v1/freshdesks': store4d685da6f41d9553ad7286a665b7e26d,
@@ -230,6 +346,42 @@ show8e2f6ef127af5fed2820e44584ed157e.head = (args: { freshdesk: string | number 
 /**
 * @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::show
 * @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:34
+* @route '/api/v1/freshdesks/{freshdesk}'
+*/
+const show8e2f6ef127af5fed2820e44584ed157eForm = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show8e2f6ef127af5fed2820e44584ed157e.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::show
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:34
+* @route '/api/v1/freshdesks/{freshdesk}'
+*/
+show8e2f6ef127af5fed2820e44584ed157eForm.get = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show8e2f6ef127af5fed2820e44584ed157e.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::show
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:34
+* @route '/api/v1/freshdesks/{freshdesk}'
+*/
+show8e2f6ef127af5fed2820e44584ed157eForm.head = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show8e2f6ef127af5fed2820e44584ed157e.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+show8e2f6ef127af5fed2820e44584ed157e.form = show8e2f6ef127af5fed2820e44584ed157eForm
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::show
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:34
 * @route '/freshdesks/{freshdesk}'
 */
 const show7f6b73a3716ef2338042f82aa3902e71 = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -288,6 +440,43 @@ show7f6b73a3716ef2338042f82aa3902e71.head = (args: { freshdesk: string | number 
     url: show7f6b73a3716ef2338042f82aa3902e71.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::show
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:34
+* @route '/freshdesks/{freshdesk}'
+*/
+const show7f6b73a3716ef2338042f82aa3902e71Form = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show7f6b73a3716ef2338042f82aa3902e71.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::show
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:34
+* @route '/freshdesks/{freshdesk}'
+*/
+show7f6b73a3716ef2338042f82aa3902e71Form.get = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show7f6b73a3716ef2338042f82aa3902e71.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::show
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:34
+* @route '/freshdesks/{freshdesk}'
+*/
+show7f6b73a3716ef2338042f82aa3902e71Form.head = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show7f6b73a3716ef2338042f82aa3902e71.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+show7f6b73a3716ef2338042f82aa3902e71.form = show7f6b73a3716ef2338042f82aa3902e71Form
 
 export const show = {
     '/api/v1/freshdesks/{freshdesk}': show8e2f6ef127af5fed2820e44584ed157e,
@@ -359,6 +548,52 @@ update8e2f6ef127af5fed2820e44584ed157e.patch = (args: { freshdesk: string | numb
 /**
 * @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::update
 * @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:50
+* @route '/api/v1/freshdesks/{freshdesk}'
+*/
+const update8e2f6ef127af5fed2820e44584ed157eForm = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update8e2f6ef127af5fed2820e44584ed157e.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::update
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:50
+* @route '/api/v1/freshdesks/{freshdesk}'
+*/
+update8e2f6ef127af5fed2820e44584ed157eForm.put = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update8e2f6ef127af5fed2820e44584ed157e.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::update
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:50
+* @route '/api/v1/freshdesks/{freshdesk}'
+*/
+update8e2f6ef127af5fed2820e44584ed157eForm.patch = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update8e2f6ef127af5fed2820e44584ed157e.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+update8e2f6ef127af5fed2820e44584ed157e.form = update8e2f6ef127af5fed2820e44584ed157eForm
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::update
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:50
 * @route '/freshdesks/{freshdesk}'
 */
 const update7f6b73a3716ef2338042f82aa3902e71 = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -417,6 +652,53 @@ update7f6b73a3716ef2338042f82aa3902e71.patch = (args: { freshdesk: string | numb
     url: update7f6b73a3716ef2338042f82aa3902e71.url(args, options),
     method: 'patch',
 })
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::update
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:50
+* @route '/freshdesks/{freshdesk}'
+*/
+const update7f6b73a3716ef2338042f82aa3902e71Form = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update7f6b73a3716ef2338042f82aa3902e71.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::update
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:50
+* @route '/freshdesks/{freshdesk}'
+*/
+update7f6b73a3716ef2338042f82aa3902e71Form.put = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update7f6b73a3716ef2338042f82aa3902e71.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::update
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:50
+* @route '/freshdesks/{freshdesk}'
+*/
+update7f6b73a3716ef2338042f82aa3902e71Form.patch = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update7f6b73a3716ef2338042f82aa3902e71.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+update7f6b73a3716ef2338042f82aa3902e71.form = update7f6b73a3716ef2338042f82aa3902e71Form
 
 export const update = {
     '/api/v1/freshdesks/{freshdesk}': update8e2f6ef127af5fed2820e44584ed157e,
@@ -478,6 +760,37 @@ destroy8e2f6ef127af5fed2820e44584ed157e.delete = (args: { freshdesk: string | nu
 /**
 * @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::destroy
 * @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:55
+* @route '/api/v1/freshdesks/{freshdesk}'
+*/
+const destroy8e2f6ef127af5fed2820e44584ed157eForm = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy8e2f6ef127af5fed2820e44584ed157e.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::destroy
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:55
+* @route '/api/v1/freshdesks/{freshdesk}'
+*/
+destroy8e2f6ef127af5fed2820e44584ed157eForm.delete = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy8e2f6ef127af5fed2820e44584ed157e.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy8e2f6ef127af5fed2820e44584ed157e.form = destroy8e2f6ef127af5fed2820e44584ed157eForm
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::destroy
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:55
 * @route '/freshdesks/{freshdesk}'
 */
 const destroy7f6b73a3716ef2338042f82aa3902e71 = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -527,6 +840,38 @@ destroy7f6b73a3716ef2338042f82aa3902e71.delete = (args: { freshdesk: string | nu
     method: 'delete',
 })
 
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::destroy
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:55
+* @route '/freshdesks/{freshdesk}'
+*/
+const destroy7f6b73a3716ef2338042f82aa3902e71Form = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy7f6b73a3716ef2338042f82aa3902e71.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::destroy
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:55
+* @route '/freshdesks/{freshdesk}'
+*/
+destroy7f6b73a3716ef2338042f82aa3902e71Form.delete = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy7f6b73a3716ef2338042f82aa3902e71.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy7f6b73a3716ef2338042f82aa3902e71.form = destroy7f6b73a3716ef2338042f82aa3902e71Form
+
 export const destroy = {
     '/api/v1/freshdesks/{freshdesk}': destroy8e2f6ef127af5fed2820e44584ed157e,
     '/freshdesks/{freshdesk}': destroy7f6b73a3716ef2338042f82aa3902e71,
@@ -575,6 +920,43 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: create.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::create
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:21
+* @route '/freshdesks/create'
+*/
+const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: create.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::create
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:21
+* @route '/freshdesks/create'
+*/
+createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: create.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::create
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:21
+* @route '/freshdesks/create'
+*/
+createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: create.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+create.form = createForm
 
 /**
 * @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::edit
@@ -637,6 +1019,43 @@ edit.head = (args: { freshdesk: string | number } | [freshdesk: string | number 
     url: edit.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::edit
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:42
+* @route '/freshdesks/{freshdesk}/edit'
+*/
+const editForm = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: edit.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::edit
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:42
+* @route '/freshdesks/{freshdesk}/edit'
+*/
+editForm.get = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: edit.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Freshdesk\Http\Controllers\FreshdeskController::edit
+* @see Modules/Freshdesk/app/Http/Controllers/FreshdeskController.php:42
+* @route '/freshdesks/{freshdesk}/edit'
+*/
+editForm.head = (args: { freshdesk: string | number } | [freshdesk: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: edit.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+edit.form = editForm
 
 const FreshdeskController = { index, store, show, update, destroy, create, edit }
 

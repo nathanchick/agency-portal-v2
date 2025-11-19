@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \Modules\Customer\Http\Controllers\Api\WebsiteController::index
 * @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:27
@@ -62,6 +62,43 @@ index.head = (args: { organisation: string | number } | [organisation: string | 
 })
 
 /**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::index
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:27
+* @route '/api/organisations/{organisation}/websites'
+*/
+const indexForm = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::index
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:27
+* @route '/api/organisations/{organisation}/websites'
+*/
+indexForm.get = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::index
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:27
+* @route '/api/organisations/{organisation}/websites'
+*/
+indexForm.head = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index.form = indexForm
+
+/**
 * @see \Modules\Customer\Http\Controllers\Api\WebsiteController::store
 * @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:49
 * @route '/api/organisations/{organisation}/websites'
@@ -112,6 +149,28 @@ store.post = (args: { organisation: string | number } | [organisation: string | 
     url: store.url(args, options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::store
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:49
+* @route '/api/organisations/{organisation}/websites'
+*/
+const storeForm = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::store
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:49
+* @route '/api/organisations/{organisation}/websites'
+*/
+storeForm.post = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(args, options),
+    method: 'post',
+})
+
+store.form = storeForm
 
 /**
 * @see \Modules\Customer\Http\Controllers\Api\WebsiteController::show
@@ -175,6 +234,43 @@ show.head = (args: { organisation: string | number, website: string | number } |
 })
 
 /**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::show
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:88
+* @route '/api/organisations/{organisation}/websites/{website}'
+*/
+const showForm = (args: { organisation: string | number, website: string | number } | [organisation: string | number, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::show
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:88
+* @route '/api/organisations/{organisation}/websites/{website}'
+*/
+showForm.get = (args: { organisation: string | number, website: string | number } | [organisation: string | number, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::show
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:88
+* @route '/api/organisations/{organisation}/websites/{website}'
+*/
+showForm.head = (args: { organisation: string | number, website: string | number } | [organisation: string | number, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+show.form = showForm
+
+/**
 * @see \Modules\Customer\Http\Controllers\Api\WebsiteController::update
 * @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:110
 * @route '/api/organisations/{organisation}/websites/{website}'
@@ -236,6 +332,53 @@ update.patch = (args: { organisation: string | number, website: string | number 
 })
 
 /**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::update
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:110
+* @route '/api/organisations/{organisation}/websites/{website}'
+*/
+const updateForm = (args: { organisation: string | number, website: string | number } | [organisation: string | number, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::update
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:110
+* @route '/api/organisations/{organisation}/websites/{website}'
+*/
+updateForm.put = (args: { organisation: string | number, website: string | number } | [organisation: string | number, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::update
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:110
+* @route '/api/organisations/{organisation}/websites/{website}'
+*/
+updateForm.patch = (args: { organisation: string | number, website: string | number } | [organisation: string | number, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+update.form = updateForm
+
+/**
 * @see \Modules\Customer\Http\Controllers\Api\WebsiteController::destroy
 * @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:155
 * @route '/api/organisations/{organisation}/websites/{website}'
@@ -285,6 +428,38 @@ destroy.delete = (args: { organisation: string | number, website: string | numbe
     url: destroy.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::destroy
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:155
+* @route '/api/organisations/{organisation}/websites/{website}'
+*/
+const destroyForm = (args: { organisation: string | number, website: string | number } | [organisation: string | number, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Customer\Http\Controllers\Api\WebsiteController::destroy
+* @see Modules/Customer/app/Http/Controllers/Api/WebsiteController.php:155
+* @route '/api/organisations/{organisation}/websites/{website}'
+*/
+destroyForm.delete = (args: { organisation: string | number, website: string | number } | [organisation: string | number, website: string | number ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy.form = destroyForm
 
 const websites = {
     index: Object.assign(index, index),

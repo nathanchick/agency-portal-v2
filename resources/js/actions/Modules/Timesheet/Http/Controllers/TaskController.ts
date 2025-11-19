@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\Timesheet\Http\Controllers\TaskController::index
 * @see Modules/Timesheet/app/Http/Controllers/TaskController.php:16
@@ -42,6 +42,43 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::index
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:16
+* @route '/timesheet/tasks'
+*/
+const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::index
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:16
+* @route '/timesheet/tasks'
+*/
+indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::index
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:16
+* @route '/timesheet/tasks'
+*/
+indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index.form = indexForm
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\TaskController::create
@@ -88,6 +125,43 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::create
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:33
+* @route '/timesheet/tasks/create'
+*/
+const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: create.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::create
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:33
+* @route '/timesheet/tasks/create'
+*/
+createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: create.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::create
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:33
+* @route '/timesheet/tasks/create'
+*/
+createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: create.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+create.form = createForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\TaskController::store
 * @see Modules/Timesheet/app/Http/Controllers/TaskController.php:48
 * @route '/timesheet/tasks'
@@ -120,6 +194,28 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::store
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:48
+* @route '/timesheet/tasks'
+*/
+const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::store
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:48
+* @route '/timesheet/tasks'
+*/
+storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+store.form = storeForm
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\TaskController::edit
@@ -190,6 +286,43 @@ edit.head = (args: { task: string | { id: string } } | [task: string | { id: str
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::edit
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:80
+* @route '/timesheet/tasks/{task}/edit'
+*/
+const editForm = (args: { task: string | { id: string } } | [task: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: edit.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::edit
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:80
+* @route '/timesheet/tasks/{task}/edit'
+*/
+editForm.get = (args: { task: string | { id: string } } | [task: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: edit.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::edit
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:80
+* @route '/timesheet/tasks/{task}/edit'
+*/
+editForm.head = (args: { task: string | { id: string } } | [task: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: edit.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+edit.form = editForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\TaskController::update
 * @see Modules/Timesheet/app/Http/Controllers/TaskController.php:100
 * @route '/timesheet/tasks/{task}'
@@ -248,6 +381,38 @@ update.put = (args: { task: string | { id: string } } | [task: string | { id: st
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::update
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:100
+* @route '/timesheet/tasks/{task}'
+*/
+const updateForm = (args: { task: string | { id: string } } | [task: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::update
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:100
+* @route '/timesheet/tasks/{task}'
+*/
+updateForm.put = (args: { task: string | { id: string } } | [task: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+update.form = updateForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\TaskController::destroy
 * @see Modules/Timesheet/app/Http/Controllers/TaskController.php:131
 * @route '/timesheet/tasks/{task}'
@@ -304,6 +469,38 @@ destroy.delete = (args: { task: string | { id: string } } | [task: string | { id
     url: destroy.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::destroy
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:131
+* @route '/timesheet/tasks/{task}'
+*/
+const destroyForm = (args: { task: string | { id: string } } | [task: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TaskController::destroy
+* @see Modules/Timesheet/app/Http/Controllers/TaskController.php:131
+* @route '/timesheet/tasks/{task}'
+*/
+destroyForm.delete = (args: { task: string | { id: string } } | [task: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy.form = destroyForm
 
 const TaskController = { index, create, store, edit, update, destroy }
 

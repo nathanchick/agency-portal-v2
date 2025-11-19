@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Webhook\Http\Controllers\WebhookController::index
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:26
@@ -44,6 +44,43 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::index
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:26
+* @route '/api/v1/webhooks'
+*/
+const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::index
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:26
+* @route '/api/v1/webhooks'
+*/
+indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::index
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:26
+* @route '/api/v1/webhooks'
+*/
+indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index.form = indexForm
+
+/**
 * @see \Modules\Webhook\Http\Controllers\WebhookController::store
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:143
 * @route '/api/v1/webhooks'
@@ -76,6 +113,28 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::store
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:143
+* @route '/api/v1/webhooks'
+*/
+const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::store
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:143
+* @route '/api/v1/webhooks'
+*/
+storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+store.form = storeForm
 
 /**
 * @see \Modules\Webhook\Http\Controllers\WebhookController::show
@@ -138,6 +197,43 @@ show.head = (args: { webhook: string | number } | [webhook: string | number ] | 
     url: show.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::show
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:0
+* @route '/api/v1/webhooks/{webhook}'
+*/
+const showForm = (args: { webhook: string | number } | [webhook: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::show
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:0
+* @route '/api/v1/webhooks/{webhook}'
+*/
+showForm.get = (args: { webhook: string | number } | [webhook: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::show
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:0
+* @route '/api/v1/webhooks/{webhook}'
+*/
+showForm.head = (args: { webhook: string | number } | [webhook: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+show.form = showForm
 
 /**
 * @see \Modules\Webhook\Http\Controllers\WebhookController::update
@@ -208,6 +304,53 @@ update.patch = (args: { webhook: string | { id: string } } | [webhook: string | 
 })
 
 /**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::update
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:196
+* @route '/api/v1/webhooks/{webhook}'
+*/
+const updateForm = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::update
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:196
+* @route '/api/v1/webhooks/{webhook}'
+*/
+updateForm.put = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::update
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:196
+* @route '/api/v1/webhooks/{webhook}'
+*/
+updateForm.patch = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+update.form = updateForm
+
+/**
 * @see \Modules\Webhook\Http\Controllers\WebhookController::destroy
 * @see Modules/Webhook/app/Http/Controllers/WebhookController.php:224
 * @route '/api/v1/webhooks/{webhook}'
@@ -264,6 +407,38 @@ destroy.delete = (args: { webhook: string | { id: string } } | [webhook: string 
     url: destroy.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::destroy
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:224
+* @route '/api/v1/webhooks/{webhook}'
+*/
+const destroyForm = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Webhook\Http\Controllers\WebhookController::destroy
+* @see Modules/Webhook/app/Http/Controllers/WebhookController.php:224
+* @route '/api/v1/webhooks/{webhook}'
+*/
+destroyForm.delete = (args: { webhook: string | { id: string } } | [webhook: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy.form = destroyForm
 
 const webhook = {
     index: Object.assign(index, index),

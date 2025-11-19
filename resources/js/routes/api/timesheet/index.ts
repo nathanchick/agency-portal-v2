@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Timesheet\Http\Controllers\TimesheetController::index
 * @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:13
@@ -44,6 +44,43 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::index
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:13
+* @route '/api/v1/timesheets'
+*/
+const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::index
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:13
+* @route '/api/v1/timesheets'
+*/
+indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::index
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:13
+* @route '/api/v1/timesheets'
+*/
+indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index.form = indexForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\TimesheetController::store
 * @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:29
 * @route '/api/v1/timesheets'
@@ -76,6 +113,28 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::store
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:29
+* @route '/api/v1/timesheets'
+*/
+const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::store
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:29
+* @route '/api/v1/timesheets'
+*/
+storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+store.form = storeForm
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\TimesheetController::show
@@ -140,6 +199,43 @@ show.head = (args: { timesheet: string | number } | [timesheet: string | number 
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::show
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:34
+* @route '/api/v1/timesheets/{timesheet}'
+*/
+const showForm = (args: { timesheet: string | number } | [timesheet: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::show
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:34
+* @route '/api/v1/timesheets/{timesheet}'
+*/
+showForm.get = (args: { timesheet: string | number } | [timesheet: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::show
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:34
+* @route '/api/v1/timesheets/{timesheet}'
+*/
+showForm.head = (args: { timesheet: string | number } | [timesheet: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+show.form = showForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\TimesheetController::update
 * @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:50
 * @route '/api/v1/timesheets/{timesheet}'
@@ -202,6 +298,53 @@ update.patch = (args: { timesheet: string | number } | [timesheet: string | numb
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::update
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:50
+* @route '/api/v1/timesheets/{timesheet}'
+*/
+const updateForm = (args: { timesheet: string | number } | [timesheet: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::update
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:50
+* @route '/api/v1/timesheets/{timesheet}'
+*/
+updateForm.put = (args: { timesheet: string | number } | [timesheet: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::update
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:50
+* @route '/api/v1/timesheets/{timesheet}'
+*/
+updateForm.patch = (args: { timesheet: string | number } | [timesheet: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+update.form = updateForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\TimesheetController::destroy
 * @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:55
 * @route '/api/v1/timesheets/{timesheet}'
@@ -252,6 +395,38 @@ destroy.delete = (args: { timesheet: string | number } | [timesheet: string | nu
     url: destroy.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::destroy
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:55
+* @route '/api/v1/timesheets/{timesheet}'
+*/
+const destroyForm = (args: { timesheet: string | number } | [timesheet: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\TimesheetController::destroy
+* @see Modules/Timesheet/app/Http/Controllers/TimesheetController.php:55
+* @route '/api/v1/timesheets/{timesheet}'
+*/
+destroyForm.delete = (args: { timesheet: string | number } | [timesheet: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy.form = destroyForm
 
 const timesheet = {
     index: Object.assign(index, index),

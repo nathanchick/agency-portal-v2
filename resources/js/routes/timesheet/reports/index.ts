@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../wayfinder'
 import saved from './saved'
 import scheduled from './scheduled'
 /**
@@ -46,6 +46,43 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\ReportController::index
+* @see Modules/Timesheet/app/Http/Controllers/ReportController.php:26
+* @route '/timesheet/reports'
+*/
+const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\ReportController::index
+* @see Modules/Timesheet/app/Http/Controllers/ReportController.php:26
+* @route '/timesheet/reports'
+*/
+indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\ReportController::index
+* @see Modules/Timesheet/app/Http/Controllers/ReportController.php:26
+* @route '/timesheet/reports'
+*/
+indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index.form = indexForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\ReportController::generate
 * @see Modules/Timesheet/app/Http/Controllers/ReportController.php:57
 * @route '/timesheet/reports/generate'
@@ -80,6 +117,28 @@ generate.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\ReportController::generate
+* @see Modules/Timesheet/app/Http/Controllers/ReportController.php:57
+* @route '/timesheet/reports/generate'
+*/
+const generateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: generate.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\ReportController::generate
+* @see Modules/Timesheet/app/Http/Controllers/ReportController.php:57
+* @route '/timesheet/reports/generate'
+*/
+generateForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: generate.url(options),
+    method: 'post',
+})
+
+generate.form = generateForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\ReportController::exportMethod
 * @see Modules/Timesheet/app/Http/Controllers/ReportController.php:81
 * @route '/timesheet/reports/export'
@@ -112,6 +171,28 @@ exportMethod.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: exportMethod.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\ReportController::exportMethod
+* @see Modules/Timesheet/app/Http/Controllers/ReportController.php:81
+* @route '/timesheet/reports/export'
+*/
+const exportMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: exportMethod.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\ReportController::exportMethod
+* @see Modules/Timesheet/app/Http/Controllers/ReportController.php:81
+* @route '/timesheet/reports/export'
+*/
+exportMethodForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: exportMethod.url(options),
+    method: 'post',
+})
+
+exportMethod.form = exportMethodForm
 
 const reports = {
     index: Object.assign(index, index),

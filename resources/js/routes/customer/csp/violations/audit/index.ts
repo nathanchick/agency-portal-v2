@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../wayfinder'
 /**
 * @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::exportMethod
 * @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:395
@@ -42,6 +42,43 @@ exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: exportMethod.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::exportMethod
+* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:395
+* @route '/customer/csp-violations/audit/export'
+*/
+const exportMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: exportMethod.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::exportMethod
+* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:395
+* @route '/customer/csp-violations/audit/export'
+*/
+exportMethodForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: exportMethod.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\CspManagement\Http\Controllers\Customer\CustomerCspViolationController::exportMethod
+* @see Modules/CspManagement/app/Http/Controllers/Customer/CustomerCspViolationController.php:395
+* @route '/customer/csp-violations/audit/export'
+*/
+exportMethodForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: exportMethod.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+exportMethod.form = exportMethodForm
 
 const audit = {
     export: Object.assign(exportMethod, exportMethod),

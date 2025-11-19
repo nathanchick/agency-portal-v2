@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Sansec\Http\Controllers\SansecController::index
 * @see Modules/Sansec/app/Http/Controllers/SansecController.php:13
@@ -44,6 +44,43 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Sansec\Http\Controllers\SansecController::index
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:13
+* @route '/api/v1/sansecs'
+*/
+const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Sansec\Http\Controllers\SansecController::index
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:13
+* @route '/api/v1/sansecs'
+*/
+indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Sansec\Http\Controllers\SansecController::index
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:13
+* @route '/api/v1/sansecs'
+*/
+indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index.form = indexForm
+
+/**
 * @see \Modules\Sansec\Http\Controllers\SansecController::store
 * @see Modules/Sansec/app/Http/Controllers/SansecController.php:29
 * @route '/api/v1/sansecs'
@@ -76,6 +113,28 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Sansec\Http\Controllers\SansecController::store
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:29
+* @route '/api/v1/sansecs'
+*/
+const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Sansec\Http\Controllers\SansecController::store
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:29
+* @route '/api/v1/sansecs'
+*/
+storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+store.form = storeForm
 
 /**
 * @see \Modules\Sansec\Http\Controllers\SansecController::show
@@ -140,6 +199,43 @@ show.head = (args: { sansec: string | number } | [sansec: string | number ] | st
 })
 
 /**
+* @see \Modules\Sansec\Http\Controllers\SansecController::show
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:34
+* @route '/api/v1/sansecs/{sansec}'
+*/
+const showForm = (args: { sansec: string | number } | [sansec: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Sansec\Http\Controllers\SansecController::show
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:34
+* @route '/api/v1/sansecs/{sansec}'
+*/
+showForm.get = (args: { sansec: string | number } | [sansec: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Sansec\Http\Controllers\SansecController::show
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:34
+* @route '/api/v1/sansecs/{sansec}'
+*/
+showForm.head = (args: { sansec: string | number } | [sansec: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+show.form = showForm
+
+/**
 * @see \Modules\Sansec\Http\Controllers\SansecController::update
 * @see Modules/Sansec/app/Http/Controllers/SansecController.php:50
 * @route '/api/v1/sansecs/{sansec}'
@@ -202,6 +298,53 @@ update.patch = (args: { sansec: string | number } | [sansec: string | number ] |
 })
 
 /**
+* @see \Modules\Sansec\Http\Controllers\SansecController::update
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:50
+* @route '/api/v1/sansecs/{sansec}'
+*/
+const updateForm = (args: { sansec: string | number } | [sansec: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Sansec\Http\Controllers\SansecController::update
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:50
+* @route '/api/v1/sansecs/{sansec}'
+*/
+updateForm.put = (args: { sansec: string | number } | [sansec: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Sansec\Http\Controllers\SansecController::update
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:50
+* @route '/api/v1/sansecs/{sansec}'
+*/
+updateForm.patch = (args: { sansec: string | number } | [sansec: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+update.form = updateForm
+
+/**
 * @see \Modules\Sansec\Http\Controllers\SansecController::destroy
 * @see Modules/Sansec/app/Http/Controllers/SansecController.php:55
 * @route '/api/v1/sansecs/{sansec}'
@@ -252,6 +395,38 @@ destroy.delete = (args: { sansec: string | number } | [sansec: string | number ]
     url: destroy.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Sansec\Http\Controllers\SansecController::destroy
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:55
+* @route '/api/v1/sansecs/{sansec}'
+*/
+const destroyForm = (args: { sansec: string | number } | [sansec: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Sansec\Http\Controllers\SansecController::destroy
+* @see Modules/Sansec/app/Http/Controllers/SansecController.php:55
+* @route '/api/v1/sansecs/{sansec}'
+*/
+destroyForm.delete = (args: { sansec: string | number } | [sansec: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy.form = destroyForm
 
 const sansec = {
     index: Object.assign(index, index),

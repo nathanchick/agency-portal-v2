@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \Modules\Timesheet\Http\Controllers\ServiceController::attach
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:235
@@ -58,6 +58,28 @@ attach.post = (args: { service: string | { id: string } } | [service: string | {
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\ServiceController::attach
+* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:235
+* @route '/timesheet/services/{service}/tasks/attach'
+*/
+const attachForm = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: attach.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\ServiceController::attach
+* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:235
+* @route '/timesheet/services/{service}/tasks/attach'
+*/
+attachForm.post = (args: { service: string | { id: string } } | [service: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: attach.url(args, options),
+    method: 'post',
+})
+
+attach.form = attachForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\ServiceController::detach
 * @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:258
 * @route '/timesheet/services/{service}/tasks/{task}'
@@ -111,6 +133,38 @@ detach.delete = (args: { service: string | { id: string }, task: string | { id: 
     url: detach.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\ServiceController::detach
+* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:258
+* @route '/timesheet/services/{service}/tasks/{task}'
+*/
+const detachForm = (args: { service: string | { id: string }, task: string | { id: string } } | [service: string | { id: string }, task: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: detach.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\ServiceController::detach
+* @see Modules/Timesheet/app/Http/Controllers/ServiceController.php:258
+* @route '/timesheet/services/{service}/tasks/{task}'
+*/
+detachForm.delete = (args: { service: string | { id: string }, task: string | { id: string } } | [service: string | { id: string }, task: string | { id: string } ], options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: detach.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+detach.form = detachForm
 
 const tasks = {
     attach: Object.assign(attach, attach),

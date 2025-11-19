@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
 * @see \Modules\Organisation\Http\Controllers\ApiTokenController::index
 * @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:24
@@ -42,6 +42,43 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::index
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:24
+* @route '/api-tokens'
+*/
+const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::index
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:24
+* @route '/api-tokens'
+*/
+indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::index
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:24
+* @route '/api-tokens'
+*/
+indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index.form = indexForm
 
 /**
 * @see \Modules\Organisation\Http\Controllers\ApiTokenController::create
@@ -88,6 +125,43 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::create
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:52
+* @route '/api-tokens/create'
+*/
+const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: create.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::create
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:52
+* @route '/api-tokens/create'
+*/
+createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: create.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::create
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:52
+* @route '/api-tokens/create'
+*/
+createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: create.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+create.form = createForm
+
+/**
 * @see \Modules\Organisation\Http\Controllers\ApiTokenController::store
 * @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:62
 * @route '/api-tokens'
@@ -120,6 +194,28 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::store
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:62
+* @route '/api-tokens'
+*/
+const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::store
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:62
+* @route '/api-tokens'
+*/
+storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+store.form = storeForm
 
 /**
 * @see \Modules\Organisation\Http\Controllers\ApiTokenController::show
@@ -190,6 +286,43 @@ show.head = (args: { apiToken: string | { id: string } } | [apiToken: string | {
 })
 
 /**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::show
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:98
+* @route '/api-tokens/{apiToken}'
+*/
+const showForm = (args: { apiToken: string | { id: string } } | [apiToken: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::show
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:98
+* @route '/api-tokens/{apiToken}'
+*/
+showForm.get = (args: { apiToken: string | { id: string } } | [apiToken: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::show
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:98
+* @route '/api-tokens/{apiToken}'
+*/
+showForm.head = (args: { apiToken: string | { id: string } } | [apiToken: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+show.form = showForm
+
+/**
 * @see \Modules\Organisation\Http\Controllers\ApiTokenController::edit
 * @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:118
 * @route '/api-tokens/{apiToken}/edit'
@@ -258,6 +391,43 @@ edit.head = (args: { apiToken: string | { id: string } } | [apiToken: string | {
 })
 
 /**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::edit
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:118
+* @route '/api-tokens/{apiToken}/edit'
+*/
+const editForm = (args: { apiToken: string | { id: string } } | [apiToken: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: edit.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::edit
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:118
+* @route '/api-tokens/{apiToken}/edit'
+*/
+editForm.get = (args: { apiToken: string | { id: string } } | [apiToken: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: edit.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::edit
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:118
+* @route '/api-tokens/{apiToken}/edit'
+*/
+editForm.head = (args: { apiToken: string | { id: string } } | [apiToken: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: edit.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+edit.form = editForm
+
+/**
 * @see \Modules\Organisation\Http\Controllers\ApiTokenController::update
 * @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:136
 * @route '/api-tokens/{apiToken}'
@@ -316,6 +486,38 @@ update.put = (args: { apiToken: string | { id: string } } | [apiToken: string | 
 })
 
 /**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::update
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:136
+* @route '/api-tokens/{apiToken}'
+*/
+const updateForm = (args: { apiToken: string | { id: string } } | [apiToken: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::update
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:136
+* @route '/api-tokens/{apiToken}'
+*/
+updateForm.put = (args: { apiToken: string | { id: string } } | [apiToken: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+update.form = updateForm
+
+/**
 * @see \Modules\Organisation\Http\Controllers\ApiTokenController::destroy
 * @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:160
 * @route '/api-tokens/{apiToken}'
@@ -372,6 +574,38 @@ destroy.delete = (args: { apiToken: string | { id: string } } | [apiToken: strin
     url: destroy.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::destroy
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:160
+* @route '/api-tokens/{apiToken}'
+*/
+const destroyForm = (args: { apiToken: string | { id: string } } | [apiToken: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\ApiTokenController::destroy
+* @see Modules/Organisation/app/Http/Controllers/ApiTokenController.php:160
+* @route '/api-tokens/{apiToken}'
+*/
+destroyForm.delete = (args: { apiToken: string | { id: string } } | [apiToken: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy.form = destroyForm
 
 const apiTokens = {
     index: Object.assign(index, index),

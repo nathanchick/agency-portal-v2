@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../../wayfinder'
 /**
 * @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::generate
 * @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:23
@@ -52,6 +52,28 @@ generate.post = (args: { service: string | number } | [service: string | number 
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::generate
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:23
+* @route '/customer/timesheet/services/{service}/report/generate'
+*/
+const generateForm = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: generate.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::generate
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:23
+* @route '/customer/timesheet/services/{service}/report/generate'
+*/
+generateForm.post = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: generate.url(args, options),
+    method: 'post',
+})
+
+generate.form = generateForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::exportMethod
 * @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:47
 * @route '/customer/timesheet/services/{service}/report/export'
@@ -102,6 +124,28 @@ exportMethod.post = (args: { service: string | number } | [service: string | num
     url: exportMethod.url(args, options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::exportMethod
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:47
+* @route '/customer/timesheet/services/{service}/report/export'
+*/
+const exportMethodForm = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: exportMethod.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::exportMethod
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:47
+* @route '/customer/timesheet/services/{service}/report/export'
+*/
+exportMethodForm.post = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: exportMethod.url(args, options),
+    method: 'post',
+})
+
+exportMethod.form = exportMethodForm
 
 /**
 * @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::getExternalReferenceReport
@@ -164,6 +208,43 @@ getExternalReferenceReport.head = (args: { service: string | number } | [service
     url: getExternalReferenceReport.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::getExternalReferenceReport
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:76
+* @route '/customer/timesheet/services/{service}/external-reference'
+*/
+const getExternalReferenceReportForm = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: getExternalReferenceReport.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::getExternalReferenceReport
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:76
+* @route '/customer/timesheet/services/{service}/external-reference'
+*/
+getExternalReferenceReportForm.get = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: getExternalReferenceReport.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::getExternalReferenceReport
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:76
+* @route '/customer/timesheet/services/{service}/external-reference'
+*/
+getExternalReferenceReportForm.head = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: getExternalReferenceReport.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+getExternalReferenceReport.form = getExternalReferenceReportForm
 
 const CustomerReportController = { generate, exportMethod, getExternalReferenceReport, export: exportMethod }
 

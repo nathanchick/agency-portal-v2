@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\Deployment\Http\Controllers\DeploymentController::index
 * @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:21
@@ -42,6 +42,43 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Deployment\Http\Controllers\DeploymentController::index
+* @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:21
+* @route '/deployments'
+*/
+const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Deployment\Http\Controllers\DeploymentController::index
+* @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:21
+* @route '/deployments'
+*/
+indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Deployment\Http\Controllers\DeploymentController::index
+* @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:21
+* @route '/deployments'
+*/
+indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index.form = indexForm
 
 /**
 * @see \Modules\Deployment\Http\Controllers\DeploymentController::config
@@ -88,6 +125,43 @@ config.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Deployment\Http\Controllers\DeploymentController::config
+* @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:60
+* @route '/deployments/config'
+*/
+const configForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: config.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Deployment\Http\Controllers\DeploymentController::config
+* @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:60
+* @route '/deployments/config'
+*/
+configForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: config.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Deployment\Http\Controllers\DeploymentController::config
+* @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:60
+* @route '/deployments/config'
+*/
+configForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: config.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+config.form = configForm
+
+/**
 * @see \Modules\Deployment\Http\Controllers\DeploymentController::store
 * @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:94
 * @route '/deployments'
@@ -120,6 +194,28 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Deployment\Http\Controllers\DeploymentController::store
+* @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:94
+* @route '/deployments'
+*/
+const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Deployment\Http\Controllers\DeploymentController::store
+* @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:94
+* @route '/deployments'
+*/
+storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+store.form = storeForm
 
 /**
 * @see \Modules\Deployment\Http\Controllers\DeploymentController::destroy
@@ -178,6 +274,38 @@ destroy.delete = (args: { deployment: string | { id: string } } | [deployment: s
     url: destroy.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Deployment\Http\Controllers\DeploymentController::destroy
+* @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:145
+* @route '/deployments/{deployment}'
+*/
+const destroyForm = (args: { deployment: string | { id: string } } | [deployment: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Deployment\Http\Controllers\DeploymentController::destroy
+* @see Modules/Deployment/app/Http/Controllers/DeploymentController.php:145
+* @route '/deployments/{deployment}'
+*/
+destroyForm.delete = (args: { deployment: string | { id: string } } | [deployment: string | { id: string } ] | string | { id: string }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy.form = destroyForm
 
 const DeploymentController = { index, config, store, destroy }
 

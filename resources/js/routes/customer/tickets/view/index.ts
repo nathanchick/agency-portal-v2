@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
 /**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::all
 * @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:179
@@ -44,6 +44,43 @@ all.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::all
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:179
+* @route '/customer/tickets/view/all'
+*/
+const allForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: all.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::all
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:179
+* @route '/customer/tickets/view/all'
+*/
+allForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: all.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::all
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:179
+* @route '/customer/tickets/view/all'
+*/
+allForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: all.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+all.form = allForm
+
+/**
 * @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::closed
 * @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:97
 * @route '/customer/tickets/view/closed'
@@ -86,6 +123,43 @@ closed.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: closed.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::closed
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:97
+* @route '/customer/tickets/view/closed'
+*/
+const closedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: closed.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::closed
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:97
+* @route '/customer/tickets/view/closed'
+*/
+closedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: closed.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Ticket\Http\Controllers\Customer\CustomerTicketController::closed
+* @see Modules/Ticket/app/Http/Controllers/Customer/CustomerTicketController.php:97
+* @route '/customer/tickets/view/closed'
+*/
+closedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: closed.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+closed.form = closedForm
 
 const view = {
     all: Object.assign(all, all),

@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::generate
 * @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:23
@@ -52,6 +52,28 @@ generate.post = (args: { service: string | number } | [service: string | number 
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::generate
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:23
+* @route '/customer/timesheet/services/{service}/report/generate'
+*/
+const generateForm = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: generate.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::generate
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:23
+* @route '/customer/timesheet/services/{service}/report/generate'
+*/
+generateForm.post = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: generate.url(args, options),
+    method: 'post',
+})
+
+generate.form = generateForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::exportMethod
 * @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:47
 * @route '/customer/timesheet/services/{service}/report/export'
@@ -102,6 +124,28 @@ exportMethod.post = (args: { service: string | number } | [service: string | num
     url: exportMethod.url(args, options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::exportMethod
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:47
+* @route '/customer/timesheet/services/{service}/report/export'
+*/
+const exportMethodForm = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: exportMethod.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Customer\CustomerReportController::exportMethod
+* @see Modules/Timesheet/app/Http/Controllers/Customer/CustomerReportController.php:47
+* @route '/customer/timesheet/services/{service}/report/export'
+*/
+exportMethodForm.post = (args: { service: string | number } | [service: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: exportMethod.url(args, options),
+    method: 'post',
+})
+
+exportMethod.form = exportMethodForm
 
 const report = {
     generate: Object.assign(generate, generate),

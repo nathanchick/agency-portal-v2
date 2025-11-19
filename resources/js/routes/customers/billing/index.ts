@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../wayfinder'
 import customer from './customer'
 /**
 * @see \Modules\Billing\Http\Controllers\BillingController::overview
@@ -43,6 +43,43 @@ overview.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: overview.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Billing\Http\Controllers\BillingController::overview
+* @see Modules/Billing/app/Http/Controllers/BillingController.php:31
+* @route '/customers/billing'
+*/
+const overviewForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: overview.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Billing\Http\Controllers\BillingController::overview
+* @see Modules/Billing/app/Http/Controllers/BillingController.php:31
+* @route '/customers/billing'
+*/
+overviewForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: overview.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Billing\Http\Controllers\BillingController::overview
+* @see Modules/Billing/app/Http/Controllers/BillingController.php:31
+* @route '/customers/billing'
+*/
+overviewForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: overview.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+overview.form = overviewForm
 
 const billing = {
     overview: Object.assign(overview, overview),

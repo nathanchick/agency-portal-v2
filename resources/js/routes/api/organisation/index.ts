@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\Organisation\Http\Controllers\OrganisationController::index
 * @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
@@ -44,6 +44,43 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::index
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations'
+*/
+const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::index
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations'
+*/
+indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::index
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations'
+*/
+indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+index.form = indexForm
+
+/**
 * @see \Modules\Organisation\Http\Controllers\OrganisationController::store
 * @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
 * @route '/api/v1/organisations'
@@ -76,6 +113,28 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
+
+/**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::store
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations'
+*/
+const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::store
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations'
+*/
+storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+store.form = storeForm
 
 /**
 * @see \Modules\Organisation\Http\Controllers\OrganisationController::show
@@ -140,6 +199,43 @@ show.head = (args: { organisation: string | number } | [organisation: string | n
 })
 
 /**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::show
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations/{organisation}'
+*/
+const showForm = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::show
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations/{organisation}'
+*/
+showForm.get = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::show
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations/{organisation}'
+*/
+showForm.head = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+show.form = showForm
+
+/**
 * @see \Modules\Organisation\Http\Controllers\OrganisationController::update
 * @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
 * @route '/api/v1/organisations/{organisation}'
@@ -202,6 +298,53 @@ update.patch = (args: { organisation: string | number } | [organisation: string 
 })
 
 /**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::update
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations/{organisation}'
+*/
+const updateForm = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::update
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations/{organisation}'
+*/
+updateForm.put = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PUT',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::update
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations/{organisation}'
+*/
+updateForm.patch = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: update.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'PATCH',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+update.form = updateForm
+
+/**
 * @see \Modules\Organisation\Http\Controllers\OrganisationController::destroy
 * @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
 * @route '/api/v1/organisations/{organisation}'
@@ -252,6 +395,38 @@ destroy.delete = (args: { organisation: string | number } | [organisation: strin
     url: destroy.url(args, options),
     method: 'delete',
 })
+
+/**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::destroy
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations/{organisation}'
+*/
+const destroyForm = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \Modules\Organisation\Http\Controllers\OrganisationController::destroy
+* @see Modules/Organisation/app/Http/Controllers/OrganisationController.php:0
+* @route '/api/v1/organisations/{organisation}'
+*/
+destroyForm.delete = (args: { organisation: string | number } | [organisation: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy.form = destroyForm
 
 const organisation = {
     index: Object.assign(index, index),

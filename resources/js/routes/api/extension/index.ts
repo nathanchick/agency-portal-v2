@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../wayfinder'
 import timeEntries from './time-entries'
 import timer from './timer'
 /**
@@ -46,6 +46,43 @@ user.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::user
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:141
+* @route '/api/extension/user'
+*/
+const userForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: user.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::user
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:141
+* @route '/api/extension/user'
+*/
+userForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: user.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::user
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:141
+* @route '/api/extension/user'
+*/
+userForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: user.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+user.form = userForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::services
 * @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:17
 * @route '/api/extension/services'
@@ -90,6 +127,43 @@ services.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::services
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:17
+* @route '/api/extension/services'
+*/
+const servicesForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: services.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::services
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:17
+* @route '/api/extension/services'
+*/
+servicesForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: services.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::services
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:17
+* @route '/api/extension/services'
+*/
+servicesForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: services.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+services.form = servicesForm
+
+/**
 * @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::recentEntries
 * @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:60
 * @route '/api/extension/recent-entries'
@@ -132,6 +206,43 @@ recentEntries.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
     url: recentEntries.url(options),
     method: 'head',
 })
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::recentEntries
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:60
+* @route '/api/extension/recent-entries'
+*/
+const recentEntriesForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: recentEntries.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::recentEntries
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:60
+* @route '/api/extension/recent-entries'
+*/
+recentEntriesForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: recentEntries.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\Timesheet\Http\Controllers\Api\Extension\TimesheetExtensionController::recentEntries
+* @see Modules/Timesheet/app/Http/Controllers/Api/Extension/TimesheetExtensionController.php:60
+* @route '/api/extension/recent-entries'
+*/
+recentEntriesForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: recentEntries.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+recentEntries.form = recentEntriesForm
 
 const extension = {
     user: Object.assign(user, user),

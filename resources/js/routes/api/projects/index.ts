@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::githubRepository
 * @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:282
@@ -60,6 +60,43 @@ githubRepository.head = (args: { projectId: string | number } | [projectId: stri
     url: githubRepository.url(args, options),
     method: 'head',
 })
+
+/**
+* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::githubRepository
+* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:282
+* @route '/api/v1/projects/{projectId}/github-repository'
+*/
+const githubRepositoryForm = (args: { projectId: string | number } | [projectId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: githubRepository.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::githubRepository
+* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:282
+* @route '/api/v1/projects/{projectId}/github-repository'
+*/
+githubRepositoryForm.get = (args: { projectId: string | number } | [projectId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: githubRepository.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \Modules\GitHub\Http\Controllers\GitHubRepositoryController::githubRepository
+* @see Modules/GitHub/app/Http/Controllers/GitHubRepositoryController.php:282
+* @route '/api/v1/projects/{projectId}/github-repository'
+*/
+githubRepositoryForm.head = (args: { projectId: string | number } | [projectId: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: githubRepository.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+githubRepository.form = githubRepositoryForm
 
 const projects = {
     githubRepository: Object.assign(githubRepository, githubRepository),
